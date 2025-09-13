@@ -114,18 +114,30 @@ main {
   display: none;
   justify-content: center;
   align-items: center;
-  margin-top: 16px;
-  padding: 0 20px;
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
-.mobile-auth-section,
+.mobile-auth-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 280px;
+}
+
 .mobile-login-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
   width: 100%;
-  max-width: 300px;
+  max-width: 280px;
 }
 
 .user-handle {
@@ -382,34 +394,65 @@ main {
   
   /* Adjust header padding for mobile layout */
   .App-header {
-    padding: 20px 24px 24px 24px;
+    padding: 16px 20px 20px 20px;
+    text-align: center;
+  }
+  
+  .App-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+  }
+  
+  .app-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 0;
   }
   
   .mobile-logout-btn {
     width: 100%;
-    max-width: 200px;
-    padding: 8px 16px;
+    max-width: 240px;
+    padding: 10px 20px;
     font-size: 0.9rem;
+    border-radius: 8px;
   }
   
+  /* Mobile login improvements */
   .navbar-login {
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     width: 100%;
+    align-items: center;
   }
   
   .login-features {
-    gap: 10px;
+    gap: 8px;
     margin-right: 0;
     justify-content: center;
+    flex-wrap: wrap;
   }
   
   .feature-compact {
-    font-size: 11px;
+    font-size: 10px;
+    padding: 2px 4px;
   }
   
   .navbar-handcash-btn {
     width: 100%;
-    max-width: 200px;
+    max-width: 240px;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+  
+  /* Mobile HandCash badge improvements */
+  .mobile-user-info .handcash-user-badge {
+    margin-bottom: 4px;
+    padding: 8px 16px;
+    border-radius: 12px;
+  }
+  
+  .mobile-user-info .handcash-user-badge .user-handle {
+    font-size: 1rem;
+    font-weight: 500;
   }
 }

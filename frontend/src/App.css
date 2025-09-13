@@ -114,30 +114,29 @@ main {
   display: none;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
-  padding: 16px 20px;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 12px;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin: 12px 16px 8px 16px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
 }
 
 .mobile-auth-section {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 16px;
+  justify-content: space-between;
+  gap: 12px;
   width: 100%;
-  max-width: 280px;
+  max-width: 320px;
 }
 
 .mobile-login-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   width: 100%;
-  max-width: 280px;
+  max-width: 260px;
 }
 
 .user-handle {
@@ -392,67 +391,57 @@ main {
     display: flex !important;
   }
   
-  /* Adjust header padding for mobile layout */
+  /* Compact mobile header */
   .App-header {
-    padding: 16px 20px 20px 20px;
+    padding: 12px 16px 16px 16px;
     text-align: center;
   }
   
   .App-header h1 {
-    font-size: 1.8rem;
-    margin-bottom: 8px;
+    font-size: 1.6rem;
+    margin-bottom: 4px;
   }
   
   .app-subtitle {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     margin-bottom: 0;
   }
   
   .mobile-logout-btn {
-    width: 100%;
-    max-width: 240px;
-    padding: 10px 20px;
-    font-size: 0.9rem;
-    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    min-width: 80px;
   }
   
-  /* Mobile login improvements */
+  /* Compact mobile login */
   .navbar-login {
-    flex-direction: column;
-    gap: 12px;
+    gap: 8px;
     width: 100%;
     align-items: center;
   }
   
   .login-features {
-    gap: 8px;
-    margin-right: 0;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  .feature-compact {
-    font-size: 10px;
-    padding: 2px 4px;
+    display: none; /* Hide feature list to save space */
   }
   
   .navbar-handcash-btn {
     width: 100%;
-    max-width: 240px;
-    padding: 12px 20px;
-    font-size: 0.9rem;
-    border-radius: 8px;
+    max-width: 200px;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    border-radius: 6px;
   }
   
-  /* Mobile HandCash badge improvements */
+  /* Compact HandCash badge */
   .mobile-user-info .handcash-user-badge {
-    margin-bottom: 4px;
-    padding: 8px 16px;
-    border-radius: 12px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
   }
   
   .mobile-user-info .handcash-user-badge .user-handle {
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 500;
   }
 }

@@ -56,9 +56,6 @@ const BitcoinSpreadsheetPage: React.FC = () => {
           <h1 className="hero-title">
             <span className="bitcoin-text">Bitcoin</span> Spreadsheet
           </h1>
-          <p className="hero-subtitle">
-            The World's First Blockchain-Powered Spreadsheet Platform
-          </p>
           <p className="hero-description">
             Save spreadsheets on the Bitcoin blockchain as NFTs. Track millions of shareholders in real-time.
           </p>

@@ -209,6 +209,9 @@ const BitcoinSpreadsheetPage: React.FC = () => {
               <a href="https://github.com/b0ase/bitcoin-spreadsheet" target="_blank" rel="noopener noreferrer">
                 GitHub
               </a>
+              <button onClick={() => navigate('/developers')}>
+                Developers
+              </button>
             </div>
             <div className="footer-copyright">
               © @b0ase September 2025

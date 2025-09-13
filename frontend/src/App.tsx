@@ -3,10 +3,11 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import Spreadsheet from './components/Spreadsheet';
 import SpreadsheetManager from './components/SpreadsheetManager';
-import Login from './components/Login';
 import NavbarLogin from './components/NavbarLogin';
 import HandCashCallback from './components/HandCashCallback';
 import BitcoinSpreadsheetPage from './pages/BitcoinSpreadsheetPage';
+import BapsPage from './pages/BapsPage';
+import ClaudeChat from './components/ClaudeChat';
 import { BitcoinService, SpreadsheetData } from './services/BitcoinService';
 import { HandCashService, HandCashUser } from './services/HandCashService';
 
@@ -19,6 +20,7 @@ function App() {
   const [currentSpreadsheet, setCurrentSpreadsheet] = useState<SpreadsheetData | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
   const [isMenuOpen, setIsMenuOpen] = useState<string | false>(false);
+  const [isClaudeChatOpen, setIsClaudeChatOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -105,6 +107,8 @@ function App() {
   return (
     <Routes>
       <Route path="/bitcoin-spreadsheet" element={<BitcoinSpreadsheetPage />} />
+      <Route path="/baps" element={<BapsPage />} />
+      <Route path="/developers" element={<BapsPage />} /> {/* Keep for backwards compatibility */}
       <Route path="/auth/handcash/callback" element={<HandCashCallback />} />
       <Route path="/*" element={
         isLoading ? (
@@ -205,12 +209,74 @@ function App() {
                           <span>🪙</span> Tokenize Spreadsheet
                         </div>
                         <div className="menu-separator" />
+                        <a 
+                          href="/baps_executive_summary.pdf"
+                          download="BAPS_Executive_Summary.pdf"
+                          className="menu-item"
+                          style={{ textDecoration: 'none', color: 'inherit' }}
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          <span>📄</span> BAPS Executive Summary
+                        </a>
                         <div className="menu-item" onClick={() => {
                           const spreadsheetCount = Object.keys(localStorage.getItem('spreadsheets') ? JSON.parse(localStorage.getItem('spreadsheets') || '[]') : []).length;
                           alert(`You have ${spreadsheetCount} spreadsheet${spreadsheetCount !== 1 ? 's' : ''} saved locally.`);
                           setIsMenuOpen(false);
                         }}>
                           <span>📊</span> Statistics
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+                
+                {/* Developer Menu */}
+                <div className="developer-menu-container">
+                  <button 
+                    className="developer-menu-button"
+                    onClick={() => setIsMenuOpen('developer')}
+                    aria-label="Developer Menu"
+                  >
+                    <span>Developer</span>
+                  </button>
+                  {isMenuOpen === 'developer' && (
+                    <>
+                      <div className="menu-overlay" onClick={() => setIsMenuOpen(false)} />
+                      <div className="developer-menu">
+                        <div className="menu-header">
+                          <span>Developer Resources</span>
+                        </div>
+                        <div className="menu-separator" />
+                        <div className="menu-item" onClick={() => {
+                          navigate('/developers');
+                          setIsMenuOpen(false);
+                        }}>
+                          <span>📋</span> BAPS Documentation
+                        </div>
+                        <div className="menu-separator" />
+                        <div className="menu-item" onClick={() => {
+                          window.open('https://github.com/b0ase/blockchain-spreadsheet', '_blank');
+                          setIsMenuOpen(false);
+                        }}>
+                          <span>🔗</span> GitHub Repository
+                        </div>
+                        <div className="menu-item" onClick={() => {
+                          window.open('https://docs.handcash.io', '_blank');
+                          setIsMenuOpen(false);
+                        }}>
+                          <span>💳</span> HandCash API Docs
+                        </div>
+                        <div className="menu-separator" />
+                        <div className="menu-item" onClick={() => {
+                          console.log('Debug info:', {
+                            user: currentUser,
+                            isAuthenticated,
+                            spreadsheets: currentSpreadsheet
+                          });
+                          alert('Debug info logged to console');
+                          setIsMenuOpen(false);
+                        }}>
+                          <span>🐛</span> Debug Console
                         </div>
                       </div>
                     </>
@@ -314,6 +380,41 @@ function App() {
                 <div className="loading">Initializing blockchain connection...</div>
               )}
             </main>
+            
+            {/* Claude AI Chat Button */}
+            <button 
+              className="claude-chat-button"
+              onClick={() => setIsClaudeChatOpen(true)}
+              style={{
+                position: 'fixed',
+                bottom: '20px',
+                right: '20px',
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                background: 'linear-gradient(135deg, #FFA500, #FF8C00)',
+                border: 'none',
+                color: 'white',
+                fontSize: '24px',
+                cursor: 'pointer',
+                boxShadow: '0 4px 12px rgba(255, 165, 0, 0.3)',
+                display: isClaudeChatOpen ? 'none' : 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.3s ease',
+                zIndex: 999
+              }}
+              title="Chat with Claude AI"
+            >
+              💬
+            </button>
+            
+             {/* Claude AI Chat Component */}
+             <ClaudeChat 
+               spreadsheetData={currentSpreadsheet?.cells ? Object.values(currentSpreadsheet.cells) : []}
+               isOpen={isClaudeChatOpen}
+               onClose={() => setIsClaudeChatOpen(false)}
+             />
           </div>
         )
       } />

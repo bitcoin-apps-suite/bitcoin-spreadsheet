@@ -432,11 +432,13 @@ main {
 }
 
 /* Spreadsheet Menu Styles */
-.spreadsheet-menu-container {
+.spreadsheet-menu-container,
+.developer-menu-container {
   position: relative;
 }
 
-.spreadsheet-menu-button {
+.spreadsheet-menu-button,
+.developer-menu-button {
   background: transparent;
   border: none;
   padding: 6px 12px;
@@ -448,11 +450,13 @@ main {
   font-weight: 500;
 }
 
-.spreadsheet-menu-button:hover {
+.spreadsheet-menu-button:hover,
+.developer-menu-button:hover {
   background: rgba(255, 255, 255, 0.1);
 }
 
-.spreadsheet-menu {
+.spreadsheet-menu,
+.developer-menu {
   position: absolute;
   top: 32px;
   left: 0;
@@ -472,6 +476,7 @@ main {
   align-items: center;
   gap: 12px;
 }
+
 
 .taskbar-twitter-link {
   display: flex;

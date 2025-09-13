@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { HandCashConnect } = require('@handcash/handcash-connect');
+const axios = require('axios');
 
 const app = express();
 app.use(cors());
@@ -44,6 +45,50 @@ app.post('/api/handcash-profile', async (req, res) => {
   }
 });
 
+// Claude AI endpoint
+app.post('/api/claude', async (req, res) => {
+  try {
+    const { messages } = req.body;
+    
+    if (!messages || !Array.isArray(messages)) {
+      return res.status(400).json({ error: 'Messages array is required' });
+    }
+
+    const apiKey = process.env.CLAUDE_API_KEY;
+    if (!apiKey) {
+      console.error('Claude API key not configured');
+      return res.status(500).json({ error: 'Claude API not configured. Please add CLAUDE_API_KEY to environment variables.' });
+    }
+
+    console.log('Sending request to Claude API with', messages.length, 'messages');
+
+    const response = await axios.post('https://api.anthropic.com/v1/messages', {
+      model: 'claude-3-sonnet-20240229',
+      max_tokens: 1024,
+      messages: messages
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01'
+      }
+    });
+
+    const content = response.data.content[0].text;
+    console.log('Claude response received');
+    
+    res.json({ content });
+  } catch (error) {
+    console.error('Error calling Claude API:', error.response?.data || error.message);
+    res.status(500).json({ 
+      error: 'Failed to get response from Claude',
+      details: error.response?.data?.error?.message || error.message
+    });
+  }
+});
+
 app.listen(PORT, () => {
-  console.log(`HandCash profile server running on port ${PORT}`);
+  console.log(`Backend server running on port ${PORT}`);
+  console.log('- HandCash profile endpoint: /api/handcash-profile');
+  console.log('- Claude AI endpoint: /api/claude');
 });

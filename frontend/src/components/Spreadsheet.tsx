@@ -16,10 +16,12 @@ interface SpreadsheetProps {
   spreadsheet?: SpreadsheetData | null;
   onSpreadsheetUpdate?: (spreadsheet: SpreadsheetData) => void;
   isAuthenticated?: boolean;
+  isSidebarOpen?: boolean;
+  onToggleSidebar?: () => void;
   onLogin?: () => void;
 }
 
-const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: propSpreadsheet, onSpreadsheetUpdate, isAuthenticated = false, onLogin }) => {
+const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: propSpreadsheet, onSpreadsheetUpdate, isAuthenticated = false, isSidebarOpen, onToggleSidebar, onLogin }) => {
   const [spreadsheet, setSpreadsheet] = useState<SpreadsheetData | null>(propSpreadsheet || null);
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -327,6 +329,8 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
         }}
         isDirty={isDirty}
         isAuthenticated={isAuthenticated}
+        isSidebarOpen={isSidebarOpen}
+        onToggleSidebar={onToggleSidebar}
         onSave={openStorageModal}
         calculateSaveCost={calculateSaveCost}
       />

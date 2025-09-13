@@ -16,6 +16,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState<HandCashUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [currentSpreadsheet, setCurrentSpreadsheet] = useState<SpreadsheetData | null>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -152,17 +153,21 @@ function App() {
             <main className="main-container">
               {bitcoinService ? (
                 <div className="app-content">
-                  <SpreadsheetManager
-                    bitcoinService={bitcoinService}
-                    onSelectSpreadsheet={setCurrentSpreadsheet}
-                    currentSpreadsheet={currentSpreadsheet}
-                  />
+                  {isSidebarOpen && (
+                    <SpreadsheetManager
+                      bitcoinService={bitcoinService}
+                      onSelectSpreadsheet={setCurrentSpreadsheet}
+                      currentSpreadsheet={currentSpreadsheet}
+                    />
+                  )}
                   <div className="spreadsheet-wrapper">
                     <Spreadsheet 
                       bitcoinService={bitcoinService}
                       spreadsheet={currentSpreadsheet}
                       onSpreadsheetUpdate={setCurrentSpreadsheet}
                       isAuthenticated={isAuthenticated}
+                      isSidebarOpen={isSidebarOpen}
+                      onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
                       onLogin={() => {
                         const loginService = new HandCashService();
                         loginService.login();

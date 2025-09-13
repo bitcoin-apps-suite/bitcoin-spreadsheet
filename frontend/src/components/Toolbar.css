@@ -201,6 +201,12 @@
   min-width: 24px;
 }
 
+.dropdown-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 6px 0;
+}
+
 .blockchain-info {
   display: flex;
   align-items: center;

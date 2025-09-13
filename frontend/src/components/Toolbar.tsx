@@ -8,11 +8,13 @@ interface ToolbarProps {
   onTitleChange: (title: string) => void;
   isDirty: boolean;
   isAuthenticated: boolean;
+  isSidebarOpen?: boolean;
+  onToggleSidebar?: () => void;
   onSave: () => void;
   calculateSaveCost: () => { cells: number; satoshis: number; usd: string };
 }
 
-const Toolbar: React.FC<ToolbarProps> = ({ spreadsheet, selectedCell, onTitleChange, isDirty, isAuthenticated, onSave, calculateSaveCost }) => {
+const Toolbar: React.FC<ToolbarProps> = ({ spreadsheet, selectedCell, onTitleChange, isDirty, isAuthenticated, isSidebarOpen, onToggleSidebar, onSave, calculateSaveCost }) => {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [titleValue, setTitleValue] = useState(spreadsheet.title);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -128,6 +130,14 @@ const Toolbar: React.FC<ToolbarProps> = ({ spreadsheet, selectedCell, onTitleCha
           
           {isMenuOpen && (
             <div className="dropdown-menu">
+              {onToggleSidebar && (
+                <>
+                  <button onClick={() => { onToggleSidebar(); setIsMenuOpen(false); }}>
+                    <span>📊</span> {isSidebarOpen ? 'Hide' : 'Show'} Spreadsheets
+                  </button>
+                  <div className="dropdown-divider"></div>
+                </>
+              )}
               <button onClick={() => { insertFormula('=SUM()'); setIsMenuOpen(false); }}>
                 <span>Σ</span> Sum
               </button>

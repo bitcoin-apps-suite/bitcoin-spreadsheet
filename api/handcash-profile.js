@@ -26,9 +26,20 @@ export default async function handler(req, res) {
     const { HandCashConnect } = await import('@handcash/handcash-connect');
 
     // Initialize HandCash with app credentials
+    const appId = process.env.REACT_APP_HANDCASH_APP_ID || process.env.HANDCASH_APP_ID;
+    const appSecret = process.env.REACT_APP_HANDCASH_APP_SECRET || process.env.HANDCASH_APP_SECRET;
+    
+    if (!appId || !appSecret) {
+      console.error('Missing HandCash credentials:', { appId: !!appId, appSecret: !!appSecret });
+      return res.status(500).json({ 
+        error: 'HandCash configuration missing',
+        details: 'App ID or App Secret not configured in environment variables'
+      });
+    }
+    
     const handcash = new HandCashConnect({
-      appId: process.env.REACT_APP_HANDCASH_APP_ID || process.env.HANDCASH_APP_ID,
-      appSecret: process.env.REACT_APP_HANDCASH_APP_SECRET || process.env.HANDCASH_APP_SECRET,
+      appId: appId,
+      appSecret: appSecret,
     });
 
     // Get the account using the authToken
@@ -37,13 +48,19 @@ export default async function handler(req, res) {
     // Fetch the user profile
     const profile = await account.profile.getCurrentProfile();
 
+    console.log('Profile fetched from HandCash:', {
+      hasPublicProfile: !!profile.publicProfile,
+      hasPrivateProfile: !!profile.privateProfile,
+      handle: profile.publicProfile?.handle
+    });
+
     // Return the profile data
     return res.status(200).json({
       success: true,
       profile: {
-        handle: profile.publicProfile?.handle || 'unknown',
+        handle: profile.publicProfile?.handle || profile.privateProfile?.handle || 'unknown',
         paymail: profile.publicProfile?.paymail || profile.privateProfile?.email || `user@handcash.io`,
-        displayName: profile.publicProfile?.displayName || profile.publicProfile?.handle,
+        displayName: profile.publicProfile?.displayName || profile.publicProfile?.handle || 'HandCash User',
         avatarUrl: profile.publicProfile?.avatarUrl,
         publicKey: profile.publicProfile?.id,
         // Include private profile if available

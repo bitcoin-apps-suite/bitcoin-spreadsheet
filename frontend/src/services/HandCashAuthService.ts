@@ -303,9 +303,8 @@ export class HandCashAuthService {
       throw new Error('No access token available');
     }
 
-    // Skip API call for now - it may not be deployed yet
-    // TODO: Enable this once the API endpoint is confirmed working
-    const SKIP_API_PROFILE_FETCH = true; // Temporary flag
+    // Try to fetch profile from server-side API
+    const SKIP_API_PROFILE_FETCH = false; // Enable API profile fetching
     
     if (!SKIP_API_PROFILE_FETCH) {
       try {

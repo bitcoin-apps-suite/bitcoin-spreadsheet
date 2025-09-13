@@ -98,7 +98,8 @@ main {
   }
 }
 
-.user-info {
+/* Desktop user info (top right) */
+.desktop-user-info {
   position: absolute;
   top: 24px;
   right: 32px;
@@ -106,6 +107,25 @@ main {
   align-items: center;
   gap: 16px;
   z-index: 9999;
+}
+
+/* Mobile user info (below title, hidden by default) */
+.mobile-user-info {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  padding: 0 20px;
+}
+
+.mobile-auth-section,
+.mobile-login-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 300px;
 }
 
 .user-handle {
@@ -348,19 +368,48 @@ main {
   100% { transform: rotate(360deg); }
 }
 
-/* Responsive adjustments */
+/* Mobile layout adjustments */
 @media (max-width: 768px) {
+  /* Hide desktop user info on mobile */
+  .desktop-user-info {
+    display: none !important;
+  }
+  
+  /* Show mobile user info */
+  .mobile-user-info {
+    display: flex !important;
+  }
+  
+  /* Adjust header padding for mobile layout */
+  .App-header {
+    padding: 20px 24px 24px 24px;
+  }
+  
+  .mobile-logout-btn {
+    width: 100%;
+    max-width: 200px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+  
   .navbar-login {
     flex-direction: column;
     gap: 10px;
+    width: 100%;
   }
   
   .login-features {
     gap: 10px;
     margin-right: 0;
+    justify-content: center;
   }
   
   .feature-compact {
     font-size: 11px;
+  }
+  
+  .navbar-handcash-btn {
+    width: 100%;
+    max-width: 200px;
   }
 }

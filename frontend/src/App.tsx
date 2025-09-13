@@ -126,7 +126,9 @@ function App() {
               <div className="connection-indicator" />
               <h1><span className="bitcoin-orange">Bitcoin</span> Spreadsheet</h1>
               <p className="app-subtitle">Secure, encrypted spreadsheets on the blockchain</p>
-              <div className="user-info">
+              
+              {/* Desktop user info (top right) */}
+              <div className="user-info desktop-user-info">
                 {isAuthenticated && currentUser ? (
                   <>
                     <div className="handcash-user-badge">
@@ -144,6 +146,30 @@ function App() {
                   </>
                 ) : (
                   <NavbarLogin onLogin={handleLogin} />
+                )}
+              </div>
+
+              {/* Mobile user info (below title) */}
+              <div className="mobile-user-info">
+                {isAuthenticated && currentUser ? (
+                  <div className="mobile-auth-section">
+                    <div className="handcash-user-badge">
+                      <img 
+                        src="https://handcash.io/favicon.ico" 
+                        alt="HandCash" 
+                        className="handcash-user-icon"
+                      />
+                      <span className="user-handle">@{currentUser.handle}</span>
+                      <div className="connection-dot"></div>
+                    </div>
+                    <button className="logout-btn mobile-logout-btn" onClick={handleLogout}>
+                      Sign Out
+                    </button>
+                  </div>
+                ) : (
+                  <div className="mobile-login-section">
+                    <NavbarLogin onLogin={handleLogin} />
+                  </div>
                 )}
               </div>
             </header>

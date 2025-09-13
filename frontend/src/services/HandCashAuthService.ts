@@ -285,53 +285,74 @@ export class HandCashAuthService {
       throw new Error('No access token available');
     }
 
-    // HandCash requires server-side SDK for profile fetching
-    // Since we're client-side, we'll extract basic info from the token if possible
-    // or use a placeholder until server-side implementation is added
-    
     try {
-      // Try to decode the authToken if it's a JWT
+      // Determine API endpoint based on environment
+      const apiBase = this.config.environment === 'production' 
+        ? 'https://bitcoin-spreadsheet.vercel.app'
+        : 'http://localhost:3000';
+      
+      console.log('Fetching user profile from API...');
+      
+      // Call our API endpoint to fetch the profile server-side
+      const response = await fetch(`${apiBase}/api/handcash-profile`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          authToken: this.tokens.accessToken
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Profile fetched successfully:', data.profile);
+        
+        return {
+          handle: data.profile.handle || 'handcash_user',
+          paymail: data.profile.paymail || 'user@handcash.io',
+          publicKey: data.profile.publicKey,
+          avatarUrl: data.profile.avatarUrl,
+          displayName: data.profile.displayName || data.profile.handle
+        };
+      } else {
+        const error = await response.json();
+        console.error('API error fetching profile:', error);
+      }
+    } catch (error) {
+      console.error('Failed to fetch user profile from API:', error);
+    }
+
+    // Fallback: Try to decode the authToken if it's a JWT
+    try {
       const tokenParts = this.tokens.accessToken.split('.');
       if (tokenParts.length === 3) {
-        try {
-          const payload = JSON.parse(atob(tokenParts[1]));
-          console.log('Decoded token payload:', payload);
-          
-          if (payload.handle || payload.user || payload.username) {
-            return {
-              handle: payload.handle || payload.user || payload.username,
-              paymail: payload.paymail || `${payload.handle || payload.user || 'user'}@handcash.io`,
-              publicKey: payload.publicKey || payload.id,
-              avatarUrl: payload.avatarUrl || payload.avatar,
-              displayName: payload.displayName || payload.name
-            };
-          }
-        } catch (decodeError) {
-          console.log('Token is not a JWT or could not be decoded');
+        const payload = JSON.parse(atob(tokenParts[1]));
+        console.log('Decoded token payload:', payload);
+        
+        if (payload.handle || payload.user || payload.username) {
+          return {
+            handle: payload.handle || payload.user || payload.username,
+            paymail: payload.paymail || `${payload.handle || payload.user || 'user'}@handcash.io`,
+            publicKey: payload.publicKey || payload.id,
+            avatarUrl: payload.avatarUrl || payload.avatar,
+            displayName: payload.displayName || payload.name
+          };
         }
       }
-      
-      // Return basic user info
-      // In production, this should be fetched server-side using the HandCash SDK
-      console.warn('Using placeholder user data - implement server-side profile fetching for production');
-      return {
-        handle: 'handcash_user',
-        paymail: 'user@handcash.io',
-        publicKey: this.tokens.accessToken.substring(0, 20),
-        avatarUrl: undefined,
-        displayName: 'HandCash User'
-      };
-    } catch (error) {
-      console.error('Failed to process user profile:', error);
-      // Return minimal user object
-      return {
-        handle: 'handcash_user',
-        paymail: 'user@handcash.io',
-        publicKey: undefined,
-        avatarUrl: undefined,
-        displayName: 'HandCash User'
-      };
+    } catch (decodeError) {
+      console.log('Token is not a JWT or could not be decoded');
     }
+    
+    // Final fallback
+    console.warn('Using placeholder user data - API endpoint may not be available');
+    return {
+      handle: 'handcash_user',
+      paymail: 'user@handcash.io',
+      publicKey: this.tokens.accessToken.substring(0, 20),
+      avatarUrl: undefined,
+      displayName: 'HandCash User'
+    };
   }
 
   // Make authenticated API request

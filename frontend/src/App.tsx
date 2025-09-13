@@ -255,7 +255,7 @@ function App() {
                         </div>
                         <div className="menu-separator" />
                         <div className="menu-item" onClick={() => {
-                          window.open('https://github.com/b0ase/blockchain-spreadsheet', '_blank');
+                          window.open('https://github.com/b0ase/bitcoin-spreadsheet', '_blank');
                           setIsMenuOpen(false);
                         }}>
                           <span>🔗</span> GitHub Repository

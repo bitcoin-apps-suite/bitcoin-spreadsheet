@@ -56,6 +56,13 @@ export class HandCashAuthService {
         const tokens = JSON.parse(savedTokens);
         const user = JSON.parse(savedUser);
         
+        // Clear old sessions with generic "handcash_user" handle
+        if (user.handle === 'handcash_user') {
+          console.log('Clearing old session with generic username');
+          this.clearSession();
+          return;
+        }
+        
         // Validate session is not expired
         if (this.isSessionValid(tokens)) {
           this.tokens = tokens;

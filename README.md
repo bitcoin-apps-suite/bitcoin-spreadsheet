@@ -1,66 +1,112 @@
 # Bitcoin Blockchain Spreadsheet
 
-A decentralized spreadsheet application built on Bitcoin blockchain using sCrypt smart contracts, React, and HandCash wallet integration.
+A revolutionary decentralized spreadsheet application that stores data on the Bitcoin SV blockchain, featuring HandCash wallet integration for authentication and data encryption. This project aims to create a fully decentralized, secure, and collaborative spreadsheet platform rivaling Google Sheets and Microsoft Excel.
 
-## 🚀 Features
+## 🌟 Vision
 
-- **Decentralized Data Storage**: All spreadsheet data is stored on the BSV blockchain
-- **Smart Contract Security**: sCrypt contracts ensure data integrity and access control
-- **Real-time Collaboration**: Multiple users can edit spreadsheets simultaneously
-- **Formula Support**: Basic spreadsheet functions (SUM, AVERAGE, COUNT, etc.)
-- **HandCash Integration**: Seamless Bitcoin wallet connection via HandCash
-- **Immutable History**: All changes are recorded permanently on the blockchain
+To create the world's first truly decentralized spreadsheet application where:
+- Data is owned by users, not corporations
+- Every change is cryptographically secure and immutable
+- Collaboration happens without central servers
+- Privacy is guaranteed through encryption
+- No single point of failure exists
+
+## 🚀 Current Features
+
+- **HandCash OAuth Authentication**: Secure wallet-based login system
+- **Encrypted Data Storage**: AES-256 encryption using wallet-derived keys
+- **Bitcoin SV Integration**: Ready for on-chain data storage
+- **Responsive Spreadsheet Grid**: Interactive 10x10 grid interface
+- **Formula Support**: Basic formula calculations (SUM, etc.)
+- **User Session Management**: Secure session handling with localStorage
+- **Dark Mode UI**: Modern, sleek interface design
+
+## 🎯 Roadmap Features (Coming Soon)
+
+- **Rich Formula Engine**: Full Excel/Google Sheets formula compatibility
+- **Real-time Collaboration**: Multi-user editing with conflict resolution
+- **Charts & Visualizations**: Interactive data visualization tools
+- **Import/Export**: CSV, Excel, Google Sheets compatibility
+- **Conditional Formatting**: Visual data rules and highlights
+- **Pivot Tables**: Advanced data analysis capabilities
+- **Macros & Scripting**: Custom automation with JavaScript
+- **Version History**: Complete change tracking and rollback
+- **Shared Workbooks**: Collaborative spreadsheets with permissions
+- **LibreOffice Integration**: Desktop application support
+- **Mobile Apps**: iOS and Android native applications
+- **API Access**: REST and WebSocket APIs for developers
 
 ## 🏗️ Architecture
 
-### Smart Contracts (sCrypt)
-- `SpreadsheetContract.ts`: Main contract for spreadsheet management
-- `CellData.ts`: Individual cell data management
-- Deployed on BSV testnet/mainnet
-
 ### Frontend (React + TypeScript)
-- Interactive spreadsheet grid
-- Real-time cell editing
-- Formula calculation engine
-- BSV wallet integration
-- Responsive design
+- **Components**: Modular React components for spreadsheet, cells, and toolbar
+- **Services**: HandCash authentication and Bitcoin blockchain integration
+- **State Management**: React hooks for local state management
+- **Styling**: Custom CSS with dark mode support
+- **Responsive Design**: Mobile-first approach
 
-### Data Storage & Security
-- Cell data encrypted with AES-256 before storage
-- Encryption key derived from user's HandCash public key
-- Data stored encrypted on Bitcoin blockchain via OP_RETURN
-- Only the user with the correct wallet can decrypt their data
-- Immutable audit trail with privacy protection
+### Backend API (Node.js + Express)
+- **HandCash OAuth**: Server-side authentication flow
+- **Profile Management**: User profile fetching and caching
+- **CORS Handling**: Cross-origin resource sharing configuration
+- **Environment Config**: Secure environment variable management
+
+### Blockchain Integration
+- **Bitcoin SV**: Data storage on immutable blockchain
+- **Encryption**: AES-256 encryption with wallet-derived keys
+- **Smart Contracts**: sCrypt contracts for data management (planned)
+- **HandCash Connect**: Wallet integration and payment processing
 
 ## 📋 Prerequisites
 
-- Node.js 16+
-- npm or yarn
-- HandCash wallet account
-- sCrypt CLI tools
+- Node.js 16+ and npm
+- HandCash wallet account (get one at https://handcash.io)
+- HandCash App credentials (from https://dashboard.handcash.io)
 
 ## 🚀 Quick Start
 
-1. **Clone and install dependencies:**
+### 1. Clone the repository
 ```bash
-git clone <repository-url>
-cd blockchain-spreadsheet
+git clone https://github.com/b0ase/bitcoin-spreadsheet.git
+cd bitcoin-spreadsheet
+```
+
+### 2. Install dependencies
+```bash
+# Install API dependencies
+cd api
 npm install
-cd frontend && npm install && cd ..
+
+# Install frontend dependencies
+cd ../frontend
+npm install
 ```
 
-2. **Compile smart contracts:**
-```bash
-npm run build:contracts
+### 3. Configure environment variables
+
+Create `.env` file in the `api` directory:
+```env
+HANDCASH_APP_ID=your_app_id
+HANDCASH_APP_SECRET=your_app_secret
+CLIENT_URL=http://localhost:3000
+PORT=3001
 ```
 
-3. **Deploy to BSV testnet:**
-```bash
-npm run deploy
+Create `.env` file in the `frontend` directory:
+```env
+REACT_APP_HANDCASH_APP_ID=your_app_id
+REACT_APP_HANDCASH_REDIRECT_URL=http://localhost:3000/auth/handcash/callback
 ```
 
-4. **Start the application:**
+### 4. Start the development servers
+
 ```bash
+# Terminal 1: Start API server
+cd api
+PORT=3001 npm start
+
+# Terminal 2: Start frontend
+cd frontend
 npm start
 ```
 
@@ -69,150 +115,284 @@ The application will be available at `http://localhost:3000`
 ## 📁 Project Structure
 
 ```
-blockchain-spreadsheet/
-├── src/
-│   ├── contracts/
-│   │   ├── SpreadsheetContract.ts    # Main sCrypt contract
-│   │   └── CellData.ts               # Cell data contract
-│   ├── deploy/
-│   │   └── deploy.ts                 # Deployment script
-│   └── tests/                        # Contract tests
-├── frontend/
+bitcoin-spreadsheet/
+├── api/                              # Backend API server
+│   ├── server.js                    # Express server with HandCash endpoints
+│   ├── package.json                 # API dependencies
+│   └── .env                         # API environment variables
+├── frontend/                         # React frontend application
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── Spreadsheet.tsx       # Main spreadsheet component
-│   │   │   ├── Cell.tsx             # Individual cell component
-│   │   │   └── Toolbar.tsx          # Toolbar with functions
+│   │   │   ├── Spreadsheet.tsx     # Main spreadsheet grid component
+│   │   │   ├── Cell.tsx            # Individual cell component
+│   │   │   ├── FormulaBar.tsx      # Formula input bar
+│   │   │   ├── LoginPage.tsx       # HandCash login interface
+│   │   │   └── Navigation.tsx      # Navigation component
 │   │   ├── services/
-│   │   │   └── BSVService.ts        # BSV blockchain integration
-│   │   ├── App.tsx                  # Main React app
-│   │   └── index.tsx               # App entry point
-│   └── public/
-│       └── index.html               # HTML template
-├── package.json                      # Main package config
-└── README.md
+│   │   │   ├── BitcoinService.ts   # Bitcoin/BSV integration
+│   │   │   └── HandCashAuthService.ts # HandCash OAuth service
+│   │   ├── styles/
+│   │   │   ├── Spreadsheet.css     # Spreadsheet styling
+│   │   │   └── LoginPage.css       # Login page styling
+│   │   ├── App.tsx                 # Main application component
+│   │   ├── App.css                 # Global styles
+│   │   └── index.tsx               # Application entry point
+│   ├── public/
+│   │   └── index.html              # HTML template
+│   ├── package.json                # Frontend dependencies
+│   └── .env                        # Frontend environment variables
+├── docs/                            # Documentation
+│   ├── PRD.md                      # Product Requirements Document
+│   ├── EPIC.md                     # EPIC documentation
+│   └── ROADMAP.md                  # Implementation roadmap
+├── .gitignore                       # Git ignore rules
+├── README.md                        # This file
+└── LICENSE                          # ISC License
 ```
 
 ## 🔧 Configuration
 
-### Environment Variables
+### HandCash Application Setup
 
-Create a `.env` file in the root directory:
+1. Go to [HandCash Dashboard](https://dashboard.handcash.io)
+2. Create a new application
+3. Set OAuth redirect URL to `http://localhost:3000/auth/handcash/callback`
+4. Copy your App ID and App Secret
+5. Add them to your environment files
 
-```env
-# BSV Network Configuration
-BSV_NETWORK=testnet
-BSV_API_KEY=your_api_key
+### Production Deployment
 
-# Wallet Configuration (for deployment)
-PRIVATE_KEY=your_private_key
-```
+For production deployment on Vercel:
 
-### Smart Contract Configuration
+1. Deploy frontend to Vercel
+2. Add environment variables in Vercel dashboard:
+   - `REACT_APP_HANDCASH_APP_ID`
+   - `REACT_APP_HANDCASH_REDIRECT_URL`
+3. Deploy API to Vercel Functions or separate server
+4. Update `CLIENT_URL` in API environment
 
-Modify `src/contracts/SpreadsheetContract.ts` to customize:
-- Maximum rows and columns
-- Access control rules
-- Data validation logic
+### Security Configuration
+
+- **Encryption**: AES-256 encryption is automatic
+- **Key Derivation**: Keys are derived from HandCash public keys
+- **Session Management**: Sessions expire after 24 hours
+- **CORS**: Configure allowed origins in `api/server.js`
 
 ## 💻 Usage
 
-### Creating a Spreadsheet
+### Getting Started
 
-1. Connect your BSV wallet
-2. Click "New Spreadsheet"
-3. Enter a title
-4. The spreadsheet is deployed to the blockchain
+1. **Sign In**: Click "Sign in with HandCash" to authenticate
+2. **Create Spreadsheet**: Your spreadsheet is automatically created upon login
+3. **Edit Cells**: Click any cell to select, type to edit
+4. **Use Formulas**: Start with `=` for formulas (e.g., `=SUM(A1:A5)`)
+5. **Save Automatically**: All changes are encrypted and prepared for blockchain storage
 
-### Editing Cells
+### Keyboard Shortcuts
 
-1. Click on any cell to select it
-2. Double-click to enter edit mode
-3. Type values or formulas (start with `=`)
-4. Press Enter or click outside to save
+- `Enter` - Confirm cell edit and move down
+- `Tab` - Confirm cell edit and move right
+- `Escape` - Cancel cell edit
+- `Arrow Keys` - Navigate between cells
+- `Delete` - Clear cell content
+- `Ctrl+C` - Copy cell (coming soon)
+- `Ctrl+V` - Paste cell (coming soon)
+- `Ctrl+Z` - Undo (coming soon)
 
-### Using Formulas
+### Formula System
 
-Supported functions:
-- `=SUM(A1:A5)` - Sum of a range
-- `=AVERAGE(B1:B10)` - Average of a range
-- `=COUNT(C1:C20)` - Count numeric values
-- `=MAX(D1:D15)` - Maximum value
-- `=MIN(E1:E25)` - Minimum value
+Currently supported:
+- `=SUM(range)` - Sum values
+- Basic arithmetic: `=A1+B1`, `=A1*2`
 
-## 🔒 Security
+Coming soon:
+- `=AVERAGE()`, `=COUNT()`, `=MAX()`, `=MIN()`
+- `=IF()`, `=VLOOKUP()`, `=CONCATENATE()`
+- Date functions, text functions, and more
 
-- All data is stored immutably on the BSV blockchain
-- Smart contracts enforce access control
-- Private keys never leave the user's wallet
-- End-to-end encryption for sensitive data
+## 🔒 Security & Privacy
+
+### Data Security
+- **Encryption**: All spreadsheet data is encrypted with AES-256
+- **Key Management**: Encryption keys derived from HandCash wallet
+- **No Central Storage**: Data will be stored on blockchain, not servers
+- **User Ownership**: Only you can decrypt your data
+
+### Authentication Security
+- **OAuth 2.0**: Industry-standard authentication via HandCash
+- **No Password Storage**: Authentication via wallet, no passwords
+- **Session Security**: Secure session tokens with expiration
+- **HTTPS Only**: All production traffic encrypted
+
+### Privacy Features
+- **Zero-Knowledge**: Servers never see unencrypted data
+- **Pseudonymous**: Only HandCash handle visible, no personal info
+- **Data Portability**: Export your data anytime
+- **Right to Delete**: Clear all data from blockchain (burn tokens)
 
 ## 🧪 Testing
 
-Run the smart contract tests:
-
+### Unit Tests
 ```bash
+# Frontend tests
+cd frontend
+npm test
+
+# API tests
+cd api
 npm test
 ```
 
-Run the frontend tests:
+### Integration Testing
+1. Start both servers locally
+2. Test HandCash authentication flow
+3. Test spreadsheet operations
+4. Verify encryption/decryption
 
-```bash
-cd frontend && npm test
-```
+### Security Testing
+- Penetration testing planned
+- Smart contract audits pending
+- OWASP compliance review scheduled
 
 ## 🚢 Deployment
 
-### Smart Contract Deployment
+### Vercel Deployment (Recommended)
 
-```bash
-npm run deploy
+1. **Frontend**:
+   ```bash
+   cd frontend
+   npm run build
+   vercel --prod
+   ```
+
+2. **API** (as Vercel Functions):
+   ```bash
+   cd api
+   vercel --prod
+   ```
+
+### Docker Deployment
+
+```dockerfile
+# Coming soon: Docker compose configuration
+docker-compose up -d
 ```
 
-### Frontend Deployment
+### Manual Deployment
 
-```bash
-npm run build:frontend
-# Deploy the built files in frontend/build/
-```
+1. Build frontend: `npm run build`
+2. Deploy `frontend/build` to any static host
+3. Deploy API to Node.js server
+4. Configure environment variables
+5. Set up SSL certificates
 
 ## 🔗 API Reference
 
-### BSVService Methods
+### Frontend Services
 
-- `createSpreadsheet(title)` - Create new spreadsheet
-- `updateCell(spreadsheetId, row, col, value, dataType)` - Update cell
-- `getCell(spreadsheetId, row, col)` - Get cell data
-- `calculateFormula(formula, cells)` - Evaluate formula
+#### BitcoinService
+```typescript
+connect(): Promise<void>                    // Connect to HandCash
+createSpreadsheet(title): Promise<SpreadsheetData>
+updateCell(id, row, col, value, type): Promise<void>
+getCell(id, row, col): Promise<CellData>
+calculateFormula(formula, cells): Promise<string>
+getBalance(): Promise<string>               // Get wallet balance
+getAddress(): Promise<string>               // Get wallet address
+```
 
-### Smart Contract Methods
+#### HandCashAuthService
+```typescript
+login(): Promise<void>                      // Start OAuth flow
+handleCallback(url): Promise<HandCashUser>  // Handle OAuth callback
+logout(): void                              // Clear session
+isAuthenticated(): boolean                  // Check auth status
+getCurrentUser(): HandCashUser | null       // Get user info
+```
 
-- `createCell(row, col, value, dataType)` - Create cell
-- `updateTitle(newTitle)` - Update spreadsheet title
-- `calculateSum(startRow, endRow, col)` - Calculate sum
+### Backend API Endpoints
+
+```
+GET  /api/health                     # Health check
+GET  /api/auth/handcash/url          # Get OAuth URL
+GET  /api/auth/handcash/callback     # OAuth callback
+POST /api/handcash-profile           # Get user profile
+```
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
+We welcome contributions! This is an open-source project aimed at revolutionizing spreadsheets.
+
+### How to Contribute
+
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
+3. **Commit changes**: `git commit -m 'Add amazing feature'`
+4. **Push to branch**: `git push origin feature/amazing-feature`
+5. **Open Pull Request**: Describe your changes
+
+### Development Guidelines
+
+- Write clean, documented code
+- Add unit tests for new features
+- Follow existing code style
+- Update documentation
+- Check security implications
+
+### Priority Areas
+
+- Formula engine enhancements
+- Collaboration features
+- Performance optimizations
+- Mobile responsiveness
+- Blockchain integration
+- Security improvements
 
 ## 📄 License
 
-This project is licensed under the ISC License.
+This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
+
+## 🏆 Acknowledgments
+
+- [HandCash](https://handcash.io) - Wallet and authentication
+- [Bitcoin SV](https://bitcoinsv.com) - Blockchain platform
+- [sCrypt](https://scrypt.io) - Smart contract framework
+- React team for the amazing framework
+- All contributors and supporters
 
 ## ⚠️ Disclaimer
 
-This is experimental software. Use at your own risk. Always test thoroughly before using in production environments.
+This is experimental software in active development. While we strive for security and reliability:
 
-## 🔗 Links
+- Not yet audited for production use
+- Blockchain integration is in development
+- Data persistence is currently local
+- Use at your own risk
+- Not financial advice
 
+**IMPORTANT**: This project is for educational and experimental purposes. Do not use for critical data until production release.
+
+## 🔗 Important Links
+
+### Project
+- [GitHub Repository](https://github.com/b0ase/bitcoin-spreadsheet)
+- [Live Demo](https://bitcoin-spreadsheet.vercel.app) (Coming Soon)
+- [Documentation](docs/)
+- [Issue Tracker](https://github.com/b0ase/bitcoin-spreadsheet/issues)
+
+### Resources
+- [HandCash Developer Portal](https://docs.handcash.io)
 - [Bitcoin SV](https://bitcoinsv.com/)
 - [sCrypt Documentation](https://scrypt.io/)
 - [BSV Developer Resources](https://developer.bitcoinsv.io/)
 
+### Community
+- [Discord](https://discord.gg/bitcoinspreadsheet) (Coming Soon)
+- [Twitter](https://twitter.com/bitcoinspreadsheet) (Coming Soon)
+- [Telegram](https://t.me/bitcoinspreadsheet) (Coming Soon)
+
 ---
 
-Built with ❤️ on Bitcoin SV
+**Built with determination to revolutionize spreadsheets on Bitcoin SV**
+
+*"Your data, your keys, your spreadsheet"*

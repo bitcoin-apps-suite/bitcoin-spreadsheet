@@ -6,6 +6,7 @@ import SpreadsheetManager from './components/SpreadsheetManager';
 import Login from './components/Login';
 import NavbarLogin from './components/NavbarLogin';
 import HandCashCallback from './components/HandCashCallback';
+import BitcoinSpreadsheetPage from './pages/BitcoinSpreadsheetPage';
 import { BitcoinService, SpreadsheetData } from './services/BitcoinService';
 import { HandCashService, HandCashUser } from './services/HandCashService';
 
@@ -103,6 +104,7 @@ function App() {
 
   return (
     <Routes>
+      <Route path="/bitcoin-spreadsheet" element={<BitcoinSpreadsheetPage />} />
       <Route path="/auth/handcash/callback" element={<HandCashCallback />} />
       <Route path="/*" element={
         isLoading ? (

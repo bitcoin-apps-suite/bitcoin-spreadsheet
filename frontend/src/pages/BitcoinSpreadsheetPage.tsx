@@ -9,7 +9,7 @@ const BitcoinSpreadsheetPage: React.FC = () => {
     {
       icon: '🔐',
       title: 'Blockchain Security',
-      description: 'Every cell is cryptographically secured on the Bitcoin SV blockchain'
+      description: 'Your entire spreadsheet is cryptographically secured on the Bitcoin SV blockchain'
     },
     {
       icon: '🪙',
@@ -29,7 +29,7 @@ const BitcoinSpreadsheetPage: React.FC = () => {
     {
       icon: '📊',
       title: 'Real-time Collaboration',
-      description: 'Share and trade spreadsheet ownership in real-time'
+      description: 'Share spreadsheet ownership and collaborate in real-time'
     },
     {
       icon: '⚡',
@@ -60,8 +60,8 @@ const BitcoinSpreadsheetPage: React.FC = () => {
             The World's First Blockchain-Powered Spreadsheet Platform
           </p>
           <p className="hero-description">
-            Create, tokenize, and trade spreadsheets on the Bitcoin SV blockchain.
-            Every cell is an NFT. Every document can have a million shareholders.
+            Create and save spreadsheets directly on the Bitcoin SV blockchain.
+            Store entire spreadsheets as NFTs. Track fractional ownership and millions of shareholders in real-time!
           </p>
           <div className="hero-buttons">
             <button 
@@ -105,9 +105,9 @@ const BitcoinSpreadsheetPage: React.FC = () => {
             <div className="tokenization-text">
               <h2 className="section-title">Tokenize Your Spreadsheets</h2>
               <p className="section-description">
-                Transform your spreadsheets into tradeable digital assets with up to 
-                1 million shares. Enable fractional ownership and create liquid markets 
-                for your data.
+                Transform your spreadsheets into tokenized digital assets with up to 
+                1 million shares. Enable fractional ownership and transparent 
+                on-chain tracking.
               </p>
               <div className="protocols-list">
                 <h4>Supported Token Protocols:</h4>
@@ -171,12 +171,12 @@ const BitcoinSpreadsheetPage: React.FC = () => {
               <p className="pricing-detail">Set your own token price</p>
             </div>
             <div className="pricing-card">
-              <h3 className="pricing-title">Trading</h3>
+              <h3 className="pricing-title">Ownership</h3>
               <div className="pricing-amount">
-                <span className="pricing-value">0%</span>
-                <span className="pricing-unit">platform fee</span>
+                <span className="pricing-value">100%</span>
+                <span className="pricing-unit">transparent</span>
               </div>
-              <p className="pricing-detail">Peer-to-peer token trading</p>
+              <p className="pricing-detail">Track ownership on-chain</p>
             </div>
           </div>
         </div>

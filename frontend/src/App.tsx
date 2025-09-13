@@ -4,6 +4,7 @@ import './App.css';
 import Spreadsheet from './components/Spreadsheet';
 import SpreadsheetManager from './components/SpreadsheetManager';
 import Login from './components/Login';
+import NavbarLogin from './components/NavbarLogin';
 import HandCashCallback from './components/HandCashCallback';
 import { BitcoinService, SpreadsheetData } from './services/BitcoinService';
 import { HandCashService, HandCashUser } from './services/HandCashService';
@@ -60,6 +61,9 @@ function App() {
       setCurrentUser(user);
       setIsAuthenticated(true);
       initializeBitcoinService();
+    } else {
+      // Allow guest access - initialize Bitcoin service for anonymous users
+      initializeBitcoinService();
     }
     setIsLoading(false);
   };
@@ -103,8 +107,6 @@ function App() {
           <div className="App">
             <div className="loading">Loading Bitcoin Spreadsheet...</div>
           </div>
-        ) : !isAuthenticated ? (
-          <Login onLogin={handleLogin} />
         ) : (
           <div className="App">
             <a 
@@ -121,12 +123,27 @@ function App() {
             </a>
             <header className="App-header">
               <div className="connection-indicator" />
-              <h1>Bitcoin Spreadsheet</h1>
+              <h1><span className="bitcoin-orange">Bitcoin</span> Spreadsheet</h1>
+              <p className="app-subtitle">Secure, encrypted spreadsheets on the blockchain</p>
               <div className="user-info">
-                <span className="user-handle">@{currentUser?.handle}</span>
-                <button className="logout-btn" onClick={handleLogout}>
-                  Sign Out
-                </button>
+                {isAuthenticated && currentUser ? (
+                  <>
+                    <div className="handcash-user-badge">
+                      <img 
+                        src="https://handcash.io/favicon.ico" 
+                        alt="HandCash" 
+                        className="handcash-user-icon"
+                      />
+                      <span className="user-handle">@{currentUser.handle}</span>
+                      <div className="connection-dot"></div>
+                    </div>
+                    <button className="logout-btn" onClick={handleLogout}>
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <NavbarLogin onLogin={handleLogin} />
+                )}
               </div>
             </header>
             <div className="disclaimer">
@@ -145,6 +162,11 @@ function App() {
                       bitcoinService={bitcoinService}
                       spreadsheet={currentSpreadsheet}
                       onSpreadsheetUpdate={setCurrentSpreadsheet}
+                      isAuthenticated={isAuthenticated}
+                      onLogin={() => {
+                        const loginService = new HandCashService();
+                        loginService.login();
+                      }}
                     />
                   </div>
                 </div>

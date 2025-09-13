@@ -2,21 +2,33 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { BitcoinService, SpreadsheetData, CellData } from '../services/BitcoinService';
 import Cell from './Cell';
 import Toolbar from './Toolbar';
+import StorageOptionsModal from './StorageOptionsModal';
+import { 
+  StorageOption, 
+  SpreadsheetPricingBreakdown,
+  calculateSpreadsheetPricing,
+  SPREADSHEET_STORAGE_OPTIONS
+} from '../utils/storageOptions';
 import './Spreadsheet.css';
 
 interface SpreadsheetProps {
   bitcoinService: BitcoinService;
   spreadsheet?: SpreadsheetData | null;
   onSpreadsheetUpdate?: (spreadsheet: SpreadsheetData) => void;
+  isAuthenticated?: boolean;
+  onLogin?: () => void;
 }
 
-const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: propSpreadsheet, onSpreadsheetUpdate }) => {
+const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: propSpreadsheet, onSpreadsheetUpdate, isAuthenticated = false, onLogin }) => {
   const [spreadsheet, setSpreadsheet] = useState<SpreadsheetData | null>(propSpreadsheet || null);
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [copiedCell, setCopiedCell] = useState<{ row: number; col: number; value: string } | null>(null);
   const [isDirty, setIsDirty] = useState(false);
   const [savedToBlockchain, setSavedToBlockchain] = useState(false);
+  const [showStorageModal, setShowStorageModal] = useState(false);
+  const [selectedStorageOption, setSelectedStorageOption] = useState<StorageOption | null>(null);
+  const [storagePricing, setStoragePricing] = useState<SpreadsheetPricingBreakdown | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
   // Spreadsheet dimensions - expanded to 26 columns (A-Z) and 100 rows
@@ -218,26 +230,60 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
     };
   };
 
-  // Save spreadsheet to blockchain
-  const saveToBlockchain = async () => {
+  // Open storage options modal
+  const openStorageModal = async () => {
     if (!spreadsheet || !isDirty) return;
 
-    const cost = calculateSaveCost();
-    const confirmSave = window.confirm(
-      `Save spreadsheet to blockchain?\n\n` +
-      `Non-empty cells: ${cost.cells}\n` +
-      `Cost: ${cost.satoshis} satoshis (${cost.usd})\n\n` +
-      `This will permanently store your data on the Bitcoin blockchain.`
-    );
+    // Check if user is authenticated
+    if (!isAuthenticated) {
+      const shouldSignIn = window.confirm(
+        'Sign in required to save to blockchain.\n\n' +
+        'You need a HandCash account to save your spreadsheet permanently to the Bitcoin blockchain.\n\n' +
+        'Would you like to sign in now?'
+      );
+      
+      if (shouldSignIn && onLogin) {
+        onLogin();
+      }
+      return;
+    }
 
-    if (!confirmSave) return;
+    // Set default storage option and calculate initial pricing
+    const defaultOption = SPREADSHEET_STORAGE_OPTIONS[0];
+    setSelectedStorageOption(defaultOption);
+    
+    try {
+      const pricing = await calculateSpreadsheetPricing(spreadsheet.cells, defaultOption);
+      setStoragePricing(pricing);
+      setShowStorageModal(true);
+    } catch (error) {
+      console.error('Failed to calculate pricing:', error);
+      alert('Failed to calculate storage pricing. Please try again.');
+    }
+  };
+
+  // Handle storage option selection
+  const handleStorageOptionSelect = async (option: StorageOption) => {
+    if (!spreadsheet) return;
+    
+    setSelectedStorageOption(option);
+    try {
+      const pricing = await calculateSpreadsheetPricing(spreadsheet.cells, option);
+      setStoragePricing(pricing);
+    } catch (error) {
+      console.error('Failed to calculate pricing:', error);
+    }
+  };
+
+  // Save spreadsheet to blockchain with selected storage option
+  const saveWithSelectedOption = async () => {
+    if (!spreadsheet || !selectedStorageOption) return;
 
     try {
-      // Here we would actually save to blockchain
-      // For now, we'll simulate it
       console.log('Saving to blockchain...', {
         spreadsheet,
-        cost
+        storageOption: selectedStorageOption,
+        pricing: storagePricing
       });
 
       // Mark all cells as saved
@@ -255,7 +301,8 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
 
       setIsDirty(false);
       setSavedToBlockchain(true);
-      alert('Spreadsheet saved to blockchain successfully!');
+      setShowStorageModal(false);
+      alert(`Spreadsheet saved to blockchain successfully using ${selectedStorageOption.name}!`);
     } catch (error) {
       console.error('Failed to save to blockchain:', error);
       alert('Failed to save to blockchain. Please try again.');
@@ -278,6 +325,10 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
             onSpreadsheetUpdate(updated);
           }
         }}
+        isDirty={isDirty}
+        isAuthenticated={isAuthenticated}
+        onSave={openStorageModal}
+        calculateSaveCost={calculateSaveCost}
       />
 
       <div className="spreadsheet-grid">
@@ -336,23 +387,21 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
           )}
         </div>
         <div className="status-right">
-          {isDirty && (
-            <>
-              <span className="unsaved-indicator">● Unsaved changes</span>
-              <button 
-                className="save-button"
-                onClick={saveToBlockchain}
-                title="Save to blockchain"
-              >
-                💾 Save to Blockchain ({calculateSaveCost().usd})
-              </button>
-            </>
-          )}
           {savedToBlockchain && !isDirty && (
             <span className="saved-indicator">✓ Saved to blockchain</span>
           )}
         </div>
       </div>
+
+      {/* Storage Options Modal */}
+      <StorageOptionsModal
+        isOpen={showStorageModal}
+        onClose={() => setShowStorageModal(false)}
+        onSelect={handleStorageOptionSelect}
+        selectedOption={selectedStorageOption}
+        pricing={storagePricing}
+        onConfirm={saveWithSelectedOption}
+      />
     </div>
   );
 };

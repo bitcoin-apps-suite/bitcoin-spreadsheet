@@ -150,6 +150,165 @@
   letter-spacing: 0.05em;
 }
 
+/* Combined Save Section Styles */
+.combined-save-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  min-width: 280px;
+}
+
+.cost-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.unsaved-indicator {
+  color: #ffa726;
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.combined-save-button {
+  background: linear-gradient(135deg, #007acc, #0056b3);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.combined-save-button:hover {
+  background: linear-gradient(135deg, #0088ff, #006bd6);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
+}
+
+.combined-save-button:active {
+  transform: translateY(0);
+}
+
+/* Cost Display Styles */
+.cost-display {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  min-width: 140px;
+}
+
+.cost-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cost-label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cost-amount {
+  color: #00d4aa;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'SF Mono', 'Monaco', monospace;
+}
+
+.cell-count {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+/* HandCash Badge Styles */
+.connection-status {
+  display: flex;
+  align-items: center;
+}
+
+.handcash-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.handcash-badge.connected {
+  background: linear-gradient(135deg, #00d4aa, #00b4d8);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 212, 170, 0.3);
+}
+
+.handcash-badge.disconnected {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.handcash-badge:hover {
+  transform: translateY(-1px);
+}
+
+.handcash-icon {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.connection-dot {
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+  margin-left: 2px;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .toolbar {

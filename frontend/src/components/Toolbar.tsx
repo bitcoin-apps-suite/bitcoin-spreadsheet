@@ -6,9 +6,13 @@ interface ToolbarProps {
   spreadsheet: SpreadsheetData;
   selectedCell: { row: number; col: number } | null;
   onTitleChange: (title: string) => void;
+  isDirty: boolean;
+  isAuthenticated: boolean;
+  onSave: () => void;
+  calculateSaveCost: () => { cells: number; satoshis: number; usd: string };
 }
 
-const Toolbar: React.FC<ToolbarProps> = ({ spreadsheet, selectedCell, onTitleChange }) => {
+const Toolbar: React.FC<ToolbarProps> = ({ spreadsheet, selectedCell, onTitleChange, isDirty, isAuthenticated, onSave, calculateSaveCost }) => {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [titleValue, setTitleValue] = useState(spreadsheet.title);
 
@@ -111,9 +115,28 @@ const Toolbar: React.FC<ToolbarProps> = ({ spreadsheet, selectedCell, onTitleCha
       </div>
 
       <div className="toolbar-section">
-        <div className="blockchain-info">
-          <span className="blockchain-status">🔗 Bitcoin Network</span>
-          <span className="tx-count">Tx: 0</span>
+        <div className="combined-save-section">
+          <div className="cost-info">
+            <div className="cost-header">
+              <span className="cost-label">Cost:</span>
+              <span className="cost-amount">{calculateSaveCost().usd}</span>
+            </div>
+            <div className="cell-count">
+              {calculateSaveCost().cells} cells • {calculateSaveCost().satoshis} sats
+            </div>
+          </div>
+          
+          {isDirty && (
+            <span className="unsaved-indicator">● Unsaved changes</span>
+          )}
+          
+          <button 
+            className="combined-save-button"
+            onClick={onSave}
+            title={isAuthenticated ? "Save to blockchain with multiple storage options" : "Sign in required to save to blockchain"}
+          >
+            💾 {isAuthenticated ? 'Save to Blockchain' : 'Sign in to Save'}
+          </button>
         </div>
       </div>
     </div>

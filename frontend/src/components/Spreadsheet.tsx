@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { BitcoinService, SpreadsheetData, CellData } from '../services/BitcoinService';
 import Cell from './Cell';
 import Toolbar from './Toolbar';
@@ -6,36 +6,56 @@ import './Spreadsheet.css';
 
 interface SpreadsheetProps {
   bitcoinService: BitcoinService;
+  spreadsheet?: SpreadsheetData | null;
+  onSpreadsheetUpdate?: (spreadsheet: SpreadsheetData) => void;
 }
 
-const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService }) => {
-  const [spreadsheet, setSpreadsheet] = useState<SpreadsheetData | null>(null);
+const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: propSpreadsheet, onSpreadsheetUpdate }) => {
+  const [spreadsheet, setSpreadsheet] = useState<SpreadsheetData | null>(propSpreadsheet || null);
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [copiedCell, setCopiedCell] = useState<{ row: number; col: number; value: string } | null>(null);
+  const [isDirty, setIsDirty] = useState(false);
+  const [savedToBlockchain, setSavedToBlockchain] = useState(false);
+  const gridRef = useRef<HTMLDivElement>(null);
 
-  // Spreadsheet dimensions
-  const ROWS = 20;
-  const COLS = 10;
+  // Spreadsheet dimensions - expanded to 26 columns (A-Z) and 100 rows
+  const ROWS = 100;
+  const COLS = 26;
 
+  // Use provided spreadsheet or create a new one
   useEffect(() => {
-    const initSpreadsheet = async () => {
-      try {
-        const newSpreadsheet = await bitcoinService.createSpreadsheet('My Spreadsheet');
-        setSpreadsheet(newSpreadsheet);
-      } catch (error) {
-        console.error('Failed to create spreadsheet:', error);
-      }
-    };
-
-    initSpreadsheet();
-  }, [bitcoinService]);
+    if (propSpreadsheet) {
+      setSpreadsheet(propSpreadsheet);
+    } else {
+      const initSpreadsheet = async () => {
+        try {
+          const newSpreadsheet = await bitcoinService.createSpreadsheet('My Spreadsheet');
+          setSpreadsheet(newSpreadsheet);
+          if (onSpreadsheetUpdate) {
+            onSpreadsheetUpdate(newSpreadsheet);
+          }
+        } catch (error) {
+          console.error('Failed to create spreadsheet:', error);
+        }
+      };
+      initSpreadsheet();
+    }
+  }, [bitcoinService, propSpreadsheet, onSpreadsheetUpdate]);
 
   const getCellKey = (row: number, col: number): string => {
     return `${row}-${col}`;
   };
 
   const getColumnLabel = (col: number): string => {
-    return String.fromCharCode(65 + col); // A, B, C, etc.
+    // Support for A-Z columns
+    if (col < 26) {
+      return String.fromCharCode(65 + col);
+    }
+    // For columns beyond Z, use AA, AB, etc.
+    const firstLetter = String.fromCharCode(65 + Math.floor(col / 26) - 1);
+    const secondLetter = String.fromCharCode(65 + (col % 26));
+    return firstLetter + secondLetter;
   };
 
   const handleCellClick = useCallback((row: number, col: number) => {
@@ -56,9 +76,7 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService }) => {
       const dataType = /^\d+(\.\d+)?$/.test(value) ? 'number' :
                       value.startsWith('=') ? 'formula' : 'string';
 
-      await bitcoinService.updateCell(spreadsheet.id, row, col, value, dataType);
-
-      // Update local state
+      // Don't save to blockchain immediately - just update local state
       const cellKey = getCellKey(row, col);
       const updatedCells = {
         ...spreadsheet.cells,
@@ -71,16 +89,22 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService }) => {
         }
       };
 
-      setSpreadsheet({
+      const updatedSpreadsheet = {
         ...spreadsheet,
         cells: updatedCells
-      });
+      };
+      setSpreadsheet(updatedSpreadsheet);
+      if (onSpreadsheetUpdate) {
+        onSpreadsheetUpdate(updatedSpreadsheet);
+      }
 
       setIsEditing(false);
+      setIsDirty(true); // Mark as unsaved changes
+      setSavedToBlockchain(false);
     } catch (error) {
       console.error('Failed to update cell:', error);
     }
-  }, [spreadsheet, bitcoinService]);
+  }, [spreadsheet]);
 
   const getCellValue = (row: number, col: number): string => {
     if (!spreadsheet) return '';
@@ -99,6 +123,145 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService }) => {
     return cell.value;
   };
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!selectedCell) return;
+
+      const { row, col } = selectedCell;
+
+      // Copy (Ctrl+C or Cmd+C)
+      if ((e.ctrlKey || e.metaKey) && e.key === 'c' && !isEditing) {
+        const value = getCellValue(row, col);
+        setCopiedCell({ row, col, value });
+        navigator.clipboard.writeText(value);
+        return;
+      }
+
+      // Paste (Ctrl+V or Cmd+V)
+      if ((e.ctrlKey || e.metaKey) && e.key === 'v' && !isEditing && copiedCell) {
+        handleCellValueChange(row, col, copiedCell.value);
+        return;
+      }
+
+      // Navigation keys (when not editing)
+      if (!isEditing) {
+        switch (e.key) {
+          case 'ArrowUp':
+            if (row > 0) {
+              setSelectedCell({ row: row - 1, col });
+              e.preventDefault();
+            }
+            break;
+          case 'ArrowDown':
+            if (row < ROWS - 1) {
+              setSelectedCell({ row: row + 1, col });
+              e.preventDefault();
+            }
+            break;
+          case 'ArrowLeft':
+            if (col > 0) {
+              setSelectedCell({ row, col: col - 1 });
+              e.preventDefault();
+            }
+            break;
+          case 'ArrowRight':
+            if (col < COLS - 1) {
+              setSelectedCell({ row, col: col + 1 });
+              e.preventDefault();
+            }
+            break;
+          case 'Enter':
+            setIsEditing(true);
+            e.preventDefault();
+            break;
+          case 'Delete':
+          case 'Backspace':
+            handleCellValueChange(row, col, '');
+            e.preventDefault();
+            break;
+          case 'Tab':
+            if (e.shiftKey && col > 0) {
+              setSelectedCell({ row, col: col - 1 });
+            } else if (!e.shiftKey && col < COLS - 1) {
+              setSelectedCell({ row, col: col + 1 });
+            }
+            e.preventDefault();
+            break;
+        }
+      } else if (e.key === 'Escape') {
+        setIsEditing(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedCell, isEditing, copiedCell, handleCellValueChange]);
+
+  // Calculate cost for saving to blockchain
+  const calculateSaveCost = (): { cells: number; satoshis: number; usd: string } => {
+    if (!spreadsheet) return { cells: 0, satoshis: 0, usd: '$0.00' };
+
+    const nonEmptyCells = Object.values(spreadsheet.cells).filter(cell => cell.value.trim() !== '').length;
+    // 1/10,000th of a penny per cell = $0.000001 per cell
+    // Assuming 1 BSV = $50 (adjust based on current price)
+    const usdPerCell = 0.000001;
+    const totalUsd = nonEmptyCells * usdPerCell;
+    const bsvPrice = 50; // Current BSV price in USD
+    const satoshisPerBsv = 100000000;
+    const satoshis = Math.ceil((totalUsd / bsvPrice) * satoshisPerBsv);
+
+    return {
+      cells: nonEmptyCells,
+      satoshis,
+      usd: `$${totalUsd.toFixed(6)}`
+    };
+  };
+
+  // Save spreadsheet to blockchain
+  const saveToBlockchain = async () => {
+    if (!spreadsheet || !isDirty) return;
+
+    const cost = calculateSaveCost();
+    const confirmSave = window.confirm(
+      `Save spreadsheet to blockchain?\n\n` +
+      `Non-empty cells: ${cost.cells}\n` +
+      `Cost: ${cost.satoshis} satoshis (${cost.usd})\n\n` +
+      `This will permanently store your data on the Bitcoin blockchain.`
+    );
+
+    if (!confirmSave) return;
+
+    try {
+      // Here we would actually save to blockchain
+      // For now, we'll simulate it
+      console.log('Saving to blockchain...', {
+        spreadsheet,
+        cost
+      });
+
+      // Mark all cells as saved
+      for (const [key, cell] of Object.entries(spreadsheet.cells)) {
+        if (cell.value.trim() !== '') {
+          await bitcoinService.updateCell(
+            spreadsheet.id,
+            cell.row,
+            cell.col,
+            cell.value,
+            cell.dataType
+          );
+        }
+      }
+
+      setIsDirty(false);
+      setSavedToBlockchain(true);
+      alert('Spreadsheet saved to blockchain successfully!');
+    } catch (error) {
+      console.error('Failed to save to blockchain:', error);
+      alert('Failed to save to blockchain. Please try again.');
+    }
+  };
+
   if (!spreadsheet) {
     return <div className="loading">Creating spreadsheet...</div>;
   }
@@ -108,7 +271,13 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService }) => {
       <Toolbar
         spreadsheet={spreadsheet}
         selectedCell={selectedCell}
-        onTitleChange={(title) => setSpreadsheet({ ...spreadsheet, title })}
+        onTitleChange={(title) => {
+          const updated = { ...spreadsheet, title };
+          setSpreadsheet(updated);
+          if (onSpreadsheetUpdate) {
+            onSpreadsheetUpdate(updated);
+          }
+        }}
       />
 
       <div className="spreadsheet-grid">
@@ -152,13 +321,37 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService }) => {
         ))}
       </div>
 
-      {/* Status bar */}
+      {/* Status bar with save button and cost display */}
       <div className="status-bar">
-        {selectedCell && (
-          <span>
-            Cell {getColumnLabel(selectedCell.col)}{selectedCell.row + 1}
-          </span>
-        )}
+        <div className="status-left">
+          {selectedCell && (
+            <span>
+              Cell {getColumnLabel(selectedCell.col)}{selectedCell.row + 1}
+            </span>
+          )}
+          {copiedCell && (
+            <span className="copied-indicator">
+              | Copied: {getColumnLabel(copiedCell.col)}{copiedCell.row + 1}
+            </span>
+          )}
+        </div>
+        <div className="status-right">
+          {isDirty && (
+            <>
+              <span className="unsaved-indicator">● Unsaved changes</span>
+              <button 
+                className="save-button"
+                onClick={saveToBlockchain}
+                title="Save to blockchain"
+              >
+                💾 Save to Blockchain ({calculateSaveCost().usd})
+              </button>
+            </>
+          )}
+          {savedToBlockchain && !isDirty && (
+            <span className="saved-indicator">✓ Saved to blockchain</span>
+          )}
+        </div>
       </div>
     </div>
   );

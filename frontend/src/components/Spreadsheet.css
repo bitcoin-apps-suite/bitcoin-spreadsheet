@@ -4,19 +4,24 @@
   border-radius: 0;
   box-shadow: none;
   outline: none;
-  overflow: hidden;
+  overflow: auto;
   margin: 0 auto;
   max-width: 100%;
   padding: 0;
+  height: calc(100vh - 200px);
+  position: relative;
 }
 
 .spreadsheet-grid {
   display: grid;
-  grid-template-columns: 60px repeat(10, 1fr);
+  grid-template-columns: 60px repeat(26, minmax(80px, 1fr));
   font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
   font-size: 13px;
   color: #ffffff;
   background: #000000;
+  overflow: auto;
+  max-height: calc(100vh - 250px);
+  position: relative;
 }
 
 .grid-header {
@@ -24,7 +29,7 @@
 }
 
 .grid-header .header-cell {
-  background: #000000;
+  background: #111111;
   border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
@@ -35,6 +40,9 @@
   font-size: 12px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .grid-row {
@@ -42,7 +50,7 @@
 }
 
 .row-number {
-  background: #000000;
+  background: #111111;
   border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
@@ -51,6 +59,9 @@
   color: rgba(255, 255, 255, 0.7);
   padding: 10px 4px;
   font-size: 12px;
+  position: sticky;
+  left: 0;
+  z-index: 9;
 }
 
 .cell {
@@ -114,11 +125,66 @@
   background: #000000;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding: 12px 20px;
-  text-align: left;
   font-size: 11px;
   color: rgba(255, 255, 255, 0.5);
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
   letter-spacing: 0.02em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+}
+
+.status-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.status-right {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.copied-indicator {
+  color: rgba(100, 255, 100, 0.6);
+  font-style: italic;
+}
+
+.unsaved-indicator {
+  color: rgba(255, 200, 100, 0.8);
+  font-weight: 500;
+}
+
+.saved-indicator {
+  color: rgba(100, 255, 100, 0.8);
+  font-weight: 500;
+}
+
+.save-button {
+  background: linear-gradient(135deg, #ff9500, #ff5500);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
+}
+
+.save-button:hover {
+  background: linear-gradient(135deg, #ffaa00, #ff6600);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(255, 100, 0, 0.3);
+}
+
+.save-button:active {
+  transform: translateY(0);
 }
 
 /* Formula cells */
@@ -137,6 +203,17 @@
 .cell[data-type="error"] {
   color: #ff5555;
   background: rgba(255, 85, 85, 0.05);
+}
+
+/* Corner cell styling */
+.corner-cell {
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 11;
+  padding: 10px 4px;
 }
 
 /* Responsive adjustments */

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import Spreadsheet from './components/Spreadsheet';
+import SpreadsheetManager from './components/SpreadsheetManager';
 import Login from './components/Login';
 import HandCashCallback from './components/HandCashCallback';
-import { BitcoinService } from './services/BitcoinService';
+import { BitcoinService, SpreadsheetData } from './services/BitcoinService';
 import { HandCashService, HandCashUser } from './services/HandCashService';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState<HandCashUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentSpreadsheet, setCurrentSpreadsheet] = useState<SpreadsheetData | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -130,9 +132,22 @@ function App() {
             <div className="disclaimer">
               <small>This is a demonstration version. Use at your own risk. Blockchain transactions cannot be reversed.</small>
             </div>
-            <main>
+            <main className="main-container">
               {bitcoinService ? (
-                <Spreadsheet bitcoinService={bitcoinService} />
+                <div className="app-content">
+                  <SpreadsheetManager
+                    bitcoinService={bitcoinService}
+                    onSelectSpreadsheet={setCurrentSpreadsheet}
+                    currentSpreadsheet={currentSpreadsheet}
+                  />
+                  <div className="spreadsheet-wrapper">
+                    <Spreadsheet 
+                      bitcoinService={bitcoinService}
+                      spreadsheet={currentSpreadsheet}
+                      onSpreadsheetUpdate={setCurrentSpreadsheet}
+                    />
+                  </div>
+                </div>
               ) : (
                 <div className="loading">Initializing blockchain connection...</div>
               )}

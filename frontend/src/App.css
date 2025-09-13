@@ -190,3 +190,21 @@ main {
     font-size: 0.7rem;
   }
 }
+
+/* Main container with sidebar layout */
+.main-container {
+  background: #000000;
+  min-height: calc(100vh - 140px);
+}
+
+.app-content {
+  display: flex;
+  height: calc(100vh - 140px);
+  background: #000000;
+}
+
+.spreadsheet-wrapper {
+  flex: 1;
+  overflow: hidden;
+  background: #000000;
+}

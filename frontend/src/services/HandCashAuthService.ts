@@ -201,7 +201,8 @@ export class HandCashAuthService {
         const urlParams = new URLSearchParams(url.search);
         authToken = urlParams.get('authToken') || 
                    urlParams.get('auth_token') ||
-                   urlParams.get('token');
+                   urlParams.get('token') ||
+                   urlParams.get('code');  // HandCash sometimes uses 'code'
       }
       
       // Check for errors
@@ -313,7 +314,7 @@ export class HandCashAuthService {
         // Determine API endpoint based on environment
         const apiBase = this.config.environment === 'production' 
           ? ''  // In production, use same origin (Vercel handles /api routes)
-          : 'http://localhost:3001';  // Local API server on port 3001
+          : 'http://localhost:4001';  // Local API server on port 4001
         
         console.log('Fetching user profile from API...');
         console.log('API Base:', apiBase);

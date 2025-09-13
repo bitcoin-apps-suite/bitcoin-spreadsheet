@@ -168,29 +168,39 @@ export class HandCashAuthService {
       
       const url = new URL(callbackUrl);
       
-      // HandCash returns the authToken directly in the URL
-      // Check both query params and hash params
+      // HandCash returns the authToken in the hash fragment
+      // Format: #authToken=xxx or sometimes just #xxx
+      let authToken: string | null = null;
+      
+      // First check hash fragment
+      if (url.hash) {
+        const hashContent = url.hash.substring(1); // Remove #
+        console.log('Hash content:', hashContent);
+        
+        // Check if it's a parameter format (#authToken=xxx)
+        if (hashContent.includes('=')) {
+          const hashParams = new URLSearchParams(hashContent);
+          authToken = hashParams.get('authToken') || hashParams.get('token');
+        } else if (hashContent.length > 20) {
+          // Might be just the token (#xxx)
+          authToken = hashContent;
+        }
+      }
+      
+      // Also check query params as fallback
+      if (!authToken) {
+        const urlParams = new URLSearchParams(url.search);
+        authToken = urlParams.get('authToken') || 
+                   urlParams.get('auth_token') ||
+                   urlParams.get('token');
+      }
+      
+      // Check for errors
       const urlParams = new URLSearchParams(url.search);
-      const hashParams = new URLSearchParams(url.hash.replace('#', ''));
-      
-      console.log('URL search params:', url.search);
-      console.log('URL hash:', url.hash);
-      console.log('Parsed URL params:', Array.from(urlParams.entries()));
-      console.log('Parsed hash params:', Array.from(hashParams.entries()));
-      
-      // Look for authToken in various formats
-      const authToken = urlParams.get('authToken') || 
-                       hashParams.get('authToken') ||
-                       urlParams.get('auth_token') ||
-                       hashParams.get('auth_token') ||
-                       urlParams.get('token') ||
-                       hashParams.get('token') ||
-                       // Sometimes the hash is just the token without parameter name
-                       (url.hash && !url.hash.includes('=') ? url.hash.replace('#', '') : null);
-      
+      const hashParams = url.hash ? new URLSearchParams(url.hash.substring(1)) : new URLSearchParams();
       const error = urlParams.get('error') || hashParams.get('error');
       
-      console.log('Found authToken:', authToken);
+      console.log('Extracted authToken:', authToken);
       console.log('Found error:', error);
       
       // Check for errors
@@ -201,7 +211,8 @@ export class HandCashAuthService {
       
       if (!authToken) {
         console.error('No authToken found in callback URL');
-        console.log('Expected one of: ?authToken=xxx, #authToken=xxx, ?token=xxx, #token=xxx, or just #xxx');
+        console.log('URL hash:', url.hash);
+        console.log('URL search:', url.search);
         throw new Error('No authToken received from HandCash. Check the console for debug information.');
       }
       
@@ -285,42 +296,48 @@ export class HandCashAuthService {
       throw new Error('No access token available');
     }
 
-    try {
-      // Determine API endpoint based on environment
-      const apiBase = this.config.environment === 'production' 
-        ? 'https://bitcoin-spreadsheet.vercel.app'
-        : 'http://localhost:3000';
-      
-      console.log('Fetching user profile from API...');
-      
-      // Call our API endpoint to fetch the profile server-side
-      const response = await fetch(`${apiBase}/api/handcash-profile`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          authToken: this.tokens.accessToken
-        })
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Profile fetched successfully:', data.profile);
+    // Skip API call for now - it may not be deployed yet
+    // TODO: Enable this once the API endpoint is confirmed working
+    const SKIP_API_PROFILE_FETCH = true; // Temporary flag
+    
+    if (!SKIP_API_PROFILE_FETCH) {
+      try {
+        // Determine API endpoint based on environment
+        const apiBase = this.config.environment === 'production' 
+          ? 'https://bitcoin-spreadsheet.vercel.app'
+          : 'http://localhost:3000';
         
-        return {
-          handle: data.profile.handle || 'handcash_user',
-          paymail: data.profile.paymail || 'user@handcash.io',
-          publicKey: data.profile.publicKey,
-          avatarUrl: data.profile.avatarUrl,
-          displayName: data.profile.displayName || data.profile.handle
-        };
-      } else {
-        const error = await response.json();
-        console.error('API error fetching profile:', error);
+        console.log('Fetching user profile from API...');
+        
+        // Call our API endpoint to fetch the profile server-side
+        const response = await fetch(`${apiBase}/api/handcash-profile`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            authToken: this.tokens.accessToken
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Profile fetched successfully:', data.profile);
+          
+          return {
+            handle: data.profile.handle || 'handcash_user',
+            paymail: data.profile.paymail || 'user@handcash.io',
+            publicKey: data.profile.publicKey,
+            avatarUrl: data.profile.avatarUrl,
+            displayName: data.profile.displayName || data.profile.handle
+          };
+        } else {
+          const error = await response.json();
+          console.error('API error fetching profile:', error);
+        }
+      } catch (error) {
+        console.error('Failed to fetch user profile from API:', error);
       }
-    } catch (error) {
-      console.error('Failed to fetch user profile from API:', error);
     }
 
     // Fallback: Try to decode the authToken if it's a JWT
@@ -344,14 +361,19 @@ export class HandCashAuthService {
       console.log('Token is not a JWT or could not be decoded');
     }
     
-    // Final fallback
-    console.warn('Using placeholder user data - API endpoint may not be available');
+    // Final fallback - create a unique identifier from the token
+    console.warn('Using fallback user data - Enable API endpoint for real profile');
+    
+    // Generate a consistent username from the token
+    const tokenHash = this.tokens.accessToken.substring(0, 8).toLowerCase();
+    const fallbackHandle = `user_${tokenHash}`;
+    
     return {
-      handle: 'handcash_user',
-      paymail: 'user@handcash.io',
+      handle: fallbackHandle,
+      paymail: `${fallbackHandle}@handcash.io`,
       publicKey: this.tokens.accessToken.substring(0, 20),
       avatarUrl: undefined,
-      displayName: 'HandCash User'
+      displayName: `User ${tokenHash.toUpperCase()}`
     };
   }
 

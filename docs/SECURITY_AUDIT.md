@@ -15,7 +15,7 @@ This security audit identifies vulnerabilities, risks, and recommendations for t
 
 **Issue**: HandCash App Secret was committed to Git repository in `.env.local`
 - **File**: `/Users/b0ase/blockchain-spreadsheet/.env.local`
-- **Exposed Secret**: `HANDCASH_APP_SECRET=c2166ae8ad67dfd92944efb67957ef65235c665d933f0ea161fd305fe628e7b7`
+- **Exposed Secret**: `HANDCASH_APP_SECRET=[REDACTED - 64 character secret]`
 - **Risk Level**: CRITICAL
 - **Impact**: Complete compromise of HandCash application, unauthorized access to user data
 

@@ -15,6 +15,7 @@ interface ToolbarProps {
 const Toolbar: React.FC<ToolbarProps> = ({ spreadsheet, selectedCell, onTitleChange, isDirty, isAuthenticated, onSave, calculateSaveCost }) => {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [titleValue, setTitleValue] = useState(spreadsheet.title);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleTitleSubmit = () => {
     onTitleChange(titleValue);
@@ -75,7 +76,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ spreadsheet, selectedCell, onTitleCha
       </div>
 
       <div className="toolbar-section">
-        <div className="function-buttons">
+        <div className="function-buttons desktop-only">
           <button
             className="function-btn"
             onClick={() => insertFormula('=SUM()')}
@@ -111,6 +112,39 @@ const Toolbar: React.FC<ToolbarProps> = ({ spreadsheet, selectedCell, onTitleCha
           >
             MIN
           </button>
+        </div>
+        
+        <div className="mobile-menu mobile-only">
+          <button 
+            className="hamburger-btn"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            title="Functions Menu"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+            Functions
+          </button>
+          
+          {isMenuOpen && (
+            <div className="dropdown-menu">
+              <button onClick={() => { insertFormula('=SUM()'); setIsMenuOpen(false); }}>
+                <span>Σ</span> Sum
+              </button>
+              <button onClick={() => { insertFormula('=AVERAGE()'); setIsMenuOpen(false); }}>
+                <span>AVG</span> Average
+              </button>
+              <button onClick={() => { insertFormula('=COUNT()'); setIsMenuOpen(false); }}>
+                <span>CNT</span> Count
+              </button>
+              <button onClick={() => { insertFormula('=MAX()'); setIsMenuOpen(false); }}>
+                <span>MAX</span> Maximum
+              </button>
+              <button onClick={() => { insertFormula('=MIN()'); setIsMenuOpen(false); }}>
+                <span>MIN</span> Minimum
+              </button>
+            </div>
+          )}
         </div>
       </div>
 

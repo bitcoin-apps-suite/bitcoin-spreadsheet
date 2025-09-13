@@ -130,3 +130,131 @@ const StorageOptionsModal: React.FC<StorageOptionsModalProps> = ({
 };
 
 export default StorageOptionsModal;
+
+// Add mobile-responsive styles
+const mobileStyles = `
+  @media (max-width: 768px) {
+    .modal-overlay {
+      padding: 12px !important;
+    }
+    
+    .modal-content {
+      max-height: 95vh !important;
+      margin: 0 !important;
+      border-radius: 12px !important;
+    }
+    
+    .modal-header h2 {
+      font-size: 1.3rem !important;
+      margin-bottom: 8px !important;
+    }
+    
+    .storage-options {
+      gap: 12px !important;
+    }
+    
+    .storage-option {
+      padding: 12px !important;
+      min-height: 80px !important;
+    }
+    
+    .storage-option h3 {
+      font-size: 0.9rem !important;
+      margin-bottom: 6px !important;
+    }
+    
+    .storage-option p {
+      font-size: 0.75rem !important;
+      margin-bottom: 8px !important;
+    }
+    
+    .storage-features {
+      font-size: 0.7rem !important;
+      gap: 6px !important;
+    }
+    
+    .pricing-table {
+      font-size: 0.75rem !important;
+      margin: 12px 0 !important;
+    }
+    
+    .pricing-table th,
+    .pricing-table td {
+      padding: 6px !important;
+    }
+    
+    .pricing-info {
+      font-size: 0.75rem !important;
+      margin-top: 12px !important;
+    }
+    
+    .modal-footer {
+      gap: 12px !important;
+      padding: 16px !important;
+    }
+    
+    .cancel-btn,
+    .confirm-btn {
+      padding: 12px 20px !important;
+      font-size: 0.9rem !important;
+      border-radius: 6px !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .modal-content {
+      max-height: 98vh !important;
+      border-radius: 8px !important;
+    }
+    
+    .storage-options {
+      gap: 8px !important;
+    }
+    
+    .storage-option {
+      padding: 10px !important;
+      min-height: 70px !important;
+    }
+    
+    .storage-option h3 {
+      font-size: 0.85rem !important;
+    }
+    
+    .storage-option p {
+      font-size: 0.7rem !important;
+    }
+    
+    .storage-features {
+      font-size: 0.65rem !important;
+    }
+    
+    .pricing-table {
+      font-size: 0.7rem !important;
+    }
+    
+    .pricing-table th,
+    .pricing-table td {
+      padding: 4px !important;
+    }
+    
+    .modal-footer {
+      flex-direction: column !important;
+    }
+    
+    .cancel-btn,
+    .confirm-btn {
+      width: 100% !important;
+    }
+  }
+`;
+
+// Inject mobile styles
+if (typeof document !== 'undefined') {
+  const styleId = 'storage-modal-mobile-styles';
+  if (!document.getElementById(styleId)) {
+    const style = document.createElement('style');
+    style.id = styleId;
+    style.textContent = mobileStyles;
+    document.head.appendChild(style);
+  }
+}

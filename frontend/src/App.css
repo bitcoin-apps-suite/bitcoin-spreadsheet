@@ -284,12 +284,12 @@ main {
 /* Main container with sidebar layout */
 .main-container {
   background: #000000;
-  min-height: calc(100vh - 140px);
+  min-height: calc(100vh - 172px);
 }
 
 .app-content {
   display: flex;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 172px);
   background: #000000;
 }
 
@@ -302,6 +302,172 @@ main {
 /* Bitcoin orange text styling */
 .bitcoin-orange {
   color: #007acc;
+}
+
+/* Bitcoin Taskbar Styles */
+.bitcoin-taskbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.taskbar-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bitcoin-menu-container {
+  position: relative;
+}
+
+.bitcoin-logo-button {
+  background: transparent;
+  border: none;
+  padding: 4px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.bitcoin-logo-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.bitcoin-logo {
+  color: #007acc;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.taskbar-title {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: 9998;
+}
+
+.bitcoin-menu {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  min-width: 250px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+}
+
+.menu-header {
+  padding: 12px 16px;
+  background: rgba(0, 122, 204, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.bitcoin-logo-small {
+  color: #007acc;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.menu-separator {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 4px 0;
+}
+
+.menu-item {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.menu-item span:first-child {
+  font-size: 16px;
+  width: 16px;
+  text-align: center;
+}
+
+/* Spreadsheet Menu Styles */
+.spreadsheet-menu-container {
+  position: relative;
+}
+
+.spreadsheet-menu-button {
+  background: transparent;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.spreadsheet-menu-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.spreadsheet-menu {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  min-width: 220px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+}
+
+/* Adjust main app content to account for taskbar */
+.App {
+  padding-top: 32px;
 }
 
 /* Navbar Login Styles */

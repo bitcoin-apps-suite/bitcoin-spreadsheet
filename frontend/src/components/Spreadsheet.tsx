@@ -3,6 +3,7 @@ import { BitcoinService, SpreadsheetData, CellData } from '../services/BitcoinSe
 import Cell from './Cell';
 import Toolbar from './Toolbar';
 import StorageOptionsModal from './StorageOptionsModal';
+import TokenizationModal from './TokenizationModal';
 import { 
   StorageOption, 
   SpreadsheetPricingBreakdown,
@@ -31,6 +32,7 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
   const [showStorageModal, setShowStorageModal] = useState(false);
   const [selectedStorageOption, setSelectedStorageOption] = useState<StorageOption | null>(null);
   const [storagePricing, setStoragePricing] = useState<SpreadsheetPricingBreakdown | null>(null);
+  const [showTokenizationModal, setShowTokenizationModal] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
 
   // Spreadsheet dimensions - expanded to 26 columns (A-Z) and 100 rows
@@ -56,6 +58,21 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
       initSpreadsheet();
     }
   }, [bitcoinService, propSpreadsheet, onSpreadsheetUpdate]);
+
+  // Listen for tokenization modal event
+  useEffect(() => {
+    const handleOpenTokenization = (event: CustomEvent) => {
+      if (event.detail?.spreadsheet?.id === spreadsheet?.id) {
+        setShowTokenizationModal(true);
+      }
+    };
+
+    window.addEventListener('openTokenizationModal', handleOpenTokenization as EventListener);
+    
+    return () => {
+      window.removeEventListener('openTokenizationModal', handleOpenTokenization as EventListener);
+    };
+  }, [spreadsheet]);
 
   const getCellKey = (row: number, col: number): string => {
     return `${row}-${col}`;
@@ -405,6 +422,15 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
         selectedOption={selectedStorageOption}
         pricing={storagePricing}
         onConfirm={saveWithSelectedOption}
+      />
+
+      {/* Tokenization Modal */}
+      <TokenizationModal
+        isOpen={showTokenizationModal}
+        spreadsheet={spreadsheet}
+        onClose={() => setShowTokenizationModal(false)}
+        userAddress="demo_wallet_address"
+        userHandle="demo_user"
       />
     </div>
   );

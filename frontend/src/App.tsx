@@ -17,6 +17,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentSpreadsheet, setCurrentSpreadsheet] = useState<SpreadsheetData | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
+  const [isMenuOpen, setIsMenuOpen] = useState<string | false>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -110,18 +111,111 @@ function App() {
           </div>
         ) : (
           <div className="App">
-            <a 
-              href="https://x.com/BitcoinSheets" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="social-link-fixed"
-              aria-label="Follow on X"
-              style={{ position: 'fixed', top: '24px', left: '24px', zIndex: 9999 }}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
+            {/* Bitcoin Taskbar */}
+            <div className="bitcoin-taskbar">
+              <div className="taskbar-left">
+                {/* Bitcoin Logo Menu */}
+                <div className="bitcoin-menu-container">
+                  <button 
+                    className="bitcoin-logo-button"
+                    onClick={() => setIsMenuOpen('bitcoin')}
+                    aria-label="Bitcoin Menu"
+                  >
+                    <div className="bitcoin-logo">₿</div>
+                  </button>
+                  {isMenuOpen === 'bitcoin' && (
+                    <>
+                      <div className="menu-overlay" onClick={() => setIsMenuOpen(false)} />
+                      <div className="bitcoin-menu">
+                        <div className="menu-header">
+                          <div className="bitcoin-logo-small">₿</div>
+                          <span>Bitcoin</span>
+                        </div>
+                        <div className="menu-separator" />
+                        <div className="menu-item" onClick={() => {
+                          window.open('https://x.com/BitcoinSheets', '_blank');
+                          setIsMenuOpen(false);
+                        }}>
+                          <span>🐦</span> Follow on X
+                        </div>
+                        <div className="menu-item" onClick={() => {
+                          alert('Bitcoin Spreadsheet v1.0\nSecure blockchain-powered spreadsheets\n\nPowered by Bitcoin SV\n\n© @b0ase September 2025');
+                          setIsMenuOpen(false);
+                        }}>
+                          <span>ℹ️</span> About Bitcoin Spreadsheet
+                        </div>
+                        <div className="menu-separator" />
+                        <div className="menu-item" onClick={() => {
+                          window.location.reload();
+                          setIsMenuOpen(false);
+                        }}>
+                          <span>🔄</span> Restart
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+                
+                {/* Bitcoin Spreadsheet Menu */}
+                <div className="spreadsheet-menu-container">
+                  <button 
+                    className="spreadsheet-menu-button"
+                    onClick={() => setIsMenuOpen('spreadsheet')}
+                    aria-label="Bitcoin Spreadsheet Menu"
+                  >
+                    <span>Bitcoin Spreadsheet</span>
+                  </button>
+                  {isMenuOpen === 'spreadsheet' && (
+                    <>
+                      <div className="menu-overlay" onClick={() => setIsMenuOpen(false)} />
+                      <div className="spreadsheet-menu">
+                        <div className="menu-header">
+                          <span>Bitcoin Spreadsheet</span>
+                        </div>
+                        <div className="menu-separator" />
+                        <div className="menu-item" onClick={() => {
+                          if (bitcoinService) {
+                            bitcoinService.createSpreadsheet('New Spreadsheet').then(sheet => {
+                              setCurrentSpreadsheet(sheet);
+                            });
+                          }
+                          setIsMenuOpen(false);
+                        }}>
+                          <span>📄</span> New Spreadsheet
+                        </div>
+                        <div className="menu-item" onClick={() => {
+                          setIsSidebarOpen(!isSidebarOpen);
+                          setIsMenuOpen(false);
+                        }}>
+                          <span>📁</span> {isSidebarOpen ? 'Hide' : 'Show'} My Spreadsheets
+                        </div>
+                        <div className="menu-separator" />
+                        <div className="menu-item" onClick={() => {
+                          if (currentSpreadsheet) {
+                            window.dispatchEvent(new CustomEvent('openTokenizationModal', { 
+                              detail: { spreadsheet: currentSpreadsheet } 
+                            }));
+                          } else {
+                            alert('Please open a spreadsheet first to tokenize it.');
+                          }
+                          setIsMenuOpen(false);
+                        }}>
+                          <span>🪙</span> Tokenize Spreadsheet
+                        </div>
+                        <div className="menu-separator" />
+                        <div className="menu-item" onClick={() => {
+                          const spreadsheetCount = Object.keys(localStorage.getItem('spreadsheets') ? JSON.parse(localStorage.getItem('spreadsheets') || '[]') : []).length;
+                          alert(`You have ${spreadsheetCount} spreadsheet${spreadsheetCount !== 1 ? 's' : ''} saved locally.`);
+                          setIsMenuOpen(false);
+                        }}>
+                          <span>📊</span> Statistics
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
             <header className="App-header">
               <div className="connection-indicator" />
               <h1><span className="bitcoin-orange">Bitcoin</span> Spreadsheet</h1>

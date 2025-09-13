@@ -44,7 +44,7 @@ body {
 .connection-indicator {
   position: absolute;
   top: 24px;
-  left: 32px;
+  left: 60px;
   width: 8px;
   height: 8px;
   background: #00ff88;
@@ -98,24 +98,30 @@ main {
   display: flex;
   align-items: center;
   gap: 16px;
+  z-index: 9999;
 }
 
 .user-handle {
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.9rem;
   font-weight: 300;
+  position: relative;
+  z-index: 9999;
 }
 
 .logout-btn {
-  padding: 6px 12px;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  background: #000000;
+  color: white;
+  border: 2px solid #333333;
   border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 9999;
+  pointer-events: auto !important;
+  position: relative;
 }
 
 .logout-btn:hover {

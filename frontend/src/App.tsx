@@ -75,10 +75,22 @@ function App() {
   };
 
   const handleLogout = () => {
-    handcashService.logout();
+    // Clear EVERYTHING
+    localStorage.clear();
+    sessionStorage.clear();
+    
+    // Clear all cookies
+    document.cookie.split(";").forEach(function(c) { 
+      document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+    });
+    
+    // Reset state
     setIsAuthenticated(false);
     setCurrentUser(null);
     setBitcoinService(null);
+    
+    // Force hard reload to clear all memory
+    window.location.replace('/');
   };
 
   return (
@@ -87,7 +99,7 @@ function App() {
       <Route path="/*" element={
         isLoading ? (
           <div className="App">
-            <div className="loading">Loading Bitcoin Spreadsheet Demo...</div>
+            <div className="loading">Loading Bitcoin Spreadsheet...</div>
           </div>
         ) : !isAuthenticated ? (
           <Login onLogin={handleLogin} />
@@ -107,7 +119,7 @@ function App() {
             </a>
             <header className="App-header">
               <div className="connection-indicator" />
-              <h1>Bitcoin Spreadsheet Demo</h1>
+              <h1>Bitcoin Spreadsheet</h1>
               <div className="user-info">
                 <span className="user-handle">@{currentUser?.handle}</span>
                 <button className="logout-btn" onClick={handleLogout}>

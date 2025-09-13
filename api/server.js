@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { HandCashConnect } = require('@handcash/handcash-connect');
@@ -5,14 +6,14 @@ const { HandCashConnect } = require('@handcash/handcash-connect');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Environment variables
-const APP_ID = process.env.HANDCASH_APP_ID || '68c4a5ce3040b54704c4fe4e';
-const APP_SECRET = process.env.HANDCASH_APP_SECRET || '';
+// Environment variables - NO FALLBACK VALUES FOR SECURITY
+const APP_ID = process.env.HANDCASH_APP_ID || process.env.REACT_APP_HANDCASH_APP_ID;
+const APP_SECRET = process.env.HANDCASH_APP_SECRET || process.env.REACT_APP_HANDCASH_APP_SECRET;
 const CLIENT_URL = process.env.CLIENT_URL || 'https://bitcoin-spreadsheet.vercel.app';
 
 // Middleware
 app.use(cors({
-  origin: [CLIENT_URL, 'http://localhost:3000'],
+  origin: '*', // Allow all origins for development
   credentials: true
 }));
 app.use(express.json());
@@ -109,6 +110,64 @@ app.get('/api/auth/handcash/profile', async (req, res) => {
   } catch (error) {
     console.error('Profile error:', error);
     res.status(500).json({ error: 'Failed to get profile' });
+  }
+});
+
+// HandCash profile endpoint (POST version for frontend compatibility)
+app.post('/api/handcash-profile', async (req, res) => {
+  try {
+    const { authToken } = req.body;
+    
+    console.log('=== Profile Request ===');
+    console.log('Auth token received:', authToken ? authToken.substring(0, 20) + '...' : 'NONE');
+    console.log('Has APP_SECRET:', !!APP_SECRET);
+    console.log('APP_ID:', APP_ID);
+    
+    if (!authToken) {
+      return res.status(401).json({ error: 'No auth token provided' });
+    }
+
+    if (!handCashConnect || !APP_SECRET) {
+      console.log('No HandCash secret configured, returning demo data');
+      return res.json({
+        success: true,
+        profile: {
+          handle: 'demo_user',
+          paymail: 'demo@handcash.io',
+          displayName: 'Demo User',
+          avatarUrl: null
+        }
+      });
+    }
+
+    console.log('Getting account from token...');
+    const account = handCashConnect.getAccountFromAuthToken(authToken);
+    console.log('Fetching profile...');
+    const profile = await account.profile.getCurrentProfile();
+    
+    console.log('Profile fetched successfully!');
+    console.log('Public handle:', profile.publicProfile?.handle);
+    console.log('Private handle:', profile.privateProfile?.handle);
+    
+    res.json({
+      success: true,
+      profile: {
+        handle: profile.publicProfile?.handle || profile.privateProfile?.handle || 'unknown',
+        paymail: profile.publicProfile?.paymail || profile.privateProfile?.email || 'user@handcash.io',
+        displayName: profile.publicProfile?.displayName || profile.publicProfile?.handle || 'HandCash User',
+        avatarUrl: profile.publicProfile?.avatarUrl,
+        publicKey: profile.publicProfile?.id,
+        email: profile.privateProfile?.email,
+        phoneNumber: profile.privateProfile?.phoneNumber
+      }
+    });
+    
+  } catch (error) {
+    console.error('Profile error:', error);
+    res.status(500).json({ 
+      error: 'Failed to get profile',
+      details: error.message 
+    });
   }
 });
 

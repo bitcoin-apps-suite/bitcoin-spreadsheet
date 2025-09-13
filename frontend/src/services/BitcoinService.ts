@@ -47,9 +47,9 @@ export class BitcoinService {
       
       // Check if we have authenticated HandCash user
       const savedUser = localStorage.getItem('handcash_user');
-      const authToken = localStorage.getItem('handcash_auth_token');
+      const authTokens = localStorage.getItem('handcash_tokens');
       
-      if (savedUser && authToken) {
+      if (savedUser && authTokens) {
         try {
           const user = JSON.parse(savedUser);
           console.log('Using authenticated HandCash user: @' + user.handle);

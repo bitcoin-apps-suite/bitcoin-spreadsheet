@@ -115,6 +115,8 @@ export class HandCashAuthService {
     localStorage.removeItem('handcash_user');
     // Also clear old format data
     localStorage.removeItem('handcash_auth_token');
+    // Clear sessionStorage too
+    sessionStorage.clear();
   }
 
   // Generate HandCash authorization URL
@@ -310,10 +312,12 @@ export class HandCashAuthService {
       try {
         // Determine API endpoint based on environment
         const apiBase = this.config.environment === 'production' 
-          ? 'https://bitcoin-spreadsheet.vercel.app'
-          : 'http://localhost:3000';
+          ? ''  // In production, use same origin (Vercel handles /api routes)
+          : 'http://localhost:3001';  // Local API server on port 3001
         
         console.log('Fetching user profile from API...');
+        console.log('API Base:', apiBase);
+        console.log('Auth Token:', this.tokens.accessToken.substring(0, 20) + '...');
         
         // Call our API endpoint to fetch the profile server-side
         const response = await fetch(`${apiBase}/api/handcash-profile`, {

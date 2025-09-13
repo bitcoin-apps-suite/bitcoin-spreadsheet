@@ -60,8 +60,7 @@ const BitcoinSpreadsheetPage: React.FC = () => {
             The World's First Blockchain-Powered Spreadsheet Platform
           </p>
           <p className="hero-description">
-            Create and save spreadsheets directly on the Bitcoin SV blockchain.
-            Store entire spreadsheets as NFTs. Track fractional ownership and millions of shareholders in real-time!
+            Save spreadsheets on the Bitcoin blockchain as NFTs. Track millions of shareholders in real-time.
           </p>
           <div className="hero-buttons">
             <button 

@@ -1,0 +1,33 @@
+{
+  "name": "blockchain-spreadsheet",
+  "version": "1.0.0",
+  "description": "A decentralized spreadsheet application on Bitcoin SV blockchain",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npm run build:frontend",
+    "build:contracts": "cd src && npx scrypt-cli compile",
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "start": "npm run start:frontend",
+    "start:frontend": "cd frontend && npm start",
+    "deploy": "npm run build:contracts && node src/deploy/deploy.js",
+    "test": "cd src && npx scrypt-cli test",
+    "clean": "rm -rf dist frontend/build"
+  },
+  "keywords": ["bsv", "bitcoin-sv", "blockchain", "spreadsheet", "decentralized"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/node": "^24.3.2",
+    "scrypt-ts": "^1.4.5",
+    "typescript": "^5.9.2",
+    "concurrently": "^7.6.0"
+  },
+  "dependencies": {
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "bsv": "^2.0.10"
+  }
+}

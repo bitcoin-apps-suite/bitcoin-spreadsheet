@@ -1,0 +1,158 @@
+.spreadsheet-container {
+  background: #000000;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+  overflow: hidden;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 0;
+}
+
+.spreadsheet-grid {
+  display: grid;
+  grid-template-columns: 60px repeat(10, 1fr);
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+  font-size: 13px;
+  color: #ffffff;
+  background: #000000;
+}
+
+.grid-header {
+  display: contents;
+}
+
+.grid-header .header-cell {
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 10px 4px;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.grid-row {
+  display: contents;
+}
+
+.row-number {
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 10px 4px;
+  font-size: 12px;
+}
+
+.cell {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 10px 8px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  background: #000000;
+  color: #ffffff;
+  cursor: cell;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 13px;
+  position: relative;
+}
+
+.cell:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.cell.selected {
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 2;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.cell.selected::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 4px;
+  height: 4px;
+  background: #ffffff;
+}
+
+.cell-content {
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 300;
+}
+
+.cell-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  font-weight: 300;
+}
+
+.status-bar {
+  background: #000000;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 12px 20px;
+  text-align: left;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+/* Formula cells */
+.cell[data-type="formula"] {
+  color: #4a9eff;
+  font-style: normal;
+}
+
+/* Number cells */
+.cell[data-type="number"] {
+  text-align: right;
+  color: #5dff8c;
+}
+
+/* Error cells */
+.cell[data-type="error"] {
+  color: #ff5555;
+  background: rgba(255, 85, 85, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .spreadsheet-grid {
+    font-size: 12px;
+  }
+
+  .cell {
+    padding: 8px 6px;
+    min-height: 32px;
+  }
+
+  .row-number,
+  .header-cell {
+    padding: 8px 4px;
+    font-size: 11px;
+  }
+}

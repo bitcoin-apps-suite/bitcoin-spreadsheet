@@ -1,0 +1,12 @@
+{
+  "buildCommand": "cd frontend && npm ci --legacy-peer-deps && CI=false npm run build",
+  "outputDirectory": "frontend/build",
+  "installCommand": "echo 'Skipping root install'",
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -8,7 +8,7 @@ const BapsPage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<string | false>(false);
 
   useEffect(() => {
-    document.title = 'BAPS - Bitcoin Applications Protocol Schema';
+    document.title = 'BAPS - Bitcoin Asset Protocol Schema';
     return () => {
       document.title = 'Bitcoin Spreadsheet';
     };
@@ -17,9 +17,9 @@ const BapsPage: React.FC = () => {
   const protocolFeatures = [
     {
       icon: '🚀',
-      title: 'BApps - Bitcoin Applications',
-      description: 'Build full-featured applications on Bitcoin using spreadsheets as the universal interface',
-      details: 'Every spreadsheet is a potential BApp with payments, smart contracts, and on-chain logic'
+      title: 'Blockchain Assets',
+      description: 'Transform spreadsheets into tradeable blockchain assets with built-in monetization',
+      details: 'Every spreadsheet becomes a valuable asset with ownership, provenance, and revenue generation'
     },
     {
       icon: '🔗',
@@ -139,23 +139,23 @@ const BapsPage: React.FC = () => {
 
   const codeExamples = [
     {
-      title: 'Creating a BApp',
+      title: 'Creating a Blockchain Asset',
       language: 'typescript',
-      code: `// Create a new Bitcoin Application
-const bapp = new BAPS.Application({
-  name: 'My First BApp',
-  type: 'defi-calculator',
-  interface: spreadsheetData,
-  smartContracts: ['swap.js', 'liquidity.js'],
-  tokenProtocol: 'STAS' // or 'Ordinals', 'BSV-20', 'Run'
+      code: `// Create a new Bitcoin Asset from spreadsheet
+const asset = new BAPS.Asset({
+  name: 'Financial Data Q4 2024',
+  type: 'spreadsheet',
+  data: spreadsheetData,
+  encryption: 'row-level',
+  tokenProtocol: 'STAS' // or 'Ordinals', 'BSV-20'
 });
 
-// Deploy BApp to Bitcoin
-const inscription = await bapp.inscribe();
-const appId = await bapp.deploy(bitcoinService);
+// Deploy asset to Bitcoin
+const inscription = await asset.inscribe();
+const assetId = await asset.deploy(bitcoinService);
 
-console.log('BApp deployed:', appId);
-console.log('Access at:', bapp.getUrl());`
+console.log('Asset deployed:', assetId);
+console.log('Trading at:', asset.getMarketplaceUrl());`
     },
     {
       title: 'Selling Row Access',
@@ -249,34 +249,34 @@ const manifest = {
 
   const useCases = [
     {
-      title: 'DeFi Calculator BApp',
-      description: 'Build interactive DeFi applications with real-time calculations and on-chain settlements',
-      example: 'A yield farming calculator that automatically executes swaps and compounds rewards directly from spreadsheet cells'
+      title: 'Financial Data Assets',
+      description: 'Turn financial spreadsheets into tradeable assets with built-in access controls',
+      example: 'Quarterly earnings data that can be sold row-by-row to different subscribers'
     },
     {
-      title: 'DAO Voting BApp',
-      description: 'Create decentralized voting systems where each cell represents a proposal and formulas calculate outcomes',
-      example: 'A DAO where members vote by entering values in cells, with smart contracts executing decisions automatically'
+      title: 'Research Data Marketplace',
+      description: 'Monetize scientific datasets by selling access to specific columns or rows',
+      example: 'Climate data where researchers can purchase access to specific geographic regions or time periods'
     },
     {
-      title: 'Supply Chain Tracker BApp',
-      description: 'Track products through supply chains with each row representing a shipment and cells triggering payments',
-      example: 'Logistics BApp where scanning a QR code updates a cell, triggering automatic payment releases via smart contracts'
+      title: 'Supply Chain Records',
+      description: 'Immutable supply chain data as blockchain assets with selective disclosure',
+      example: 'Shipment records where different parties can access only their relevant columns'
     },
     {
-      title: 'Scientific Computing BApp',
-      description: 'Distributed computing platform where cells can run complex calculations and share results',
-      example: 'Climate modeling BApp where researchers contribute computing power and get paid per calculation via microtransactions'
+      title: 'IP and Patent Data',
+      description: 'Tokenize intellectual property documentation and research data',
+      example: 'Patent filing data where ownership shares are distributed to contributors'
     },
     {
-      title: 'NFT Marketplace BApp',
-      description: 'Spreadsheet-based NFT marketplace where each row is a listing with embedded smart contracts',
-      example: 'Art marketplace where formulas calculate royalties and cells execute trades when conditions are met'
+      title: 'Accounting Ledgers',
+      description: 'Auditable, immutable accounting records with controlled access',
+      example: 'Company ledgers where auditors can verify specific entries without seeing all data'
     },
     {
-      title: 'Prediction Market BApp',
-      description: 'Create prediction markets where cells represent outcomes and formulas manage betting pools',
-      example: 'Sports betting BApp with automatic odds calculation and instant payouts based on cell values'
+      title: 'Market Data Feeds',
+      description: 'Real-time market data as subscription-based blockchain assets',
+      example: 'Trading data where subscribers pay per row or time period accessed'
     }
   ];
 
@@ -428,8 +428,8 @@ const manifest = {
             <span className="bitcoin-text">BAPS</span>
           </h1>
           <p className="hero-description">
-            Bitcoin Applications Protocol Schema - Build powerful BApps (Bitcoin Apps) with native data ownership. 
-            Transform spreadsheets into interactive applications with granular access control and on-chain logic.
+            Bitcoin Asset Protocol Schema - Transform spreadsheets into tradeable blockchain assets. 
+            Create NFT data files with granular access control, selective encryption, and tokenized ownership.
           </p>
           <div className="hero-buttons">
             <button 
@@ -466,13 +466,13 @@ const manifest = {
             <h2 className="summary-title">Executive Summary</h2>
             <div className="summary-text">
               <p>
-                The <strong>Bitcoin Applications Protocol Schema (BAPS)</strong> represents a revolutionary approach to building decentralized applications on Bitcoin. By transforming spreadsheets into fully-functional <strong>BApps (Bitcoin Apps)</strong>, BAPS enables developers to create interactive, data-driven applications with native Bitcoin integration, granular access control, and on-chain logic.
+                The <strong>Bitcoin Asset Protocol Schema (BAPS)</strong> represents a revolutionary approach to data ownership on Bitcoin. By transforming spreadsheets into tradeable blockchain assets, BAPS enables users to monetize their data with selective access control, immutable versioning, and tokenized revenue sharing.
               </p>
               <p>
-                BAPS enables the creation of <strong>BApps</strong> - Bitcoin-native applications that combine spreadsheet functionality with smart contracts, tokens, and inscriptions. Each BApp is a living application that can process payments, execute logic, store data permanently via ordinals, and interact with other BApps through the Bitcoin network.
+                BAPS transforms ordinary spreadsheets into <strong>NFT data assets</strong> that can be owned, traded, and monetized. Each spreadsheet becomes a valuable asset with cryptographic proof of ownership, selective encryption for controlled access, and automatic revenue distribution to token holders.
               </p>
               <p>
-                Developers can build everything from DeFi calculators and DAO voting systems to supply chain trackers and scientific computing platforms. With support for multiple token protocols (STAS, Ordinals, BSV-20, Run), BApps can issue tokens, NFTs, and inscriptions while maintaining the familiar spreadsheet interface that billions of users already understand.
+                Users can monetize financial data, research datasets, supply chain records, and accounting ledgers. With support for multiple token protocols (STAS, Ordinals, BSV-20), data assets can be tokenized, inscribed permanently on-chain, and traded in marketplaces while maintaining the familiar spreadsheet interface.
               </p>
             </div>
           </div>
@@ -485,7 +485,7 @@ const manifest = {
           <div className="content-section">
             <h2 className="section-title">Use Cases</h2>
             <p className="section-description">
-              Real-world BApps you can build with BAPS
+              Real-world data assets you can create with BAPS
             </p>
             
             <div className="usecases-grid">
@@ -508,10 +508,10 @@ const manifest = {
         <div className="container">
           {/* BAPS Overview */}
           <div className="content-section">
-            <h2 className="section-title">Building BApps with BAPS</h2>
+            <h2 className="section-title">BAPS Overview</h2>
             <p className="section-description">
-              The Bitcoin Applications Protocol Schema (BAPS) empowers developers to build BApps - full-featured Bitcoin applications using spreadsheets as the interface. 
-              Every spreadsheet becomes a potential application with built-in payments, smart contracts, and decentralized data storage.
+              The Bitcoin Asset Protocol Schema (BAPS) transforms spreadsheets into valuable blockchain assets. 
+              Every spreadsheet becomes an NFT with cryptographic ownership, selective encryption, and built-in monetization.
             </p>
             
             <div className="features-grid">
@@ -683,74 +683,76 @@ const manifest = {
             </div>
           </div>
 
-          {/* Building BApps Section */}
+          {/* Creating Data Assets Section */}
           <div className="content-section">
-            <h2 className="section-title">Building Your First BApp</h2>
+            <h2 className="section-title">Creating Your First Data Asset</h2>
             <p className="section-description">
-              Transform any spreadsheet into a Bitcoin application in minutes
+              Transform any spreadsheet into a tradeable blockchain asset in minutes
             </p>
             
             <div className="bapp-steps">
               <div className="bapp-step">
                 <div className="step-number">1</div>
-                <h3>Design Your Interface</h3>
-                <p>Use familiar spreadsheet formulas and layouts. Every cell can be an input, output, or trigger for Bitcoin transactions.</p>
+                <h3>Create Your Spreadsheet</h3>
+                <p>Use familiar spreadsheet tools to organize your data. Every cell can be individually encrypted and monetized.</p>
               </div>
               <div className="bapp-step">
                 <div className="step-number">2</div>
-                <h3>Add Bitcoin Logic</h3>
-                <p>Connect cells to smart contracts, token protocols, and payment channels. Use formulas to define business logic.</p>
+                <h3>Set Access Controls</h3>
+                <p>Define which rows, columns, or cells are public vs. premium. Set prices for selective data access.</p>
               </div>
               <div className="bapp-step">
                 <div className="step-number">3</div>
                 <h3>Choose Token Protocol</h3>
-                <p>Select from STAS, Ordinals, BSV-20, or sCrypt smart contracts based on your BApp's requirements for compliance, permanence, or interactivity.</p>
+                <p>Select from STAS, Ordinals, BSV-20, or sCrypt based on your asset's requirements for compliance, permanence, or trading.</p>
               </div>
               <div className="bapp-step">
                 <div className="step-number">4</div>
-                <h3>Deploy as BApp</h3>
-                <p>Inscribe your BApp on-chain with ordinals for permanent hosting. Users interact directly through the spreadsheet interface.</p>
+                <h3>Mint as NFT</h3>
+                <p>Deploy your data asset on-chain as an NFT. Buyers can purchase access to specific data ranges.</p>
               </div>
             </div>
 
-            <div className="bapp-examples">
-              <h3>Example BApp Architecture</h3>
+            <div className="asset-examples">
+              <h3>Example Asset Structure</h3>
               <div className="architecture-code">
                 <pre>
-                  <code>{`// DeFi Yield Calculator BApp
-class YieldCalculatorBApp extends BAPS.Application {
+                  <code>{`// Financial Data Asset
+class FinancialDataAsset extends BAPS.Asset {
   constructor() {
     super({
-      name: 'DeFi Yield Calculator',
+      name: 'Q4 2024 Financial Data',
+      type: 'spreadsheet',
       inscription: 'ordinal://12345',
-      tokens: ['STAS', 'BSV-20']
+      tokenProtocol: 'STAS'
     });
   }
 
-  // Cell A1: User deposits amount
-  async onCellChange(cell, value) {
-    if (cell === 'A1') {
-      // Calculate yield in B1
-      const yield = await this.calculateYield(value);
-      this.updateCell('B1', yield);
-      
-      // Execute swap if threshold met
-      if (yield > this.getCell('C1')) {
-        await this.executeSwap(value, yield);
-      }
-    }
+  // Define access tiers
+  accessTiers = {
+    public: ['A1:A10'],     // Company names
+    premium: ['B1:B10'],    // Revenue data
+    exclusive: ['C1:D10']   // Profit margins
+  };
+
+  // Set pricing per tier
+  pricing = {
+    premium: 0.001,    // 1000 sats
+    exclusive: 0.01    // 10000 sats
+  };
+
+  // Encrypt sensitive columns
+  async encryptData() {
+    await this.encryptRange('B1:D10', {
+      algorithm: 'AES-256',
+      granularity: 'column'
+    });
   }
 
-  async executeSwap(amount, expectedYield) {
-    // Smart contract execution
-    const tx = await this.contract.swap({
-      amount,
-      expectedYield,
-      slippage: 0.01
-    });
-    
-    // Update transaction history
-    this.appendRow('History', [Date.now(), tx.id, amount, expectedYield]);
+  // Generate access keys for buyer
+  async sellAccess(buyerPubKey, tier) {
+    const keys = await this.generateKeys(tier);
+    return this.encryptForBuyer(keys, buyerPubKey);
   }
 }`}</code>
                 </pre>
@@ -764,9 +766,9 @@ class YieldCalculatorBApp extends BAPS.Application {
       {/* CTA Section */}
       <section className="cta-section">
         <div className="container">
-          <h2 className="cta-title">Ready to Build Your First BApp?</h2>
+          <h2 className="cta-title">Ready to Create Your First Data Asset?</h2>
           <p className="cta-description">
-            Join the Bitcoin Applications revolution. Transform spreadsheets into powerful BApps with BAPS.
+            Join the data ownership revolution. Transform your spreadsheets into valuable blockchain assets with BAPS.
           </p>
           <div className="cta-buttons">
             <button 
@@ -801,7 +803,7 @@ class YieldCalculatorBApp extends BAPS.Application {
           <div className="footer-content">
             <div className="footer-brand">
               <div className="footer-logo">₿</div>
-              <span className="footer-title">BAPS - Bitcoin Applications</span>
+              <span className="footer-title">BAPS - Bitcoin Asset Protocol</span>
             </div>
             <div className="footer-links">
               <a href="https://x.com/BitcoinSheets" target="_blank" rel="noopener noreferrer">

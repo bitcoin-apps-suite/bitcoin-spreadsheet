@@ -139,7 +139,7 @@ const BapsPage: React.FC = () => {
       title: 'Creating a Blockchain Asset',
       language: 'typescript',
       code: `// Create a new Bitcoin Asset from spreadsheet
-const asset = new BAPS.Asset({
+const asset = new BAP.Asset({
   name: 'Financial Data Q4 2024',
   type: 'spreadsheet',
   data: spreadsheetData,
@@ -234,7 +234,7 @@ const ordinal = await inscribeOrdinal({
   fee: 500 // sats
 });
 
-// Reference in BAPS manifest
+// Reference in BAP manifest
 const manifest = {
   ordinalNumber: ordinal.number,
   inscriptionId: ordinal.id,
@@ -396,7 +396,7 @@ const manifest = {
                     specsSection?.scrollIntoView({ behavior: 'smooth' });
                     setIsMenuOpen(false);
                   }}>
-                    <span>📋</span> BAPS Documentation
+                    <span>📋</span> BAP Documentation
                   </div>
                   <div className="menu-separator" />
                   <div className="menu-item" onClick={() => {
@@ -599,7 +599,7 @@ const manifest = {
       {/* Main Content */}
       <section className="main-content">
         <div className="container">
-          {/* BAPS Overview */}
+          {/* BAP Overview */}
           <div className="content-section">
             <h2 className="section-title">Core Features</h2>
             <p className="section-description">
@@ -862,7 +862,7 @@ const manifest = {
           <div className="content-section">
             <h2 className="section-title">Code Examples</h2>
             <p className="section-description">
-              Get started with BAPS using these code examples
+              Get started with BAP using these code examples
             </p>
             
             <div className="code-examples">
@@ -918,7 +918,7 @@ const manifest = {
               <div className="architecture-code">
                 <pre>
                   <code>{`// Financial Data Asset
-class FinancialDataAsset extends BAPS.Asset {
+class FinancialDataAsset extends BAP.Asset {
   constructor() {
     super({
       name: 'Q4 2024 Financial Data',

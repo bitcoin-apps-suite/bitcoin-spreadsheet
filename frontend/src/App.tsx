@@ -251,7 +251,7 @@ function App() {
                           navigate('/developers');
                           setIsMenuOpen(false);
                         }}>
-                          <span>📋</span> BAPS Documentation
+                          <span>📋</span> BAP Documentation
                         </div>
                         <div className="menu-separator" />
                         <div className="menu-item" onClick={() => {

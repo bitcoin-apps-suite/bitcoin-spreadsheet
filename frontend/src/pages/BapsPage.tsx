@@ -709,37 +709,152 @@ const manifest = {
 
           {/* Technical Specifications */}
           <div className="content-section">
-            <h2 className="section-title">Technical Specifications</h2>
+            <h2 className="section-title">Technical Architecture</h2>
             <p className="section-description">
-              Complete technical details for implementing BAPS
+              Complete technical implementation details for BAP
             </p>
             
-            <div className="specs-grid">
-              {technicalSpecs.map((spec, index) => (
-                <div key={index} className="spec-category">
-                  <h3 className="spec-category-title">{spec.category}</h3>
-                  <div className="spec-items">
-                    {spec.items.map((item, itemIndex) => (
-                      <div key={itemIndex} className="spec-item">
-                        <span className="spec-name">{item.name}</span>
-                        <span className="spec-value">{item.value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+            {/* Compact Specification Table */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '12px',
+              marginBottom: '24px'
+            }}>
+              {/* File Format Card */}
+              <div style={{
+                background: 'rgba(30, 30, 30, 0.5)',
+                border: '1px solid rgba(255, 165, 0, 0.15)',
+                borderRadius: '6px',
+                padding: '12px'
+              }}>
+                <h4 style={{fontSize: '0.9rem', color: '#FFA500', marginBottom: '8px', fontWeight: 600}}>
+                  📁 File Format & Storage
+                </h4>
+                <table style={{width: '100%', fontSize: '0.75rem'}}>
+                  <tbody>
+                    <tr style={{borderBottom: '1px solid rgba(255, 165, 0, 0.05)'}}>
+                      <td style={{padding: '4px 0', opacity: 0.7}}>Container</td>
+                      <td style={{padding: '4px 0', textAlign: 'right', color: '#FFA500', fontSize: '0.7rem'}}>.nft (ZIP + ordinal)</td>
+                    </tr>
+                    <tr style={{borderBottom: '1px solid rgba(255, 165, 0, 0.05)'}}>
+                      <td style={{padding: '4px 0', opacity: 0.7}}>Formats</td>
+                      <td style={{padding: '4px 0', textAlign: 'right', color: '#FFA500', fontSize: '0.7rem'}}>CSV, XML, XLSX</td>
+                    </tr>
+                    <tr style={{borderBottom: '1px solid rgba(255, 165, 0, 0.05)'}}>
+                      <td style={{padding: '4px 0', opacity: 0.7}}>Encryption</td>
+                      <td style={{padding: '4px 0', textAlign: 'right', color: '#FFA500', fontSize: '0.7rem'}}>AES-256-GCM</td>
+                    </tr>
+                    <tr style={{borderBottom: '1px solid rgba(255, 165, 0, 0.05)'}}>
+                      <td style={{padding: '4px 0', opacity: 0.7}}>Signing</td>
+                      <td style={{padding: '4px 0', textAlign: 'right', color: '#FFA500', fontSize: '0.7rem'}}>ECDSA secp256k1</td>
+                    </tr>
+                    <tr>
+                      <td style={{padding: '4px 0', opacity: 0.7}}>Storage</td>
+                      <td style={{padding: '4px 0', textAlign: 'right', color: '#FFA500', fontSize: '0.7rem'}}>Ordinals + IPFS</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Blockchain Card */}
+              <div style={{
+                background: 'rgba(30, 30, 30, 0.5)',
+                border: '1px solid rgba(255, 165, 0, 0.15)',
+                borderRadius: '6px',
+                padding: '12px'
+              }}>
+                <h4 style={{fontSize: '0.9rem', color: '#FFA500', marginBottom: '8px', fontWeight: 600}}>
+                  ⛓️ Blockchain Layer
+                </h4>
+                <table style={{width: '100%', fontSize: '0.75rem'}}>
+                  <tbody>
+                    <tr style={{borderBottom: '1px solid rgba(255, 165, 0, 0.05)'}}>
+                      <td style={{padding: '4px 0', opacity: 0.7}}>Platform</td>
+                      <td style={{padding: '4px 0', textAlign: 'right', color: '#FFA500', fontSize: '0.7rem'}}>Bitcoin SV</td>
+                    </tr>
+                    <tr style={{borderBottom: '1px solid rgba(255, 165, 0, 0.05)'}}>
+                      <td style={{padding: '4px 0', opacity: 0.7}}>Inscriptions</td>
+                      <td style={{padding: '4px 0', textAlign: 'right', color: '#FFA500', fontSize: '0.7rem'}}>1Sat Ordinals</td>
+                    </tr>
+                    <tr style={{borderBottom: '1px solid rgba(255, 165, 0, 0.05)'}}>
+                      <td style={{padding: '4px 0', opacity: 0.7}}>Versioning</td>
+                      <td style={{padding: '4px 0', textAlign: 'right', color: '#FFA500', fontSize: '0.7rem'}}>UTXO Chain</td>
+                    </tr>
+                    <tr style={{borderBottom: '1px solid rgba(255, 165, 0, 0.05)'}}>
+                      <td style={{padding: '4px 0', opacity: 0.7}}>Smart Contracts</td>
+                      <td style={{padding: '4px 0', textAlign: 'right', color: '#FFA500', fontSize: '0.7rem'}}>sCrypt</td>
+                    </tr>
+                    <tr>
+                      <td style={{padding: '4px 0', opacity: 0.7}}>Node</td>
+                      <td style={{padding: '4px 0', textAlign: 'right', color: '#FFA500', fontSize: '0.7rem'}}>TeraNode</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Access Control Card */}
+              <div style={{
+                background: 'rgba(30, 30, 30, 0.5)',
+                border: '1px solid rgba(255, 165, 0, 0.15)',
+                borderRadius: '6px',
+                padding: '12px'
+              }}>
+                <h4 style={{fontSize: '0.9rem', color: '#FFA500', marginBottom: '8px', fontWeight: 600}}>
+                  🔐 Access & Trading
+                </h4>
+                <table style={{width: '100%', fontSize: '0.75rem'}}>
+                  <tbody>
+                    <tr style={{borderBottom: '1px solid rgba(255, 165, 0, 0.05)'}}>
+                      <td style={{padding: '4px 0', opacity: 0.7}}>Granularity</td>
+                      <td style={{padding: '4px 0', textAlign: 'right', color: '#FFA500', fontSize: '0.7rem'}}>Cell-level</td>
+                    </tr>
+                    <tr style={{borderBottom: '1px solid rgba(255, 165, 0, 0.05)'}}>
+                      <td style={{padding: '4px 0', opacity: 0.7}}>Keys</td>
+                      <td style={{padding: '4px 0', textAlign: 'right', color: '#FFA500', fontSize: '0.7rem'}}>Symmetric + Asymmetric</td>
+                    </tr>
+                    <tr style={{borderBottom: '1px solid rgba(255, 165, 0, 0.05)'}}>
+                      <td style={{padding: '4px 0', opacity: 0.7}}>Permissions</td>
+                      <td style={{padding: '4px 0', textAlign: 'right', color: '#FFA500', fontSize: '0.7rem'}}>JSON Schema</td>
+                    </tr>
+                    <tr style={{borderBottom: '1px solid rgba(255, 165, 0, 0.05)'}}>
+                      <td style={{padding: '4px 0', opacity: 0.7}}>Auth</td>
+                      <td style={{padding: '4px 0', textAlign: 'right', color: '#FFA500', fontSize: '0.7rem'}}>HandCash OAuth</td>
+                    </tr>
+                    <tr>
+                      <td style={{padding: '4px 0', opacity: 0.7}}>Trading</td>
+                      <td style={{padding: '4px 0', textAlign: 'right', color: '#FFA500', fontSize: '0.7rem'}}>P2P + Marketplaces</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
-            <div className="file-format-section">
-              <h3>.nft File Structure</h3>
-              <div className="file-tree">
-                <div className="file-item">root.nft</div>
-                <div className="file-item indent">├── manifest.json</div>
-                <div className="file-item indent">├── sheet.csv</div>
-                <div className="file-item indent">├── schema.json</div>
-                <div className="file-item indent">├── keys.json</div>
-                <div className="file-item indent">└── signatures.json</div>
-              </div>
+            {/* File Structure Diagram */}
+            <div style={{
+              background: 'rgba(0, 0, 0, 0.3)',
+              border: '1px solid rgba(255, 165, 0, 0.15)',
+              borderRadius: '6px',
+              padding: '12px',
+              marginTop: '16px'
+            }}>
+              <h4 style={{fontSize: '0.9rem', color: '#FFA500', marginBottom: '8px', fontWeight: 600}}>
+                .nft Container Structure
+              </h4>
+              <pre style={{
+                margin: 0,
+                fontSize: '0.75rem',
+                lineHeight: '1.4',
+                color: 'rgba(255, 255, 255, 0.8)',
+                fontFamily: 'Monaco, Menlo, monospace'
+              }}>
+{`root.nft/
+├── manifest.json     # Metadata & version info
+├── sheet.csv        # Spreadsheet data
+├── schema.json      # Column definitions
+├── keys.json        # Encrypted access keys
+└── signatures.json  # Digital signatures`}
+              </pre>
             </div>
           </div>
 
@@ -788,8 +903,8 @@ const manifest = {
               </div>
               <div className="bapp-step">
                 <div className="step-number">3</div>
-                <h3>Choose Token Protocol</h3>
-                <p>Select from STAS, Ordinals, BSV-20, or sCrypt based on your asset's requirements for compliance, permanence, or trading.</p>
+                <h3>Choose Storage Method</h3>
+                <p>Use 1Sat Ordinals for permanent inscription or IPFS for larger datasets. Add sCrypt smart contracts for advanced logic.</p>
               </div>
               <div className="bapp-step">
                 <div className="step-number">4</div>

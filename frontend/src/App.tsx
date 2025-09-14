@@ -210,13 +210,13 @@ function App() {
                         </div>
                         <div className="menu-separator" />
                         <a 
-                          href="/baps_executive_summary.pdf"
-                          download="BAPS_Executive_Summary.pdf"
+                          href="/bap_executive_summary.pdf"
+                          download="BAP_Executive_Summary.pdf"
                           className="menu-item"
                           style={{ textDecoration: 'none', color: 'inherit' }}
                           onClick={() => setIsMenuOpen(false)}
                         >
-                          <span>📄</span> BAPS Executive Summary
+                          <span>📄</span> BAP Executive Summary
                         </a>
                         <div className="menu-item" onClick={() => {
                           const spreadsheetCount = Object.keys(localStorage.getItem('spreadsheets') ? JSON.parse(localStorage.getItem('spreadsheets') || '[]') : []).length;

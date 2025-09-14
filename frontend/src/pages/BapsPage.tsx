@@ -442,12 +442,12 @@ const manifest = {
               View Specifications
             </button>
             <a 
-              href="/baps_executive_summary.pdf"
-              download="BAPS_Executive_Summary.pdf"
+              href="/bap_executive_summary.pdf"
+              download="BAP_Executive_Summary.pdf"
               className="cta-button secondary"
               style={{ textDecoration: 'none', display: 'inline-block' }}
             >
-              📄 Download PDF
+              📄 Download BAP Summary
             </a>
             <button 
               className="cta-button secondary"
@@ -778,12 +778,12 @@ class FinancialDataAsset extends BAPS.Asset {
               Launch App
             </button>
             <a 
-              href="/baps_executive_summary.pdf"
-              download="BAPS_Executive_Summary.pdf"
+              href="/bap_executive_summary.pdf"
+              download="BAP_Executive_Summary.pdf"
               className="cta-button primary large"
               style={{ textDecoration: 'none' }}
             >
-              📄 Executive Summary
+              📄 BAP Executive Summary
             </a>
             <a 
               href="https://github.com/b0ase/bitcoin-spreadsheet"

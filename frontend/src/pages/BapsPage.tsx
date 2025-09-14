@@ -53,51 +53,48 @@ const BapsPage: React.FC = () => {
     }
   ];
 
-  const tokenProtocols = [
+  const bsvCapabilities = [
     {
-      name: 'STAS (Satoshi Token Asset Standard)',
-      icon: '🪙',
-      description: 'Native Bitcoin SV token protocol with full script capabilities',
-      features: ['Regulatory compliant', 'Atomic swaps', 'Smart contract integration', 'Fractional ownership'],
-      useCase: 'Best for regulated securities and complex financial instruments',
-      inscriptionSupport: 'Full on-chain metadata via OP_RETURN',
-      ordinalCompatible: true
+      name: 'TeraNode',
+      icon: '⚡',
+      description: 'Next-generation BSV node implementation for massive scale',
+      features: ['1 million+ TPS capacity', 'Horizontal scaling', 'Microservices architecture', 'Enterprise-ready'],
+      details: 'TeraNode enables BSV to process over 1 million transactions per second, making it suitable for global-scale data applications'
     },
     {
       name: '1Sat Ordinals',
       icon: '🎯',
-      description: 'Bitcoin-native ordinal inscription protocol adapted for BSV',
-      features: ['Satoshi-level tracking', 'Inscription in witness data', 'Immutable ordering', 'Cross-chain compatible'],
-      useCase: 'Perfect for permanent data inscription and provenance tracking',
-      inscriptionSupport: 'Native - entire protocol based on inscriptions',
-      ordinalCompatible: true
+      description: 'Inscription protocol for permanent on-chain data storage',
+      features: ['Satoshi-level tracking', 'Immutable data storage', 'Content addressing', 'NFT capabilities'],
+      details: 'Each satoshi can carry inscribed data, creating permanent, traceable digital assets'
     },
     {
-      name: 'Sensible Contract NFTs',
-      icon: '📜',
-      description: 'UTXO-based NFT protocol with metadata flexibility',
-      features: ['UTXO-based', 'Metadata on-chain', 'Low fees', 'Simple implementation'],
-      useCase: 'Simple NFT representation of spreadsheet ownership',
-      inscriptionSupport: 'Metadata directly in transaction',
-      ordinalCompatible: false
+      name: 'sCrypt Smart Contracts',
+      icon: '📝',
+      description: 'Native Bitcoin script-based smart contracts',
+      features: ['TypeScript/JavaScript syntax', 'Turing-complete within gas limits', 'Direct UTXO manipulation', 'No additional layers'],
+      details: 'Write complex smart contracts that compile directly to Bitcoin Script'
     },
     {
-      name: 'BSV-20 Protocol',
-      icon: '🏷️',
-      description: 'Inscription-based fungible token standard similar to BRC-20',
-      features: ['JSON inscriptions', 'Fungible tokens', 'Simple deploys', 'Marketplace compatible'],
-      useCase: 'Fungible shares in spreadsheet data pools',
-      inscriptionSupport: 'JSON inscriptions for all operations',
-      ordinalCompatible: true
+      name: 'Micropayments',
+      icon: '💰',
+      description: 'Sub-cent transactions with instant finality',
+      features: ['Fees < $0.0001', 'Instant 0-conf transactions', 'Payment channels', 'Streaming money'],
+      details: 'Enable new business models with true micropayments at global scale'
     },
     {
-      name: 'RareCandyNFT',
-      icon: '🍬',
-      description: 'Simple NFT protocol with focus on collectibles',
-      features: ['Simple minting', 'Low complexity', 'Wallet support', 'Marketplace ready'],
-      useCase: 'Collectible spreadsheet templates and datasets',
-      inscriptionSupport: 'Optional metadata inscriptions',
-      ordinalCompatible: false
+      name: 'IPv6 Integration',
+      icon: '🌐',
+      description: 'Direct peer-to-peer transactions via IPv6',
+      features: ['End-to-end encryption', 'Direct node communication', 'Reduced latency', 'Enhanced privacy'],
+      details: 'BSV nodes can communicate directly using IPv6 for improved efficiency'
+    },
+    {
+      name: 'Simplified Payment Verification (SPV)',
+      icon: '✅',
+      description: 'Lightweight client verification without full blockchain',
+      features: ['Merkle proofs', 'Header-only validation', 'Mobile-friendly', 'Instant verification'],
+      details: 'Verify transactions without downloading the entire blockchain'
     }
   ];
 
@@ -119,8 +116,8 @@ const BapsPage: React.FC = () => {
         { name: 'Platform', value: 'Bitcoin SV' },
         { name: 'Storage', value: 'Inscriptions + OP_RETURN + IPFS' },
         { name: 'Versioning', value: 'UTXO Chain with ordinal tracking' },
-        { name: 'Token Options', value: 'STAS, Run, Ordinals, BSV-20' },
-        { name: 'Smart Contracts', value: 'sCrypt + Run Interactive' },
+        { name: 'Data Storage', value: '1Sat Ordinals inscriptions' },
+        { name: 'Smart Contracts', value: 'sCrypt (native Bitcoin Script)' },
         { name: 'Ordinal Support', value: 'Full 1Sat ordinal tracking' }
       ]
     },
@@ -132,7 +129,7 @@ const BapsPage: React.FC = () => {
         { name: 'Distribution', value: 'Encrypted Key Wrapping' },
         { name: 'Permissions', value: 'JSON Schema (inscribed)' },
         { name: 'Authentication', value: 'HandCash OAuth' },
-        { name: 'Trading', value: 'Ordinal marketplaces + DEX' }
+        { name: 'Trading', value: 'P2P exchanges + Ordinal marketplaces' }
       ]
     }
   ];
@@ -147,7 +144,7 @@ const asset = new BAPS.Asset({
   type: 'spreadsheet',
   data: spreadsheetData,
   encryption: 'row-level',
-  tokenProtocol: 'STAS' // or 'Ordinals', 'BSV-20'
+  protocol: '1SatOrdinals' // Inscribe as ordinal
 });
 
 // Deploy asset to Bitcoin
@@ -174,43 +171,42 @@ const accessKeys = await nft.createAccessKeys(saleConfig);
 const decryptedData = await buyer.decryptRows(accessKeys);`
     },
     {
-      title: 'Tokenizing with Multiple Protocols',
+      title: 'Using BSV Capabilities',
       language: 'typescript',
-      code: `// Option 1: STAS Protocol (Regulated)
-const stasToken = new STASToken({
-  spreadsheetTxid,
-  totalShares: 1000000,
-  compliance: 'SEC-compliant',
-  dividendRights: true
-});
-
-// Option 2: 1Sat Ordinals (Permanent inscription)
+      code: `// 1Sat Ordinals - Permanent Data Inscription
 const ordinalNFT = new OrdinalInscription({
   satoshi: 1,
   inscription: {
-    protocol: 'baps',
+    protocol: 'bap',
     spreadsheetHash: sha256(csvData),
     metadata: manifestJSON,
     accessRights: encryptedKeys
   }
 });
 
-// Option 3: BSV-20 (Fungible shares)
-const bsv20Token = new BSV20Inscription({
-  op: 'deploy',
-  tick: 'SHEET',
-  max: '1000000',
-  lim: '1000'
+// sCrypt Smart Contract - Native Bitcoin Script
+const smartContract = new sCrypt.Contract({
+  name: 'Data Access Controller',
+  // Compile TypeScript to Bitcoin Script
+  @method()
+  public unlock(preimage: SigHashPreimage, amount: bigint) {
+    assert(this.checkSig(preimage, amount));
+    // Release data keys when payment received
+  }
 });
 
-// Option 4: sCrypt Smart Contract (Interactive)
-const smartContract = new sCrypt.Contract({
-  name: 'Spreadsheet DAO',
-  supply: 1000000,
-  // Native Bitcoin script for complex logic
-  script: contractCode,
-  // Automatic execution on conditions
-  triggers: ['cellUpdate', 'thresholdMet']
+// Micropayment Stream
+const paymentChannel = new PaymentChannel({
+  recipient: dataProvider,
+  ratePerCell: 0.000001, // 1 satoshi per cell
+  streamingEnabled: true
+});
+
+// TeraNode-Ready Batch Processing
+const batch = new TeraNodeBatch({
+  transactions: spreadsheetUpdates,
+  parallelProcessing: true,
+  targetTPS: 10000
 });`
     },
     {
@@ -640,81 +636,74 @@ const manifest = {
             </div>
           </div>
 
-          {/* Token Protocols */}
+          {/* BSV Capabilities */}
           <div className="content-section">
-            <h2 className="section-title">Bitcoin SV Token Protocols</h2>
+            <h2 className="section-title">Bitcoin SV Capabilities</h2>
             <p className="section-description">
-              Choose the right token protocol for your spreadsheet assets. BAPS supports multiple tokenization standards,
-              including ordinals and inscriptions for permanent on-chain data storage.
+              BSV provides the scalability and features needed for enterprise-grade data applications.
+              With TeraNode and native capabilities, BSV can handle global-scale data operations.
             </p>
             
-            <div className="token-protocols-grid">
-              {tokenProtocols.map((protocol, index) => (
-                <div key={index} className="protocol-card">
-                  <div className="protocol-header">
-                    <span className="protocol-icon">{protocol.icon}</span>
-                    <h3 className="protocol-name">{protocol.name}</h3>
+            <div className="capabilities-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px'}}>
+              {bsvCapabilities.map((capability, index) => (
+                <div key={index} className="capability-card" style={{
+                  background: 'rgba(30, 30, 30, 0.5)',
+                  border: '1px solid rgba(255, 165, 0, 0.15)',
+                  borderRadius: '6px',
+                  padding: '16px',
+                  transition: 'all 0.2s ease'
+                }}>
+                  <div className="capability-header" style={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}>
+                    <span className="capability-icon" style={{fontSize: '1.3rem', marginRight: '8px'}}>{capability.icon}</span>
+                    <h3 className="capability-name" style={{fontSize: '1rem', margin: 0, fontWeight: 600, color: '#FFA500'}}>{capability.name}</h3>
                   </div>
-                  <p className="protocol-description">{protocol.description}</p>
-                  <div className="protocol-features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                      {protocol.features.map((feature, idx) => (
-                        <li key={idx}>{feature}</li>
+                  <p className="capability-description" style={{fontSize: '0.85rem', marginBottom: '10px', opacity: 0.9}}>{capability.description}</p>
+                  <div className="capability-features" style={{marginBottom: '10px'}}>
+                    <ul style={{margin: 0, paddingLeft: '16px', fontSize: '0.8rem', opacity: 0.8}}>
+                      {capability.features.map((feature, idx) => (
+                        <li key={idx} style={{marginBottom: '2px'}}>{feature}</li>
                       ))}
                     </ul>
                   </div>
-                  <div className="protocol-usecase">
-                    <strong>Best For:</strong> {protocol.useCase}
+                  <div className="capability-details" style={{
+                    borderTop: '1px solid rgba(255, 165, 0, 0.1)',
+                    paddingTop: '8px',
+                    fontSize: '0.75rem',
+                    opacity: 0.7,
+                    fontStyle: 'italic'
+                  }}>
+                    {capability.details}
                   </div>
-                  <div className="protocol-inscription">
-                    <strong>Inscription Support:</strong> {protocol.inscriptionSupport}
-                  </div>
-                  {protocol.ordinalCompatible && (
-                    <div className="ordinal-badge">✓ Ordinal Compatible</div>
-                  )}
                 </div>
               ))}
             </div>
 
-            <div className="protocol-comparison">
-              <h3>Protocol Selection Guide</h3>
-              <table className="comparison-table">
-                <thead>
-                  <tr>
-                    <th>Use Case</th>
-                    <th>Recommended Protocol</th>
-                    <th>Why</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Regulated Securities</td>
-                    <td>STAS</td>
-                    <td>Full compliance and atomic swap support</td>
-                  </tr>
-                  <tr>
-                    <td>Permanent Data Storage</td>
-                    <td>1Sat Ordinals</td>
-                    <td>Inscription-native with immutable ordering</td>
-                  </tr>
-                  <tr>
-                    <td>Interactive Spreadsheets</td>
-                    <td>sCrypt Smart Contracts</td>
-                    <td>Native Bitcoin script with complex logic</td>
-                  </tr>
-                  <tr>
-                    <td>Fungible Shares</td>
-                    <td>BSV-20</td>
-                    <td>Simple JSON inscriptions for shares</td>
-                  </tr>
-                  <tr>
-                    <td>Simple NFTs</td>
-                    <td>Sensible/RareCandy</td>
-                    <td>Low complexity with wallet support</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="bsv-resources" style={{
+              marginTop: '30px',
+              padding: '16px',
+              background: 'rgba(30, 30, 30, 0.5)',
+              borderRadius: '6px',
+              border: '1px solid rgba(255, 165, 0, 0.15)'
+            }}>
+              <h3 style={{fontSize: '1.1rem', marginBottom: '12px', color: '#FFA500'}}>Learn More</h3>
+              <div style={{display: 'flex', gap: '16px', flexWrap: 'wrap'}}>
+                <a href="https://bsvblockchain.org" target="_blank" rel="noopener noreferrer" 
+                   style={{color: '#FFA500', fontSize: '0.85rem', textDecoration: 'none'}}>
+                  BSV Association →
+                </a>
+                <a href="https://docs.bsvblockchain.org/network-topology/nodes/sv-node/teranode" target="_blank" rel="noopener noreferrer" 
+                   style={{color: '#FFA500', fontSize: '0.85rem', textDecoration: 'none'}}>
+                  TeraNode Documentation →
+                </a>
+                <a href="https://scrypt.io" target="_blank" rel="noopener noreferrer" 
+                   style={{color: '#FFA500', fontSize: '0.85rem', textDecoration: 'none'}}>
+                  sCrypt Smart Contracts →
+                </a>
+                <a href="https://1satordinals.com" target="_blank" rel="noopener noreferrer" 
+                   style={{color: '#FFA500', fontSize: '0.85rem', textDecoration: 'none'}}>
+                  1Sat Ordinals →
+                </a>
+              </div>
             </div>
           </div>
 

@@ -107,7 +107,7 @@ function App() {
   return (
     <Routes>
       <Route path="/bitcoin-spreadsheet" element={<BitcoinSpreadsheetPage />} />
-      <Route path="/baps" element={<BapsPage />} />
+      <Route path="/bap" element={<BapsPage />} />
       <Route path="/developers" element={<BapsPage />} /> {/* Keep for backwards compatibility */}
       <Route path="/auth/handcash/callback" element={<HandCashCallback />} />
       <Route path="/*" element={

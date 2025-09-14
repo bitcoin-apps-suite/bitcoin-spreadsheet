@@ -472,10 +472,10 @@ const manifest = {
           <h1 className="hero-title">
             <span className="bitcoin-text">BAP</span>
           </h1>
-          <p className="hero-subtitle" style={{fontSize: '1.2em', marginBottom: '10px', opacity: 0.9}}>
+          <p className="hero-subtitle" style={{fontSize: '0.95rem', marginBottom: '8px', opacity: 0.9}}>
             Bitcoin Asset Protocol
           </p>
-          <p className="hero-tagline" style={{fontSize: '1.5em', fontWeight: 'bold', marginBottom: '20px', color: '#FFA500'}}>
+          <p className="hero-tagline" style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '16px', color: '#FFA500'}}>
             One Protocol for Every Asset. One Ledger for the World.
           </p>
           <p className="hero-description">
@@ -564,32 +564,32 @@ const manifest = {
               (creation → versioning → access control → monetization) but can express unique behaviors.
             </p>
             
-            <div className="asset-classes-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '24px', marginTop: '40px'}}>
+            <div className="asset-classes-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '12px', marginTop: '20px'}}>
               {assetClasses.map((asset, index) => (
                 <div key={index} className="asset-class-card" style={{
-                  background: 'rgba(255, 165, 0, 0.05)',
-                  border: '1px solid rgba(255, 165, 0, 0.2)',
-                  borderRadius: '8px',
-                  padding: '24px',
-                  transition: 'all 0.3s ease'
+                  background: 'rgba(30, 30, 30, 0.5)',
+                  border: '1px solid rgba(255, 165, 0, 0.15)',
+                  borderRadius: '6px',
+                  padding: '16px',
+                  transition: 'all 0.2s ease'
                 }}>
-                  <div className="asset-header" style={{display: 'flex', alignItems: 'center', marginBottom: '16px'}}>
-                    <span className="asset-icon" style={{fontSize: '2em', marginRight: '12px'}}>{asset.icon}</span>
-                    <h3 className="asset-title" style={{fontSize: '1.2em', margin: 0}}>{asset.title}</h3>
+                  <div className="asset-header" style={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}>
+                    <span className="asset-icon" style={{fontSize: '1.3rem', marginRight: '8px'}}>{asset.icon}</span>
+                    <h3 className="asset-title" style={{fontSize: '0.95rem', margin: 0, fontWeight: 600}}>{asset.title}</h3>
                   </div>
-                  <p className="asset-description" style={{marginBottom: '16px', opacity: 0.9}}>{asset.description}</p>
-                  <div className="asset-features" style={{marginBottom: '16px'}}>
-                    <ul style={{margin: 0, paddingLeft: '20px', opacity: 0.8}}>
+                  <p className="asset-description" style={{fontSize: '0.8rem', marginBottom: '10px', opacity: 0.9, lineHeight: '1.3'}}>{asset.description}</p>
+                  <div className="asset-features" style={{marginBottom: '10px'}}>
+                    <ul style={{margin: 0, paddingLeft: '16px', opacity: 0.8, fontSize: '0.75rem', lineHeight: '1.4'}}>
                       {asset.features.map((feature, idx) => (
-                        <li key={idx} style={{marginBottom: '4px'}}>{feature}</li>
+                        <li key={idx} style={{marginBottom: '2px'}}>{feature}</li>
                       ))}
                     </ul>
                   </div>
                   <div className="asset-example" style={{
                     borderTop: '1px solid rgba(255, 165, 0, 0.1)',
-                    paddingTop: '12px',
-                    fontSize: '0.9em',
-                    opacity: 0.8
+                    paddingTop: '8px',
+                    fontSize: '0.75rem',
+                    opacity: 0.7
                   }}>
                     <strong>Example:</strong> {asset.example}
                   </div>
@@ -863,10 +863,10 @@ class FinancialDataAsset extends BAPS.Asset {
       <section className="cta-section">
         <div className="container">
           <h2 className="cta-title">The Vision</h2>
-          <p className="cta-description" style={{fontSize: '1.2em', lineHeight: '1.6'}}>
-            <strong>One Ledger, Many Assets:</strong> Spreadsheets, contracts, media, tokens — all managed with the same rules.<br/>
-            <strong>One Protocol, Infinite Apps:</strong> Any developer can turn assets into BApps with familiar UIs and Bitcoin-native logic.<br/>
-            <strong>One Economy, Built on Bitcoin:</strong> Everything becomes tradeable, auditable, and monetizable at micro and macro scale.
+          <p className="cta-description" style={{fontSize: '0.95rem', lineHeight: '1.5'}}>
+            <strong style={{color: '#FFA500'}}>One Ledger, Many Assets:</strong> Spreadsheets, contracts, media, tokens — all managed with the same rules.<br/>
+            <strong style={{color: '#FFA500'}}>One Protocol, Infinite Apps:</strong> Any developer can turn assets into BApps with familiar UIs and Bitcoin-native logic.<br/>
+            <strong style={{color: '#FFA500'}}>One Economy, Built on Bitcoin:</strong> Everything becomes tradeable, auditable, and monetizable at micro and macro scale.
           </p>
           <div className="cta-buttons">
             <button 

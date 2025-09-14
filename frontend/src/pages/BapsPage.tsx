@@ -8,7 +8,7 @@ const BapsPage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<string | false>(false);
 
   useEffect(() => {
-    document.title = 'BAPS - Bitcoin Asset Protocol Schema';
+    document.title = 'BAP - Bitcoin Asset Protocol';
     return () => {
       document.title = 'Bitcoin Spreadsheet';
     };
@@ -17,9 +17,9 @@ const BapsPage: React.FC = () => {
   const protocolFeatures = [
     {
       icon: '🚀',
-      title: 'Blockchain Assets',
-      description: 'Transform spreadsheets into tradeable blockchain assets with built-in monetization',
-      details: 'Every spreadsheet becomes a valuable asset with ownership, provenance, and revenue generation'
+      title: 'Universal Asset Framework',
+      description: 'Transform any digital object into a Bitcoin-native asset',
+      details: 'From spreadsheets to contracts, every digital object becomes ownable, tradeable, and monetizable'
     },
     {
       icon: '🔗',
@@ -47,9 +47,9 @@ const BapsPage: React.FC = () => {
     },
     {
       icon: '🌐',
-      title: 'Decentralized Infrastructure',
-      description: 'No central servers, no vendor lock-in, pure peer-to-peer data exchange',
-      details: 'Built on Bitcoin SV for maximum security and censorship resistance'
+      title: 'Interoperability',
+      description: 'All asset types work together on one global protocol',
+      details: 'Documents link to spreadsheets, spreadsheets trigger contracts, contracts pay royalties'
     }
   ];
 
@@ -247,6 +247,51 @@ const manifest = {
     }
   ];
 
+  const assetClasses = [
+    {
+      icon: '📊',
+      title: 'Spreadsheets (Data Assets)',
+      description: 'Familiar UI with on-chain version control',
+      features: ['Cell-to-UTXO mapping', 'Selective encryption', 'Pay-per-cell monetization'],
+      example: 'DAO voting sheets, DeFi calculators, NFT marketplaces'
+    },
+    {
+      icon: '📄',
+      title: 'Documents (Knowledge Assets)',
+      description: '.doc, .pdf, .md wrapped in .nft container',
+      features: ['Immutable UTXO versioning', 'Per-section access control', 'Automatic royalties'],
+      example: 'Research papers sold by chapter, encrypted reports with royalty payouts'
+    },
+    {
+      icon: '🎵',
+      title: 'Media (Creative Assets)',
+      description: 'Audio, video, and images with on-chain licensing',
+      features: ['Smart contract licensing', 'Pay-per-stream micropayments', 'Automatic royalty distribution'],
+      example: 'Musicians releasing albums with microtransaction streaming'
+    },
+    {
+      icon: '🪙',
+      title: 'Tokens & Shares (Financial Assets)',
+      description: 'Equity, fungible tokens, and utility tokens',
+      features: ['Automated dividends', 'Governance voting', 'Compliance rules'],
+      example: 'Tokenized company shares, DAO governance spreadsheets'
+    },
+    {
+      icon: '📡',
+      title: 'IoT & Sensors (Data Stream Assets)',
+      description: 'Live sensor feeds inscribed as UTXOs',
+      features: ['Real-time data streams', 'Pay-per-datapoint', 'Subscription access'],
+      example: 'Weather data streams, energy grid reporting'
+    },
+    {
+      icon: '📜',
+      title: 'Contracts (Legal/Business Assets)',
+      description: 'Human-readable + machine-executable agreements',
+      features: ['Automatic execution', 'Payment triggers', 'Compliance tracking'],
+      example: 'Shipping contracts that release payment on delivery confirmation'
+    }
+  ];
+
   const useCases = [
     {
       title: 'Financial Data Assets',
@@ -425,11 +470,17 @@ const manifest = {
             <div className="bitcoin-logo-large">₿</div>
           </div>
           <h1 className="hero-title">
-            <span className="bitcoin-text">BAPS</span>
+            <span className="bitcoin-text">BAP</span>
           </h1>
+          <p className="hero-subtitle" style={{fontSize: '1.2em', marginBottom: '10px', opacity: 0.9}}>
+            Bitcoin Asset Protocol
+          </p>
+          <p className="hero-tagline" style={{fontSize: '1.5em', fontWeight: 'bold', marginBottom: '20px', color: '#FFA500'}}>
+            One Protocol for Every Asset. One Ledger for the World.
+          </p>
           <p className="hero-description">
-            Bitcoin Asset Protocol Schema - Transform spreadsheets into tradeable blockchain assets. 
-            Create NFT data files with granular access control, selective encryption, and tokenized ownership.
+            Transform any digital object into a Bitcoin-native asset. From spreadsheets to contracts, 
+            BAP enables native ownership, transfer, and monetization on the global shared ledger.
           </p>
           <div className="hero-buttons">
             <button 
@@ -466,13 +517,13 @@ const manifest = {
             <h2 className="summary-title">Executive Summary</h2>
             <div className="summary-text">
               <p>
-                The <strong>Bitcoin Asset Protocol Schema (BAPS)</strong> represents a revolutionary approach to data ownership on Bitcoin. By transforming spreadsheets into tradeable blockchain assets, BAPS enables users to monetize their data with selective access control, immutable versioning, and tokenized revenue sharing.
+                The <strong>Bitcoin Asset Protocol (BAP)</strong> defines a universal framework for representing any digital object as an on-chain asset. From spreadsheets to legal contracts, BAP enables native Bitcoin ownership, transfer, and monetization. Each asset becomes part of the global shared ledger, with full support for version control, encryption, tokenization, and programmable logic.
               </p>
               <p>
-                BAPS transforms ordinary spreadsheets into <strong>NFT data assets</strong> that can be owned, traded, and monetized. Each spreadsheet becomes a valuable asset with cryptographic proof of ownership, selective encryption for controlled access, and automatic revenue distribution to token holders.
+                With BAP, developers can build <strong>BApps (Bitcoin Applications)</strong> — user-facing apps that wrap assets in familiar interfaces (like spreadsheets) while leveraging Bitcoin's UTXO model for immutable history, microtransactions, and scalable peer-to-peer exchange. Every digital object becomes tradeable, auditable, and monetizable at both micro and macro scale.
               </p>
               <p>
-                Users can monetize financial data, research datasets, supply chain records, and accounting ledgers. With support for multiple token protocols (STAS, Ordinals, BSV-20), data assets can be tokenized, inscribed permanently on-chain, and traded in marketplaces while maintaining the familiar spreadsheet interface.
+                BAP treats every digital object as an asset: spreadsheets become data assets, documents become knowledge assets, media files become creative assets, and contracts become executable business assets. All share the same lifecycle (creation → versioning → access control → monetization) while expressing unique behaviors through the universal protocol.
               </p>
             </div>
           </div>
@@ -485,7 +536,7 @@ const manifest = {
           <div className="content-section">
             <h2 className="section-title">Use Cases</h2>
             <p className="section-description">
-              Real-world data assets you can create with BAPS
+              Real-world data assets you can create with BAP
             </p>
             
             <div className="usecases-grid">
@@ -503,15 +554,60 @@ const manifest = {
         </div>
       </section>
 
+      {/* Asset Classes */}
+      <section className="asset-classes-section" style={{background: '#1a1a1a', padding: '60px 0'}}>
+        <div className="container">
+          <div className="content-section">
+            <h2 className="section-title">Asset Classes in BAP</h2>
+            <p className="section-description">
+              BAP treats every digital object as an asset. Each asset type shares the same lifecycle 
+              (creation → versioning → access control → monetization) but can express unique behaviors.
+            </p>
+            
+            <div className="asset-classes-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '24px', marginTop: '40px'}}>
+              {assetClasses.map((asset, index) => (
+                <div key={index} className="asset-class-card" style={{
+                  background: 'rgba(255, 165, 0, 0.05)',
+                  border: '1px solid rgba(255, 165, 0, 0.2)',
+                  borderRadius: '8px',
+                  padding: '24px',
+                  transition: 'all 0.3s ease'
+                }}>
+                  <div className="asset-header" style={{display: 'flex', alignItems: 'center', marginBottom: '16px'}}>
+                    <span className="asset-icon" style={{fontSize: '2em', marginRight: '12px'}}>{asset.icon}</span>
+                    <h3 className="asset-title" style={{fontSize: '1.2em', margin: 0}}>{asset.title}</h3>
+                  </div>
+                  <p className="asset-description" style={{marginBottom: '16px', opacity: 0.9}}>{asset.description}</p>
+                  <div className="asset-features" style={{marginBottom: '16px'}}>
+                    <ul style={{margin: 0, paddingLeft: '20px', opacity: 0.8}}>
+                      {asset.features.map((feature, idx) => (
+                        <li key={idx} style={{marginBottom: '4px'}}>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="asset-example" style={{
+                    borderTop: '1px solid rgba(255, 165, 0, 0.1)',
+                    paddingTop: '12px',
+                    fontSize: '0.9em',
+                    opacity: 0.8
+                  }}>
+                    <strong>Example:</strong> {asset.example}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Main Content */}
       <section className="main-content">
         <div className="container">
           {/* BAPS Overview */}
           <div className="content-section">
-            <h2 className="section-title">BAPS Overview</h2>
+            <h2 className="section-title">Core Features</h2>
             <p className="section-description">
-              The Bitcoin Asset Protocol Schema (BAPS) transforms spreadsheets into valuable blockchain assets. 
-              Every spreadsheet becomes an NFT with cryptographic ownership, selective encryption, and built-in monetization.
+              BAP provides a universal framework with powerful features that work across all asset types.
             </p>
             
             <div className="features-grid">
@@ -766,9 +862,11 @@ class FinancialDataAsset extends BAPS.Asset {
       {/* CTA Section */}
       <section className="cta-section">
         <div className="container">
-          <h2 className="cta-title">Ready to Create Your First Data Asset?</h2>
-          <p className="cta-description">
-            Join the data ownership revolution. Transform your spreadsheets into valuable blockchain assets with BAPS.
+          <h2 className="cta-title">The Vision</h2>
+          <p className="cta-description" style={{fontSize: '1.2em', lineHeight: '1.6'}}>
+            <strong>One Ledger, Many Assets:</strong> Spreadsheets, contracts, media, tokens — all managed with the same rules.<br/>
+            <strong>One Protocol, Infinite Apps:</strong> Any developer can turn assets into BApps with familiar UIs and Bitcoin-native logic.<br/>
+            <strong>One Economy, Built on Bitcoin:</strong> Everything becomes tradeable, auditable, and monetizable at micro and macro scale.
           </p>
           <div className="cta-buttons">
             <button 
@@ -803,7 +901,7 @@ class FinancialDataAsset extends BAPS.Asset {
           <div className="footer-content">
             <div className="footer-brand">
               <div className="footer-logo">₿</div>
-              <span className="footer-title">BAPS - Bitcoin Asset Protocol</span>
+              <span className="footer-title">BAP - Bitcoin Asset Protocol</span>
             </div>
             <div className="footer-links">
               <a href="https://x.com/BitcoinSheets" target="_blank" rel="noopener noreferrer">

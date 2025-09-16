@@ -21,10 +21,9 @@ interface SpreadsheetProps {
   isSidebarOpen?: boolean;
   onToggleSidebar?: () => void;
   onLogin?: () => void;
-  useAdvanced?: boolean; // Toggle between basic and advanced spreadsheet
 }
 
-const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: propSpreadsheet, onSpreadsheetUpdate, isAuthenticated = false, isSidebarOpen, onToggleSidebar, onLogin, useAdvanced = true }) => {
+const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: propSpreadsheet, onSpreadsheetUpdate, isAuthenticated = false, isSidebarOpen, onToggleSidebar, onLogin }) => {
   const [spreadsheet, setSpreadsheet] = useState<SpreadsheetData | null>(propSpreadsheet || null);
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -35,8 +34,15 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
   const [selectedStorageOption, setSelectedStorageOption] = useState<StorageOption | null>(null);
   const [storagePricing, setStoragePricing] = useState<SpreadsheetPricingBreakdown | null>(null);
   const [showTokenizationModal, setShowTokenizationModal] = useState(false);
-  const [advancedMode, setAdvancedMode] = useState(useAdvanced);
+  const [useCellAddresses, setUseCellAddresses] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
+
+  // Handle per-cell address toggle
+  const handleToggleCellAddresses = (enabled: boolean) => {
+    setUseCellAddresses(enabled);
+    bitcoinService.setUseCellAddresses(enabled);
+    console.log('Per-cell addresses:', enabled ? 'ENABLED' : 'DISABLED');
+  };
 
   // Spreadsheet dimensions - expanded to 26 columns (A-Z) and 100 rows
   const ROWS = 100;
@@ -353,73 +359,18 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
         onToggleSidebar={onToggleSidebar}
         onSave={openStorageModal}
         calculateSaveCost={calculateSaveCost}
+        useCellAddresses={useCellAddresses}
+        onToggleCellAddresses={handleToggleCellAddresses}
       />
 
-      {/* Mode Toggle */}
-      <div className="mode-toggle">
-        <button 
-          className={`toggle-btn ${!advancedMode ? 'active' : ''}`}
-          onClick={() => setAdvancedMode(false)}
-        >
-          📊 Basic Mode
-        </button>
-        <button 
-          className={`toggle-btn ${advancedMode ? 'active' : ''}`}
-          onClick={() => setAdvancedMode(true)}
-        >
-          🚀 Advanced Mode
-        </button>
-      </div>
-
-      {advancedMode ? (
+      {
         <AdvancedSpreadsheet
           bitcoinService={bitcoinService}
           spreadsheet={spreadsheet}
           onSpreadsheetUpdate={onSpreadsheetUpdate || setSpreadsheet}
           isAuthenticated={isAuthenticated}
         />
-      ) : (
-        <div className="spreadsheet-grid">
-          {/* Header row with column labels */}
-          <div className="grid-header">
-            <div className="corner-cell"></div>
-            {Array.from({ length: COLS }, (_, col) => (
-              <div key={`header-${col}`} className="header-cell">
-                {getColumnLabel(col)}
-              </div>
-            ))}
-          </div>
-
-          {/* Data rows */}
-          {Array.from({ length: ROWS }, (_, row) => (
-            <div key={`row-${row}`} className="grid-row">
-              {/* Row number */}
-              <div className="row-number">{row + 1}</div>
-
-              {/* Cells */}
-              {Array.from({ length: COLS }, (_, col) => {
-                const cellKey = getCellKey(row, col);
-                const isSelected = selectedCell?.row === row && selectedCell?.col === col;
-                const cellValue = getCellValue(row, col);
-
-                return (
-                  <Cell
-                    key={cellKey}
-                    row={row}
-                    col={col}
-                    value={cellValue}
-                    isSelected={isSelected}
-                    isEditing={isSelected && isEditing}
-                    onClick={() => handleCellClick(row, col)}
-                    onDoubleClick={() => handleCellDoubleClick(row, col)}
-                    onValueChange={(value) => handleCellValueChange(row, col, value)}
-                  />
-                );
-              })}
-            </div>
-          ))}
-        </div>
-      )}
+      }
 
       {/* Status bar with save button and cost display */}
       <div className="status-bar">

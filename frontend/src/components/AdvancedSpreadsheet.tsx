@@ -1,11 +1,15 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import Spreadsheet from 'x-data-spreadsheet';
+import React, { useEffect, useRef, useState } from 'react';
+import { HotTable } from '@handsontable/react';
+import { registerAllModules } from 'handsontable/registry';
 import { HyperFormula } from 'hyperformula';
-import * as XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
-import 'x-data-spreadsheet/dist/xspreadsheet.css';
-import './AdvancedSpreadsheet.css';
-import { BitcoinService, SpreadsheetData } from '../services/BitcoinService';
+import { BitcoinService, SpreadsheetData, CellData } from '../services/BitcoinService';
+import SpreadsheetToolbar from './SpreadsheetToolbar';
+
+// Import Handsontable styles
+import 'handsontable/dist/handsontable.full.min.css';
+
+// Register all Handsontable modules
+registerAllModules();
 
 interface AdvancedSpreadsheetProps {
   bitcoinService: BitcoinService;
@@ -20,396 +24,326 @@ const AdvancedSpreadsheet: React.FC<AdvancedSpreadsheetProps> = ({
   onSpreadsheetUpdate,
   isAuthenticated
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const spreadsheetRef = useRef<any>(null);
-  const formulaEngineRef = useRef<HyperFormula | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [autoSave, setAutoSave] = useState(true);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const hotTableRef = useRef<any>(null);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [data, setData] = useState<any[][]>(() => 
+    Array.from({ length: 100 }, () => Array.from({ length: 26 }, () => ''))
+  );
+  const [isAutoSaveEnabled, setIsAutoSaveEnabled] = useState(false);
+  const autoSaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Initialize HyperFormula engine
+  // Check for dark mode
   useEffect(() => {
-    formulaEngineRef.current = HyperFormula.buildEmpty({
-      licenseKey: 'gpl-v3',
-      maxColumns: 16384,
-      maxRows: 1048576,
+    const checkDarkMode = () => {
+      setIsDarkMode(document.body.classList.contains('dark-mode'));
+    };
+    
+    checkDarkMode();
+    
+    // Watch for dark mode changes
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['class']
     });
+    
+    return () => observer.disconnect();
   }, []);
 
-  // Initialize x-spreadsheet
+  // Initialize spreadsheet data
   useEffect(() => {
-    if (!containerRef.current) return;
-
-    const options: any = {
-      mode: 'edit',
-      showToolbar: true,
-      showGrid: true,
-      showContextmenu: true,
-      showBottomBar: true,
-      
-      view: {
-        height: () => window.innerHeight - 300,
-        width: () => window.innerWidth - 40,
-      },
-      
-      row: {
-        len: 100,
-        height: 25,
-      },
-      
-      col: {
-        len: 26,
-        width: 100,
-        minWidth: 60,
-        indexWidth: 60,
-      },
-    };
-
-    // Create spreadsheet instance
-    spreadsheetRef.current = new Spreadsheet(containerRef.current, options);
-
-    // Load existing data if available
-    if (spreadsheet?.cells) {
-      const data = convertCellsToGrid(spreadsheet.cells);
-      spreadsheetRef.current.loadData(data);
+    if (!spreadsheet) {
+      // Initialize with empty data if no spreadsheet
+      const initialData = Array(100).fill(null).map(() => Array(26).fill(''));
+      setData(initialData);
+      return;
     }
 
-    // Add change handler
-    spreadsheetRef.current.change((data: any) => {
-      handleDataChange(data);
+    // Convert spreadsheet cells to Handsontable data format
+    const maxRow = Math.max(
+      100,
+      ...Object.keys(spreadsheet.cells || {}).map(key => {
+        const [row] = key.split('-').map(Number);
+        return row + 1;
+      })
+    );
+    
+    const maxCol = Math.max(
+      26,
+      ...Object.keys(spreadsheet.cells || {}).map(key => {
+        const [, col] = key.split('-').map(Number);
+        return col + 1;
+      })
+    );
+
+    // Create empty data array - use Array.from for proper 2D array initialization
+    const newData: any[][] = Array.from({ length: maxRow }, () => 
+      Array.from({ length: maxCol }, () => '')
+    );
+
+    // Fill in the data from spreadsheet cells
+    Object.entries(spreadsheet.cells || {}).forEach(([key, cell]) => {
+      const [row, col] = key.split('-').map(Number);
+      if (row < maxRow && col < maxCol) {
+        newData[row][col] = cell.value;
+      }
     });
 
-    return () => {
-      // Cleanup
-      if (spreadsheetRef.current) {
-        spreadsheetRef.current = null;
-      }
-    };
-  }, []);
+    setData(newData);
+  }, [spreadsheet]);
 
-  // Convert cells to grid format for x-spreadsheet
-  const convertCellsToGrid = (cells: any) => {
-    const rows: any = {};
-    
-    Object.entries(cells).forEach(([key, cell]: [string, any]) => {
-      const [col, row] = parseCell(key);
-      if (!rows[row]) {
-        rows[row] = { cells: {} };
-      }
+  // Save data to BitcoinService
+  const saveData = async (changes: any[] | null = null) => {
+    if (!spreadsheet || !hotTableRef.current) return;
+
+    const hot = hotTableRef.current.hotInstance;
+    if (!hot) return;
+
+    // If specific changes are provided, update only those cells
+    if (changes) {
+      const updatedCells: { [key: string]: CellData } = { ...spreadsheet.cells };
       
-      // Check if it's a formula
-      let cellValue = cell.value;
-      if (cell.formula) {
-        cellValue = cell.formula;
-      } else if (typeof cellValue === 'string' && cellValue.startsWith('=')) {
-        // Calculate formula using HyperFormula
-        try {
-          const result = calculateFormula(cellValue);
-          cellValue = result;
-        } catch (e) {
-          console.error('Formula error:', e);
-        }
-      }
-      
-      rows[row].cells[col] = {
-        text: cellValue,
-        style: cell.style || 0,
-      };
-    });
-
-    return { rows };
-  };
-
-  // Parse cell reference (e.g., "A1" -> [0, 0])
-  const parseCell = (cellRef: string): [number, number] => {
-    const match = cellRef.match(/([A-Z]+)(\d+)/);
-    if (!match) return [0, 0];
-    
-    const col = match[1].charCodeAt(0) - 65;
-    const row = parseInt(match[2]) - 1;
-    return [col, row];
-  };
-
-  // Calculate formula (simplified for now)
-  const calculateFormula = (formula: string) => {
-    // Basic formula calculation - can be enhanced later
-    if (formula.startsWith('=SUM(')) {
-      // Simple SUM formula parsing
-      return formula; // Return as-is for now, x-spreadsheet handles formulas
-    }
-    return formula;
-  };
-
-  // Handle data changes
-  const handleDataChange = useCallback(async (data: any) => {
-    if (!spreadsheet || !autoSave) return;
-
-    // Convert grid data back to cells format
-    const cells: any = {};
-    
-    if (data.rows) {
-      Object.entries(data.rows).forEach(([rowIndex, rowData]: [string, any]) => {
-        if (rowData.cells) {
-          Object.entries(rowData.cells).forEach(([colIndex, cellData]: [string, any]) => {
-            const col = String.fromCharCode(65 + parseInt(colIndex));
-            const row = parseInt(rowIndex) + 1;
-            const cellKey = `${col}${row}`;
-            
-            cells[cellKey] = {
-              value: cellData.text || '',
-              formula: cellData.text?.startsWith('=') ? cellData.text : null,
-              style: cellData.style || null,
-            };
-          });
+      changes.forEach(([row, col, oldValue, newValue]) => {
+        const key = `${row}-${col}`;
+        if (newValue && newValue.toString().trim()) {
+          updatedCells[key] = {
+            value: newValue.toString(),
+            lastUpdated: Date.now(),
+            row: row,
+            col: col,
+            dataType: 'string' as const
+          };
+        } else {
+          delete updatedCells[key];
         }
       });
-    }
 
-    // Update spreadsheet
-    const updatedSpreadsheet = {
-      ...spreadsheet,
-      cells,
-      lastModified: Date.now(),
-    };
+      const updatedSpreadsheet = {
+        ...spreadsheet,
+        cells: updatedCells,
+        lastModified: new Date().toISOString()
+      };
 
-    onSpreadsheetUpdate(updatedSpreadsheet);
-
-    // Save to Bitcoin if authenticated
-    // TODO: Implement save to blockchain
-    // if (isAuthenticated && bitcoinService) {
-    //   try {
-    //     await bitcoinService.saveSpreadsheet(updatedSpreadsheet);
-    //   } catch (error) {
-    //     console.error('Failed to save to blockchain:', error);
-    //   }
-    // }
-  }, [spreadsheet, autoSave, isAuthenticated, bitcoinService, onSpreadsheetUpdate]);
-
-  // Import Excel file
-  const handleImportExcel = (file: File) => {
-    const reader = new FileReader();
-    
-    reader.onload = (e) => {
-      try {
-        const data = e.target?.result;
-        const workbook = XLSX.read(data, { type: 'binary' });
-        const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-        const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-        
-        // Convert to x-spreadsheet format
-        const rows: any = {};
-        jsonData.forEach((row: any, rowIndex: number) => {
-          rows[rowIndex] = { cells: {} };
-          row.forEach((cell: any, colIndex: number) => {
-            rows[rowIndex].cells[colIndex] = { text: String(cell || '') };
-          });
-        });
-        
-        // Load into spreadsheet
-        spreadsheetRef.current?.loadData({ rows });
-        
-        // Trigger change handler
-        handleDataChange({ rows });
-        
-      } catch (error) {
-        console.error('Import error:', error);
-        alert('Failed to import file. Please check the format.');
+      onSpreadsheetUpdate(updatedSpreadsheet);
+      
+      // Save to localStorage
+      const spreadsheets = JSON.parse(localStorage.getItem('spreadsheets') || '[]');
+      const index = spreadsheets.findIndex((s: any) => s.id === spreadsheet.id);
+      if (index !== -1) {
+        spreadsheets[index] = updatedSpreadsheet;
+        localStorage.setItem('spreadsheets', JSON.stringify(spreadsheets));
       }
-    };
-    
-    reader.readAsBinaryString(file);
+    }
   };
 
-  // Export to Excel
-  const handleExportExcel = () => {
-    const data = spreadsheetRef.current?.getData();
-    if (!data || !data.rows) return;
-    
-    // Convert to array format
-    const arrayData: any[][] = [];
-    const maxRow = Math.max(...Object.keys(data.rows).map(Number));
-    
-    for (let r = 0; r <= maxRow; r++) {
-      const row: any[] = [];
-      const rowData = data.rows[r];
-      
-      if (rowData && rowData.cells) {
-        const maxCol = Math.max(...Object.keys(rowData.cells).map(Number));
-        for (let c = 0; c <= maxCol; c++) {
-          row.push(rowData.cells[c]?.text || '');
-        }
-      }
-      
-      arrayData.push(row);
+  // Auto-save handler
+  const handleCellChange = (changes: any[] | null, source: string | null) => {
+    if (!changes || source === 'loadData') return;
+
+    // Clear existing timeout
+    if (autoSaveTimeoutRef.current) {
+      clearTimeout(autoSaveTimeoutRef.current);
     }
-    
-    // Create workbook
-    const ws = XLSX.utils.aoa_to_sheet(arrayData);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-    
-    // Save file
-    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
-    const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
-    saveAs(blob, `bitcoin-spreadsheet-${Date.now()}.xlsx`);
+
+    // Save immediately or with delay based on auto-save setting
+    if (isAutoSaveEnabled) {
+      autoSaveTimeoutRef.current = setTimeout(() => {
+        saveData(changes);
+      }, 1000); // 1 second delay for auto-save
+    } else {
+      saveData(changes);
+    }
   };
 
-  // Export to CSV
-  const handleExportCSV = () => {
-    const data = spreadsheetRef.current?.getData();
-    if (!data || !data.rows) return;
+  // Handsontable settings
+  const hotSettings = {
+    data: data,
+    colHeaders: true,
+    rowHeaders: true,
+    width: '100%',
+    height: 'calc(100vh - 350px)',
+    licenseKey: 'non-commercial-and-evaluation',
     
-    // Convert to CSV format
-    let csv = '';
-    const maxRow = Math.max(...Object.keys(data.rows).map(Number));
+    // Features
+    contextMenu: true,
+    manualColumnResize: true,
+    manualRowResize: true,
+    manualColumnMove: true,
+    manualRowMove: true,
+    autoWrapRow: true,
+    autoWrapCol: true,
+    dropdownMenu: true,
+    filters: true,
+    columnSorting: true,
+    comments: true,
+    customBorders: true,
+    mergeCells: true,
+    search: true,
+    undo: true,
+    redo: true,
     
-    for (let r = 0; r <= maxRow; r++) {
-      const rowData = data.rows[r];
-      const row: string[] = [];
+    // Formulas with HyperFormula
+    formulas: {
+      engine: HyperFormula,
+      sheetName: spreadsheet?.title || 'Sheet1'
+    },
+    
+    // Initial dimensions
+    startRows: 100,
+    startCols: 26,
+    minRows: 100,
+    minCols: 26,
+    maxRows: 10000,
+    maxCols: 100,
+    
+    // Cell settings
+    wordWrap: true,
+    copyPaste: true,
+    
+    // Appearance - Dark mode support
+    className: isDarkMode ? 'dark-table' : '',
+    
+    // Column widths
+    colWidths: 100,
+    rowHeights: 23,
+    
+    // Events
+    afterChange: handleCellChange,
+    
+    // Custom cell renderer for dark mode
+    cells: function(row: number, col: number) {
+      const cellProperties: any = {};
       
-      if (rowData && rowData.cells) {
-        const maxCol = Math.max(...Object.keys(rowData.cells).map(Number));
-        for (let c = 0; c <= maxCol; c++) {
-          const cell = rowData.cells[c]?.text || '';
-          // Escape quotes and wrap in quotes if contains comma
-          const escaped = cell.toString().replace(/"/g, '""');
-          row.push(escaped.includes(',') ? `"${escaped}"` : escaped);
-        }
+      if (isDarkMode) {
+        cellProperties.className = 'dark-cell';
       }
       
-      csv += row.join(',') + '\n';
+      return cellProperties;
     }
-    
-    // Save file
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
-    saveAs(blob, `bitcoin-spreadsheet-${Date.now()}.csv`);
-  };
-
-  // String to ArrayBuffer
-  const s2ab = (s: string) => {
-    const buf = new ArrayBuffer(s.length);
-    const view = new Uint8Array(buf);
-    for (let i = 0; i < s.length; i++) {
-      view[i] = s.charCodeAt(i) & 0xFF;
-    }
-    return buf;
-  };
-
-  // Add formula to current cell
-  const insertFormula = (formula: string) => {
-    // This would need x-spreadsheet API to get current cell
-    // For now, just show the formula
-    alert(`Formula to insert: ${formula}\nClick on a cell and type = to start entering formulas`);
   };
 
   return (
-    <div className="advanced-spreadsheet-container">
-      <div className="spreadsheet-toolbar">
-        <div className="toolbar-section">
-          <button 
-            className="toolbar-btn"
-            onClick={() => fileInputRef.current?.click()}
-            title="Import Excel/CSV"
-          >
-            📂 Import
-          </button>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".xlsx,.xls,.csv"
-            style={{ display: 'none' }}
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) handleImportExcel(file);
-            }}
-          />
-          
-          <button 
-            className="toolbar-btn"
-            onClick={handleExportExcel}
-            title="Export as Excel"
-          >
-            📊 Export Excel
-          </button>
-          
-          <button 
-            className="toolbar-btn"
-            onClick={handleExportCSV}
-            title="Export as CSV"
-          >
-            📄 Export CSV
-          </button>
-        </div>
+    <div className="advanced-spreadsheet-container" style={{ 
+      width: '100%', 
+      height: '100%',
+      backgroundColor: isDarkMode ? '#1a1a1a' : '#fff'
+    }}>
+      {/* Spreadsheet Toolbar */}
+      <SpreadsheetToolbar 
+        isDarkMode={isDarkMode}
+        isAutoSaveEnabled={isAutoSaveEnabled}
+        onAutoSaveToggle={setIsAutoSaveEnabled}
+        onSave={() => saveData()}
+        spreadsheetTitle={spreadsheet?.title || 'Untitled Spreadsheet'}
+      />
 
-        <div className="toolbar-section">
-          <select 
-            className="formula-select"
-            onChange={(e) => insertFormula(e.target.value)}
-            value=""
-          >
-            <option value="">Insert Formula...</option>
-            <optgroup label="Math">
-              <option value="=SUM(A1:A10)">SUM</option>
-              <option value="=AVERAGE(A1:A10)">AVERAGE</option>
-              <option value="=MIN(A1:A10)">MIN</option>
-              <option value="=MAX(A1:A10)">MAX</option>
-              <option value="=COUNT(A1:A10)">COUNT</option>
-            </optgroup>
-            <optgroup label="Text">
-              <option value="=CONCAT(A1,B1)">CONCAT</option>
-              <option value="=LEFT(A1,5)">LEFT</option>
-              <option value="=RIGHT(A1,5)">RIGHT</option>
-              <option value="=LEN(A1)">LENGTH</option>
-              <option value="=UPPER(A1)">UPPER</option>
-            </optgroup>
-            <optgroup label="Logical">
-              <option value="=IF(A1>10,'Yes','No')">IF</option>
-              <option value="=AND(A1>0,B1>0)">AND</option>
-              <option value="=OR(A1>0,B1>0)">OR</option>
-            </optgroup>
-            <optgroup label="Lookup">
-              <option value="=VLOOKUP(A1,A1:B10,2,FALSE)">VLOOKUP</option>
-              <option value="=HLOOKUP(A1,A1:Z1,2,FALSE)">HLOOKUP</option>
-              <option value="=INDEX(A1:B10,1,2)">INDEX</option>
-            </optgroup>
-          </select>
-        </div>
-
-        <div className="toolbar-section">
-          <label className="autosave-toggle">
-            <input
-              type="checkbox"
-              checked={autoSave}
-              onChange={(e) => setAutoSave(e.target.checked)}
-            />
-            Auto-save to Blockchain
-          </label>
-        </div>
-
-        {isLoading && (
-          <div className="toolbar-section">
-            <span className="loading-indicator">Saving...</span>
-          </div>
-        )}
-      </div>
-
-      <div className="formula-bar">
-        <span className="cell-reference">A1</span>
-        <input 
-          type="text" 
-          className="formula-input"
-          placeholder="Enter formula or value..."
+      {/* Handsontable Component */}
+      <div className={isDarkMode ? 'handsontable-dark' : ''}>
+        <HotTable
+          ref={(ref) => {
+            hotTableRef.current = ref;
+            // Make the instance globally accessible for SpreadsheetUtils
+            if (ref && ref.hotInstance) {
+              (window as any).hotInstance = ref.hotInstance;
+            }
+          }}
+          settings={hotSettings}
         />
       </div>
 
-      <div ref={containerRef} className="spreadsheet-container" />
-      
-      <div className="status-bar">
-        <span>Ready</span>
-        <span className="status-right">
-          {spreadsheet ? `${Object.keys(spreadsheet.cells || {}).length} cells` : 'No data'}
-        </span>
-      </div>
+      {/* Dark mode styles */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        .handsontable-dark .ht_master .wtHolder {
+          background-color: #1a1a1a !important;
+        }
+        
+        .handsontable-dark .ht_master table {
+          background-color: #1a1a1a !important;
+        }
+        
+        .handsontable-dark .ht_master td {
+          background-color: #0a0a0a !important;
+          color: #e0e0e0 !important;
+          border-color: #333 !important;
+        }
+        
+        .handsontable-dark .ht_master th {
+          background-color: #2a2a2a !important;
+          color: #b0b0b0 !important;
+          border-color: #444 !important;
+        }
+        
+        .handsontable-dark .ht_master tr:hover td {
+          background-color: rgba(255, 165, 0, 0.1) !important;
+        }
+        
+        .handsontable-dark .ht_master td.current {
+          background-color: rgba(255, 165, 0, 0.2) !important;
+          border: 2px solid #FFA500 !important;
+        }
+        
+        .handsontable-dark .ht_master td.area {
+          background-color: rgba(255, 165, 0, 0.1) !important;
+        }
+        
+        .handsontable-dark .handsontableInput {
+          background-color: #1a1a1a !important;
+          color: #e0e0e0 !important;
+          border: 2px solid #FFA500 !important;
+        }
+        
+        .handsontable-dark .htContextMenu {
+          background-color: #2a2a2a !important;
+          border: 1px solid #444 !important;
+        }
+        
+        .handsontable-dark .htContextMenu .ht_master td {
+          background-color: #2a2a2a !important;
+          color: #e0e0e0 !important;
+        }
+        
+        .handsontable-dark .htContextMenu .ht_master td:hover {
+          background-color: #3a3a3a !important;
+        }
+        
+        .handsontable-dark .htDropdownMenu {
+          background-color: #2a2a2a !important;
+          border: 1px solid #444 !important;
+        }
+        
+        .handsontable-dark .htFilters {
+          background-color: #2a2a2a !important;
+        }
+        
+        .handsontable-dark .changeType {
+          background-color: #2a2a2a !important;
+          color: #e0e0e0 !important;
+        }
+        
+        .handsontable-dark .htCommentTextArea {
+          background-color: #2a2a2a !important;
+          color: #e0e0e0 !important;
+          border: 1px solid #444 !important;
+        }
+        
+        .handsontable-dark ::-webkit-scrollbar {
+          width: 10px;
+          height: 10px;
+        }
+        
+        .handsontable-dark ::-webkit-scrollbar-track {
+          background: #2a2a2a;
+        }
+        
+        .handsontable-dark ::-webkit-scrollbar-thumb {
+          background-color: #4a4a4a;
+          border-radius: 5px;
+        }
+        
+        .handsontable-dark ::-webkit-scrollbar-thumb:hover {
+          background-color: #5a5a5a;
+        }
+      ` }} />
     </div>
   );
 };

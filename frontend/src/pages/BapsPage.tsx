@@ -8,7 +8,7 @@ const BapsPage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<string | false>(false);
 
   useEffect(() => {
-    document.title = 'BAP - Bitcoin Asset Protocol';
+    document.title = 'BAP - Bitcoin Attestation Protocol';
     return () => {
       document.title = 'Bitcoin Spreadsheet';
     };
@@ -16,40 +16,40 @@ const BapsPage: React.FC = () => {
 
   const protocolFeatures = [
     {
-      icon: '🚀',
-      title: 'Universal Asset Framework',
-      description: 'Transform any digital object into a Bitcoin-native asset',
-      details: 'From spreadsheets to contracts, every digital object becomes ownable, tradeable, and monetizable'
+      icon: '🔐',
+      title: 'Bitcoin Attestation Protocol',
+      description: 'Create cryptographic identity attestations and link data on the Bitcoin blockchain',
+      details: 'BAP enables self-sovereign identity and data attestation using Bitcoin-native cryptography'
+    },
+    {
+      icon: '🔑',
+      title: 'Identity Key Management',
+      description: 'Hierarchical deterministic key derivation from seed phrases',
+      details: 'Generate identity keys using BIP32/39/44 standards for secure, recoverable identities'
+    },
+    {
+      icon: '✍️',
+      title: 'Cryptographic Signatures',
+      description: 'Sign and verify data with ECDSA secp256k1 signatures',
+      details: 'Every attestation is cryptographically signed and verifiable on-chain'
+    },
+    {
+      icon: '📝',
+      title: 'On-Chain Attestations',
+      description: 'Attest to data ownership, authorship, and integrity',
+      details: 'Store attestations permanently using OP_RETURN with protocol ID 1BAPSuaPnfGnSBM3GLV9yhxUdYe4vGbdMT'
     },
     {
       icon: '🔗',
-      title: 'UTXO Version Control',
-      description: 'Git-like versioning using Bitcoin\'s UTXO model for immutable change tracking',
-      details: 'Every save creates a new transaction, forming an unbreakable chain of versions'
-    },
-    {
-      icon: '🔐',
-      title: 'Granular Encryption',
-      description: 'Encrypt at file, row, column, or cell level with selective key distribution',
-      details: 'Buyers receive only the decryption keys for the data they purchased'
-    },
-    {
-      icon: '🪙',
-      title: 'Tokenized Ownership',
-      description: 'Issue shares in spreadsheets with automatic dividend distribution',
-      details: 'Revenue from data sales is distributed to token holders via smart contracts'
-    },
-    {
-      icon: '⚡',
-      title: 'Micro-Transaction Pricing',
-      description: 'Pay-per-cell pricing model with instant settlement',
-      details: '1/1,000,000th of a penny per cell with Bitcoin SV\'s low fees'
+      title: 'Data Linking',
+      description: 'Link attestations to create chains of related data',
+      details: 'Reference previous attestations by transaction ID to create version histories'
     },
     {
       icon: '🌐',
-      title: 'Interoperability',
-      description: 'All asset types work together on one global protocol',
-      details: 'Documents link to spreadsheets, spreadsheets trigger contracts, contracts pay royalties'
+      title: 'Universal Compatibility',
+      description: 'Works with any data type and Bitcoin protocol',
+      details: 'Compatible with 1Sat Ordinals, STAS tokens, sCrypt contracts, and all BSV protocols'
     }
   ];
 
@@ -98,9 +98,53 @@ const BapsPage: React.FC = () => {
     }
   ];
 
+  const bapImplementation = {
+    protocolID: '1BAPSuaPnfGnSBM3GLV9yhxUdYe4vGbdMT',
+    version: '0.1.5',
+    specification: 'https://github.com/icellan/bap',
+    author: 'Siggi - https://github.com/icellan',
+    format: {
+      identity: {
+        fields: ['BAP_ID', 'ID_KEY', 'ADDRESS', 'SIGNATURE'],
+        description: 'Create an identity attestation'
+      },
+      attestation: {
+        fields: ['BAP_ID', 'ATTEST', 'HASH', 'TYPE', 'ID', 'SEQUENCE'],
+        description: 'Attest to data with optional attributes'
+      },
+      revocation: {
+        fields: ['BAP_ID', 'REVOKE', 'TXID', 'VOUT'],
+        description: 'Revoke a previous attestation'
+      }
+    },
+    example: `// BAP Identity Creation
+OP_FALSE OP_RETURN
+"1BAPSuaPnfGnSBM3GLV9yhxUdYe4vGbdMT"
+"ID"
+<bitcoin_address>
+<signature>
+
+// BAP Data Attestation for Spreadsheet
+OP_FALSE OP_RETURN  
+"1BAPSuaPnfGnSBM3GLV9yhxUdYe4vGbdMT"
+"ATTEST"
+<sha256_hash_of_spreadsheet>
+"urn:x-spreadsheet:1"
+<spreadsheet_id>
+<sequence_number>
+<signing_address>
+<signature>
+
+// Additional attributes (optional)
+[attribute_count]
+[attribute_1_key]
+[attribute_1_value]
+...`
+  };
+
   const technicalSpecs = [
     {
-      category: 'File Format & Inscriptions',
+      category: 'BAP Protocol Structure',
       items: [
         { name: 'Container', value: '.nft (ZIP-like with ordinal inscription)' },
         { name: 'Manifest', value: 'JSON metadata (inscribed on-chain)' },
@@ -392,11 +436,16 @@ const manifest = {
                   </div>
                   <div className="menu-separator" />
                   <div className="menu-item" onClick={() => {
-                    const specsSection = document.querySelector('.content-section:nth-child(2)');
-                    specsSection?.scrollIntoView({ behavior: 'smooth' });
+                    window.open('https://github.com/icellan/bap', '_blank');
                     setIsMenuOpen(false);
                   }}>
                     <span>📋</span> BAP Documentation
+                  </div>
+                  <div className="menu-item" onClick={() => {
+                    window.open('https://www.bitcoinfiles.org/', '_blank');
+                    setIsMenuOpen(false);
+                  }}>
+                    <span>📁</span> Bitcoin Files Protocol
                   </div>
                   <div className="menu-separator" />
                   <div className="menu-item" onClick={() => {
@@ -469,14 +518,14 @@ const manifest = {
             <span className="bitcoin-text">BAP</span>
           </h1>
           <p className="hero-subtitle" style={{fontSize: '0.95rem', marginBottom: '8px', opacity: 0.9}}>
-            Bitcoin Asset Protocol
+            Bitcoin Attestation Protocol
           </p>
           <p className="hero-tagline" style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '16px', color: '#FFA500'}}>
-            One Protocol for Every Asset. One Ledger for the World.
+            Cryptographic Identity & Data Attestation on Bitcoin
           </p>
           <p className="hero-description">
-            Transform any digital object into a Bitcoin-native asset. From spreadsheets to contracts, 
-            BAP enables native ownership, transfer, and monetization on the global shared ledger.
+            Create verifiable identities and attest to data on the Bitcoin blockchain. 
+            BAP enables cryptographic proof of authorship, ownership chains, and data integrity.
           </p>
           <div className="hero-buttons">
             <button 
@@ -513,13 +562,13 @@ const manifest = {
             <h2 className="summary-title">Executive Summary</h2>
             <div className="summary-text">
               <p>
-                The <strong>Bitcoin Asset Protocol (BAP)</strong> defines a universal framework for representing any digital object as an on-chain asset. From spreadsheets to legal contracts, BAP enables native Bitcoin ownership, transfer, and monetization. Each asset becomes part of the global shared ledger, with full support for version control, encryption, tokenization, and programmable logic.
+                The <strong>Bitcoin Attestation Protocol (BAP)</strong> is a simple protocol to create an identity system and attestation scheme for the Bitcoin blockchain. It enables users to create verifiable identities and attest to the authenticity, ownership, and integrity of any data stored on-chain.
               </p>
               <p>
-                With BAP, developers can build <strong>BApps (Bitcoin Applications)</strong> — user-facing apps that wrap assets in familiar interfaces (like spreadsheets) while leveraging Bitcoin's UTXO model for immutable history, microtransactions, and scalable peer-to-peer exchange. Every digital object becomes tradeable, auditable, and monetizable at both micro and macro scale.
+                BAP provides a universal method for <strong>cryptographic attestation</strong> — signing data with your Bitcoin keys to prove authorship, establish ownership chains, and create audit trails. Using the protocol ID <code>1BAPSuaPnfGnSBM3GLV9yhxUdYe4vGbdMT</code>, all BAP attestations are discoverable and verifiable by any Bitcoin application.
               </p>
               <p>
-                BAP treats every digital object as an asset: spreadsheets become data assets, documents become knowledge assets, media files become creative assets, and contracts become executable business assets. All share the same lifecycle (creation → versioning → access control → monetization) while expressing unique behaviors through the universal protocol.
+                In Bitcoin Spreadsheet, we use BAP to <strong>version control</strong> spreadsheets on-chain. Each save creates a new attestation linking to the previous version, establishing an immutable audit trail. Combined with encryption and 1Sat Ordinals, this creates a complete data management system on Bitcoin.
               </p>
             </div>
           </div>
@@ -554,10 +603,10 @@ const manifest = {
       <section className="asset-classes-section" style={{background: '#1a1a1a', padding: '60px 0'}}>
         <div className="container">
           <div className="content-section">
-            <h2 className="section-title">Asset Classes in BAP</h2>
+            <h2 className="section-title">Using BAP with Bitcoin Assets</h2>
             <p className="section-description">
-              BAP treats every digital object as an asset. Each asset type shares the same lifecycle 
-              (creation → versioning → access control → monetization) but can express unique behaviors.
+              BAP provides the identity and attestation layer for Bitcoin assets. Combined with ordinals, 
+              tokens, and smart contracts, any digital object can become a verifiable, tradeable asset.
             </p>
             
             <div className="asset-classes-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '12px', marginTop: '20px'}}>
@@ -601,9 +650,9 @@ const manifest = {
         <div className="container">
           {/* BAP Overview */}
           <div className="content-section">
-            <h2 className="section-title">Core Features</h2>
+            <h2 className="section-title">Core Protocol Features</h2>
             <p className="section-description">
-              BAP provides a universal framework with powerful features that work across all asset types.
+              BAP provides essential cryptographic primitives for identity and attestation on Bitcoin.
             </p>
             
             <div className="features-grid">
@@ -707,11 +756,107 @@ const manifest = {
             </div>
           </div>
 
+          {/* Real BAP Protocol Implementation */}
+          <div className="content-section">
+            <h2 className="section-title">BAP Protocol Implementation</h2>
+            <p className="section-description">
+              The real Bitcoin Attestation Protocol as specified at{' '}
+              <a href="https://github.com/icellan/bap" target="_blank" rel="noopener noreferrer" style={{color: '#FFA500'}}>
+                github.com/icellan/bap
+              </a>
+            </p>
+            
+            <div style={{
+              background: 'rgba(30, 30, 30, 0.5)',
+              border: '1px solid rgba(255, 165, 0, 0.15)',
+              borderRadius: '6px',
+              padding: '16px',
+              marginBottom: '20px'
+            }}>
+              <h3 style={{fontSize: '1rem', color: '#FFA500', marginBottom: '12px'}}>Protocol Structure</h3>
+              
+              <div style={{marginBottom: '16px'}}>
+                <h4 style={{fontSize: '0.9rem', marginBottom: '8px', opacity: 0.9}}>Identity Creation (ID)</h4>
+                <pre style={{
+                  background: 'rgba(0, 0, 0, 0.3)',
+                  padding: '8px',
+                  borderRadius: '4px',
+                  fontSize: '0.75rem',
+                  overflow: 'auto'
+                }}>
+{`OP_FALSE OP_RETURN
+"1BAPSuaPnfGnSBM3GLV9yhxUdYe4vGbdMT"  // Protocol ID
+"ID"                                   // Action: Identity
+<bitcoin_address>                      // Identity address
+<signature>                            // Signature of address`}
+                </pre>
+              </div>
+
+              <div style={{marginBottom: '16px'}}>
+                <h4 style={{fontSize: '0.9rem', marginBottom: '8px', opacity: 0.9}}>Data Attestation (ATTEST)</h4>
+                <pre style={{
+                  background: 'rgba(0, 0, 0, 0.3)',
+                  padding: '8px',
+                  borderRadius: '4px',
+                  fontSize: '0.75rem',
+                  overflow: 'auto'
+                }}>
+{`OP_FALSE OP_RETURN
+"1BAPSuaPnfGnSBM3GLV9yhxUdYe4vGbdMT"  // Protocol ID
+"ATTEST"                               // Action: Attestation
+<sha256_hash>                          // Hash of data
+<urn>                                  // URN type identifier
+<id>                                   // Unique ID
+<sequence>                             // Version/sequence number
+<signing_address>                      // Signer's address
+<signature>                            // ECDSA signature
+[attributes...]                        // Optional attributes`}
+                </pre>
+              </div>
+
+              <div style={{marginBottom: '16px'}}>
+                <h4 style={{fontSize: '0.9rem', marginBottom: '8px', opacity: 0.9}}>Revocation (REVOKE)</h4>
+                <pre style={{
+                  background: 'rgba(0, 0, 0, 0.3)',
+                  padding: '8px',
+                  borderRadius: '4px',
+                  fontSize: '0.75rem',
+                  overflow: 'auto'
+                }}>
+{`OP_FALSE OP_RETURN
+"1BAPSuaPnfGnSBM3GLV9yhxUdYe4vGbdMT"  // Protocol ID
+"REVOKE"                               // Action: Revocation
+<txid>                                 // Transaction to revoke
+<vout>                                 // Output index`}
+                </pre>
+              </div>
+            </div>
+
+            <div style={{
+              background: 'rgba(30, 30, 30, 0.5)',
+              border: '1px solid rgba(255, 165, 0, 0.15)',
+              borderRadius: '6px',
+              padding: '16px'
+            }}>
+              <h3 style={{fontSize: '1rem', color: '#FFA500', marginBottom: '12px'}}>Spreadsheet Implementation</h3>
+              <p style={{fontSize: '0.85rem', marginBottom: '12px', opacity: 0.9}}>
+                In Bitcoin Spreadsheet, we use BAP to create versioned, attestable spreadsheet data:
+              </p>
+              <ul style={{fontSize: '0.85rem', opacity: 0.9, marginLeft: '20px'}}>
+                <li>Each spreadsheet save creates a BAP attestation</li>
+                <li>The attestation includes the spreadsheet hash and version number</li>
+                <li>Previous versions are linked via the sequence field</li>
+                <li>Signatures prove authorship and prevent tampering</li>
+                <li>Combined with 1Sat Ordinals for permanent storage</li>
+              </ul>
+            </div>
+          </div>
+
           {/* Technical Specifications */}
           <div className="content-section">
             <h2 className="section-title">Technical Architecture</h2>
             <p className="section-description">
-              Complete technical implementation details for BAP
+              Complete technical implementation details for spreadsheet storage
             </p>
             
             {/* Compact Specification Table */}

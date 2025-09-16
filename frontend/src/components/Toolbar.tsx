@@ -12,9 +12,11 @@ interface ToolbarProps {
   onToggleSidebar?: () => void;
   onSave: () => void;
   calculateSaveCost: () => { cells: number; satoshis: number; usd: string };
+  useCellAddresses?: boolean;
+  onToggleCellAddresses?: (enabled: boolean) => void;
 }
 
-const Toolbar: React.FC<ToolbarProps> = ({ spreadsheet, selectedCell, onTitleChange, isDirty, isAuthenticated, isSidebarOpen, onToggleSidebar, onSave, calculateSaveCost }) => {
+const Toolbar: React.FC<ToolbarProps> = ({ spreadsheet, selectedCell, onTitleChange, isDirty, isAuthenticated, isSidebarOpen, onToggleSidebar, onSave, calculateSaveCost, useCellAddresses, onToggleCellAddresses }) => {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [titleValue, setTitleValue] = useState(spreadsheet.title);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -160,6 +162,31 @@ const Toolbar: React.FC<ToolbarProps> = ({ spreadsheet, selectedCell, onTitleCha
 
       <div className="toolbar-section">
         <div className="combined-save-section">
+          {/* Per-cell addresses toggle */}
+          {onToggleCellAddresses && (
+            <div className="cell-address-toggle" style={{
+              display: 'flex',
+              alignItems: 'center',
+              marginRight: '12px',
+              padding: '4px 8px',
+              background: 'rgba(255, 165, 0, 0.1)',
+              borderRadius: '4px',
+              fontSize: '12px'
+            }}>
+              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                <input
+                  type="checkbox"
+                  checked={useCellAddresses || false}
+                  onChange={(e) => onToggleCellAddresses(e.target.checked)}
+                  style={{ marginRight: '6px' }}
+                />
+                <span title="Generate unique Bitcoin address for each cell">
+                  🔑 Per-Cell Addresses
+                </span>
+              </label>
+            </div>
+          )}
+          
           <div className="cost-info">
             <div className="cost-header">
               <span className="cost-label">Cost:</span>

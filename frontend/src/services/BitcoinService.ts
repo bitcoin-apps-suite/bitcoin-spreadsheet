@@ -1,5 +1,5 @@
-import { bsv } from 'scrypt-ts';
 import CryptoJS from 'crypto-js';
+import { BSVService, CellAddress } from './BSVService';
 
 export interface CellData {
   row: number;
@@ -8,6 +8,7 @@ export interface CellData {
   dataType: 'number' | 'string' | 'formula';
   lastUpdated: number;
   encrypted?: boolean;
+  address?: string; // Bitcoin address for this cell (if per-cell addresses enabled)
 }
 
 export interface SpreadsheetData {
@@ -34,10 +35,15 @@ export class BitcoinService {
   private handcash: HandCashConnect | null = null;
   private encryptionKey: string | null = null;
   private isConnected: boolean = false;
+  private bsvService: BSVService;
+  private useCellAddresses: boolean = false;
 
-  constructor() {
+  constructor(useCellAddresses: boolean = false) {
     this.handcash = null;
     this.encryptionKey = null;
+    this.useCellAddresses = useCellAddresses;
+    // Initialize BSV service with optional per-cell addresses
+    this.bsvService = new BSVService(undefined, useCellAddresses);
   }
 
   // Connect to HandCash wallet
@@ -173,11 +179,27 @@ export class BitcoinService {
       encrypted: true
     };
 
-    // In production, this would write encrypted data to Bitcoin
-    console.log('Updating encrypted cell on Bitcoin:', { spreadsheetId, cellKey, cellData });
+    console.log('Preparing to save encrypted cell to Bitcoin:', { spreadsheetId, cellKey });
 
-    // Simulate blockchain transaction
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // For now, we'll store locally until we have UTXO management
+    // In production, this would:
+    // 1. Get UTXOs from HandCash or a UTXO provider
+    // 2. Build transaction with BSVService
+    // 3. Broadcast to network
+    
+    // TODO: Implement UTXO fetching and transaction broadcasting
+    const mockTransaction = {
+      spreadsheetId,
+      cellKey,
+      cellData,
+      txid: 'pending_implementation'
+    };
+    
+    console.log('Transaction prepared (awaiting UTXO implementation):', mockTransaction);
+    
+    // Store in localStorage for now
+    const storageKey = `cell_${spreadsheetId}_${cellKey}`;
+    localStorage.setItem(storageKey, JSON.stringify(cellData));
   }
 
   async getCell(spreadsheetId: string, row: number, col: number): Promise<CellData | null> {
@@ -235,5 +257,144 @@ export class BitcoinService {
 
   getUserHandle(): string {
     return this.handcash?.profile?.handle || 'Anonymous';
+  }
+
+  /**
+   * Save entire spreadsheet to blockchain with BAP attestation
+   * Costs 1 penny (capped)
+   */
+  async saveSpreadsheetToBlockchain(spreadsheet: SpreadsheetData): Promise<string> {
+    try {
+      console.log('Saving spreadsheet to blockchain with BAP...', spreadsheet);
+      
+      // Create NFT format of spreadsheet
+      const nftData = this.bsvService.createSpreadsheetNFT({
+        ...spreadsheet,
+        created: Date.now(),
+        modified: Date.now(),
+        owner: this.getUserHandle()
+      });
+
+      // Calculate cost (capped at 1 penny)
+      const dataSize = nftData.length;
+      const costUSD = this.bsvService.calculateCost(dataSize);
+      
+      console.log(`Transaction cost: $${costUSD.toFixed(4)} (capped at $0.01)`);
+
+      // For production, we need:
+      // 1. HandCash payment API to get UTXOs
+      // 2. Build transaction with BSVService
+      // 3. Broadcast to BSV network
+      
+      // Mock transaction for now
+      const mockTxId = `mock_tx_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      
+      // Store locally with "blockchain" marker
+      const blockchainRecord = {
+        txid: mockTxId,
+        spreadsheet: spreadsheet,
+        timestamp: Date.now(),
+        cost: costUSD,
+        bapAttestation: this.bsvService.createBAPAttestation(
+          spreadsheet.id,
+          1, // version
+          undefined // no previous version
+        )
+      };
+      
+      localStorage.setItem(`blockchain_${spreadsheet.id}`, JSON.stringify(blockchainRecord));
+      
+      console.log('Spreadsheet saved (mock):', blockchainRecord);
+      
+      return mockTxId;
+    } catch (error) {
+      console.error('Failed to save spreadsheet to blockchain:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Get BSV address for receiving payments
+   */
+  getBSVAddress(): string {
+    return this.bsvService.getAddress();
+  }
+
+  /**
+   * Get public key for verification
+   */
+  getPublicKey(): string {
+    return this.bsvService.getPublicKey();
+  }
+
+  /**
+   * Toggle per-cell address generation
+   */
+  setUseCellAddresses(enabled: boolean): void {
+    this.useCellAddresses = enabled;
+    this.bsvService.setUseCellAddresses(enabled);
+  }
+
+  /**
+   * Check if using per-cell addresses
+   */
+  isUsingCellAddresses(): boolean {
+    return this.useCellAddresses;
+  }
+
+  /**
+   * Get Bitcoin address for a specific cell
+   */
+  getCellAddress(row: number, col: number): CellAddress {
+    return this.bsvService.getCellAddress(row, col);
+  }
+
+  /**
+   * Get all generated cell addresses
+   */
+  getAllCellAddresses(): CellAddress[] {
+    return this.bsvService.getAllCellAddresses();
+  }
+
+  /**
+   * Save cell data with its own address (if enabled)
+   */
+  async saveCellToBlockchain(
+    spreadsheetId: string,
+    row: number,
+    col: number,
+    value: string,
+    dataType: 'number' | 'string' | 'formula'
+  ): Promise<string> {
+    try {
+      if (this.useCellAddresses) {
+        // Get or generate address for this cell
+        const cellAddress = this.getCellAddress(row, col);
+        console.log(`Cell [${row},${col}] address:`, cellAddress.address);
+        
+        // In production, build and broadcast transaction
+        // For now, store locally with address info
+        const cellData: CellData = {
+          row,
+          col,
+          value,
+          dataType,
+          lastUpdated: Date.now(),
+          address: cellAddress.address
+        };
+        
+        const storageKey = `cell_${spreadsheetId}_${row}-${col}`;
+        localStorage.setItem(storageKey, JSON.stringify(cellData));
+        
+        return cellAddress.address;
+      } else {
+        // Use regular cell saving
+        await this.updateCell(spreadsheetId, row, col, value, dataType);
+        return this.getBSVAddress();
+      }
+    } catch (error) {
+      console.error('Failed to save cell to blockchain:', error);
+      throw error;
+    }
   }
 }

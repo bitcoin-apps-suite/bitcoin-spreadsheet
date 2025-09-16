@@ -1,0 +1,314 @@
+/* Handsontable Dark Theme */
+
+/* Main table and cells */
+.dark-mode .handsontable .ht_master .wtHolder {
+  background-color: #1a1a1a !important;
+}
+
+.dark-mode .handsontable .ht_master table {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .handsontable td {
+  background-color: #0a0a0a !important;
+  color: #e0e0e0 !important;
+  border-color: #333 !important;
+}
+
+.dark-mode .handsontable th {
+  background-color: #2a2a2a !important;
+  color: #b0b0b0 !important;
+  border-color: #444 !important;
+  font-weight: 500;
+}
+
+/* Column headers */
+.dark-mode .handsontable .ht_clone_top th,
+.dark-mode .handsontable .ht_master thead th {
+  background-color: #2a2a2a !important;
+  color: #b0b0b0 !important;
+  border-color: #444 !important;
+}
+
+/* Row headers */
+.dark-mode .handsontable .ht_clone_left th,
+.dark-mode .handsontable .ht_master tbody th {
+  background-color: #2a2a2a !important;
+  color: #b0b0b0 !important;
+  border-color: #444 !important;
+}
+
+/* Selected cells */
+.dark-mode .handsontable td.current,
+.dark-mode .handsontable td.area {
+  background-color: rgba(255, 165, 0, 0.15) !important;
+}
+
+.dark-mode .handsontable .current {
+  background-color: rgba(255, 165, 0, 0.2) !important;
+}
+
+.dark-mode .handsontable .area {
+  background-color: rgba(255, 165, 0, 0.1) !important;
+}
+
+/* Active cell border */
+.dark-mode .handsontable .wtBorder {
+  background-color: #1976d2 !important;
+}
+
+/* Cell editor */
+.dark-mode .handsontableInput {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
+  border: 2px solid #1976d2 !important;
+}
+
+.dark-mode .handsontableInputHolder {
+  background-color: #1a1a1a !important;
+}
+
+/* Context menu */
+.dark-mode .htContextMenu {
+  background-color: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark-mode .htContextMenu table.htCore {
+  background-color: #2a2a2a !important;
+}
+
+.dark-mode .htContextMenu td {
+  background-color: #2a2a2a !important;
+  color: #e0e0e0 !important;
+  border-color: transparent !important;
+}
+
+.dark-mode .htContextMenu td:not(.htSeparator):hover {
+  background-color: #3a3a3a !important;
+}
+
+.dark-mode .htContextMenu .htSeparator {
+  background-color: #2a2a2a !important;
+  border-top: 1px solid #444 !important;
+}
+
+.dark-mode .htContextMenu .htDisabled {
+  color: #666 !important;
+}
+
+/* Dropdown menu */
+.dark-mode .htDropdownMenu {
+  background-color: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark-mode .htDropdownMenu .ht_master td {
+  background-color: #2a2a2a !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .htDropdownMenu .ht_master td:hover {
+  background-color: #3a3a3a !important;
+}
+
+/* Filters */
+.dark-mode .htFiltersMenu {
+  background-color: #2a2a2a !important;
+  border: 1px solid #444 !important;
+}
+
+.dark-mode .htFiltersMenu .htUIInput input {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #444 !important;
+}
+
+.dark-mode .htFiltersMenu .htUIButton {
+  background-color: #3a3a3a !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #444 !important;
+}
+
+.dark-mode .htFiltersMenu .htUIButton:hover {
+  background-color: #4a4a4a !important;
+}
+
+/* Comments */
+.dark-mode .htCommentCell:after {
+  border-color: #1976d2 transparent transparent transparent !important;
+}
+
+.dark-mode .htComments {
+  background-color: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .htCommentTextArea {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #444 !important;
+}
+
+/* Autocomplete dropdown */
+.dark-mode .htAutocompleteArrow {
+  color: #1976d2 !important;
+}
+
+.dark-mode .handsontable.listbox {
+  background-color: #2a2a2a !important;
+  border: 1px solid #444 !important;
+}
+
+.dark-mode .handsontable.listbox td {
+  background-color: #2a2a2a !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .handsontable.listbox td.current {
+  background-color: #3a3a3a !important;
+}
+
+/* Column resize handle */
+.dark-mode .manualColumnResizer {
+  background-color: #1976d2 !important;
+}
+
+.dark-mode .manualRowResizer {
+  background-color: #1976d2 !important;
+}
+
+/* Fill handle */
+.dark-mode .ht_fill_handle {
+  background-color: #1976d2 !important;
+}
+
+/* Scrollbars */
+.dark-mode .handsontable .wtHolder::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.dark-mode .handsontable .wtHolder::-webkit-scrollbar-track {
+  background: #2a2a2a;
+}
+
+.dark-mode .handsontable .wtHolder::-webkit-scrollbar-thumb {
+  background-color: #4a4a4a;
+  border-radius: 5px;
+}
+
+.dark-mode .handsontable .wtHolder::-webkit-scrollbar-thumb:hover {
+  background-color: #5a5a5a;
+}
+
+/* Hover effects */
+.dark-mode .handsontable tbody tr:hover td {
+  background-color: rgba(255, 165, 0, 0.05) !important;
+}
+
+/* Formula bar (if visible) */
+.dark-mode .handsontable .ht_clone_top_left_corner th {
+  background-color: #2a2a2a !important;
+  border-color: #444 !important;
+}
+
+/* Invalid cells */
+.dark-mode .handsontable .htInvalid {
+  background-color: rgba(255, 0, 0, 0.1) !important;
+}
+
+/* Read-only cells */
+.dark-mode .handsontable .htDimmed {
+  color: #888 !important;
+}
+
+/* Search results */
+.dark-mode .handsontable .htSearchResult {
+  background-color: rgba(255, 255, 0, 0.2) !important;
+  color: #fff !important;
+}
+
+/* Custom borders */
+.dark-mode .htBorder-top {
+  border-top: 1px solid #1976d2 !important;
+}
+
+.dark-mode .htBorder-right {
+  border-right: 1px solid #1976d2 !important;
+}
+
+.dark-mode .htBorder-bottom {
+  border-bottom: 1px solid #1976d2 !important;
+}
+
+.dark-mode .htBorder-left {
+  border-left: 1px solid #1976d2 !important;
+}
+
+/* Merge cells */
+.dark-mode .handsontable td.htMergedCell {
+  background-color: #0a0a0a !important;
+}
+
+/* Column sorting indicators */
+.dark-mode .handsontable .columnSorting:before {
+  color: #1976d2 !important;
+}
+
+.dark-mode .handsontable .columnSorting.ascending:before {
+  border-bottom-color: #1976d2 !important;
+}
+
+.dark-mode .handsontable .columnSorting.descending:before {
+  border-top-color: #1976d2 !important;
+}
+
+/* Highlight on column/row selection */
+.dark-mode .handsontable .ht__highlight {
+  background-color: rgba(255, 165, 0, 0.1) !important;
+}
+
+/* Fix for nested tables in context menus */
+.dark-mode .htContextMenu .handsontable td {
+  background-color: transparent !important;
+}
+
+/* Modal dialogs */
+.dark-mode .htModalContainer {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.dark-mode .htModalDialog {
+  background-color: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .htModalDialog input,
+.dark-mode .htModalDialog select,
+.dark-mode .htModalDialog textarea {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #444 !important;
+}
+
+.dark-mode .htModalDialog button {
+  background-color: #3a3a3a !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #444 !important;
+}
+
+.dark-mode .htModalDialog button:hover {
+  background-color: #4a4a4a !important;
+}
+
+.dark-mode .htModalDialog .htButton {
+  background-color: #1976d2 !important;
+  color: #000 !important;
+  border: none !important;
+}

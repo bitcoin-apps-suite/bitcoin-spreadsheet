@@ -304,6 +304,35 @@ main {
   color: #007acc;
 }
 
+/* Heavy bevel effect for Bitcoin icons */
+.bitcoin-icon-beveled {
+  border-radius: 12px;
+  box-shadow: 
+    /* Outer shadow for depth */
+    0 8px 16px rgba(0, 0, 0, 0.4),
+    /* Top-left highlight */
+    inset 2px 2px 4px rgba(255, 255, 255, 0.3),
+    /* Bottom-right shadow */
+    inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+    /* Additional outer glow */
+    0 0 20px rgba(25, 118, 210, 0.2);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.bitcoin-icon-beveled:hover {
+  box-shadow: 
+    /* Enhanced outer shadow */
+    0 12px 24px rgba(0, 0, 0, 0.5),
+    /* Stronger highlights */
+    inset 3px 3px 6px rgba(255, 255, 255, 0.4),
+    inset -3px -3px 6px rgba(0, 0, 0, 0.4),
+    /* Stronger glow */
+    0 0 30px rgba(25, 118, 210, 0.4);
+  transform: translateY(-1px);
+}
+
 /* Bitcoin Taskbar Styles */
 .bitcoin-taskbar {
   position: fixed;

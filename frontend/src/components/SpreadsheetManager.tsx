@@ -74,13 +74,19 @@ const SpreadsheetManager: React.FC<SpreadsheetManagerProps> = ({
     if (window.confirm('Are you sure you want to delete this spreadsheet? This action cannot be undone.')) {
       setSpreadsheets(prev => prev.filter(s => s.id !== id));
       
-      // If we deleted the current spreadsheet, create a new one
+      // If we deleted the current spreadsheet, select another non-blank one
       if (currentSpreadsheet?.id === id) {
         const remaining = spreadsheets.filter(s => s.id !== id);
-        if (remaining.length > 0) {
+        // Find the first non-blank spreadsheet
+        const nonBlankRemaining = remaining.filter(s => getCellCount(s) > 0);
+        
+        if (nonBlankRemaining.length > 0) {
+          onSelectSpreadsheet(nonBlankRemaining[0]);
+        } else if (remaining.length > 0) {
+          // If there are spreadsheets but all are blank, select the first one
           onSelectSpreadsheet(remaining[0]);
         } else {
-          // Create a new default spreadsheet
+          // Create a new default spreadsheet if no spreadsheets remain
           bitcoinService.createSpreadsheet('Untitled Spreadsheet').then(newSheet => {
             setSpreadsheets([newSheet]);
             onSelectSpreadsheet(newSheet);
@@ -132,6 +138,75 @@ const SpreadsheetManager: React.FC<SpreadsheetManagerProps> = ({
     return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
   };
 
+  const renderSpreadsheetList = () => {
+    // Filter out blank spreadsheets
+    const nonBlankSpreadsheets = spreadsheets.filter(sheet => {
+      const cellCount = getCellCount(sheet);
+      return cellCount > 0;
+    });
+
+    if (spreadsheets.length === 0 || nonBlankSpreadsheets.length === 0) {
+      return (
+        <div className="empty-state">
+          <p>{spreadsheets.length === 0 ? 'No spreadsheets yet' : 'No spreadsheets with content'}</p>
+          <button 
+            className="create-first-button"
+            onClick={() => setShowNewDialog(true)}
+          >
+            Create your first spreadsheet
+          </button>
+        </div>
+      );
+    }
+
+    return nonBlankSpreadsheets.map(sheet => (
+      <div 
+        key={sheet.id}
+        className={`spreadsheet-item ${currentSpreadsheet?.id === sheet.id ? 'active' : ''}`}
+      >
+        <div 
+          className="sheet-info"
+          onClick={() => onSelectSpreadsheet(sheet)}
+        >
+          <div className="sheet-title">{sheet.title}</div>
+          <div className="sheet-meta">
+            <span className="cell-count">{getCellCount(sheet)} cells</span>
+            <span className="separator">•</span>
+            <span className="last-modified">{getLastModified(sheet)}</span>
+            {sheet.owner && (
+              <>
+                <span className="separator">•</span>
+                <span className="owner">@{sheet.owner}</span>
+              </>
+            )}
+          </div>
+        </div>
+        <div className="sheet-actions">
+          <button 
+            className="action-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              renameSpreadsheet(sheet.id);
+            }}
+            title="Rename"
+          >
+            ✏️
+          </button>
+          <button 
+            className="action-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              deleteSpreadsheet(sheet.id);
+            }}
+            title="Delete"
+          >
+            🗑️
+          </button>
+        </div>
+      </div>
+    ));
+  };
+
   return (
     <div className="spreadsheet-manager">
       <div className="manager-header">
@@ -145,64 +220,7 @@ const SpreadsheetManager: React.FC<SpreadsheetManagerProps> = ({
       </div>
 
       <div className="spreadsheet-list">
-        {spreadsheets.length === 0 ? (
-          <div className="empty-state">
-            <p>No spreadsheets yet</p>
-            <button 
-              className="create-first-button"
-              onClick={() => setShowNewDialog(true)}
-            >
-              Create your first spreadsheet
-            </button>
-          </div>
-        ) : (
-          spreadsheets.map(sheet => (
-            <div 
-              key={sheet.id}
-              className={`spreadsheet-item ${currentSpreadsheet?.id === sheet.id ? 'active' : ''}`}
-            >
-              <div 
-                className="sheet-info"
-                onClick={() => onSelectSpreadsheet(sheet)}
-              >
-                <div className="sheet-title">{sheet.title}</div>
-                <div className="sheet-meta">
-                  <span className="cell-count">{getCellCount(sheet)} cells</span>
-                  <span className="separator">•</span>
-                  <span className="last-modified">{getLastModified(sheet)}</span>
-                  {sheet.owner && (
-                    <>
-                      <span className="separator">•</span>
-                      <span className="owner">@{sheet.owner}</span>
-                    </>
-                  )}
-                </div>
-              </div>
-              <div className="sheet-actions">
-                <button 
-                  className="action-button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    renameSpreadsheet(sheet.id);
-                  }}
-                  title="Rename"
-                >
-                  ✏️
-                </button>
-                <button 
-                  className="action-button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    deleteSpreadsheet(sheet.id);
-                  }}
-                  title="Delete"
-                >
-                  🗑️
-                </button>
-              </div>
-            </div>
-          ))
-        )}
+        {renderSpreadsheetList()}
       </div>
 
       {showNewDialog && (

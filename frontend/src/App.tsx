@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
+import './styles/handsontable-dark.css';
+import './styles/app-dark.css';
 import Spreadsheet from './components/Spreadsheet';
 import SpreadsheetManager from './components/SpreadsheetManager';
 import NavbarLogin from './components/NavbarLogin';
 import HandCashCallback from './components/HandCashCallback';
 import BitcoinSpreadsheetPage from './pages/BitcoinSpreadsheetPage';
 import BapsPage from './pages/BapsPage';
+import ExchangePage from './pages/ExchangePage';
 import ClaudeChat from './components/ClaudeChat';
+import SpreadsheetTaskbar from './components/SpreadsheetTaskbar';
 import { BitcoinService, SpreadsheetData } from './services/BitcoinService';
 import { HandCashService, HandCashUser } from './services/HandCashService';
 
@@ -19,9 +23,31 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentSpreadsheet, setCurrentSpreadsheet] = useState<SpreadsheetData | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
-  const [isMenuOpen, setIsMenuOpen] = useState<string | false>(false);
   const [isClaudeChatOpen, setIsClaudeChatOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Check localStorage for saved preference
+    const savedMode = localStorage.getItem('darkMode');
+    return savedMode === 'true' || (!savedMode && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  });
   const navigate = useNavigate();
+
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    setIsDarkMode(prev => {
+      const newMode = !prev;
+      localStorage.setItem('darkMode', newMode.toString());
+      return newMode;
+    });
+  };
+
+  // Apply dark mode class to body
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }, [isDarkMode]);
 
   useEffect(() => {
     // Check if we're coming back from HandCash with an authToken
@@ -109,6 +135,7 @@ function App() {
       <Route path="/bitcoin-spreadsheet" element={<BitcoinSpreadsheetPage />} />
       <Route path="/bap" element={<BapsPage />} />
       <Route path="/developers" element={<BapsPage />} /> {/* Keep for backwards compatibility */}
+      <Route path="/exchange" element={<ExchangePage />} />
       <Route path="/auth/handcash/callback" element={<HandCashCallback />} />
       <Route path="/*" element={
         isLoading ? (
@@ -116,190 +143,45 @@ function App() {
             <div className="loading">Loading Bitcoin Spreadsheet...</div>
           </div>
         ) : (
-          <div className="App">
-            {/* Bitcoin Taskbar */}
-            <div className="bitcoin-taskbar">
-              <div className="taskbar-left">
-                {/* Bitcoin Logo Menu */}
-                <div className="bitcoin-menu-container">
-                  <button 
-                    className="bitcoin-logo-button"
-                    onClick={() => setIsMenuOpen('bitcoin')}
-                    aria-label="Bitcoin Menu"
-                  >
-                    <div className="bitcoin-logo">₿</div>
-                  </button>
-                  {isMenuOpen === 'bitcoin' && (
-                    <>
-                      <div className="menu-overlay" onClick={() => setIsMenuOpen(false)} />
-                      <div className="bitcoin-menu">
-                        <div className="menu-header">
-                          <div className="bitcoin-logo-small">₿</div>
-                          <span>Bitcoin</span>
-                        </div>
-                        <div className="menu-separator" />
-                        <div className="menu-item" onClick={() => {
-                          window.open('https://x.com/BitcoinSheets', '_blank');
-                          setIsMenuOpen(false);
-                        }}>
-                          <span>🐦</span> Follow on X
-                        </div>
-                        <div className="menu-item" onClick={() => {
-                          alert('Bitcoin Spreadsheet v1.0\nSecure blockchain-powered spreadsheets\n\nPowered by Bitcoin SV\n\n© @b0ase September 2025');
-                          setIsMenuOpen(false);
-                        }}>
-                          <span>ℹ️</span> About Bitcoin Spreadsheet
-                        </div>
-                        <div className="menu-separator" />
-                        <div className="menu-item" onClick={() => {
-                          window.location.reload();
-                          setIsMenuOpen(false);
-                        }}>
-                          <span>🔄</span> Restart
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-                
-                {/* Bitcoin Spreadsheet Menu */}
-                <div className="spreadsheet-menu-container">
-                  <button 
-                    className="spreadsheet-menu-button"
-                    onClick={() => setIsMenuOpen('spreadsheet')}
-                    aria-label="Bitcoin Spreadsheet Menu"
-                  >
-                    <span>Bitcoin Spreadsheet</span>
-                  </button>
-                  {isMenuOpen === 'spreadsheet' && (
-                    <>
-                      <div className="menu-overlay" onClick={() => setIsMenuOpen(false)} />
-                      <div className="spreadsheet-menu">
-                        <div className="menu-header">
-                          <span>Bitcoin Spreadsheet</span>
-                        </div>
-                        <div className="menu-separator" />
-                        <div className="menu-item" onClick={() => {
-                          if (bitcoinService) {
-                            bitcoinService.createSpreadsheet('New Spreadsheet').then(sheet => {
-                              setCurrentSpreadsheet(sheet);
-                            });
-                          }
-                          setIsMenuOpen(false);
-                        }}>
-                          <span>📄</span> New Spreadsheet
-                        </div>
-                        <div className="menu-item" onClick={() => {
-                          setIsSidebarOpen(!isSidebarOpen);
-                          setIsMenuOpen(false);
-                        }}>
-                          <span>📁</span> {isSidebarOpen ? 'Hide' : 'Show'} My Spreadsheets
-                        </div>
-                        <div className="menu-separator" />
-                        <div className="menu-item" onClick={() => {
-                          if (currentSpreadsheet) {
-                            window.dispatchEvent(new CustomEvent('openTokenizationModal', { 
-                              detail: { spreadsheet: currentSpreadsheet } 
-                            }));
-                          } else {
-                            alert('Please open a spreadsheet first to tokenize it.');
-                          }
-                          setIsMenuOpen(false);
-                        }}>
-                          <span>🪙</span> Tokenize Spreadsheet
-                        </div>
-                        <div className="menu-separator" />
-                        <a 
-                          href="/bap_executive_summary.pdf"
-                          download="BAP_Executive_Summary.pdf"
-                          className="menu-item"
-                          style={{ textDecoration: 'none', color: 'inherit' }}
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          <span>📄</span> BAP Executive Summary
-                        </a>
-                        <div className="menu-item" onClick={() => {
-                          const spreadsheetCount = Object.keys(localStorage.getItem('spreadsheets') ? JSON.parse(localStorage.getItem('spreadsheets') || '[]') : []).length;
-                          alert(`You have ${spreadsheetCount} spreadsheet${spreadsheetCount !== 1 ? 's' : ''} saved locally.`);
-                          setIsMenuOpen(false);
-                        }}>
-                          <span>📊</span> Statistics
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-                
-                {/* Developer Menu */}
-                <div className="developer-menu-container">
-                  <button 
-                    className="developer-menu-button"
-                    onClick={() => setIsMenuOpen('developer')}
-                    aria-label="Developer Menu"
-                  >
-                    <span>Developer</span>
-                  </button>
-                  {isMenuOpen === 'developer' && (
-                    <>
-                      <div className="menu-overlay" onClick={() => setIsMenuOpen(false)} />
-                      <div className="developer-menu">
-                        <div className="menu-header">
-                          <span>Developer Resources</span>
-                        </div>
-                        <div className="menu-separator" />
-                        <div className="menu-item" onClick={() => {
-                          navigate('/developers');
-                          setIsMenuOpen(false);
-                        }}>
-                          <span>📋</span> BAP Documentation
-                        </div>
-                        <div className="menu-separator" />
-                        <div className="menu-item" onClick={() => {
-                          window.open('https://github.com/b0ase/bitcoin-spreadsheet', '_blank');
-                          setIsMenuOpen(false);
-                        }}>
-                          <span>🔗</span> GitHub Repository
-                        </div>
-                        <div className="menu-item" onClick={() => {
-                          window.open('https://docs.handcash.io', '_blank');
-                          setIsMenuOpen(false);
-                        }}>
-                          <span>💳</span> HandCash API Docs
-                        </div>
-                        <div className="menu-separator" />
-                        <div className="menu-item" onClick={() => {
-                          console.log('Debug info:', {
-                            user: currentUser,
-                            isAuthenticated,
-                            spreadsheets: currentSpreadsheet
-                          });
-                          alert('Debug info logged to console');
-                          setIsMenuOpen(false);
-                        }}>
-                          <span>🐛</span> Debug Console
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-              <div className="taskbar-right">
-                <a 
-                  href="https://x.com/BitcoinSheets" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="taskbar-twitter-link"
-                  aria-label="Follow on X"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                  </svg>
-                </a>
-              </div>
-            </div>
+          <div className="App" style={{ paddingTop: '28px' }}>
+            {/* Bitcoin Spreadsheet Taskbar */}
+            <SpreadsheetTaskbar
+              isAuthenticated={isAuthenticated}
+              currentUser={currentUser}
+              onLogout={handleLogout}
+              onNewSpreadsheet={() => {
+                if (bitcoinService) {
+                  bitcoinService.createSpreadsheet('New Spreadsheet').then(sheet => {
+                    setCurrentSpreadsheet(sheet);
+                  });
+                }
+              }}
+              onSaveSpreadsheet={() => {
+                // Trigger save functionality
+                console.log('Save spreadsheet');
+              }}
+              onImport={() => {
+                // Trigger import functionality
+                console.log('Import spreadsheet');
+              }}
+              onExport={() => {
+                // Trigger export functionality
+                console.log('Export spreadsheet');
+              }}
+              toggleDarkMode={toggleDarkMode}
+              isDarkMode={isDarkMode}
+            />
             <header className="App-header">
               <div className="connection-indicator" />
-              <h1><span className="bitcoin-orange">Bitcoin</span> Spreadsheet</h1>
+              <h1>
+                <img 
+                  src="/bitcoin-watercolor-icon.png" 
+                  alt="Bitcoin" 
+                  className="bitcoin-icon-beveled"
+                  style={{ width: '40px', height: '40px', marginRight: '16px', verticalAlign: 'middle' }}
+                />
+                <span className="bitcoin-orange">Bitcoin</span> Spreadsheet
+              </h1>
               <p className="app-subtitle">Secure, encrypted spreadsheets on the blockchain</p>
               
               {/* Desktop user info (top right) */}

@@ -5,7 +5,7 @@ import './styles/app-dark.css';
 import Spreadsheet from './components/Spreadsheet';
 import SpreadsheetManager from './components/SpreadsheetManager';
 import NavbarLogin from './components/NavbarLogin';
-import ConnectionsModal from './components/ConnectionsModal';
+import EnhancedConnectionsModal from './components/EnhancedConnectionsModal';
 import HandCashCallback from './components/HandCashCallback';
 import BitcoinSpreadsheetPage from './pages/BitcoinSpreadsheetPage';
 import BapsPage from './pages/BapsPage';
@@ -209,6 +209,41 @@ function App() {
                       <span className="user-handle">@{currentUser.handle}</span>
                       <div className="connection-dot"></div>
                     </div>
+                    <button 
+                      className="connections-button"
+                      onClick={() => setShowConnectionsModal(true)}
+                      style={{
+                        padding: '10px 24px',
+                        backgroundColor: '#4285F4',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '12px',
+                        fontSize: '14px',
+                        fontWeight: '500',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        transition: 'all 0.2s ease',
+                        marginRight: '8px',
+                        minWidth: '160px',
+                        justifyContent: 'center',
+                        boxShadow: '0 2px 8px rgba(66, 133, 244, 0.2)'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = '#3367D6';
+                        e.currentTarget.style.transform = 'translateY(-1px)';
+                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(66, 133, 244, 0.3)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = '#4285F4';
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(66, 133, 244, 0.2)';
+                      }}
+                    >
+                      <span style={{ fontSize: '16px' }}>⚙️</span>
+                      Manage Connections
+                    </button>
                     <button className="logout-btn" onClick={handleLogout}>
                       Sign Out
                     </button>
@@ -216,33 +251,38 @@ function App() {
                 ) : (
                   <>
                     <button 
-                      className="sign-in-button"
+                      className="connect-button"
                       onClick={() => setShowConnectionsModal(true)}
                       style={{
-                        padding: '8px 16px',
-                        backgroundColor: '#38CB7C',
+                        padding: '10px 24px',
+                        backgroundColor: '#4285F4',
                         color: 'white',
                         border: 'none',
-                        borderRadius: '8px',
+                        borderRadius: '12px',
                         fontSize: '14px',
-                        fontWeight: '600',
+                        fontWeight: '500',
                         cursor: 'pointer',
                         display: 'flex',
                         alignItems: 'center',
                         gap: '8px',
-                        transition: 'all 0.2s ease'
+                        transition: 'all 0.2s ease',
+                        minWidth: '140px',
+                        justifyContent: 'center',
+                        boxShadow: '0 2px 8px rgba(66, 133, 244, 0.2)'
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = '#2BA968';
-                        e.currentTarget.style.transform = 'scale(1.05)';
+                        e.currentTarget.style.backgroundColor = '#3367D6';
+                        e.currentTarget.style.transform = 'translateY(-1px)';
+                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(66, 133, 244, 0.3)';
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = '#38CB7C';
-                        e.currentTarget.style.transform = 'scale(1)';
+                        e.currentTarget.style.backgroundColor = '#4285F4';
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(66, 133, 244, 0.2)';
                       }}
                     >
-                      <span style={{ fontSize: '16px' }}>💰</span>
-                      Sign In
+                      <span style={{ fontSize: '16px' }}>🔗</span>
+                      Connect
                     </button>
                   </>
                 )}
@@ -261,23 +301,45 @@ function App() {
                       <span className="user-handle">@{currentUser.handle}</span>
                       <div className="connection-dot"></div>
                     </div>
-                    <button className="logout-btn mobile-logout-btn" onClick={handleLogout}>
-                      Sign Out
-                    </button>
+                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+                      <button 
+                        className="connections-button mobile-connections-btn"
+                        onClick={() => setShowConnectionsModal(true)}
+                        style={{
+                          padding: '10px 20px',
+                          backgroundColor: '#4285F4',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '12px',
+                          fontSize: '14px',
+                          fontWeight: '500',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                          boxShadow: '0 2px 8px rgba(66, 133, 244, 0.2)'
+                        }}
+                      >
+                        Manage Connections
+                      </button>
+                      <button className="logout-btn mobile-logout-btn" onClick={handleLogout}>
+                        Sign Out
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <div className="mobile-login-section">
                     <button 
-                      className="sign-in-button mobile-sign-in"
+                      className="connect-button mobile-connect"
                       onClick={() => setShowConnectionsModal(true)}
                       style={{
-                        padding: '10px 20px',
-                        backgroundColor: '#38CB7C',
+                        padding: '12px 24px',
+                        backgroundColor: '#4285F4',
                         color: 'white',
                         border: 'none',
-                        borderRadius: '8px',
+                        borderRadius: '12px',
                         fontSize: '15px',
-                        fontWeight: '600',
+                        fontWeight: '500',
                         cursor: 'pointer',
                         display: 'flex',
                         alignItems: 'center',
@@ -285,11 +347,11 @@ function App() {
                         gap: '8px',
                         width: '100%',
                         maxWidth: '200px',
-                        transition: 'all 0.2s ease'
+                        transition: 'all 0.2s ease',
+                        boxShadow: '0 2px 8px rgba(66, 133, 244, 0.2)'
                       }}
                     >
-                      <span style={{ fontSize: '18px' }}>💰</span>
-                      Sign In
+                      Connect
                     </button>
                   </div>
                 )}
@@ -381,12 +443,18 @@ function App() {
                onClose={() => setIsClaudeChatOpen(false)}
              />
              
-             {/* Connections Modal */}
-             <ConnectionsModal
+             {/* Enhanced Connections Modal */}
+             <EnhancedConnectionsModal
                isOpen={showConnectionsModal}
                onClose={() => setShowConnectionsModal(false)}
                onLogin={handleLogin}
+               bitcoinService={bitcoinService}
                isDarkMode={isDarkMode}
+               onDataImport={(data) => {
+                 // Handle imported spreadsheet data
+                 setCurrentSpreadsheet(data);
+                 console.log('Imported spreadsheet:', data);
+               }}
              />
           </div>
         )

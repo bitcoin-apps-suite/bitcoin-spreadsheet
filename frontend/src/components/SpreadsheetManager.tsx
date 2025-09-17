@@ -24,8 +24,14 @@ const SpreadsheetManager: React.FC<SpreadsheetManagerProps> = ({
       const saved = localStorage.getItem('spreadsheets');
       if (saved) {
         try {
-          const sheets = JSON.parse(saved);
+          let sheets = JSON.parse(saved);
+          // Filter out any demo spreadsheets from storage
+          sheets = sheets.filter((sheet: SpreadsheetData) => 
+            !sheet.title?.includes('Demo') && !sheet.title?.includes('demo')
+          );
           setSpreadsheets(sheets);
+          // Update localStorage to remove demo spreadsheets permanently
+          localStorage.setItem('spreadsheets', JSON.stringify(sheets));
         } catch (error) {
           console.error('Failed to load spreadsheets:', error);
         }
@@ -139,8 +145,12 @@ const SpreadsheetManager: React.FC<SpreadsheetManagerProps> = ({
   };
 
   const renderSpreadsheetList = () => {
-    // Filter out blank spreadsheets
+    // Filter out blank spreadsheets and demo spreadsheets
     const nonBlankSpreadsheets = spreadsheets.filter(sheet => {
+      // Skip demo spreadsheets
+      if (sheet.title && (sheet.title.includes('Demo') || sheet.title.includes('demo'))) {
+        return false;
+      }
       const cellCount = getCellCount(sheet);
       return cellCount > 0;
     });
@@ -190,7 +200,7 @@ const SpreadsheetManager: React.FC<SpreadsheetManagerProps> = ({
             }}
             title="Rename"
           >
-            ✏️
+            Rename
           </button>
           <button 
             className="action-button"
@@ -200,7 +210,7 @@ const SpreadsheetManager: React.FC<SpreadsheetManagerProps> = ({
             }}
             title="Delete"
           >
-            🗑️
+            Delete
           </button>
         </div>
       </div>

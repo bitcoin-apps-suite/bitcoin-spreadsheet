@@ -21,9 +21,10 @@ interface SpreadsheetProps {
   isSidebarOpen?: boolean;
   onToggleSidebar?: () => void;
   onLogin?: () => void;
+  onNewSpreadsheet?: () => void;
 }
 
-const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: propSpreadsheet, onSpreadsheetUpdate, isAuthenticated = false, isSidebarOpen, onToggleSidebar, onLogin }) => {
+const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: propSpreadsheet, onSpreadsheetUpdate, isAuthenticated = false, isSidebarOpen, onToggleSidebar, onLogin, onNewSpreadsheet }) => {
   const [spreadsheet, setSpreadsheet] = useState<SpreadsheetData | null>(propSpreadsheet || null);
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -35,6 +36,7 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
   const [storagePricing, setStoragePricing] = useState<SpreadsheetPricingBreakdown | null>(null);
   const [showTokenizationModal, setShowTokenizationModal] = useState(false);
   const [useCellAddresses, setUseCellAddresses] = useState(false);
+  const [is3DView, setIs3DView] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
 
   // Handle per-cell address toggle
@@ -369,6 +371,17 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
           spreadsheet={spreadsheet}
           onSpreadsheetUpdate={onSpreadsheetUpdate || setSpreadsheet}
           isAuthenticated={isAuthenticated}
+          is3DView={is3DView}
+          onToggle3DView={() => {
+            console.log('🔄 onToggle3DView called! Current is3DView:', is3DView);
+            const newState = !is3DView;
+            setIs3DView(newState);
+            console.log('🔄 Setting is3DView to:', newState);
+            setTimeout(() => {
+              console.log('🔄 State after update:', newState);
+            }, 100);
+          }}
+          onNewSpreadsheet={onNewSpreadsheet}
         />
       }
 

@@ -1,7 +1,4 @@
-import React, { useState, useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Text, Box } from '@react-three/drei';
-import * as THREE from 'three';
+import React, { useState, useMemo } from 'react';
 import { BitcoinService, SpreadsheetData, CellData } from '../services/BitcoinService';
 
 interface Spreadsheet3DProps {
@@ -12,163 +9,90 @@ interface Spreadsheet3DProps {
   isDarkMode?: boolean;
 }
 
-// 3D Cell Component
+// CSS 3D Cell Component
 const Cell3D: React.FC<{
-  position: [number, number, number];
+  position: { x: number; y: number; z: number };
   value: string;
   isSelected: boolean;
   onClick: () => void;
   isDarkMode: boolean;
-}> = ({ position, value, isSelected, onClick, isDarkMode }) => {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const [hovered, setHovered] = useState(false);
+  cellRef: string;
+}> = ({ position, value, isSelected, onClick, isDarkMode, cellRef }) => {
+  const [isHovered, setIsHovered] = useState(false);
 
-  useFrame(() => {
-    if (meshRef.current) {
-      // Subtle floating animation
-      meshRef.current.position.y = position[1] + Math.sin(Date.now() * 0.001) * 0.02;
-    }
-  });
-
-  const cellColor = useMemo(() => {
-    if (isSelected) return '#1976d2';
-    if (hovered) return isDarkMode ? '#444' : '#f0f0f0';
-    return isDarkMode ? '#2a2a2a' : '#ffffff';
-  }, [isSelected, hovered, isDarkMode]);
-
-  const textColor = isDarkMode ? '#e0e0e0' : '#333333';
+  const cellStyle: React.CSSProperties = {
+    position: 'absolute',
+    width: '80px',
+    height: '30px',
+    border: `1px solid ${isDarkMode ? '#444' : '#ddd'}`,
+    backgroundColor: isSelected 
+      ? '#1976d2' 
+      : isHovered 
+        ? (isDarkMode ? '#444' : '#f0f0f0')
+        : (isDarkMode ? '#2a2a2a' : '#ffffff'),
+    color: isSelected 
+      ? '#fff' 
+      : (isDarkMode ? '#e0e0e0' : '#333'),
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '11px',
+    fontFamily: 'monospace',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    padding: '2px 4px',
+    boxSizing: 'border-box',
+    transform: `translate3d(${position.x}px, ${position.y}px, ${position.z}px)`,
+    transformStyle: 'preserve-3d',
+    transition: 'all 0.2s ease',
+    boxShadow: isSelected 
+      ? '0 2px 8px rgba(25, 118, 210, 0.3)' 
+      : '0 1px 3px rgba(0, 0, 0, 0.1)',
+  };
 
   return (
-    <group position={position}>
-      <Box
-        ref={meshRef}
-        args={[0.9, 0.1, 0.9]}
-        onClick={onClick}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
-      >
-        <meshStandardMaterial color={cellColor} />
-      </Box>
-      {value && (
-        <Text
-          position={[0, 0.06, 0]}
-          fontSize={0.1}
-          color={textColor}
-          anchorX="center"
-          anchorY="middle"
-          maxWidth={0.8}
-        >
-          {value}
-        </Text>
-      )}
-    </group>
+    <div
+      style={cellStyle}
+      onClick={onClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      title={`${cellRef}: ${value || 'Empty'}`}
+    >
+      {value || ''}
+    </div>
   );
 };
 
-// Grid Component
-const Grid3D: React.FC<{
-  rows: number;
-  cols: number;
-  layers: number;
-  cellData: { [key: string]: CellData };
-  selectedCell: [number, number, number] | null;
-  onCellClick: (row: number, col: number, layer: number) => void;
+// Layer Label Component
+const LayerLabel: React.FC<{
+  layer: number;
+  position: { x: number; y: number; z: number };
   isDarkMode: boolean;
-}> = ({ rows, cols, layers, cellData, selectedCell, onCellClick, isDarkMode }) => {
-  const cells = [];
+}> = ({ layer, position, isDarkMode }) => {
+  const labelStyle: React.CSSProperties = {
+    position: 'absolute',
+    width: '60px',
+    height: '20px',
+    backgroundColor: isDarkMode ? '#1a1a1a' : '#f9f9f9',
+    color: isDarkMode ? '#999' : '#666',
+    border: `1px solid ${isDarkMode ? '#333' : '#ccc'}`,
+    borderRadius: '4px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '10px',
+    fontWeight: 'bold',
+    transform: `translate3d(${position.x}px, ${position.y}px, ${position.z}px)`,
+    transformStyle: 'preserve-3d',
+  };
 
-  for (let layer = 0; layer < layers; layer++) {
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        const key = `${row}-${col}-${layer}`;
-        const cell = cellData[key];
-        const position: [number, number, number] = [
-          col - cols / 2,
-          layer * 2,
-          row - rows / 2
-        ];
-        const isSelected = selectedCell && 
-          selectedCell[0] === row && 
-          selectedCell[1] === col && 
-          selectedCell[2] === layer;
-
-        cells.push(
-          <Cell3D
-            key={key}
-            position={position}
-            value={cell?.value || ''}
-            isSelected={!!isSelected}
-            onClick={() => onCellClick(row, col, layer)}
-            isDarkMode={isDarkMode}
-          />
-        );
-      }
-    }
-  }
-
-  return <>{cells}</>;
-};
-
-// Axis Labels Component
-const AxisLabels: React.FC<{
-  rows: number;
-  cols: number;
-  layers: number;
-  isDarkMode: boolean;
-}> = ({ rows, cols, layers, isDarkMode }) => {
-  const textColor = isDarkMode ? '#999' : '#666';
-  const labels = [];
-
-  // Column labels (A, B, C...)
-  for (let col = 0; col < cols; col++) {
-    const letter = String.fromCharCode(65 + col);
-    labels.push(
-      <Text
-        key={`col-${col}`}
-        position={[col - cols / 2, -0.5, -rows / 2 - 1]}
-        fontSize={0.2}
-        color={textColor}
-        anchorX="center"
-        anchorY="middle"
-      >
-        {letter}
-      </Text>
-    );
-  }
-
-  // Row labels (1, 2, 3...)
-  for (let row = 0; row < rows; row++) {
-    labels.push(
-      <Text
-        key={`row-${row}`}
-        position={[-cols / 2 - 1, -0.5, row - rows / 2]}
-        fontSize={0.2}
-        color={textColor}
-        anchorX="center"
-        anchorY="middle"
-      >
-        {row + 1}
-      </Text>
-    );
-  }
-
-  // Layer labels (L1, L2, L3...)
-  for (let layer = 0; layer < layers; layer++) {
-    labels.push(
-      <Text
-        key={`layer-${layer}`}
-        position={[-cols / 2 - 1, layer * 2, -rows / 2 - 1]}
-        fontSize={0.2}
-        color={textColor}
-        anchorX="center"
-        anchorY="middle"
-      >
-        L{layer + 1}
-      </Text>
-    );
-  }
-
-  return <>{labels}</>;
+  return (
+    <div style={labelStyle}>
+      Layer {layer + 1}
+    </div>
+  );
 };
 
 const Spreadsheet3D: React.FC<Spreadsheet3DProps> = ({
@@ -178,8 +102,16 @@ const Spreadsheet3D: React.FC<Spreadsheet3DProps> = ({
   isAuthenticated,
   isDarkMode = false
 }) => {
-  const [selectedCell, setSelectedCell] = useState<[number, number, number] | null>(null);
-  const [dimensions] = useState({ rows: 10, cols: 10, layers: 5 });
+  console.log('🎯 Spreadsheet3D component rendering!');
+  console.log('🎯 Props:', { bitcoinService: !!bitcoinService, spreadsheet: !!spreadsheet, isDarkMode });
+  const [selectedCell, setSelectedCell] = useState<{row: number, col: number, layer: number} | null>(null);
+  const [rotationY, setRotationY] = useState(15);
+  const [rotationX, setRotationX] = useState(-10);
+  const [scale, setScale] = useState(1);
+  const [isDragging, setIsDragging] = useState(false);
+  const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
+
+  const dimensions = { rows: 8, cols: 8, layers: 3 };
 
   // Convert 2D spreadsheet data to 3D format
   const cellData = useMemo(() => {
@@ -187,100 +119,264 @@ const Spreadsheet3D: React.FC<Spreadsheet3DProps> = ({
     
     if (spreadsheet?.cells) {
       Object.entries(spreadsheet.cells).forEach(([key, cell]) => {
-        // Convert 2D coordinates to 3D (place all existing data on layer 0)
+        // Convert 2D coordinates to 3D (place existing data on layer 0)
         const [row, col] = key.split('-').map(Number);
-        const key3D = `${row}-${col}-0`;
-        data[key3D] = cell;
+        if (row < dimensions.rows && col < dimensions.cols) {
+          const key3D = `${row}-${col}-0`;
+          data[key3D] = cell;
+        }
       });
     }
 
     return data;
-  }, [spreadsheet]);
+  }, [spreadsheet, dimensions.rows, dimensions.cols]);
 
+  // Generate column letters (A, B, C...)
+  const getColumnLetter = (col: number): string => {
+    return String.fromCharCode(65 + col);
+  };
+
+  // Handle cell selection
   const handleCellClick = (row: number, col: number, layer: number) => {
-    setSelectedCell([row, col, layer]);
-    console.log(`Selected cell: ${String.fromCharCode(65 + col)}${row + 1}L${layer + 1}`);
+    setSelectedCell({ row, col, layer });
+    
+    // Create cell reference like A1L1, B2L2, etc.
+    const cellRef = `${getColumnLetter(col)}${row + 1}L${layer + 1}`;
+    console.log(`Selected cell: ${cellRef}`);
   };
 
-  const cameraSettings = {
-    position: [15, 10, 15] as [number, number, number],
-    fov: 75
+  // Mouse controls for 3D rotation
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setLastMousePos({ x: e.clientX, y: e.clientY });
   };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    
+    const deltaX = e.clientX - lastMousePos.x;
+    const deltaY = e.clientY - lastMousePos.y;
+    
+    setRotationY(prev => prev + deltaX * 0.5);
+    setRotationX(prev => Math.max(-60, Math.min(60, prev - deltaY * 0.5)));
+    
+    setLastMousePos({ x: e.clientX, y: e.clientY });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? -0.1 : 0.1;
+    setScale(prev => Math.max(0.3, Math.min(2, prev + delta)));
+  };
+
+  // Container style for 3D scene
+  const containerStyle: React.CSSProperties = {
+    width: '100%',
+    height: 'calc(100vh - 200px)',
+    backgroundColor: isDarkMode ? '#0a0a0a' : '#ffffff',
+    position: 'relative',
+    overflow: 'hidden',
+    perspective: '1200px',
+    cursor: isDragging ? 'grabbing' : 'grab',
+  };
+
+  // 3D scene transform
+  const sceneStyle: React.CSSProperties = {
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    transform: `translate(-50%, -50%) rotateX(${rotationX}deg) rotateY(${rotationY}deg) scale(${scale})`,
+    transformStyle: 'preserve-3d',
+    width: '600px',
+    height: '400px',
+  };
+
+  // Generate cells for all layers
+  const cells = [];
+  for (let layer = 0; layer < dimensions.layers; layer++) {
+    for (let row = 0; row < dimensions.rows; row++) {
+      for (let col = 0; col < dimensions.cols; col++) {
+        const key = `${row}-${col}-${layer}`;
+        const cell = cellData[key];
+        const cellRef = `${getColumnLetter(col)}${row + 1}L${layer + 1}`;
+        
+        const position = {
+          x: col * 90 - (dimensions.cols * 90) / 2,
+          y: row * 35 - (dimensions.rows * 35) / 2,
+          z: layer * 100
+        };
+
+        const isSelected = selectedCell && 
+          selectedCell.row === row && 
+          selectedCell.col === col && 
+          selectedCell.layer === layer;
+
+        cells.push(
+          <Cell3D
+            key={key}
+            position={position}
+            value={cell?.value || ''}
+            isSelected={!!isSelected}
+            onClick={() => handleCellClick(row, col, layer)}
+            isDarkMode={isDarkMode}
+            cellRef={cellRef}
+          />
+        );
+      }
+    }
+  }
+
+  // Generate layer labels
+  const layerLabels = [];
+  for (let layer = 0; layer < dimensions.layers; layer++) {
+    layerLabels.push(
+      <LayerLabel
+        key={`layer-${layer}`}
+        layer={layer}
+        position={{
+          x: -(dimensions.cols * 90) / 2 - 80,
+          y: -(dimensions.rows * 35) / 2 - 15,
+          z: layer * 100
+        }}
+        isDarkMode={isDarkMode}
+      />
+    );
+  }
+
+  // Add column and row headers for each layer
+  const headers = [];
+  for (let layer = 0; layer < dimensions.layers; layer++) {
+    // Column headers
+    for (let col = 0; col < dimensions.cols; col++) {
+      headers.push(
+        <div
+          key={`col-header-${layer}-${col}`}
+          style={{
+            position: 'absolute',
+            width: '80px',
+            height: '20px',
+            backgroundColor: isDarkMode ? '#333' : '#f0f0f0',
+            color: isDarkMode ? '#999' : '#666',
+            border: `1px solid ${isDarkMode ? '#444' : '#ccc'}`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '10px',
+            fontWeight: 'bold',
+            transform: `translate3d(${col * 90 - (dimensions.cols * 90) / 2}px, ${-(dimensions.rows * 35) / 2 - 25}px, ${layer * 100}px)`,
+            transformStyle: 'preserve-3d',
+          }}
+        >
+          {getColumnLetter(col)}
+        </div>
+      );
+    }
+
+    // Row headers
+    for (let row = 0; row < dimensions.rows; row++) {
+      headers.push(
+        <div
+          key={`row-header-${layer}-${row}`}
+          style={{
+            position: 'absolute',
+            width: '30px',
+            height: '30px',
+            backgroundColor: isDarkMode ? '#333' : '#f0f0f0',
+            color: isDarkMode ? '#999' : '#666',
+            border: `1px solid ${isDarkMode ? '#444' : '#ccc'}`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '10px',
+            fontWeight: 'bold',
+            transform: `translate3d(${-(dimensions.cols * 90) / 2 - 35}px, ${row * 35 - (dimensions.rows * 35) / 2}px, ${layer * 100}px)`,
+            transformStyle: 'preserve-3d',
+          }}
+        >
+          {row + 1}
+        </div>
+      );
+    }
+  }
 
   return (
-    <div style={{ 
-      width: '100%', 
-      height: 'calc(100vh - 200px)',
-      backgroundColor: isDarkMode ? '#0a0a0a' : '#ffffff'
-    }}>
-      {/* 3D Controls Info */}
+    <div style={containerStyle}>
+      {/* Controls Info */}
       <div style={{
         position: 'absolute',
         top: '10px',
         left: '10px',
-        zIndex: 1000,
+        zIndex: 100,
         padding: '8px 12px',
-        backgroundColor: isDarkMode ? 'rgba(42, 42, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+        backgroundColor: isDarkMode ? 'rgba(42, 42, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
         color: isDarkMode ? '#e0e0e0' : '#333',
-        borderRadius: '4px',
-        fontSize: '12px',
-        fontFamily: 'monospace'
+        borderRadius: '6px',
+        fontSize: '11px',
+        fontFamily: 'monospace',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+        maxWidth: '200px'
       }}>
-        <div>🖱️ Click & Drag: Rotate view</div>
+        <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>🧊 3D Spreadsheet</div>
+        <div>🖱️ Drag: Rotate view</div>
         <div>⚫ Scroll: Zoom in/out</div>
-        <div>📦 Click cell: Select</div>
+        <div>📦 Click: Select cell</div>
         {selectedCell && (
-          <div style={{ marginTop: '8px', fontWeight: 'bold' }}>
-            Selected: {String.fromCharCode(65 + selectedCell[1])}{selectedCell[0] + 1}L{selectedCell[2] + 1}
+          <div style={{ marginTop: '8px', fontWeight: 'bold', color: '#1976d2' }}>
+            Selected: {getColumnLetter(selectedCell.col)}{selectedCell.row + 1}L{selectedCell.layer + 1}
           </div>
         )}
+        <div style={{ marginTop: '4px', fontSize: '10px', opacity: 0.7 }}>
+          {dimensions.layers} layers × {dimensions.rows}×{dimensions.cols} grid
+        </div>
       </div>
 
-      <Canvas camera={cameraSettings}>
-        {/* Lighting */}
-        <ambientLight intensity={0.6} />
-        <directionalLight 
-          position={[10, 10, 10]} 
-          intensity={0.8}
-          castShadow
-        />
-        <pointLight position={[-10, -10, -10]} intensity={0.3} />
+      {/* Reset View Button */}
+      <button
+        onClick={() => {
+          setRotationX(-10);
+          setRotationY(15);
+          setScale(1);
+        }}
+        style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          zIndex: 100,
+          padding: '6px 12px',
+          backgroundColor: '#1976d2',
+          color: '#fff',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          fontSize: '11px',
+          fontWeight: 'bold'
+        }}
+      >
+        Reset View
+      </button>
 
-        {/* Controls */}
-        <OrbitControls 
-          enablePan={true}
-          enableZoom={true}
-          enableRotate={true}
-          maxDistance={50}
-          minDistance={5}
-        />
-
-        {/* 3D Spreadsheet Grid */}
-        <Grid3D
-          rows={dimensions.rows}
-          cols={dimensions.cols}
-          layers={dimensions.layers}
-          cellData={cellData}
-          selectedCell={selectedCell}
-          onCellClick={handleCellClick}
-          isDarkMode={isDarkMode}
-        />
-
-        {/* Axis Labels */}
-        <AxisLabels
-          rows={dimensions.rows}
-          cols={dimensions.cols}
-          layers={dimensions.layers}
-          isDarkMode={isDarkMode}
-        />
-
-        {/* Grid lines for reference */}
-        <gridHelper 
-          args={[dimensions.rows, dimensions.rows]} 
-          position={[0, -0.5, 0]}
-          rotation={[0, 0, 0]}
-        />
-      </Canvas>
+      {/* 3D Scene */}
+      <div
+        style={sceneStyle}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onWheel={handleWheel}
+      >
+        {/* Render all cells */}
+        {cells}
+        
+        {/* Render layer labels */}
+        {layerLabels}
+        
+        {/* Render headers */}
+        {headers}
+      </div>
     </div>
   );
 };

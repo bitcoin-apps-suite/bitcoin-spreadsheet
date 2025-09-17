@@ -26,6 +26,7 @@ interface TaskbarProps {
   onExport?: () => void;
   toggleDarkMode?: () => void;
   isDarkMode?: boolean;
+  onToggle3DView?: () => void;
 }
 
 const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({ 
@@ -38,7 +39,8 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
   onImport,
   onExport,
   toggleDarkMode,
-  isDarkMode
+  isDarkMode,
+  onToggle3DView
 }) => {
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -173,7 +175,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
         { label: 'Publish to Chain', action: () => console.log('Publish to chain') },
         { label: 'View on Explorer', href: 'https://whatsonchain.com' },
         { divider: true },
-        { label: 'Exchange', action: () => navigate('/exchange') }
+        { label: 'Exchange', action: () => window.dispatchEvent(new CustomEvent('openSpreadsheetExchange')) }
       ]
     },
     {
@@ -219,7 +221,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
         { label: 'Toggle Sidebar', shortcut: '⌥⌘S', action: () => console.log('Toggle sidebar') },
         { label: 'Toggle Dark Mode', shortcut: '⌥⌘D', action: toggleDarkMode },
         { label: 'Toggle Formula Bar', action: () => console.log('Toggle formula bar') },
-        { label: '3D View', shortcut: '⌥⌘3', action: () => console.log('Toggle 3D view') },
+        { label: '3D View', shortcut: '⌥⌘3', action: () => navigate('/3d') },
         { divider: true },
         { label: 'Gridlines', action: () => console.log('Toggle gridlines') },
         { label: 'Protected Ranges', action: () => console.log('Show protected ranges') },

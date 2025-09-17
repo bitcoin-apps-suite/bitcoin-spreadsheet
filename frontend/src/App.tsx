@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
-import './styles/handsontable-dark.css';
 import './styles/app-dark.css';
 import Spreadsheet from './components/Spreadsheet';
 import SpreadsheetManager from './components/SpreadsheetManager';
 import NavbarLogin from './components/NavbarLogin';
+import ConnectionsModal from './components/ConnectionsModal';
 import HandCashCallback from './components/HandCashCallback';
 import BitcoinSpreadsheetPage from './pages/BitcoinSpreadsheetPage';
 import BapsPage from './pages/BapsPage';
 import ExchangePage from './pages/ExchangePage';
+import ThreeDPage from './pages/ThreeDPage';
 import ClaudeChat from './components/ClaudeChat';
 import SpreadsheetTaskbar from './components/SpreadsheetTaskbar';
+import SpreadsheetExchangeView from './components/SpreadsheetExchangeView';
 import { BitcoinService, SpreadsheetData } from './services/BitcoinService';
 import { HandCashService, HandCashUser } from './services/HandCashService';
 
@@ -24,6 +26,8 @@ function App() {
   const [currentSpreadsheet, setCurrentSpreadsheet] = useState<SpreadsheetData | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
   const [isClaudeChatOpen, setIsClaudeChatOpen] = useState(false);
+  const [showExchange, setShowExchange] = useState(false);
+  const [showConnectionsModal, setShowConnectionsModal] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     // Check localStorage for saved preference
     const savedMode = localStorage.getItem('darkMode');
@@ -48,6 +52,13 @@ function App() {
       document.body.classList.remove('dark-mode');
     }
   }, [isDarkMode]);
+
+  // Listen for exchange open event
+  useEffect(() => {
+    const handleOpenExchange = () => setShowExchange(true);
+    window.addEventListener('openSpreadsheetExchange', handleOpenExchange);
+    return () => window.removeEventListener('openSpreadsheetExchange', handleOpenExchange);
+  }, []);
 
   useEffect(() => {
     // Check if we're coming back from HandCash with an authToken
@@ -136,6 +147,7 @@ function App() {
       <Route path="/bap" element={<BapsPage />} />
       <Route path="/developers" element={<BapsPage />} /> {/* Keep for backwards compatibility */}
       <Route path="/exchange" element={<ExchangePage />} />
+      <Route path="/3d" element={<ThreeDPage />} />
       <Route path="/auth/handcash/callback" element={<HandCashCallback />} />
       <Route path="/*" element={
         isLoading ? (
@@ -202,7 +214,37 @@ function App() {
                     </button>
                   </>
                 ) : (
-                  <NavbarLogin onLogin={handleLogin} />
+                  <>
+                    <button 
+                      className="sign-in-button"
+                      onClick={() => setShowConnectionsModal(true)}
+                      style={{
+                        padding: '8px 16px',
+                        backgroundColor: '#38CB7C',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '8px',
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        transition: 'all 0.2s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = '#2BA968';
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = '#38CB7C';
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    >
+                      <span style={{ fontSize: '16px' }}>💰</span>
+                      Sign In
+                    </button>
+                  </>
                 )}
               </div>
 
@@ -225,7 +267,30 @@ function App() {
                   </div>
                 ) : (
                   <div className="mobile-login-section">
-                    <NavbarLogin onLogin={handleLogin} />
+                    <button 
+                      className="sign-in-button mobile-sign-in"
+                      onClick={() => setShowConnectionsModal(true)}
+                      style={{
+                        padding: '10px 20px',
+                        backgroundColor: '#38CB7C',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '8px',
+                        fontSize: '15px',
+                        fontWeight: '600',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                        width: '100%',
+                        maxWidth: '200px',
+                        transition: 'all 0.2s ease'
+                      }}
+                    >
+                      <span style={{ fontSize: '18px' }}>💰</span>
+                      Sign In
+                    </button>
                   </div>
                 )}
               </div>
@@ -235,29 +300,47 @@ function App() {
             </div>
             <main className="main-container">
               {bitcoinService ? (
-                <div className="app-content">
-                  {isSidebarOpen && (
-                    <SpreadsheetManager
-                      bitcoinService={bitcoinService}
-                      onSelectSpreadsheet={setCurrentSpreadsheet}
-                      currentSpreadsheet={currentSpreadsheet}
-                    />
-                  )}
-                  <div className="spreadsheet-wrapper">
-                    <Spreadsheet 
-                      bitcoinService={bitcoinService}
-                      spreadsheet={currentSpreadsheet}
-                      onSpreadsheetUpdate={setCurrentSpreadsheet}
-                      isAuthenticated={isAuthenticated}
-                      isSidebarOpen={isSidebarOpen}
-                      onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
-                      onLogin={() => {
-                        const loginService = new HandCashService();
-                        loginService.login();
-                      }}
-                    />
+                showExchange ? (
+                  <SpreadsheetExchangeView 
+                    onClose={() => setShowExchange(false)}
+                    onSelectSpreadsheet={(spreadsheet) => {
+                      console.log('Selected spreadsheet from exchange:', spreadsheet);
+                      // Could load the spreadsheet data here
+                      setShowExchange(false);
+                    }}
+                  />
+                ) : (
+                  <div className="app-content">
+                    {isSidebarOpen && (
+                      <SpreadsheetManager
+                        bitcoinService={bitcoinService}
+                        onSelectSpreadsheet={setCurrentSpreadsheet}
+                        currentSpreadsheet={currentSpreadsheet}
+                      />
+                    )}
+                    <div className="spreadsheet-wrapper">
+                      <Spreadsheet 
+                        bitcoinService={bitcoinService}
+                        spreadsheet={currentSpreadsheet}
+                        onSpreadsheetUpdate={setCurrentSpreadsheet}
+                        isAuthenticated={isAuthenticated}
+                        isSidebarOpen={isSidebarOpen}
+                        onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+                        onLogin={() => {
+                          const loginService = new HandCashService();
+                          loginService.login();
+                        }}
+                        onNewSpreadsheet={() => {
+                          if (bitcoinService) {
+                            bitcoinService.createSpreadsheet('New Spreadsheet').then(sheet => {
+                              setCurrentSpreadsheet(sheet);
+                            });
+                          }
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
+                )
               ) : (
                 <div className="loading">Initializing blockchain connection...</div>
               )}
@@ -296,6 +379,14 @@ function App() {
                spreadsheetData={currentSpreadsheet?.cells ? Object.values(currentSpreadsheet.cells) : []}
                isOpen={isClaudeChatOpen}
                onClose={() => setIsClaudeChatOpen(false)}
+             />
+             
+             {/* Connections Modal */}
+             <ConnectionsModal
+               isOpen={showConnectionsModal}
+               onClose={() => setShowConnectionsModal(false)}
+               onLogin={handleLogin}
+               isDarkMode={isDarkMode}
              />
           </div>
         )

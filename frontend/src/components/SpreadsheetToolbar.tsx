@@ -8,6 +8,9 @@ interface SpreadsheetToolbarProps {
   onSave?: () => void;
   spreadsheetTitle?: string;
   onTitleChange?: (newTitle: string) => void;
+  is3DView?: boolean;
+  onToggle3DView?: () => void;
+  onNewSpreadsheet?: () => void;
 }
 
 const SpreadsheetToolbar: React.FC<SpreadsheetToolbarProps> = ({ 
@@ -16,7 +19,10 @@ const SpreadsheetToolbar: React.FC<SpreadsheetToolbarProps> = ({
   onAutoSaveToggle, 
   onSave,
   spreadsheetTitle,
-  onTitleChange
+  onTitleChange,
+  is3DView,
+  onToggle3DView,
+  onNewSpreadsheet
 }) => {
   const [selectedCell, setSelectedCell] = useState('A1');
   const [formulaValue, setFormulaValue] = useState('');
@@ -188,7 +194,7 @@ const SpreadsheetToolbar: React.FC<SpreadsheetToolbarProps> = ({
             cursor: 'pointer',
             fontSize: '11px',
             fontWeight: 'bold',
-            marginRight: '12px',
+            marginRight: '8px',
             height: '22px',
             display: 'flex',
             alignItems: 'center',
@@ -196,6 +202,33 @@ const SpreadsheetToolbar: React.FC<SpreadsheetToolbarProps> = ({
           }}
         >
           💾 Save
+        </button>
+
+        {/* 3D View Toggle */}
+        <button
+          onClick={() => {
+            console.log('🎯 3D Button clicked! Current:', is3DView ? '3D' : '2D');
+            onToggle3DView?.();
+          }}
+          style={{
+            padding: '8px 16px',
+            backgroundColor: is3DView ? '#ff9500' : '#1976d2',
+            color: '#fff',
+            border: `2px solid ${is3DView ? '#ff9500' : '#1976d2'}`,
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontSize: '12px',
+            fontWeight: 'bold',
+            marginRight: '12px',
+            height: '22px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '3px',
+            transition: 'all 0.15s ease'
+          }}
+          title={is3DView ? 'Switch to 2D View' : 'Switch to 3D View'}
+        >
+          {is3DView ? '📊 2D' : '🧊 3D'}
         </button>
 
         <div style={{
@@ -247,7 +280,7 @@ const SpreadsheetToolbar: React.FC<SpreadsheetToolbarProps> = ({
         {/* File Operations */}
         <button 
           style={iconButtonStyle}
-          onClick={() => console.log('New')}
+          onClick={() => onNewSpreadsheet?.()}
           title="New Spreadsheet"
         >
           📄

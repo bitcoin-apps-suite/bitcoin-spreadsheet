@@ -55,6 +55,7 @@ const EnhancedConnectionsModal: React.FC<EnhancedConnectionsModalProps> = ({
       features: [
         '10 Spreadsheets',
         '1,000 Blockchain Transactions',
+        'Revenue Share Tokenization',
         'Basic Import/Export',
         'Email Support'
       ]
@@ -213,8 +214,8 @@ const EnhancedConnectionsModal: React.FC<EnhancedConnectionsModalProps> = ({
           </button>
         </div>
 
-        {/* HandCash Featured Connection - Always Visible */}
-        <div className="handcash-featured">
+        {/* Wallet Options - HandCash and Bitcoin Wallet */}
+        <div className="wallet-options">
           <div className="handcash-card">
             <img 
               src="https://handcash.io/favicon.ico"
@@ -223,9 +224,9 @@ const EnhancedConnectionsModal: React.FC<EnhancedConnectionsModalProps> = ({
               style={{ width: '56px', height: '56px', borderRadius: '12px' }}
             />
             <div className="handcash-info">
-              <div className="handcash-title">HandCash Wallet (Required)</div>
+              <div className="handcash-title">HandCash Wallet</div>
               <div className="handcash-description">
-                Connect your Bitcoin SV wallet for secure blockchain transactions. We don't store your private keys - HandCash manages your wallet security.
+                Connect your Bitcoin SV wallet for secure blockchain transactions. We don't store your private keys.
               </div>
             </div>
             <button 
@@ -233,6 +234,56 @@ const EnhancedConnectionsModal: React.FC<EnhancedConnectionsModalProps> = ({
               onClick={() => handcashService.login()}
             >
               Connect Wallet
+            </button>
+          </div>
+          
+          <div className="bitcoin-wallet-card">
+            <img 
+              src="/bitcoin-wallet-icon.jpg"
+              alt="Bitcoin Wallet"
+              className="bitcoin-wallet-logo-large"
+              style={{ width: '56px', height: '56px', borderRadius: '12px' }}
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+                const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                if (fallback) {
+                  fallback.style.display = 'flex';
+                }
+              }}
+            />
+            <div className="bitcoin-wallet-icon-fallback" style={{ display: 'none' }}>
+              <svg 
+                width="56" 
+                height="56" 
+                viewBox="0 0 56 56" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ borderRadius: '12px' }}
+              >
+                <rect width="56" height="56" rx="12" fill="url(#bitcoinGradient)"/>
+                <path 
+                  d="M20 16h10c3.314 0 6 2.686 6 6 0 1.657-.671 3.157-1.757 4.243.686.686 1.11 1.636 1.11 2.686 0 2.071-1.686 3.757-3.757 3.757H20V16zm4 3v6h6c1.657 0 3-1.343 3-3s-1.343-3-3-3h-6zm0 9v6h8.596c.828 0 1.5-.672 1.5-1.5s-.672-1.5-1.5-1.5H24z" 
+                  fill="white"
+                />
+                <defs>
+                  <linearGradient id="bitcoinGradient" x1="0" y1="0" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#FFD700"/>
+                    <stop offset="1" stopColor="#F5C500"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div className="bitcoin-wallet-info">
+              <div className="bitcoin-wallet-title">Bitcoin Wallet</div>
+              <div className="bitcoin-wallet-description">
+                Our native Bitcoin wallet with seamless spreadsheet integration. Enhanced security and built-in features.
+              </div>
+            </div>
+            <button 
+              className="bitcoin-wallet-coming-soon-btn"
+              disabled
+            >
+              Coming Soon
             </button>
           </div>
         </div>
@@ -693,6 +744,147 @@ const EnhancedConnectionsModal: React.FC<EnhancedConnectionsModalProps> = ({
                 <div className="service-info">
                   <div className="service-name">Jira</div>
                   <div className="service-desc">Project Management</div>
+                </div>
+                <button className="service-connect">Connect</button>
+              </div>
+
+              {/* Additional Business Data Sources */}
+              <div className="service-card">
+                <img 
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg"
+                  alt="Twitter/X"
+                  className="service-logo"
+                  style={{ filter: 'brightness(0) invert(1)' }}
+                />
+                <div className="service-info">
+                  <div className="service-name">Twitter/X</div>
+                  <div className="service-desc">Social Media</div>
+                </div>
+                <button className="service-connect">Connect</button>
+              </div>
+
+              <div className="service-card">
+                <img 
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg"
+                  alt="Instagram"
+                  className="service-logo"
+                  style={{ filter: 'brightness(0) saturate(100%) invert(32%) sepia(89%) saturate(2196%) hue-rotate(308deg) brightness(101%) contrast(98%)' }}
+                />
+                <div className="service-info">
+                  <div className="service-name">Instagram</div>
+                  <div className="service-desc">Social Media</div>
+                </div>
+                <button className="service-connect">Connect</button>
+              </div>
+
+              <div className="service-card">
+                <img 
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/amazon.svg"
+                  alt="Amazon"
+                  className="service-logo"
+                  style={{ filter: 'brightness(0) saturate(100%) invert(69%) sepia(68%) saturate(1251%) hue-rotate(356deg) brightness(97%) contrast(95%)' }}
+                />
+                <div className="service-info">
+                  <div className="service-name">Amazon</div>
+                  <div className="service-desc">E-commerce</div>
+                </div>
+                <button className="service-connect">Connect</button>
+              </div>
+
+              <div className="service-card">
+                <img 
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/ebay.svg"
+                  alt="eBay"
+                  className="service-logo"
+                  style={{ filter: 'brightness(0) saturate(100%) invert(19%) sepia(99%) saturate(2664%) hue-rotate(216deg) brightness(94%) contrast(101%)' }}
+                />
+                <div className="service-info">
+                  <div className="service-name">eBay</div>
+                  <div className="service-desc">Marketplace</div>
+                </div>
+                <button className="service-connect">Connect</button>
+              </div>
+
+              <div className="service-card">
+                <img 
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/etsy.svg"
+                  alt="Etsy"
+                  className="service-logo"
+                  style={{ filter: 'brightness(0) saturate(100%) invert(51%) sepia(96%) saturate(2975%) hue-rotate(355deg) brightness(101%) contrast(103%)' }}
+                />
+                <div className="service-info">
+                  <div className="service-name">Etsy</div>
+                  <div className="service-desc">Handmade Market</div>
+                </div>
+                <button className="service-connect">Connect</button>
+              </div>
+
+              <div className="service-card">
+                <img 
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg"
+                  alt="YouTube"
+                  className="service-logo"
+                  style={{ filter: 'brightness(0) saturate(100%) invert(25%) sepia(89%) saturate(4174%) hue-rotate(346deg) brightness(102%) contrast(97%)' }}
+                />
+                <div className="service-info">
+                  <div className="service-name">YouTube</div>
+                  <div className="service-desc">Video Analytics</div>
+                </div>
+                <button className="service-connect">Connect</button>
+              </div>
+
+              <div className="service-card">
+                <img 
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tiktok.svg"
+                  alt="TikTok"
+                  className="service-logo"
+                  style={{ filter: 'brightness(0) invert(1)' }}
+                />
+                <div className="service-info">
+                  <div className="service-name">TikTok</div>
+                  <div className="service-desc">Short Video</div>
+                </div>
+                <button className="service-connect">Connect</button>
+              </div>
+
+              <div className="service-card">
+                <img 
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/coinbase.svg"
+                  alt="Coinbase"
+                  className="service-logo"
+                  style={{ filter: 'brightness(0) saturate(100%) invert(46%) sepia(99%) saturate(1946%) hue-rotate(200deg) brightness(97%) contrast(102%)' }}
+                />
+                <div className="service-info">
+                  <div className="service-name">Coinbase</div>
+                  <div className="service-desc">Crypto Exchange</div>
+                </div>
+                <button className="service-connect">Connect</button>
+              </div>
+
+              <div className="service-card">
+                <img 
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/binance.svg"
+                  alt="Binance"
+                  className="service-logo"
+                  style={{ filter: 'brightness(0) saturate(100%) invert(69%) sepia(68%) saturate(1251%) hue-rotate(356deg) brightness(97%) contrast(95%)' }}
+                />
+                <div className="service-info">
+                  <div className="service-name">Binance</div>
+                  <div className="service-desc">Crypto Exchange</div>
+                </div>
+                <button className="service-connect">Connect</button>
+              </div>
+
+              <div className="service-card">
+                <img 
+                  src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/woocommerce.svg"
+                  alt="WooCommerce"
+                  className="service-logo"
+                  style={{ filter: 'brightness(0) saturate(100%) invert(46%) sepia(99%) saturate(1946%) hue-rotate(258deg) brightness(97%) contrast(102%)' }}
+                />
+                <div className="service-info">
+                  <div className="service-name">WooCommerce</div>
+                  <div className="service-desc">WordPress Store</div>
                 </div>
                 <button className="service-connect">Connect</button>
               </div>

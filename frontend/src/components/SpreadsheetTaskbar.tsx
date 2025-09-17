@@ -26,8 +26,6 @@ interface TaskbarProps {
   onExport?: () => void;
   toggleDarkMode?: () => void;
   isDarkMode?: boolean;
-  isAutoSaveEnabled?: boolean;
-  onAutoSaveToggle?: (enabled: boolean) => void;
 }
 
 const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({ 
@@ -40,9 +38,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
   onImport,
   onExport,
   toggleDarkMode,
-  isDarkMode,
-  isAutoSaveEnabled,
-  onAutoSaveToggle
+  isDarkMode
 }) => {
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -587,74 +583,16 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
         ))}
       </div>
 
-      {/* Right side - Actions & Status */}
+      {/* Right side - Status */}
       <div style={{
         marginLeft: 'auto',
         display: 'flex',
         alignItems: 'center',
-        gap: '12px',
+        gap: '16px',
         paddingRight: '16px',
         fontSize: '12px',
         color: 'rgba(255, 255, 255, 0.8)'
       }}>
-        {/* Auto-save */}
-        <label style={{
-          display: 'flex',
-          alignItems: 'center',
-          cursor: 'pointer',
-          fontSize: '11px'
-        }}>
-          <input
-            type="checkbox"
-            checked={isAutoSaveEnabled || false}
-            onChange={(e) => onAutoSaveToggle?.(e.target.checked)}
-            style={{ marginRight: '4px', transform: 'scale(0.8)' }}
-          />
-          Auto-save
-        </label>
-
-        {/* Save Button */}
-        <button
-          onClick={() => onSaveSpreadsheet?.()}
-          style={{
-            padding: '3px 8px',
-            backgroundColor: '#1976d2',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '3px',
-            cursor: 'pointer',
-            fontSize: '11px',
-            fontWeight: 'bold',
-            height: '20px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '3px'
-          }}
-        >
-          💾 Save
-        </button>
-
-        {/* Save to Blockchain Button */}
-        <button
-          onClick={() => onSaveToBlockchain?.()}
-          style={{
-            padding: '3px 8px',
-            backgroundColor: '#ff9500',
-            color: '#000',
-            border: 'none',
-            borderRadius: '3px',
-            cursor: 'pointer',
-            fontSize: '11px',
-            fontWeight: 'bold',
-            height: '20px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '3px'
-          }}
-        >
-          ₿ Blockchain
-        </button>
-
         {/* Connection Status */}
         {isAuthenticated && currentUser ? (
           <>

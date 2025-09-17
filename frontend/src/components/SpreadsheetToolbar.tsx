@@ -7,6 +7,7 @@ interface SpreadsheetToolbarProps {
   onAutoSaveToggle?: (enabled: boolean) => void;
   onSave?: () => void;
   spreadsheetTitle?: string;
+  onTitleChange?: (newTitle: string) => void;
 }
 
 const SpreadsheetToolbar: React.FC<SpreadsheetToolbarProps> = ({ 
@@ -14,11 +15,14 @@ const SpreadsheetToolbar: React.FC<SpreadsheetToolbarProps> = ({
   isAutoSaveEnabled, 
   onAutoSaveToggle, 
   onSave,
-  spreadsheetTitle 
+  spreadsheetTitle,
+  onTitleChange
 }) => {
   const [selectedCell, setSelectedCell] = useState('A1');
   const [formulaValue, setFormulaValue] = useState('');
   const [currentFormat, setCurrentFormat] = useState('General');
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [editingTitleValue, setEditingTitleValue] = useState('');
 
   const buttonStyle = {
     padding: '4px 8px',
@@ -89,15 +93,70 @@ const SpreadsheetToolbar: React.FC<SpreadsheetToolbarProps> = ({
       {/* Formula Bar */}
       <div style={formulaBarStyle}>
         {/* Spreadsheet Title */}
-        <div style={{
-          fontSize: '14px',
-          fontWeight: 'bold',
-          color: isDarkMode ? '#e0e0e0' : '#333',
-          marginRight: '12px',
-          minWidth: '120px'
-        }}>
-          {spreadsheetTitle || 'Untitled Spreadsheet'}
-        </div>
+        {isEditingTitle ? (
+          <input
+            type="text"
+            value={editingTitleValue}
+            onChange={(e) => setEditingTitleValue(e.target.value)}
+            onBlur={() => {
+              if (editingTitleValue.trim() && editingTitleValue !== spreadsheetTitle) {
+                onTitleChange?.(editingTitleValue.trim());
+              }
+              setIsEditingTitle(false);
+            }}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                if (editingTitleValue.trim() && editingTitleValue !== spreadsheetTitle) {
+                  onTitleChange?.(editingTitleValue.trim());
+                }
+                setIsEditingTitle(false);
+              } else if (e.key === 'Escape') {
+                setIsEditingTitle(false);
+                setEditingTitleValue(spreadsheetTitle || '');
+              }
+            }}
+            autoFocus
+            style={{
+              fontSize: '14px',
+              fontWeight: 'bold',
+              color: isDarkMode ? '#e0e0e0' : '#333',
+              backgroundColor: isDarkMode ? '#2a2a2a' : '#fff',
+              border: `1px solid ${isDarkMode ? '#444' : '#ccc'}`,
+              borderRadius: '3px',
+              padding: '2px 6px',
+              marginRight: '12px',
+              minWidth: '120px',
+              outline: 'none'
+            }}
+          />
+        ) : (
+          <div 
+            style={{
+              fontSize: '14px',
+              fontWeight: 'bold',
+              color: isDarkMode ? '#e0e0e0' : '#333',
+              marginRight: '12px',
+              minWidth: '120px',
+              cursor: 'pointer',
+              padding: '2px 6px',
+              borderRadius: '3px',
+              transition: 'background-color 0.15s ease'
+            }}
+            onDoubleClick={() => {
+              setIsEditingTitle(true);
+              setEditingTitleValue(spreadsheetTitle || 'Untitled Spreadsheet');
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
+            title="Double-click to rename"
+          >
+            {spreadsheetTitle || 'Untitled Spreadsheet'}
+          </div>
+        )}
 
         {/* Auto-save */}
         <label style={{

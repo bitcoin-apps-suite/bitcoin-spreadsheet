@@ -235,6 +235,24 @@ const AdvancedSpreadsheet: React.FC<AdvancedSpreadsheetProps> = ({
         onAutoSaveToggle={setIsAutoSaveEnabled}
         onSave={() => saveData()}
         spreadsheetTitle={spreadsheet?.title || 'Untitled Spreadsheet'}
+        onTitleChange={(newTitle) => {
+          if (spreadsheet) {
+            const updatedSpreadsheet = {
+              ...spreadsheet,
+              title: newTitle,
+              lastModified: new Date().toISOString()
+            };
+            onSpreadsheetUpdate(updatedSpreadsheet);
+            
+            // Update localStorage
+            const spreadsheets = JSON.parse(localStorage.getItem('spreadsheets') || '[]');
+            const index = spreadsheets.findIndex((s: any) => s.id === spreadsheet.id);
+            if (index !== -1) {
+              spreadsheets[index] = updatedSpreadsheet;
+              localStorage.setItem('spreadsheets', JSON.stringify(spreadsheets));
+            }
+          }
+        }}
       />
 
       {/* Handsontable Component */}

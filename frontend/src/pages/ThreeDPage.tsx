@@ -54,6 +54,7 @@ const ThreeDPage: React.FC = () => {
     setBitcoinService(service);
     
     // Load existing spreadsheets from localStorage
+    let spreadsheetLoaded = false;
     const saved = localStorage.getItem('spreadsheets');
     if (saved) {
       try {
@@ -69,10 +70,39 @@ const ThreeDPage: React.FC = () => {
         
         if (nonEmptySheet) {
           setCurrentSpreadsheet(nonEmptySheet);
+          spreadsheetLoaded = true;
         }
       } catch (error) {
         console.error('Failed to load spreadsheets:', error);
       }
+    }
+    
+    // If no spreadsheet was loaded, create a demo one for 3D visualization
+    if (!spreadsheetLoaded) {
+      const newSheet = await service.createSpreadsheet('3D Visualization Demo');
+      
+      // Add sample data with a wave pattern for interesting 3D visualization
+      const cells: { [key: string]: any } = {};
+      for (let row = 0; row < 20; row++) {
+        for (let col = 0; col < 20; col++) {
+          // Create a wave pattern using sine and cosine
+          const value = Math.sin(row * 0.3) * Math.cos(col * 0.3) * 50 + 50;
+          cells[`${row}-${col}`] = {
+            row,
+            col,
+            value: value.toFixed(2),
+            dataType: 'number' as const,
+            lastUpdated: Date.now()
+          };
+        }
+      }
+      
+      // Add some labels
+      cells['0-0'] = { row: 0, col: 0, value: 'Wave', dataType: 'string' as const, lastUpdated: Date.now() };
+      cells['0-1'] = { row: 0, col: 1, value: 'Pattern', dataType: 'string' as const, lastUpdated: Date.now() };
+      
+      newSheet.cells = cells;
+      setCurrentSpreadsheet(newSheet);
     }
     
     setIsLoading(false);

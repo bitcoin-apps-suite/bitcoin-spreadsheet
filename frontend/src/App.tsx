@@ -28,6 +28,7 @@ function App() {
   const [isClaudeChatOpen, setIsClaudeChatOpen] = useState(false);
   const [showExchange, setShowExchange] = useState(false);
   const [showConnectionsModal, setShowConnectionsModal] = useState(false);
+  const [connectedServices, setConnectedServices] = useState<string[]>([]);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     // Check localStorage for saved preference
     const savedMode = localStorage.getItem('darkMode');
@@ -59,6 +60,35 @@ function App() {
     window.addEventListener('openSpreadsheetExchange', handleOpenExchange);
     return () => window.removeEventListener('openSpreadsheetExchange', handleOpenExchange);
   }, []);
+
+  // Load connected services from localStorage
+  useEffect(() => {
+    const loadConnectedServices = () => {
+      const services = [];
+      if (isAuthenticated && currentUser) {
+        services.push('HandCash');
+      }
+      // Check for other connected services in localStorage
+      const connected = localStorage.getItem('connectedServices');
+      if (connected) {
+        try {
+          const parsed = JSON.parse(connected);
+          services.push(...parsed);
+        } catch (error) {
+          console.error('Failed to parse connected services:', error);
+        }
+      }
+      setConnectedServices(services);
+    };
+    
+    loadConnectedServices();
+    
+    // Listen for service updates from connection modal
+    const handleServicesUpdated = () => loadConnectedServices();
+    window.addEventListener('servicesUpdated', handleServicesUpdated);
+    
+    return () => window.removeEventListener('servicesUpdated', handleServicesUpdated);
+  }, [isAuthenticated, currentUser]);
 
   useEffect(() => {
     // Check if we're coming back from HandCash with an authToken
@@ -184,7 +214,54 @@ function App() {
               isDarkMode={isDarkMode}
             />
             <header className="App-header">
-              <div className="connection-indicator" />
+              <div className="connection-badge" onClick={() => setShowConnectionsModal(true)}>
+                {connectedServices.length === 0 ? (
+                  <button className="connect-badge-btn">
+                    Connect
+                  </button>
+                ) : (
+                  <>
+                    <div className="connected-avatars">
+                      {connectedServices.slice(0, 3).map((service, index) => (
+                        <div 
+                          key={service} 
+                          className="service-avatar" 
+                          style={{ 
+                            marginLeft: index > 0 ? '-8px' : '0',
+                            zIndex: 3 - index 
+                          }}
+                          title={service}
+                        >
+                          {service === 'HandCash' ? (
+                            <img src="https://handcash.io/favicon.ico" alt="HandCash" />
+                          ) : service === 'Salesforce' ? (
+                            <div className="avatar-icon salesforce">S</div>
+                          ) : service === 'Stripe' ? (
+                            <div className="avatar-icon stripe">$</div>
+                          ) : service === 'Google Sheets' ? (
+                            <div className="avatar-icon sheets">G</div>
+                          ) : service === 'QuickBooks' ? (
+                            <div className="avatar-icon quickbooks">Q</div>
+                          ) : (
+                            <div className="avatar-icon default">{service.charAt(0)}</div>
+                          )}
+                        </div>
+                      ))}
+                      {connectedServices.length > 3 && (
+                        <div 
+                          className="service-avatar more-count" 
+                          style={{ marginLeft: '-8px', zIndex: 0 }}
+                        >
+                          <span>+{connectedServices.length - 3}</span>
+                        </div>
+                      )}
+                    </div>
+                    <span className="connection-count">
+                      {connectedServices.length} connected
+                    </span>
+                  </>
+                )}
+              </div>
               <h1>
                 <img 
                   src="/bitcoin-watercolor-icon.png" 

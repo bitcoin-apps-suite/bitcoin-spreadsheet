@@ -46,6 +46,32 @@ const EnhancedConnectionsModal: React.FC<EnhancedConnectionsModalProps> = ({
   const [bsvBalance, setBsvBalance] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
+  const handleServiceConnect = (serviceName: string) => {
+    setIsLoading(serviceName);
+    
+    // Simulate connection process
+    setTimeout(() => {
+      const currentConnected = JSON.parse(localStorage.getItem('connectedServices') || '[]');
+      if (!currentConnected.includes(serviceName)) {
+        const updated = [...currentConnected, serviceName];
+        localStorage.setItem('connectedServices', JSON.stringify(updated));
+        
+        // Update the connected accounts state
+        setConnectedAccounts(prev => [...prev, {
+          id: serviceName.toLowerCase(),
+          name: serviceName,
+          type: serviceName.toLowerCase(),
+          balance: Math.random() * 0.1 // Random small BSV balance
+        }]);
+      }
+      
+      setIsLoading(null);
+      
+      // Dispatch event to update parent component
+      window.dispatchEvent(new CustomEvent('servicesUpdated'));
+    }, 1500);
+  };
+
   const subscriptionPlans: SubscriptionPlan[] = [
     {
       id: 'starter',
@@ -328,7 +354,13 @@ const EnhancedConnectionsModal: React.FC<EnhancedConnectionsModalProps> = ({
                   <div className="service-name">Salesforce</div>
                   <div className="service-desc">CRM & Sales Pipeline</div>
                 </div>
-                <button className="service-connect">Connect</button>
+                <button 
+                  className="service-connect"
+                  onClick={() => handleServiceConnect('Salesforce')}
+                  disabled={isLoading === 'Salesforce'}
+                >
+                  {isLoading === 'Salesforce' ? 'Connecting...' : 'Connect'}
+                </button>
               </div>
 
               <div className="service-card">

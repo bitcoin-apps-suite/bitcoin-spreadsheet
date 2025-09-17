@@ -3,6 +3,7 @@ import { RevoGrid, type ColumnRegular } from '@revolist/react-datagrid';
 import { BitcoinService, SpreadsheetData, CellData } from '../services/BitcoinService';
 import SpreadsheetToolbar from './SpreadsheetToolbar';
 import Spreadsheet3D from './Spreadsheet3D';
+import MobileSpreadsheet from './MobileSpreadsheet';
 
 // RevoGrid doesn't require explicit CSS import - styles are included in the component
 
@@ -33,6 +34,7 @@ const AdvancedSpreadsheet: React.FC<AdvancedSpreadsheetProps> = ({
   const autoSaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [selectedCell, setSelectedCell] = useState<{row: number; col: string} | null>(null);
   const [editingValue, setEditingValue] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
 
   // Check for dark mode
   useEffect(() => {
@@ -50,6 +52,17 @@ const AdvancedSpreadsheet: React.FC<AdvancedSpreadsheetProps> = ({
     });
     
     return () => observer.disconnect();
+  }, []);
+
+  // Check for mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || 'ontouchstart' in window);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   // Initialize columns with proper sizing
@@ -238,6 +251,19 @@ const AdvancedSpreadsheet: React.FC<AdvancedSpreadsheetProps> = ({
       saveData(changes);
     }
   };
+
+  // Use mobile view for mobile devices
+  if (isMobile && !is3DView) {
+    return (
+      <MobileSpreadsheet
+        bitcoinService={bitcoinService}
+        spreadsheet={spreadsheet}
+        onSpreadsheetUpdate={onSpreadsheetUpdate}
+        isAuthenticated={isAuthenticated}
+        isDarkMode={isDarkMode}
+      />
+    );
+  }
 
   return (
     <div className="advanced-spreadsheet-container" style={{ 

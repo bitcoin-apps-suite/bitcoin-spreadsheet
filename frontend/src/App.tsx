@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import './styles/app-dark.css';
+import './styles/mobile.css';
 import Spreadsheet from './components/Spreadsheet';
+import MobileSpreadsheet from './components/MobileSpreadsheet';
 import SpreadsheetManager from './components/SpreadsheetManager';
 import NavbarLogin from './components/NavbarLogin';
 import EnhancedConnectionsModal from './components/EnhancedConnectionsModal';
@@ -14,6 +16,7 @@ import ThreeDPage from './pages/ThreeDPage';
 import ClaudeChat from './components/ClaudeChat';
 import SpreadsheetTaskbar from './components/SpreadsheetTaskbar';
 import SpreadsheetExchangeView from './components/SpreadsheetExchangeView';
+import InstallPrompt from './components/InstallPrompt';
 import { BitcoinService, SpreadsheetData } from './services/BitcoinService';
 import { HandCashService, HandCashUser } from './services/HandCashService';
 
@@ -29,6 +32,7 @@ function App() {
   const [showExchange, setShowExchange] = useState(false);
   const [showConnectionsModal, setShowConnectionsModal] = useState(false);
   const [connectedServices, setConnectedServices] = useState<string[]>([]);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     // Check localStorage for saved preference
     const savedMode = localStorage.getItem('darkMode');
@@ -53,6 +57,17 @@ function App() {
       document.body.classList.remove('dark-mode');
     }
   }, [isDarkMode]);
+
+  // Handle window resize for mobile detection
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      setIsSidebarOpen(window.innerWidth > 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Listen for exchange open event
   useEffect(() => {
@@ -458,25 +473,33 @@ function App() {
                       />
                     )}
                     <div className="spreadsheet-wrapper">
-                      <Spreadsheet 
-                        bitcoinService={bitcoinService}
-                        spreadsheet={currentSpreadsheet}
-                        onSpreadsheetUpdate={setCurrentSpreadsheet}
-                        isAuthenticated={isAuthenticated}
-                        isSidebarOpen={isSidebarOpen}
-                        onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
-                        onLogin={() => {
-                          const loginService = new HandCashService();
-                          loginService.login();
-                        }}
-                        onNewSpreadsheet={() => {
-                          if (bitcoinService) {
-                            bitcoinService.createSpreadsheet('New Spreadsheet').then(sheet => {
-                              setCurrentSpreadsheet(sheet);
-                            });
-                          }
-                        }}
-                      />
+                      {isMobile ? (
+                        <MobileSpreadsheet
+                          spreadsheetData={currentSpreadsheet}
+                          onSpreadsheetUpdate={setCurrentSpreadsheet}
+                          isDarkMode={isDarkMode}
+                        />
+                      ) : (
+                        <Spreadsheet 
+                          bitcoinService={bitcoinService}
+                          spreadsheet={currentSpreadsheet}
+                          onSpreadsheetUpdate={setCurrentSpreadsheet}
+                          isAuthenticated={isAuthenticated}
+                          isSidebarOpen={isSidebarOpen}
+                          onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+                          onLogin={() => {
+                            const loginService = new HandCashService();
+                            loginService.login();
+                          }}
+                          onNewSpreadsheet={() => {
+                            if (bitcoinService) {
+                              bitcoinService.createSpreadsheet('New Spreadsheet').then(sheet => {
+                                setCurrentSpreadsheet(sheet);
+                              });
+                            }
+                          }}
+                        />
+                      )}
                     </div>
                   </div>
                 )
@@ -533,6 +556,9 @@ function App() {
                  console.log('Imported spreadsheet:', data);
                }}
              />
+             
+             {/* PWA Install Prompt */}
+             <InstallPrompt />
           </div>
         )
       } />

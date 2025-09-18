@@ -256,10 +256,8 @@ const AdvancedSpreadsheet: React.FC<AdvancedSpreadsheetProps> = ({
   if (isMobile && !is3DView) {
     return (
       <MobileSpreadsheet
-        bitcoinService={bitcoinService}
-        spreadsheet={spreadsheet}
+        spreadsheetData={spreadsheet}
         onSpreadsheetUpdate={onSpreadsheetUpdate}
-        isAuthenticated={isAuthenticated}
         isDarkMode={isDarkMode}
       />
     );

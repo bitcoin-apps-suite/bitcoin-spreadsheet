@@ -1,420 +1,325 @@
 /* Mobile Spreadsheet Styles */
+
 .mobile-spreadsheet {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
+  background: #0A0E27;
+  color: white;
   overflow: hidden;
-  background: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-}
-
-.mobile-spreadsheet.dark {
-  background: #1a1a1a;
-  color: #e0e0e0;
 }
 
 /* Mobile Toolbar */
 .mobile-toolbar {
   display: flex;
-  align-items: center;
-  padding: 8px;
-  background: #f5f5f5;
-  border-bottom: 1px solid #ddd;
-  gap: 8px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.mobile-spreadsheet.dark .mobile-toolbar {
-  background: #2a2a2a;
-  border-bottom-color: #444;
-}
-
-.toolbar-btn {
-  padding: 10px 15px;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.mobile-spreadsheet.dark .toolbar-btn {
-  background: #333;
-  border-color: #555;
-  color: #e0e0e0;
-}
-
-.toolbar-btn:active {
-  background: #e0e0e0;
-  transform: scale(0.95);
-}
-
-.cell-indicator {
-  margin-left: auto;
-  padding: 8px 12px;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-weight: bold;
-  font-family: monospace;
-  min-width: 60px;
-  text-align: center;
-}
-
-.mobile-spreadsheet.dark .cell-indicator {
-  background: #333;
-  border-color: #555;
-  color: #FFA500;
-}
-
-/* Quick Actions */
-.quick-actions {
-  display: flex;
   gap: 8px;
   padding: 8px;
-  background: #f9f9f9;
-  border-bottom: 1px solid #ddd;
-  position: sticky;
-  top: 50px;
-  z-index: 99;
+  background: linear-gradient(180deg, #0F1329 0%, #0A0E27 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-x: auto;
+  flex-shrink: 0;
+  -webkit-overflow-scrolling: touch;
 }
 
-.mobile-spreadsheet.dark .quick-actions {
-  background: #252525;
-  border-bottom-color: #444;
-}
-
-.quick-actions button {
-  flex: 1;
-  padding: 10px;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
-  touch-action: manipulation;
-}
-
-.mobile-spreadsheet.dark .quick-actions button {
-  background: #333;
-  border-color: #555;
-  color: #e0e0e0;
-}
-
-.quick-actions button:active {
-  background: #e0e0e0;
-  transform: scale(0.95);
-}
-
-/* Edit Modal */
-.edit-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  z-index: 1000;
-  width: 90%;
-  max-width: 400px;
-}
-
-.mobile-spreadsheet.dark .edit-modal {
-  background: #2a2a2a;
-  border-color: #555;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.edit-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  border-bottom: 1px solid #eee;
-  font-weight: 600;
-}
-
-.mobile-spreadsheet.dark .edit-header {
-  border-bottom-color: #444;
-}
-
-.edit-header button {
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: #666;
-  padding: 0;
-  width: 30px;
-  height: 30px;
+.mobile-tool-btn {
+  min-width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.edit-input {
-  width: calc(100% - 30px);
-  margin: 15px;
-  padding: 12px;
-  border: 2px solid #4285F4;
-  border-radius: 6px;
   font-size: 16px;
-  font-family: monospace;
-  background: #f9f9f9;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.mobile-spreadsheet.dark .edit-input {
-  background: #1a1a1a;
-  color: #e0e0e0;
-  border-color: #FFA500;
+.mobile-tool-btn:active {
+  background: rgba(247, 147, 26, 0.2);
+  border-color: #F7931A;
+  transform: scale(0.95);
 }
 
-.edit-actions {
+/* Formula Bar */
+.mobile-formula-bar {
   display: flex;
-  gap: 10px;
-  padding: 15px;
-  border-top: 1px solid #eee;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: #0A0E27;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
 }
 
-.mobile-spreadsheet.dark .edit-actions {
-  border-top-color: #444;
-}
-
-.edit-actions button {
-  flex: 1;
-  padding: 12px;
-  border: none;
+.cell-reference {
+  min-width: 50px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 6px;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
+  color: #F7931A;
 }
 
-.edit-actions button:first-child {
-  background: #4285F4;
+.formula-input {
+  flex: 1;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
   color: white;
+  font-size: 14px;
+  outline: none;
 }
 
-.edit-actions button:last-child {
-  background: #f0f0f0;
-  color: #333;
+.formula-input:focus {
+  border-color: #F7931A;
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.mobile-spreadsheet.dark .edit-actions button:last-child {
-  background: #333;
-  color: #e0e0e0;
-}
-
-/* Mobile Grid */
+/* Grid Container */
 .mobile-grid-container {
   flex: 1;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+  position: relative;
 }
 
+/* Grid Table */
 .mobile-grid {
-  border-collapse: collapse;
   width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 14px;
 }
 
 .mobile-grid th,
 .mobile-grid td {
-  border: 1px solid #e0e0e0;
-  text-align: left;
-  padding: 0;
-}
-
-.mobile-spreadsheet.dark .mobile-grid th,
-.mobile-spreadsheet.dark .mobile-grid td {
-  border-color: #333;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px;
+  text-align: center;
+  height: 40px;
+  min-width: 70px;
 }
 
 /* Headers */
-.col-header,
-.row-header {
-  background: linear-gradient(to bottom, #f8f8f8, #e8e8e8);
-  font-weight: 500;
+.mobile-grid .row-header,
+.mobile-grid .col-header {
+  background: #0F1329;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
   font-size: 12px;
-  text-align: center;
-  padding: 8px 4px;
   position: sticky;
-  z-index: 10;
-  user-select: none;
+  z-index: 1;
 }
 
-.col-header {
-  top: 0;
-  min-width: 80px;
-}
-
-.row-header {
+.mobile-grid .row-header {
   left: 0;
   width: 40px;
   min-width: 40px;
+  max-width: 40px;
 }
 
-.mobile-spreadsheet.dark .col-header,
-.mobile-spreadsheet.dark .row-header {
-  background: linear-gradient(to bottom, #2a2a2a, #222);
-  color: #b0b0b0;
+.mobile-grid .col-header {
+  top: 0;
 }
 
-/* Cells */
-.cell {
-  padding: 10px 8px;
-  min-width: 80px;
-  height: 40px;
-  white-space: nowrap;
+.mobile-grid thead tr th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+
+/* Grid Cells */
+.grid-cell {
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  transition: all 0.1s ease;
+  position: relative;
+  padding: 4px;
+}
+
+.grid-cell:active {
+  background: rgba(247, 147, 26, 0.1);
+}
+
+.grid-cell.selected {
+  background: rgba(247, 147, 26, 0.15);
+  border-color: #F7931A;
+  box-shadow: inset 0 0 0 2px #F7931A;
+}
+
+.grid-cell.editing {
+  padding: 0;
+  background: rgba(247, 147, 26, 0.2);
+}
+
+.cell-content {
+  display: block;
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.cell-edit-input {
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  background: #0A0E27;
+  border: 2px solid #F7931A;
+  color: white;
+  font-size: 13px;
+  outline: none;
+}
+
+/* Mobile Bottom Navigation */
+.mobile-bottom-nav {
+  display: flex;
+  background: #0F1329;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 0;
+  flex-shrink: 0;
+}
+
+.nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.nav-btn span:first-child {
+  font-size: 20px;
+}
+
+.nav-btn span:last-child {
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.nav-btn.active {
+  color: #F7931A;
+}
+
+.nav-btn:active {
+  transform: scale(0.95);
+}
+
+/* Light mode */
+.mobile-spreadsheet.light {
+  background: white;
+  color: #333;
+}
+
+.mobile-spreadsheet.light .mobile-toolbar {
+  background: linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%);
+  border-bottom-color: #e0e0e0;
+}
+
+.mobile-spreadsheet.light .mobile-tool-btn {
+  border-color: #e0e0e0;
+  background: white;
+  color: #333;
+}
+
+.mobile-spreadsheet.light .mobile-formula-bar {
+  background: white;
+  border-bottom-color: #e0e0e0;
+}
+
+.mobile-spreadsheet.light .formula-input {
+  background: #f5f5f5;
+  border-color: #e0e0e0;
+  color: #333;
+}
+
+.mobile-spreadsheet.light .mobile-grid th,
+.mobile-spreadsheet.light .mobile-grid td {
+  border-color: #e0e0e0;
+}
+
+.mobile-spreadsheet.light .row-header,
+.mobile-spreadsheet.light .col-header {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.mobile-spreadsheet.light .grid-cell {
   background: white;
 }
 
-.mobile-spreadsheet.dark .cell {
-  background: #0a0a0a;
-  color: #e0e0e0;
+.mobile-spreadsheet.light .cell-edit-input {
+  background: white;
+  color: #333;
 }
 
-.cell:active {
-  background: rgba(66, 133, 244, 0.1);
-}
-
-.cell.selected {
-  background: rgba(66, 133, 244, 0.2) !important;
-  outline: 2px solid #4285F4;
-  outline-offset: -1px;
-  z-index: 5;
-  position: relative;
-}
-
-.mobile-spreadsheet.dark .cell.selected {
-  background: rgba(255, 165, 0, 0.2) !important;
-  outline-color: #FFA500;
-}
-
-.cell.editing {
-  background: #fffbf0 !important;
-  outline: 3px solid #FFA500;
-  outline-offset: -1px;
-}
-
-.mobile-spreadsheet.dark .cell.editing {
-  background: #2a2a1a !important;
-}
-
-/* Mobile Navigation */
-.mobile-nav {
-  padding: 10px;
+.mobile-spreadsheet.light .mobile-bottom-nav {
   background: #f5f5f5;
-  border-top: 1px solid #ddd;
-  display: flex;
-  justify-content: center;
-  font-size: 12px;
+  border-top-color: #e0e0e0;
+}
+
+.mobile-spreadsheet.light .nav-btn {
   color: #666;
-  position: sticky;
-  bottom: 0;
 }
 
-.mobile-spreadsheet.dark .mobile-nav {
-  background: #2a2a2a;
-  border-top-color: #444;
-  color: #999;
+.mobile-spreadsheet.light .nav-btn.active {
+  color: #F7931A;
 }
 
-.range-info {
-  font-family: monospace;
-}
-
-/* Touch optimizations */
-@media (max-width: 768px) {
-  .mobile-toolbar {
-    padding: 6px;
+/* Responsive adjustments */
+@media screen and (max-width: 375px) {
+  .mobile-grid th,
+  .mobile-grid td {
+    min-width: 60px;
+    font-size: 12px;
+    padding: 6px 4px;
   }
 
-  .toolbar-btn {
-    padding: 12px 16px;
-    font-size: 20px;
+  .mobile-tool-btn {
+    min-width: 40px;
+    height: 40px;
+    font-size: 14px;
   }
 
-  .cell {
-    min-width: 70px;
-    font-size: 13px;
-  }
-
-  .col-header {
-    min-width: 70px;
-  }
-
-  .edit-modal {
-    width: 95%;
+  .nav-btn span:first-child {
+    font-size: 18px;
   }
 }
 
-/* Landscape mode optimizations */
-@media (max-width: 768px) and (orientation: landscape) {
+@media screen and (orientation: landscape) and (max-height: 500px) {
   .mobile-toolbar {
     padding: 4px;
   }
 
-  .toolbar-btn {
-    padding: 8px 12px;
-    font-size: 16px;
+  .mobile-tool-btn {
+    height: 36px;
+    min-width: 36px;
   }
 
-  .cell {
+  .mobile-grid th,
+  .mobile-grid td {
     height: 32px;
-    padding: 6px;
+    padding: 4px;
   }
 
-  .mobile-nav {
-    padding: 6px;
-  }
-}
-
-/* Small phones */
-@media (max-width: 375px) {
-  .cell {
-    min-width: 60px;
-    font-size: 12px;
+  .mobile-bottom-nav {
+    padding: 4px 0;
   }
 
-  .col-header {
-    min-width: 60px;
-    font-size: 11px;
+  .nav-btn {
+    padding: 4px;
   }
-
-  .row-header {
-    width: 35px;
-    min-width: 35px;
-    font-size: 11px;
-  }
-}
-
-/* Disable text selection on mobile */
-.mobile-spreadsheet * {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.mobile-spreadsheet input {
-  -webkit-user-select: text;
-  -khtml-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
 }

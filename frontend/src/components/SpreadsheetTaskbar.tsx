@@ -164,6 +164,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
       label: 'Blockchain',
       items: [
         { label: '$BSHEETS Token', href: '/token' },
+        { label: 'Contributions', href: '/contributions' },
         { divider: true },
         { label: 'Encrypt Spreadsheet', shortcut: '⌘L', action: () => console.log('Encrypt') },
         { label: 'Decrypt Spreadsheet', action: () => console.log('Decrypt') },
@@ -249,6 +250,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
         { label: 'BSV SDK Docs', href: 'https://docs.bsvblockchain.org' },
         { label: 'HandCash SDK Docs', href: 'https://docs.handcash.io' },
         { label: '$BSHEETS Token', href: '/token' },
+        { label: 'Contributions', href: '/contributions' },
         { divider: true },
         { label: 'GitHub Repository', href: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet' },
         { label: 'API Documentation', action: () => console.log('API Documentation') },

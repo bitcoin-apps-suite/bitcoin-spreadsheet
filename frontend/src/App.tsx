@@ -14,6 +14,7 @@ import BapsPage from './pages/BapsPage';
 import ExchangePage from './pages/ExchangePage';
 import ThreeDPage from './pages/ThreeDPage';
 import TokenPage from './pages/TokenPage';
+import ContributionsPage from './pages/ContributionsPage';
 import ClaudeChat from './components/ClaudeChat';
 import SpreadsheetTaskbar from './components/SpreadsheetTaskbar';
 import SpreadsheetExchangeView from './components/SpreadsheetExchangeView';
@@ -195,6 +196,7 @@ function App() {
       <Route path="/exchange" element={<ExchangePage />} />
       <Route path="/3d" element={<ThreeDPage />} />
       <Route path="/token" element={<TokenPage />} />
+      <Route path="/contributions" element={<ContributionsPage />} />
       <Route path="/auth/handcash/callback" element={<HandCashCallback />} />
       <Route path="/*" element={
         isLoading ? (

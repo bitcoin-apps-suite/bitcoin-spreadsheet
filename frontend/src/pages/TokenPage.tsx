@@ -272,7 +272,7 @@ const TokenPage: React.FC = () => {
           <h2>Ready to Build the Future of Spreadsheets?</h2>
           <div className="cta-buttons">
             <a 
-              href="https://github.com/b0ase/bitcoin-spreadsheet" 
+              href="https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet" 
               target="_blank" 
               rel="noopener noreferrer"
               className="cta-btn primary"

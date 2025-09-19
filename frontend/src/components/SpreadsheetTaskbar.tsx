@@ -250,7 +250,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
         { label: 'HandCash SDK Docs', href: 'https://docs.handcash.io' },
         { label: '$BSHEETS Token', href: '/token' },
         { divider: true },
-        { label: 'GitHub Repository', href: 'https://github.com/b0ase/blockchain-spreadsheet' },
+        { label: 'GitHub Repository', href: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet' },
         { label: 'API Documentation', action: () => console.log('API Documentation') },
         { divider: true },
         { label: 'Bitcoin Writer', href: 'https://bitcoin-writer.vercel.app' },
@@ -279,7 +279,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
         { label: 'Release Notes', href: '/releases' },
         { label: 'What\'s New', action: () => alert('What\'s New in v1.0:\n\n• Handsontable integration\n• Dark mode support\n• Formula support with HyperFormula\n• Blockchain storage\n• HandCash authentication') },
         { divider: true },
-        { label: 'Report an Issue', href: 'https://github.com/b0ase/blockchain-spreadsheet/issues' },
+        { label: 'Report an Issue', href: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues' },
         { label: 'Contact @b0ase', href: 'https://twitter.com/b0ase' }
       ]
     }

@@ -449,7 +449,7 @@ const manifest = {
                   </div>
                   <div className="menu-separator" />
                   <div className="menu-item" onClick={() => {
-                    window.open('https://github.com/b0ase/bitcoin-spreadsheet', '_blank');
+                    window.open('https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet', '_blank');
                     setIsMenuOpen(false);
                   }}>
                     <span>🔗</span> GitHub Repository
@@ -1133,7 +1133,7 @@ class FinancialDataAsset extends BAP.Asset {
               📄 BAP Executive Summary
             </a>
             <a 
-              href="https://github.com/b0ase/bitcoin-spreadsheet"
+              href="https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet"
               target="_blank"
               rel="noopener noreferrer"
               className="cta-button secondary large"
@@ -1156,7 +1156,7 @@ class FinancialDataAsset extends BAP.Asset {
               <a href="https://x.com/BitcoinSheets" target="_blank" rel="noopener noreferrer">
                 Twitter
               </a>
-              <a href="https://github.com/b0ase/bitcoin-spreadsheet" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet" target="_blank" rel="noopener noreferrer">
                 GitHub
               </a>
               <button onClick={() => navigate('/bitcoin-spreadsheet')}>

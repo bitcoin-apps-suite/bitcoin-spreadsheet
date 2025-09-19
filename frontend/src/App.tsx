@@ -231,64 +231,149 @@ function App() {
               isDarkMode={isDarkMode}
             />
             <header className="App-header">
-              <div className="connection-badge" onClick={() => setShowConnectionsModal(true)}>
-                {connectedServices.length === 0 ? (
-                  <button className="connect-badge-btn">
-                    Connect
-                  </button>
-                ) : (
-                  <>
-                    <div className="connected-avatars">
-                      {connectedServices.slice(0, 3).map((service, index) => (
-                        <div 
-                          key={service} 
-                          className="service-avatar" 
-                          style={{ 
-                            marginLeft: index > 0 ? '-8px' : '0',
-                            zIndex: 3 - index 
-                          }}
-                          title={service}
-                        >
-                          {service === 'HandCash' ? (
-                            <img src="https://handcash.io/favicon.ico" alt="HandCash" />
-                          ) : service === 'Salesforce' ? (
-                            <div className="avatar-icon salesforce">S</div>
-                          ) : service === 'Stripe' ? (
-                            <div className="avatar-icon stripe">$</div>
-                          ) : service === 'Google Sheets' ? (
-                            <div className="avatar-icon sheets">G</div>
-                          ) : service === 'QuickBooks' ? (
-                            <div className="avatar-icon quickbooks">Q</div>
-                          ) : (
-                            <div className="avatar-icon default">{service.charAt(0)}</div>
+              {/* Mobile header layout - only on mobile */}
+              <div className="mobile-header-wrapper">
+                <div className="mobile-header-title">
+                  <h1>
+                    <img 
+                      src="/bitcoin-watercolor-icon.png" 
+                      alt="Bitcoin" 
+                      className="bitcoin-icon-beveled"
+                      style={{ width: '40px', height: '40px', marginRight: '16px', verticalAlign: 'middle' }}
+                    />
+                    <span className="bitcoin-orange">Bitcoin</span> Spreadsheet
+                  </h1>
+                </div>
+                <div className="mobile-header-connections">
+                  <div className="connection-badge" onClick={() => setShowConnectionsModal(true)}>
+                    {connectedServices.length === 0 ? (
+                      <button className="connect-badge-btn">
+                        Connect
+                      </button>
+                    ) : (
+                      <>
+                        <div className="connected-avatars">
+                          {connectedServices.slice(0, 3).map((service, index) => (
+                            <div 
+                              key={service} 
+                              className="service-avatar" 
+                              style={{ 
+                                marginLeft: index > 0 ? '-8px' : '0',
+                                zIndex: 3 - index 
+                              }}
+                              title={service}
+                            >
+                              {service === 'HandCash' ? (
+                                <img src="https://handcash.io/favicon.ico" alt="HandCash" />
+                              ) : service === 'Salesforce' ? (
+                                <div className="avatar-icon salesforce">S</div>
+                              ) : service === 'Stripe' ? (
+                                <div className="avatar-icon stripe">$</div>
+                              ) : service === 'Google Sheets' ? (
+                                <div className="avatar-icon sheets">G</div>
+                              ) : service === 'QuickBooks' ? (
+                                <div className="avatar-icon quickbooks">Q</div>
+                              ) : (
+                                <div className="avatar-icon default">{service.charAt(0)}</div>
+                              )}
+                            </div>
+                          ))}
+                          {connectedServices.length > 3 && (
+                            <div 
+                              className="service-avatar more-count" 
+                              style={{ marginLeft: '-8px', zIndex: 0 }}
+                            >
+                              <span>+{connectedServices.length - 3}</span>
+                            </div>
                           )}
                         </div>
-                      ))}
-                      {connectedServices.length > 3 && (
-                        <div 
-                          className="service-avatar more-count" 
-                          style={{ marginLeft: '-8px', zIndex: 0 }}
-                        >
-                          <span>+{connectedServices.length - 3}</span>
-                        </div>
-                      )}
+                        <span className="connection-count">
+                          {connectedServices.length} connected
+                        </span>
+                      </>
+                    )}
+                  </div>
+                  {/* Mobile user section */}
+                  {isAuthenticated && currentUser && (
+                    <div className="mobile-user-section">
+                      <div className="handcash-user-badge">
+                        <img 
+                          src="https://handcash.io/favicon.ico" 
+                          alt="HandCash" 
+                          className="handcash-user-icon"
+                        />
+                        <span className="user-handle">@{currentUser.handle}</span>
+                        <div className="connection-dot"></div>
+                      </div>
+                      <button className="mobile-logout-btn" onClick={handleLogout}>
+                        Exit
+                      </button>
                     </div>
-                    <span className="connection-count">
-                      {connectedServices.length} connected
-                    </span>
-                  </>
-                )}
+                  )}
+                </div>
               </div>
-              <h1>
-                <img 
-                  src="/bitcoin-watercolor-icon.png" 
-                  alt="Bitcoin" 
-                  className="bitcoin-icon-beveled"
-                  style={{ width: '40px', height: '40px', marginRight: '16px', verticalAlign: 'middle' }}
-                />
-                <span className="bitcoin-orange">Bitcoin</span> Spreadsheet
-              </h1>
-              <p className="app-subtitle">Secure, encrypted spreadsheets on the blockchain</p>
+
+              {/* Desktop header layout - hidden on mobile */}
+              <div className="desktop-header-wrapper">
+                <div className="connection-badge" onClick={() => setShowConnectionsModal(true)}>
+                  {connectedServices.length === 0 ? (
+                    <button className="connect-badge-btn">
+                      Connect
+                    </button>
+                  ) : (
+                    <>
+                      <div className="connected-avatars">
+                        {connectedServices.slice(0, 3).map((service, index) => (
+                          <div 
+                            key={service} 
+                            className="service-avatar" 
+                            style={{ 
+                              marginLeft: index > 0 ? '-8px' : '0',
+                              zIndex: 3 - index 
+                            }}
+                            title={service}
+                          >
+                            {service === 'HandCash' ? (
+                              <img src="https://handcash.io/favicon.ico" alt="HandCash" />
+                            ) : service === 'Salesforce' ? (
+                              <div className="avatar-icon salesforce">S</div>
+                            ) : service === 'Stripe' ? (
+                              <div className="avatar-icon stripe">$</div>
+                            ) : service === 'Google Sheets' ? (
+                              <div className="avatar-icon sheets">G</div>
+                            ) : service === 'QuickBooks' ? (
+                              <div className="avatar-icon quickbooks">Q</div>
+                            ) : (
+                              <div className="avatar-icon default">{service.charAt(0)}</div>
+                            )}
+                          </div>
+                        ))}
+                        {connectedServices.length > 3 && (
+                          <div 
+                            className="service-avatar more-count" 
+                            style={{ marginLeft: '-8px', zIndex: 0 }}
+                          >
+                            <span>+{connectedServices.length - 3}</span>
+                          </div>
+                        )}
+                      </div>
+                      <span className="connection-count">
+                        {connectedServices.length} connected
+                      </span>
+                    </>
+                  )}
+                </div>
+                <h1>
+                  <img 
+                    src="/bitcoin-watercolor-icon.png" 
+                    alt="Bitcoin" 
+                    className="bitcoin-icon-beveled"
+                    style={{ width: '40px', height: '40px', marginRight: '16px', verticalAlign: 'middle' }}
+                  />
+                  <span className="bitcoin-orange">Bitcoin</span> Spreadsheet
+                </h1>
+                <p className="app-subtitle">Secure, encrypted spreadsheets on the blockchain</p>
+              </div>
               
               {/* Desktop user info (top right) */}
               <div className="user-info desktop-user-info">

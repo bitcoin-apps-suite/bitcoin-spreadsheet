@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { HandCashService, HandCashUser } from '../services/HandCashService';
 import { BitcoinService } from '../services/BitcoinService';
 import './EnhancedConnectionsModal.css';
+import './EnhancedConnectionsModal.mobile.css';
 
 interface EnhancedConnectionsModalProps {
   isOpen: boolean;

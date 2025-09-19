@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SpreadsheetUtils } from '../utils/SpreadsheetUtils';
-import DevServerApplet from './DevServerApplet';
 
 interface MenuItem {
   label?: string;
@@ -373,8 +372,12 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
             padding: '8px 0',
             zIndex: 1000
           }}>
-            <button
+            <a
+              href="https://www.bitcoinapps.store"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
+                display: 'block',
                 width: '100%',
                 padding: '8px 16px',
                 fontSize: '12px',
@@ -386,32 +389,33 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
                 cursor: 'pointer',
                 textAlign: 'left',
                 fontWeight: '600',
-                transition: 'background 0.15s ease'
+                transition: 'background 0.15s ease',
+                textDecoration: 'none'
               }}
               onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(25, 118, 210, 0.1)'}
               onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
             >
-              Bitcoin Apps
-            </button>
+              Bitcoin Apps →
+            </a>
             
             {[
-              { name: 'Bitcoin Auth', color: '#ef4444' },
-              { name: 'Bitcoin Chat', color: '#ff6500' },
-              { name: 'Bitcoin Domains', color: '#eab308' },
-              { name: 'Bitcoin Draw', color: '#10b981' },
+              { name: 'Bitcoin Auth', color: '#666666', comingSoon: true },
+              { name: 'Bitcoin Chat', color: '#666666', comingSoon: true },
+              { name: 'Bitcoin Domains', color: '#666666', comingSoon: true },
+              { name: 'Bitcoin Draw', color: '#666666', comingSoon: true },
               { name: 'Bitcoin Drive', color: '#22c55e', href: 'https://bitcoin-drive.vercel.app' },
               { name: 'Bitcoin Email', color: '#06b6d4' },
-              { name: 'Bitcoin Exchange', color: '#3b82f6' },
-              { name: 'Bitcoin Music', color: '#8b5cf6' },
-              { name: 'Bitcoin Paint', color: '#a855f7' },
-              { name: 'Bitcoin Pics', color: '#ec4899' },
-              { name: 'Bitcoin Registry', color: '#f43f5e' },
-              { name: 'Bitcoin Shares', color: '#f43f5e' },
+              { name: 'Bitcoin Exchange', color: '#666666', comingSoon: true },
+              { name: 'Bitcoin Music', color: '#666666', comingSoon: true },
+              { name: 'Bitcoin Paint', color: '#666666', comingSoon: true },
+              { name: 'Bitcoin Pics', color: '#666666', comingSoon: true },
+              { name: 'Bitcoin Registry', color: '#666666', comingSoon: true },
+              { name: 'Bitcoin Shares', color: '#666666', comingSoon: true },
               { name: 'Bitcoin Spreadsheets', color: '#3b82f6', active: true },
-              { name: 'Bitcoin Video', color: '#65a30d' },
-              { name: 'Bitcoin Wallet', color: '#f59e0b' },
+              { name: 'Bitcoin Video', color: '#666666', comingSoon: true },
+              { name: 'Bitcoin Wallet', color: '#666666', comingSoon: true },
               { name: 'Bitcoin Writer', color: '#1976d2', href: 'https://bitcoin-writer.vercel.app' }
-            ].map((app) => (
+            ].map((app: any) => (
               app.href ? (
                 <a
                   key={app.name}
@@ -440,30 +444,33 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
                 <button
                   key={app.name}
                   onClick={() => {
-                    if (!app.active) {
+                    if (!app.active && !app.comingSoon) {
                       console.log(`Opening ${app.name}`);
                     }
-                    setShowBitcoinSuite(false);
+                    if (!app.comingSoon) {
+                      setShowBitcoinSuite(false);
+                    }
                   }}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     padding: '6px 16px',
-                    color: '#ffffff',
+                    color: app.comingSoon ? '#666666' : '#ffffff',
                     background: app.active ? 'rgba(255, 149, 0, 0.15)' : 'transparent',
                     border: 'none',
                     width: '100%',
                     textAlign: 'left',
                     fontSize: '13px',
                     transition: 'background 0.15s ease',
-                    cursor: app.active ? 'default' : 'pointer'
+                    cursor: app.active ? 'default' : (app.comingSoon ? 'not-allowed' : 'pointer')
                   }}
-                  onMouseEnter={(e) => !app.active && (e.currentTarget.style.background = 'rgba(128, 128, 128, 0.2)')}
-                  onMouseLeave={(e) => !app.active && (e.currentTarget.style.background = 'transparent')}
-                  disabled={app.active}
+                  onMouseEnter={(e) => !app.active && !app.comingSoon && (e.currentTarget.style.background = 'rgba(128, 128, 128, 0.2)')}
+                  onMouseLeave={(e) => !app.active && !app.comingSoon && (e.currentTarget.style.background = 'transparent')}
+                  disabled={app.active || app.comingSoon}
                 >
-                  <span style={{ color: app.color, marginRight: '12px', fontSize: '16px', fontWeight: 'bold' }}>₿</span>
-                  {app.name}
+                  <span style={{ color: app.color, marginRight: '12px', fontSize: '16px', fontWeight: 'bold', opacity: app.comingSoon ? 0.5 : 1 }}>₿</span>
+                  <span style={{ flex: 1 }}>{app.name}</span>
+                  {app.comingSoon && <span style={{ fontSize: '10px', opacity: 0.5, marginLeft: 'auto' }}>(coming soon)</span>}
                   {app.active && <span style={{ marginLeft: 'auto', fontSize: '10px', opacity: 0.6 }}>●</span>}
                 </button>
               )
@@ -596,15 +603,104 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
         marginLeft: 'auto',
         display: 'flex',
         alignItems: 'center',
-        gap: '16px',
+        gap: '20px',
         paddingRight: '16px',
         fontSize: '12px',
         color: 'rgba(255, 255, 255, 0.8)'
       }}>
-        {/* Dev Server Applet - Only show in development */}
-        {process.env.NODE_ENV === 'development' && (
-          <DevServerApplet className="taskbar-item" />
-        )}
+        {/* Quick Links */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          {/* GitHub */}
+          <a
+            href="https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              textDecoration: 'none',
+              opacity: 0.9,
+              transition: 'opacity 0.2s ease'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+            onMouseLeave={(e) => e.currentTarget.style.opacity = '0.9'}
+            title="GitHub Repository"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+          </a>
+          
+          {/* Docs */}
+          <a
+            href="/bap"
+            style={{
+              color: '#ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              textDecoration: 'none',
+              opacity: 0.9,
+              transition: 'opacity 0.2s ease'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+            onMouseLeave={(e) => e.currentTarget.style.opacity = '0.9'}
+            title="Developer Docs"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <path d="M14 2v6h6"/>
+              <path d="M16 13H8"/>
+              <path d="M16 17H8"/>
+              <path d="M10 9H8"/>
+            </svg>
+          </a>
+          
+          {/* Token */}
+          <a
+            href="/token"
+            style={{
+              color: '#ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              textDecoration: 'none',
+              opacity: 0.9,
+              transition: 'opacity 0.2s ease'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+            onMouseLeave={(e) => e.currentTarget.style.opacity = '0.9'}
+            title="$BSHEETS Token"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2"/>
+              <path d="M12 6v12M9 9h6c0.83 0 1.5.67 1.5 1.5S15.83 12 15 12H9h6c0.83 0 1.5.67 1.5 1.5S15.83 15 15 15H9" stroke="currentColor" strokeWidth="2" fill="none"/>
+            </svg>
+          </a>
+          
+          {/* Leaderboard */}
+          <a
+            href="/contributions"
+            style={{
+              color: '#ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              textDecoration: 'none',
+              opacity: 0.9,
+              transition: 'opacity 0.2s ease'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+            onMouseLeave={(e) => e.currentTarget.style.opacity = '0.9'}
+            title="Contributors Leaderboard"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="11" width="4" height="10" rx="1"/>
+              <rect x="10" y="6" width="4" height="15" rx="1"/>
+              <rect x="17" y="8" width="4" height="13" rx="1"/>
+            </svg>
+          </a>
+        </div>
+
+        <div style={{ width: '1px', height: '16px', background: 'rgba(255, 255, 255, 0.2)' }} />
         
         {/* Connection Status */}
         {isAuthenticated && currentUser ? (

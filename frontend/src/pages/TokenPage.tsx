@@ -13,7 +13,9 @@ const TokenPage: React.FC = () => {
       <div className="token-container">
         {/* Hero Section */}
         <section className="token-hero">
-          <h1 style={{color: '#ffffff'}}>The Bitcoin Spreadsheet Token</h1>
+          <h1 style={{color: '#ffffff'}}>
+            The <span style={{color: '#1976d2'}}>Bitcoin</span> Spreadsheet Token
+          </h1>
           <p className="token-tagline">
             Open-source spreadsheets meet sustainable blockchain economics
           </p>

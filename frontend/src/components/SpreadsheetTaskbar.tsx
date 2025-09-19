@@ -599,8 +599,10 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
         fontSize: '12px',
         color: 'rgba(255, 255, 255, 0.8)'
       }}>
-        {/* Dev Server Applet */}
-        <DevServerApplet className="taskbar-item" />
+        {/* Dev Server Applet - Only show in development */}
+        {process.env.NODE_ENV === 'development' && (
+          <DevServerApplet className="taskbar-item" />
+        )}
         
         {/* Connection Status */}
         {isAuthenticated && currentUser ? (

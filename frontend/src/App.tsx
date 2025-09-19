@@ -234,7 +234,10 @@ function App() {
               {/* Mobile header layout - only on mobile */}
               <div className="mobile-header-wrapper">
                 <div className="mobile-header-title">
-                  <h1>
+                  <h1 
+                    onClick={() => navigate('/')}
+                    style={{ cursor: 'pointer' }}
+                  >
                     <img 
                       src="/bitcoin-watercolor-icon.png" 
                       alt="Bitcoin" 
@@ -363,7 +366,10 @@ function App() {
                     </>
                   )}
                 </div>
-                <h1>
+                <h1
+                  onClick={() => navigate('/')}
+                  style={{ cursor: 'pointer' }}
+                >
                   <img 
                     src="/bitcoin-watercolor-icon.png" 
                     alt="Bitcoin" 

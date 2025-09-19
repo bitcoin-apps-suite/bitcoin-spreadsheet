@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SpreadsheetUtils } from '../utils/SpreadsheetUtils';
+import DevServerApplet from './DevServerApplet';
 
 interface MenuItem {
   label?: string;
@@ -162,6 +163,8 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
     {
       label: 'Blockchain',
       items: [
+        { label: '$BSHEETS Token', href: '/token' },
+        { divider: true },
         { label: 'Encrypt Spreadsheet', shortcut: '⌘L', action: () => console.log('Encrypt') },
         { label: 'Decrypt Spreadsheet', action: () => console.log('Decrypt') },
         { divider: true },
@@ -245,6 +248,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
       items: [
         { label: 'BSV SDK Docs', href: 'https://docs.bsvblockchain.org' },
         { label: 'HandCash SDK Docs', href: 'https://docs.handcash.io' },
+        { label: '$BSHEETS Token', href: '/token' },
         { divider: true },
         { label: 'GitHub Repository', href: 'https://github.com/b0ase/blockchain-spreadsheet' },
         { label: 'API Documentation', action: () => console.log('API Documentation') },
@@ -595,6 +599,9 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
         fontSize: '12px',
         color: 'rgba(255, 255, 255, 0.8)'
       }}>
+        {/* Dev Server Applet */}
+        <DevServerApplet className="taskbar-item" />
+        
         {/* Connection Status */}
         {isAuthenticated && currentUser ? (
           <>

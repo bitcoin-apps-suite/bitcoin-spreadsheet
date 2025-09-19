@@ -1,13 +1,19 @@
 import React from 'react';
 import './TokenPage.css';
+import SpreadsheetTaskbar from '../components/SpreadsheetTaskbar';
 
 const TokenPage: React.FC = () => {
   return (
     <div className="token-page">
+      <SpreadsheetTaskbar 
+        isAuthenticated={false}
+        currentUser={null}
+        onLogout={() => {}}
+      />
       <div className="token-container">
         {/* Hero Section */}
         <section className="token-hero">
-          <h1><span style={{color: '#ffffff'}}>The</span> Bitcoin Spreadsheet <span style={{color: '#ffffff'}}>Token</span></h1>
+          <h1 style={{color: '#ffffff'}}>The Bitcoin Spreadsheet Token</h1>
           <p className="token-tagline">
             Open-source spreadsheets meet sustainable blockchain economics
           </p>

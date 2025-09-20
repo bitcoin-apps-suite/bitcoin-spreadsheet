@@ -5,6 +5,7 @@ import Toolbar from './Toolbar';
 import StorageOptionsModal from './StorageOptionsModal';
 import TokenizationModal from './TokenizationModal';
 import AdvancedSpreadsheet from './AdvancedSpreadsheet';
+import SpreadsheetExchangeView from './SpreadsheetExchangeView';
 import { 
   StorageOption, 
   SpreadsheetPricingBreakdown,
@@ -37,6 +38,7 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
   const [showTokenizationModal, setShowTokenizationModal] = useState(false);
   const [useCellAddresses, setUseCellAddresses] = useState(false);
   const [is3DView, setIs3DView] = useState(false);
+  const [showExchangeView, setShowExchangeView] = useState(true); // Show exchange by default
   const gridRef = useRef<HTMLDivElement>(null);
 
   // Handle per-cell address toggle
@@ -84,6 +86,19 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
       window.removeEventListener('openTokenizationModal', handleOpenTokenization as EventListener);
     };
   }, [spreadsheet]);
+
+  // Listen for exchange open event
+  useEffect(() => {
+    const handleOpenExchange = () => {
+      setShowExchangeView(true);
+    };
+
+    window.addEventListener('openSpreadsheetExchange', handleOpenExchange);
+    
+    return () => {
+      window.removeEventListener('openSpreadsheetExchange', handleOpenExchange);
+    };
+  }, []);
 
   const getCellKey = (row: number, col: number): string => {
     return `${row}-${col}`;
@@ -365,7 +380,17 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
         onToggleCellAddresses={handleToggleCellAddresses}
       />
 
-      {
+      {showExchangeView ? (
+        <SpreadsheetExchangeView
+          onClose={() => setShowExchangeView(false)}
+          onSelectSpreadsheet={(selectedSpreadsheet) => {
+            // When a spreadsheet is selected from the exchange, load it
+            console.log('Selected spreadsheet from exchange:', selectedSpreadsheet);
+            setShowExchangeView(false);
+            // You could load the selected spreadsheet data here
+          }}
+        />
+      ) : (
         <AdvancedSpreadsheet
           bitcoinService={bitcoinService}
           spreadsheet={spreadsheet}
@@ -383,7 +408,7 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
           }}
           onNewSpreadsheet={onNewSpreadsheet}
         />
-      }
+      )}
 
       {/* Status bar with save button and cost display */}
       <div className="status-bar">

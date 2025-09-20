@@ -321,7 +321,7 @@ const SpreadsheetExchangeView: React.FC<SpreadsheetExchangeViewProps> = ({
                   fontWeight: 'bold'
                 }}
               >
-                Go to Spreadsheet Editor
+                ← Back to Editor
               </button>
             )}
           </div>

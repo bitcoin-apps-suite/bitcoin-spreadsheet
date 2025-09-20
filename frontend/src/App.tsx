@@ -32,7 +32,7 @@ function App() {
   const [currentSpreadsheet, setCurrentSpreadsheet] = useState<SpreadsheetData | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
   const [isClaudeChatOpen, setIsClaudeChatOpen] = useState(false);
-  const [showExchange, setShowExchange] = useState(true); // Default to showing exchange
+  const [showExchange, setShowExchange] = useState(false);
   const [showConnectionsModal, setShowConnectionsModal] = useState(false);
   const [connectedServices, setConnectedServices] = useState<string[]>([]);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);

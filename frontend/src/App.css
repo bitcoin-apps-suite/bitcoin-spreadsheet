@@ -5,27 +5,48 @@
 }
 
 body {
-  background-color: #000000;
+  background: linear-gradient(135deg, #E3F2FD 0%, #FFFFFF 50%, #E1F5FE 100%);
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 .App {
   text-align: center;
-  background-color: #000000;
+  background: transparent;
   min-height: 100vh;
   color: #ffffff;
+  position: relative;
+}
+
+.App::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(144, 202, 249, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(129, 212, 250, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%,
+    rgba(100, 181, 246, 0.1) 100%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .App-header {
-  background: #000000;
-  color: #ffffff;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  color: #1976d2;
   padding: 24px 32px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(25, 118, 210, 0.1);
   position: relative;
+  box-shadow: 0 2px 12px rgba(25, 118, 210, 0.08);
 }
 
 /* Mobile/Desktop header wrappers */
@@ -50,9 +71,9 @@ body {
 .App-header h1 {
   margin: 0;
   font-size: 2rem;
-  font-weight: 200;
+  font-weight: 300;
   letter-spacing: -0.02em;
-  color: #ffffff;
+  color: #1976d2;
   position: relative;
   z-index: 1;
   text-align: center;
@@ -61,8 +82,8 @@ body {
 .app-subtitle {
   margin: 8px 0 0 0;
   font-size: 1rem;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+  color: rgba(25, 118, 210, 0.7);
   letter-spacing: 0.02em;
   text-align: center;
 }
@@ -413,15 +434,17 @@ main {
 
 .disclaimer {
   padding: 8px 32px;
-  background: rgba(255, 255, 255, 0.02);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(90deg, rgba(50, 50, 50, 0.95), rgba(70, 70, 70, 0.95), rgba(50, 50, 50, 0.95));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   text-align: center;
+  margin: 0 20px;
+  border-radius: 8px;
 }
 
 .disclaimer small {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.75rem;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 0.02em;
   line-height: 1.4;
 }
@@ -441,18 +464,26 @@ main {
 .main-container {
   background: #000000;
   min-height: calc(100vh - 172px);
+  margin: 20px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(25, 118, 210, 0.12),
+              0 0 0 1px rgba(25, 118, 210, 0.05);
 }
 
 .app-content {
   display: flex;
   height: calc(100vh - 172px);
   background: #000000;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .spreadsheet-wrapper {
   flex: 1;
   overflow: hidden;
   background: #000000;
+  border-radius: 0 16px 16px 0;
 }
 
 /* Bitcoin orange text styling */

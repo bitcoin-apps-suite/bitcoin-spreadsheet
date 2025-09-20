@@ -59,7 +59,7 @@ const SpreadsheetExchangeView: React.FC<SpreadsheetExchangeViewProps> = ({
   const [sidebarWidth, setSidebarWidth] = useState(320);
   const [isResizing, setIsResizing] = useState(false);
   const [isDarkMode] = useState(() => {
-    return document.body.classList.contains('dark-mode');
+    return true; // Default to dark mode
   });
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
@@ -321,7 +321,7 @@ const SpreadsheetExchangeView: React.FC<SpreadsheetExchangeViewProps> = ({
                   fontWeight: 'bold'
                 }}
               >
-                ← Back to Spreadsheet
+                Go to Spreadsheet Editor
               </button>
             )}
           </div>

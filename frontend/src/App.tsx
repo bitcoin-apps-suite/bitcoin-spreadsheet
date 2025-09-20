@@ -32,14 +32,14 @@ function App() {
   const [currentSpreadsheet, setCurrentSpreadsheet] = useState<SpreadsheetData | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
   const [isClaudeChatOpen, setIsClaudeChatOpen] = useState(false);
-  const [showExchange, setShowExchange] = useState(false);
+  const [showExchange, setShowExchange] = useState(true); // Default to showing exchange
   const [showConnectionsModal, setShowConnectionsModal] = useState(false);
   const [connectedServices, setConnectedServices] = useState<string[]>([]);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Check localStorage for saved preference
+    // Check localStorage for saved preference, default to true (dark mode)
     const savedMode = localStorage.getItem('darkMode');
-    return savedMode === 'true' || (!savedMode && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    return savedMode !== 'false'; // Default to true unless explicitly set to false
   });
   const navigate = useNavigate();
 
@@ -206,7 +206,7 @@ function App() {
             <div className="loading">Loading Bitcoin Spreadsheet...</div>
           </div>
         ) : (
-          <div className="App" style={{ paddingTop: '28px' }}>
+          <div className="App" style={{ paddingTop: isMobile ? '0' : '28px' }}>
             {/* Bitcoin Spreadsheet Taskbar */}
             <SpreadsheetTaskbar
               isAuthenticated={isAuthenticated}
@@ -547,7 +547,7 @@ function App() {
               </div>
             </header>
             <div className="disclaimer">
-              <small>This is a demonstration version. Use at your own risk. Blockchain transactions cannot be reversed.</small>
+              <small>This is a demonstration version. Use at your own risk.</small>
             </div>
             <main className="main-container">
               {bitcoinService ? (
@@ -616,12 +616,12 @@ function App() {
                 width: '60px',
                 height: '60px',
                 borderRadius: '50%',
-                background: 'linear-gradient(135deg, #FFA500, #FF8C00)',
+                background: 'linear-gradient(135deg, #87CEEB, #4682B4)',
                 border: 'none',
                 color: 'white',
                 fontSize: '24px',
                 cursor: 'pointer',
-                boxShadow: '0 4px 12px rgba(255, 165, 0, 0.3)',
+                boxShadow: '0 4px 12px rgba(135, 206, 235, 0.3)',
                 display: isClaudeChatOpen ? 'none' : 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

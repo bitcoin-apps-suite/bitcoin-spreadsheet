@@ -144,7 +144,7 @@
 
   .user-handle {
     font-size: 12px;
-    color: #F7931A;
+    color: #87CEEB;
   }
 
   .connection-dot {
@@ -422,7 +422,7 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #F7931A, #ff9500);
+    background: linear-gradient(135deg, #87CEEB, #4682B4);
     color: white;
     border: none;
     box-shadow: 0 4px 12px rgba(247, 147, 26, 0.4);
@@ -469,7 +469,7 @@
   }
 
   .mobile-nav button.active {
-    color: #F7931A;
+    color: #87CEEB;
   }
 
   .mobile-nav button svg {

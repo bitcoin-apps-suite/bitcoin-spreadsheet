@@ -45,6 +45,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [showBitcoinSuite, setShowBitcoinSuite] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const menus: MenuData[] = [
@@ -287,6 +288,15 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
   ];
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setActiveMenu(null);
@@ -312,6 +322,201 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
     }
   };
 
+  // Mobile taskbar
+  if (isMobile) {
+    return (
+      <div 
+        ref={menuRef}
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '56px',
+          background: '#0A0E27',
+          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-around',
+          padding: '0 8px',
+          zIndex: 10000
+        }}
+      >
+        {/* Mobile menu items */}
+        <button
+          onClick={() => setActiveMenu(activeMenu === 'file' ? null : 'file')}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            background: 'transparent',
+            border: 'none',
+            color: activeMenu === 'file' ? '#87CEEB' : 'rgba(255, 255, 255, 0.7)',
+            padding: '8px',
+            fontSize: '11px',
+            cursor: 'pointer'
+          }}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
+            <path d="M13 2v7h7"/>
+          </svg>
+          <span>File</span>
+        </button>
+
+        <button
+          onClick={() => setActiveMenu(activeMenu === 'edit' ? null : 'edit')}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            background: 'transparent',
+            border: 'none',
+            color: activeMenu === 'edit' ? '#87CEEB' : 'rgba(255, 255, 255, 0.7)',
+            padding: '8px',
+            fontSize: '11px',
+            cursor: 'pointer'
+          }}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+          </svg>
+          <span>Edit</span>
+        </button>
+
+        <button
+          onClick={() => window.dispatchEvent(new CustomEvent('openSpreadsheetExchange'))}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            background: 'transparent',
+            border: 'none',
+            color: 'rgba(255, 255, 255, 0.7)',
+            padding: '8px',
+            fontSize: '11px',
+            cursor: 'pointer'
+          }}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="8" r="7"/>
+            <path d="M12 1v14M5 5h14"/>
+            <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.11"/>
+          </svg>
+          <span>Exchange</span>
+        </button>
+
+        <button
+          onClick={toggleDarkMode}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            background: 'transparent',
+            border: 'none',
+            color: 'rgba(255, 255, 255, 0.7)',
+            padding: '8px',
+            fontSize: '11px',
+            cursor: 'pointer'
+          }}
+        >
+          {isDarkMode ? (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M14.46 14.46l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M14.46 9.54l4.24-4.24"/>
+            </svg>
+          ) : (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          )}
+          <span>Theme</span>
+        </button>
+
+        <button
+          onClick={() => setActiveMenu(activeMenu === 'more' ? null : 'more')}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            background: 'transparent',
+            border: 'none',
+            color: activeMenu === 'more' ? '#87CEEB' : 'rgba(255, 255, 255, 0.7)',
+            padding: '8px',
+            fontSize: '11px',
+            cursor: 'pointer'
+          }}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="1"/>
+            <circle cx="12" cy="5" r="1"/>
+            <circle cx="12" cy="19" r="1"/>
+          </svg>
+          <span>More</span>
+        </button>
+
+        {/* Mobile dropdown menus */}
+        {activeMenu && (
+          <div style={{
+            position: 'fixed',
+            bottom: '60px',
+            left: '8px',
+            right: '8px',
+            background: '#1a1a1a',
+            borderRadius: '12px 12px 0 0',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            maxHeight: '60vh',
+            overflowY: 'auto',
+            zIndex: 10001
+          }}>
+            <div style={{ padding: '12px' }}>
+              <h3 style={{ margin: '0 0 12px 0', fontSize: '14px', color: '#87CEEB' }}>
+                {activeMenu === 'file' ? 'File' : 
+                 activeMenu === 'edit' ? 'Edit' : 
+                 activeMenu === 'more' ? 'More Options' : activeMenu}
+              </h3>
+              {activeMenu === 'file' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <button onClick={() => { onNewSpreadsheet?.(); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>New Spreadsheet</button>
+                  <button onClick={() => { onSaveSpreadsheet?.(); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>Save</button>
+                  <button onClick={() => { onImport?.(); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>Import</button>
+                  <button onClick={() => { onExport?.(); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>Export</button>
+                </div>
+              )}
+              {activeMenu === 'edit' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <button onClick={() => { SpreadsheetUtils.undo(); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>Undo</button>
+                  <button onClick={() => { SpreadsheetUtils.redo(); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>Redo</button>
+                  <button onClick={() => { SpreadsheetUtils.copySelection(); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>Copy</button>
+                  <button onClick={() => { SpreadsheetUtils.pasteSelection(); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>Paste</button>
+                </div>
+              )}
+              {activeMenu === 'more' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <button onClick={() => { navigate('/docs'); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>Documentation</button>
+                  <button onClick={() => { navigate('/token'); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>$BSHEETS Token</button>
+                  <button onClick={() => { navigate('/contributions'); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>Contributions</button>
+                  {isAuthenticated ? (
+                    <button onClick={() => { onLogout(); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 0, 0, 0.1)', border: 'none', borderRadius: '8px', color: '#ff6666', textAlign: 'left' }}>Sign Out</button>
+                  ) : (
+                    <button onClick={() => { document.querySelector<HTMLButtonElement>('.login-btn')?.click(); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(66, 133, 244, 0.1)', border: 'none', borderRadius: '8px', color: '#4285F4', textAlign: 'left' }}>Sign In</button>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Desktop taskbar
   return (
     <div 
       ref={menuRef}

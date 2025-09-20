@@ -38,7 +38,7 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
   const [showTokenizationModal, setShowTokenizationModal] = useState(false);
   const [useCellAddresses, setUseCellAddresses] = useState(false);
   const [is3DView, setIs3DView] = useState(false);
-  const [showExchangeView, setShowExchangeView] = useState(true); // Show exchange by default
+  const [showExchangeView, setShowExchangeView] = useState(false); // Show spreadsheet by default
   const gridRef = useRef<HTMLDivElement>(null);
 
   // Handle per-cell address toggle

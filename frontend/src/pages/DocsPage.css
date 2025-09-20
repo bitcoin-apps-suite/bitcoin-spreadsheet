@@ -1,0 +1,423 @@
+/* Docs Page Styles */
+.docs-page {
+  background: #0A0E27;
+  color: #ffffff;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  padding-top: 28px;
+}
+
+.docs-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Header */
+.docs-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.docs-header h1 {
+  font-size: 48px;
+  font-weight: 300;
+  margin: 0 0 16px 0;
+  background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.docs-subtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* Navigation */
+.docs-nav {
+  background: rgba(25, 118, 210, 0.1);
+  border: 1px solid rgba(25, 118, 210, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+.docs-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.docs-nav a {
+  color: #1976d2;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.docs-nav a:hover {
+  background: rgba(25, 118, 210, 0.1);
+  color: #42a5f5;
+}
+
+/* Content Sections */
+.docs-content {
+  line-height: 1.6;
+}
+
+.docs-section {
+  margin-bottom: 60px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.docs-section:last-child {
+  border-bottom: none;
+}
+
+.docs-section h2 {
+  font-size: 32px;
+  font-weight: 300;
+  margin: 0 0 30px 0;
+  color: #1976d2;
+}
+
+.docs-section h3 {
+  font-size: 24px;
+  font-weight: 400;
+  margin: 30px 0 15px 0;
+  color: #ffffff;
+}
+
+.docs-section h4 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 20px 0 10px 0;
+  color: #42a5f5;
+}
+
+.docs-section p {
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.docs-section ul {
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+
+.docs-section li {
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Feature Grid */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin: 30px 0;
+}
+
+.feature-card {
+  background: rgba(15, 19, 41, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  border-color: rgba(25, 118, 210, 0.3);
+  transform: translateY(-2px);
+}
+
+.feature-card h3 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.feature-card p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Tokenomics */
+.tokenomics-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin: 30px 0;
+}
+
+.token-stat {
+  text-align: center;
+  background: rgba(25, 118, 210, 0.1);
+  border: 1px solid rgba(25, 118, 210, 0.2);
+  border-radius: 12px;
+  padding: 30px 20px;
+}
+
+.token-stat h3 {
+  font-size: 36px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #1976d2;
+}
+
+.token-stat p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.tokenomics-details {
+  background: rgba(15, 19, 41, 0.4);
+  border-radius: 12px;
+  padding: 30px;
+  margin: 30px 0;
+}
+
+/* Workflow Steps */
+.workflow-steps {
+  margin: 30px 0;
+}
+
+.workflow-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 30px;
+  padding: 24px;
+  background: rgba(15, 19, 41, 0.4);
+  border-radius: 12px;
+  border-left: 4px solid #1976d2;
+}
+
+.step-number {
+  background: #1976d2;
+  color: #ffffff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.step-content h3 {
+  margin: 0 0 8px 0;
+  color: #ffffff;
+}
+
+.step-content p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.step-content a {
+  color: #1976d2;
+  text-decoration: none;
+}
+
+.step-content a:hover {
+  color: #42a5f5;
+  text-decoration: underline;
+}
+
+/* Development Info */
+.development-info {
+  margin: 30px 0;
+}
+
+.code-block {
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  overflow-x: auto;
+}
+
+.code-block pre {
+  margin: 0;
+  color: #e0e0e0;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Contributing */
+.contribution-types {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin: 30px 0;
+}
+
+.contrib-category {
+  background: rgba(15, 19, 41, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.contrib-category h4 {
+  margin: 0 0 16px 0;
+  color: #1976d2;
+  font-size: 18px;
+}
+
+.contrib-category ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.contrib-category li {
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* API Reference */
+.api-section {
+  margin: 30px 0;
+  background: rgba(15, 19, 41, 0.4);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.api-section h4 {
+  margin: 0 0 12px 0;
+  color: #1976d2;
+}
+
+.api-section p {
+  margin: 0 0 16px 0;
+}
+
+/* Roadmap */
+.roadmap {
+  margin: 30px 0;
+}
+
+.roadmap-phase {
+  background: rgba(15, 19, 41, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 24px;
+}
+
+.roadmap-phase h3 {
+  margin: 0 0 20px 0;
+  color: #1976d2;
+  font-size: 20px;
+}
+
+.roadmap-phase ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.roadmap-phase li {
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Quick Links */
+.quick-links {
+  margin: 60px 0 0 0;
+  padding: 40px 0 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.quick-links h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #1976d2;
+}
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.link-card {
+  background: rgba(25, 118, 210, 0.1);
+  border: 1px solid rgba(25, 118, 210, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.link-card:hover {
+  background: rgba(25, 118, 210, 0.15);
+  border-color: rgba(25, 118, 210, 0.4);
+  transform: translateY(-2px);
+}
+
+.link-card h3 {
+  margin: 0 0 8px 0;
+  color: #1976d2;
+  font-size: 18px;
+}
+
+.link-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .docs-container {
+    padding: 20px 16px;
+  }
+  
+  .docs-header h1 {
+    font-size: 36px;
+  }
+  
+  .docs-nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .feature-grid,
+  .tokenomics-overview,
+  .contribution-types,
+  .links-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .workflow-step {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .code-block {
+    padding: 16px;
+  }
+  
+  .code-block pre {
+    font-size: 12px;
+  }
+}

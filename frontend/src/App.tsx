@@ -11,6 +11,7 @@ import EnhancedConnectionsModal from './components/EnhancedConnectionsModal';
 import HandCashCallback from './components/HandCashCallback';
 import BitcoinSpreadsheetPage from './pages/BitcoinSpreadsheetPage';
 import BapsPage from './pages/BapsPage';
+import DocsPage from './pages/DocsPage';
 import ExchangePage from './pages/ExchangePage';
 import ThreeDPage from './pages/ThreeDPage';
 import TokenPage from './pages/TokenPage';
@@ -193,6 +194,7 @@ function App() {
       <Route path="/bitcoin-spreadsheet" element={<BitcoinSpreadsheetPage />} />
       <Route path="/bap" element={<BapsPage />} />
       <Route path="/developers" element={<BapsPage />} /> {/* Keep for backwards compatibility */}
+      <Route path="/docs" element={<DocsPage />} />
       <Route path="/exchange" element={<ExchangePage />} />
       <Route path="/3d" element={<ThreeDPage />} />
       <Route path="/token" element={<TokenPage />} />

@@ -634,7 +634,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
           
           {/* Docs */}
           <a
-            href="/bap"
+            href="/docs"
             style={{
               color: '#ffffff',
               display: 'flex',

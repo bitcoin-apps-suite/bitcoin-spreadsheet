@@ -323,9 +323,32 @@ npm test
 
 ## 🚢 Deployment
 
-### Vercel Deployment (Recommended)
+### Production URL
+🌐 **Live App**: https://bitcoin-spreadsheet.vercel.app
 
-1. **Frontend**:
+### Vercel Deployment Configuration
+
+The project is deployed on Vercel with the following setup:
+
+1. **GitHub Integration**:
+   - Repository: `bitcoin-apps-suite/bitcoin-spreadsheet`
+   - Branch: `main` (auto-deploys on push)
+   - Organization: Bitcoin Apps Suite
+
+2. **Build Configuration** (`vercel.json`):
+   ```json
+   {
+     "buildCommand": "cd frontend && npm ci --legacy-peer-deps && CI=false npm run build",
+     "outputDirectory": "frontend/build",
+     "installCommand": "echo 'Skipping root install'",
+     "framework": null
+   }
+   ```
+
+3. **Environment Variables**:
+   No environment variables required for frontend deployment.
+
+4. **Manual Deployment**:
    ```bash
    cd frontend
    npm run build

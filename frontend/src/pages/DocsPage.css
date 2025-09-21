@@ -4,7 +4,7 @@
   color: #ffffff;
   min-height: 100vh;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  padding-top: 76px; /* 48px banner + 28px taskbar */
+  padding-top: 68px; /* 40px banner + 28px taskbar */
 }
 
 .docs-container {

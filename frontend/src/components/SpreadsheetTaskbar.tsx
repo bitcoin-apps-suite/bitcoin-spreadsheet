@@ -248,34 +248,23 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
     {
       label: 'Developers',
       items: [
-        { label: 'BSV SDK Docs', href: 'https://docs.bsvblockchain.org' },
-        { label: 'HandCash SDK Docs', href: 'https://docs.handcash.io' },
-        { label: '$BSHEETS Token', href: '/token' },
-        { label: 'Tasks', href: '/tasks' },
-        { label: 'Contributions', href: '/contributions' },
-        { divider: true },
-        { label: 'GitHub Repository', href: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet' },
-        { label: 'API Documentation', action: () => console.log('API Documentation') },
-        { divider: true },
-        { label: 'Bitcoin Writer', href: 'https://bitcoin-writer.vercel.app' },
-        { label: 'Bitcoin Drive', href: 'https://bitcoin-drive.vercel.app' },
-        { divider: true },
-        { label: 'BAP Executive Summary', href: '/bap' }
-      ]
-    },
-    {
-      label: 'Developers',
-      items: [
         { label: 'Developer Contracts', href: '/contracts' },
         { label: 'Open Tasks', href: '/tasks' },
-        { label: 'My Contributions', href: '/contributions' },
+        { label: 'Contributions', href: '/contributions' },
+        { label: '$BSHEETS Token', href: '/token' },
         { divider: true },
         { label: 'Documentation', href: '/docs' },
-        { label: 'API Reference', href: '/api' },
+        { label: 'API Documentation', action: () => console.log('API Documentation') },
+        { label: 'BSV SDK Docs', href: 'https://docs.bsvblockchain.org' },
+        { label: 'HandCash SDK Docs', href: 'https://docs.handcash.io' },
         { divider: true },
         { label: 'GitHub Repository', href: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet' },
         { label: 'Report Issue', href: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/new' },
-        { label: 'Submit Pull Request', href: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/pulls' }
+        { label: 'Submit Pull Request', href: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/pulls' },
+        { divider: true },
+        { label: 'Bitcoin Writer', href: 'https://bitcoin-writer.vercel.app' },
+        { label: 'Bitcoin Drive', href: 'https://bitcoin-drive.vercel.app' },
+        { label: 'BAP Executive Summary', href: '/bap' }
       ]
     },
     {

@@ -26,8 +26,6 @@ const DevSidebar: React.FC = () => {
 
   useEffect(() => {
     localStorage.setItem('devSidebarCollapsed', isCollapsed.toString());
-    // Emit custom event for same-tab updates
-    window.dispatchEvent(new CustomEvent('devSidebarToggle'));
   }, [isCollapsed]);
 
   const menuItems: Array<{

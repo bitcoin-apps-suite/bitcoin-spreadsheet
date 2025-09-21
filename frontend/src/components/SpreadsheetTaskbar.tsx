@@ -46,10 +46,6 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [showBitcoinSuite, setShowBitcoinSuite] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
-    const saved = localStorage.getItem('devSidebarCollapsed');
-    return saved === 'true';
-  });
   const menuRef = useRef<HTMLDivElement>(null);
 
   const menus: MenuData[] = [
@@ -301,22 +297,6 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Listen for sidebar collapse changes
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const collapsed = localStorage.getItem('devSidebarCollapsed') === 'true';
-      setSidebarCollapsed(collapsed);
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    // Listen for custom event from sidebar
-    window.addEventListener('devSidebarToggle', handleStorageChange);
-    
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('devSidebarToggle', handleStorageChange);
-    };
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -561,7 +541,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
       }}
     >
       {/* Bitcoin Logo - Aligned with dev sidebar center */}
-      <div style={{ position: 'relative', marginLeft: sidebarCollapsed ? '10px' : '110px' }}>
+      <div style={{ position: 'relative', marginLeft: '110px' }}>
         <button
           onClick={() => {
             setShowBitcoinSuite(!showBitcoinSuite);

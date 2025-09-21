@@ -250,6 +250,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
         { label: 'BSV SDK Docs', href: 'https://docs.bsvblockchain.org' },
         { label: 'HandCash SDK Docs', href: 'https://docs.handcash.io' },
         { label: '$BSHEETS Token', href: '/token' },
+        { label: 'Tasks', href: '/tasks' },
         { label: 'Contributions', href: '/contributions' },
         { divider: true },
         { label: 'GitHub Repository', href: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet' },
@@ -501,6 +502,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <button onClick={() => { navigate('/docs'); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>Documentation</button>
                   <button onClick={() => { navigate('/token'); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>$BSHEETS Token</button>
+                  <button onClick={() => { navigate('/tasks'); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>Tasks</button>
                   <button onClick={() => { navigate('/contributions'); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>Contributions</button>
                   {isAuthenticated ? (
                     <button onClick={() => { onLogout(); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 0, 0, 0.1)', border: 'none', borderRadius: '8px', color: '#ff6666', textAlign: 'left' }}>Sign Out</button>

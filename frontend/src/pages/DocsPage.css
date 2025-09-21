@@ -386,6 +386,78 @@
   font-size: 14px;
 }
 
+/* Enhanced Tokenomics Styles */
+.vesting-info {
+  background: rgba(135, 206, 235, 0.05);
+  border: 1px solid rgba(135, 206, 235, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 16px 0;
+}
+
+.vesting-info p {
+  margin: 8px 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.economic-model {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin: 24px 0;
+}
+
+.model-section {
+  background: rgba(15, 19, 41, 0.3);
+  border: 1px solid rgba(135, 206, 235, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.model-section h5 {
+  color: #87CEEB;
+  font-size: 16px;
+  margin: 0 0 12px 0;
+  font-weight: 500;
+}
+
+.model-section ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.model-section li {
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
+
+.getting-started-tokens {
+  background: rgba(76, 175, 80, 0.05);
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 24px 0;
+}
+
+.getting-started-tokens p {
+  margin: 12px 0;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+}
+
+.inline-link {
+  color: #87CEEB;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.inline-link:hover {
+  color: #4682B4;
+  text-decoration: underline;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .docs-container {

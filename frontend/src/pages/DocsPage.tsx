@@ -92,11 +92,58 @@ const DocsPage: React.FC = () => {
               
               <h4>Token Allocation Guidelines:</h4>
               <ul>
-                <li><strong>Major Features (0.5-1%)</strong>: New core functionality, blockchain integration</li>
-                <li><strong>Medium Features (0.2-0.5%)</strong>: UI improvements, formula functions, optimizations</li>
-                <li><strong>Minor Features (0.05-0.2%)</strong>: Bug fixes, documentation, small enhancements</li>
-                <li><strong>Critical Fixes (0.1-0.3%)</strong>: Security fixes, performance improvements</li>
+                <li><strong>Major Features (0.5-1%)</strong>: New core functionality, blockchain integration, real-time collaboration</li>
+                <li><strong>Medium Features (0.2-0.5%)</strong>: UI improvements, formula functions, mobile optimization, testing suites</li>
+                <li><strong>Minor Features (0.05-0.2%)</strong>: Bug fixes, documentation, small enhancements, accessibility improvements</li>
+                <li><strong>Critical Fixes (0.1-0.3%)</strong>: Security fixes, performance improvements, data integrity patches</li>
               </ul>
+
+              <h4>Token Utility & Use Cases:</h4>
+              <ul>
+                <li><strong>Governance Rights</strong>: Vote on protocol changes and feature prioritization</li>
+                <li><strong>Premium Features</strong>: Access advanced spreadsheet functions and templates</li>
+                <li><strong>Revenue Sharing</strong>: Earn dividends from platform revenue based on token holdings</li>
+                <li><strong>Marketplace Currency</strong>: Buy/sell spreadsheet templates and formulas in our marketplace</li>
+                <li><strong>Staking Rewards</strong>: Stake tokens to validate spreadsheet data and earn rewards</li>
+                <li><strong>API Credits</strong>: Pay for API usage and blockchain storage costs</li>
+              </ul>
+
+              <h4>Vesting & Distribution:</h4>
+              <div className="vesting-info">
+                <p><strong>Developer Tokens:</strong> 100% unlocked upon PR merge - no vesting period</p>
+                <p><strong>Company Reserve:</strong> 4-year linear vesting with 1-year cliff</p>
+                <p><strong>Initial Distribution:</strong> Tokens distributed via Bitcoin SV smart contracts</p>
+                <p><strong>Future Issuance:</strong> Capped at 1B total supply - no additional minting</p>
+              </div>
+
+              <h4>Economic Model:</h4>
+              <div className="economic-model">
+                <div className="model-section">
+                  <h5>Revenue Streams:</h5>
+                  <ul>
+                    <li>Premium subscription plans (10% of revenue to token holders)</li>
+                    <li>Enterprise licenses and custom deployments</li>
+                    <li>Marketplace transaction fees (2.5% per transaction)</li>
+                    <li>API usage fees and blockchain storage costs</li>
+                    <li>NFT spreadsheet royalties (5% per trade)</li>
+                  </ul>
+                </div>
+                
+                <div className="model-section">
+                  <h5>Token Burn Mechanism:</h5>
+                  <ul>
+                    <li>25% of platform revenue used for quarterly token burns</li>
+                    <li>Deflationary pressure to increase token value over time</li>
+                    <li>Transparent burn tracking on Bitcoin SV blockchain</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h4>Getting Started:</h4>
+              <div className="getting-started-tokens">
+                <p>Ready to earn $BSHEETS tokens? Check out our <a href="/tasks" className="inline-link">Tasks page</a> to find development opportunities, or browse our <a href="https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues" target="_blank" rel="noopener noreferrer" className="inline-link">GitHub issues</a> for specific tasks with token rewards listed.</p>
+                <p>All token distributions are subject to code review and community approval. Quality contributions that advance the platform will be rewarded generously.</p>
+              </div>
             </div>
           </section>
 

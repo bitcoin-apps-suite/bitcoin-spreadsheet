@@ -37,8 +37,8 @@ const TasksPage: React.FC = () => {
   const tasks: Task[] = [
     {
       id: 'TASK-001',
-      title: 'Implement Advanced Formula Engine',
-      description: 'Integrate HyperFormula library to support 400+ Excel functions including VLOOKUP, XLOOKUP, array formulas, and complex financial calculations.',
+      title: 'Enhance Formula Engine with Array Functions',
+      description: 'Extend the existing formula engine to support advanced array functions, XLOOKUP, dynamic arrays, and complex financial calculations. Current engine supports basic formulas only.',
       difficulty: 'Expert',
       category: 'Frontend',
       estimatedHours: 40,
@@ -53,13 +53,13 @@ const TasksPage: React.FC = () => {
       ],
       tags: ['formulas', 'excel', 'hyperformula', 'calculations'],
       interestedDevs: [],
-      datePosted: '2024-01-20',
-      deadline: '2024-03-15'
+      datePosted: '2025-09-19',
+      deadline: '2025-10-30'
     },
     {
       id: 'TASK-002',
-      title: 'Mobile Spreadsheet Touch Interface',
-      description: 'Create a mobile-optimized spreadsheet interface with touch gestures, pinch-to-zoom, and swipe navigation for iOS and Android.',
+      title: 'Improve Mobile Touch Gestures',
+      description: 'Enhance the existing mobile interface with better touch gestures, pinch-to-zoom, cell selection improvements, and smoother scrolling for large spreadsheets.',
       difficulty: 'Hard',
       category: 'Frontend',
       estimatedHours: 30,
@@ -74,7 +74,7 @@ const TasksPage: React.FC = () => {
       ],
       tags: ['mobile', 'touch', 'responsive', 'gestures'],
       interestedDevs: ['dev1', 'dev2'],
-      datePosted: '2024-01-18'
+      datePosted: '2025-09-20'
     },
     {
       id: 'TASK-003',
@@ -94,13 +94,13 @@ const TasksPage: React.FC = () => {
       ],
       tags: ['bitcoin-sv', 'smart-contracts', 'scrypt', 'blockchain'],
       interestedDevs: [],
-      datePosted: '2024-01-15',
-      deadline: '2024-04-01'
+      datePosted: '2025-09-18',
+      deadline: '2025-11-01'
     },
     {
       id: 'TASK-004',
-      title: 'Real-time Collaboration System',
-      description: 'Build WebSocket-based real-time collaboration allowing multiple users to edit the same spreadsheet simultaneously.',
+      title: 'Complete Real-time Collaboration',
+      description: 'Finish the WebRTC-based real-time collaboration system. Foundation exists but needs cursor tracking, conflict resolution, and presence indicators.',
       difficulty: 'Hard',
       category: 'Backend',
       estimatedHours: 35,
@@ -116,12 +116,12 @@ const TasksPage: React.FC = () => {
       tags: ['websockets', 'collaboration', 'real-time', 'sync'],
       interestedDevs: ['dev3'],
       assignedTo: 'dev3',
-      datePosted: '2024-01-10'
+      datePosted: '2025-09-17'
     },
     {
       id: 'TASK-005',
-      title: 'Advanced Chart and Visualization Engine',
-      description: 'Create interactive charts (line, bar, pie, scatter) with data binding from spreadsheet cells and export capabilities.',
+      title: 'Implement Chart Visualization',
+      description: 'Add Chart.js or D3.js integration for creating charts from spreadsheet data. Currently mentioned in docs but not yet implemented.',
       difficulty: 'Medium',
       category: 'Frontend',
       estimatedHours: 25,
@@ -136,7 +136,7 @@ const TasksPage: React.FC = () => {
       ],
       tags: ['charts', 'visualization', 'd3', 'data'],
       interestedDevs: ['dev4', 'dev5'],
-      datePosted: '2024-01-22'
+      datePosted: '2025-09-21'
     },
     {
       id: 'TASK-006',
@@ -156,7 +156,127 @@ const TasksPage: React.FC = () => {
       ],
       tags: ['testing', 'jest', 'cypress', 'qa'],
       interestedDevs: [],
-      datePosted: '2024-01-25'
+      datePosted: '2025-09-21'
+    },
+    {
+      id: 'TASK-007',
+      title: 'Implement Pivot Tables',
+      description: 'Build full pivot table functionality with drag-and-drop interface, multiple aggregation functions, and dynamic data summarization.',
+      difficulty: 'Hard',
+      category: 'Frontend',
+      estimatedHours: 40,
+      reward: 100000,
+      priority: 'Medium',
+      status: 'Open',
+      requirements: [
+        'Data aggregation algorithms',
+        'Drag-and-drop UI implementation',
+        'React and TypeScript expertise',
+        'Experience with data transformation'
+      ],
+      tags: ['pivot-tables', 'data', 'aggregation', 'analytics'],
+      interestedDevs: [],
+      datePosted: '2025-09-20'
+    },
+    {
+      id: 'TASK-008',
+      title: 'Excel/CSV Import Export Enhancement',
+      description: 'Improve import/export to handle complex Excel files with formulas, formatting, multiple sheets, and large datasets efficiently.',
+      difficulty: 'Medium',
+      category: 'Backend',
+      estimatedHours: 25,
+      reward: 75000,
+      priority: 'High',
+      status: 'Open',
+      requirements: [
+        'Excel file format knowledge',
+        'File parsing experience',
+        'Memory optimization skills',
+        'Data transformation expertise'
+      ],
+      tags: ['excel', 'csv', 'import', 'export', 'files'],
+      interestedDevs: [],
+      datePosted: '2025-09-21'
+    },
+    {
+      id: 'TASK-009',
+      title: 'Conditional Formatting Engine',
+      description: 'Create a conditional formatting system with rules based on cell values, formulas, data bars, color scales, and icon sets.',
+      difficulty: 'Medium',
+      category: 'Frontend',
+      estimatedHours: 20,
+      reward: 60000,
+      priority: 'Medium',
+      status: 'Open',
+      requirements: [
+        'CSS and styling expertise',
+        'Rule engine development',
+        'React component optimization',
+        'UI/UX design skills'
+      ],
+      tags: ['formatting', 'rules', 'styling', 'visualization'],
+      interestedDevs: [],
+      datePosted: '2025-09-19'
+    },
+    {
+      id: 'TASK-010',
+      title: 'Performance Optimization for Large Datasets',
+      description: 'Optimize rendering and calculations for spreadsheets with 100,000+ cells using virtual scrolling, web workers, and lazy loading.',
+      difficulty: 'Expert',
+      category: 'Frontend',
+      estimatedHours: 50,
+      reward: 150000,
+      priority: 'Critical',
+      status: 'Open',
+      requirements: [
+        'Virtual scrolling implementation',
+        'Web Workers expertise',
+        'Performance profiling skills',
+        'Memory management knowledge'
+      ],
+      tags: ['performance', 'optimization', 'virtual-scrolling', 'web-workers'],
+      interestedDevs: [],
+      datePosted: '2025-09-21'
+    },
+    {
+      id: 'TASK-011',
+      title: 'Macro Recording and Playback',
+      description: 'Implement macro recording system to capture user actions and replay them, with basic scripting support for automation.',
+      difficulty: 'Hard',
+      category: 'Frontend',
+      estimatedHours: 35,
+      reward: 90000,
+      priority: 'Low',
+      status: 'Open',
+      requirements: [
+        'Event recording and replay',
+        'Scripting language design',
+        'Security considerations',
+        'User action tracking'
+      ],
+      tags: ['macros', 'automation', 'scripting', 'recording'],
+      interestedDevs: [],
+      datePosted: '2025-09-18'
+    },
+    {
+      id: 'TASK-012',
+      title: 'Accessibility and Screen Reader Support',
+      description: 'Ensure full WCAG 2.1 AA compliance with proper ARIA labels, keyboard navigation, and screen reader compatibility.',
+      difficulty: 'Medium',
+      category: 'Frontend',
+      estimatedHours: 30,
+      reward: 70000,
+      priority: 'High',
+      status: 'Open',
+      requirements: [
+        'WCAG guidelines knowledge',
+        'ARIA implementation',
+        'Screen reader testing',
+        'Keyboard navigation expertise'
+      ],
+      tags: ['accessibility', 'a11y', 'wcag', 'aria'],
+      interestedDevs: [],
+      datePosted: '2025-09-20'
     }
   ];
 

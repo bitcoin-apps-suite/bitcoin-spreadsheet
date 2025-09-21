@@ -1,8 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './DocsPage.css';
 import SpreadsheetTaskbar from '../components/SpreadsheetTaskbar';
 
 const DocsPage: React.FC = () => {
+  const [activeTab, setActiveTab] = useState('overview');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['overview', 'tokenomics', 'development', 'contributing', 'api', 'roadmap'];
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top >= 0 && rect.top <= 200) {
+            setActiveTab(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleTabClick = (e: React.MouseEvent<HTMLAnchorElement>, tabId: string) => {
+    e.preventDefault();
+    setActiveTab(tabId);
+    
+    const element = document.getElementById(tabId);
+    if (element) {
+      const yOffset = -100; // Offset for fixed header
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="docs-page">
       <SpreadsheetTaskbar 
@@ -21,12 +55,60 @@ const DocsPage: React.FC = () => {
 
         <nav className="docs-nav">
           <ul>
-            <li><a href="#overview">Overview</a></li>
-            <li><a href="#tokenomics">Tokenomics</a></li>
-            <li><a href="#development">Development</a></li>
-            <li><a href="#contributing">Contributing</a></li>
-            <li><a href="#api">API Reference</a></li>
-            <li><a href="#roadmap">Roadmap</a></li>
+            <li>
+              <a 
+                href="#overview" 
+                className={activeTab === 'overview' ? 'active' : ''}
+                onClick={(e) => handleTabClick(e, 'overview')}
+              >
+                Overview
+              </a>
+            </li>
+            <li>
+              <a 
+                href="#tokenomics" 
+                className={activeTab === 'tokenomics' ? 'active' : ''}
+                onClick={(e) => handleTabClick(e, 'tokenomics')}
+              >
+                Tokenomics
+              </a>
+            </li>
+            <li>
+              <a 
+                href="#development" 
+                className={activeTab === 'development' ? 'active' : ''}
+                onClick={(e) => handleTabClick(e, 'development')}
+              >
+                Development
+              </a>
+            </li>
+            <li>
+              <a 
+                href="#contributing" 
+                className={activeTab === 'contributing' ? 'active' : ''}
+                onClick={(e) => handleTabClick(e, 'contributing')}
+              >
+                Contributing
+              </a>
+            </li>
+            <li>
+              <a 
+                href="#api" 
+                className={activeTab === 'api' ? 'active' : ''}
+                onClick={(e) => handleTabClick(e, 'api')}
+              >
+                API Reference
+              </a>
+            </li>
+            <li>
+              <a 
+                href="#roadmap" 
+                className={activeTab === 'roadmap' ? 'active' : ''}
+                onClick={(e) => handleTabClick(e, 'roadmap')}
+              >
+                Roadmap
+              </a>
+            </li>
           </ul>
         </nav>
 

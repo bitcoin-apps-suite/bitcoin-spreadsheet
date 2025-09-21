@@ -109,8 +109,8 @@
 }
 
 .dev-sidebar-badge {
-  background: linear-gradient(135deg, #F7931A, #FF6B35);
-  color: #1a1a1a;
+  background: linear-gradient(135deg, #1976d2, #1565c0);
+  color: #ffffff;
   font-size: 10px;
   font-weight: 700;
   padding: 2px 6px;

@@ -216,7 +216,7 @@ function App() {
             <div className="loading">Loading Bitcoin Spreadsheet...</div>
           </div>
         ) : (
-          <div className="App" style={{ paddingTop: isMobile ? '0' : '76px' }}> {/* 48px banner + 28px taskbar */}
+          <div className="App" style={{ paddingTop: isMobile ? '0' : '68px' }}> {/* 40px banner + 28px taskbar */}
             {/* Bitcoin Spreadsheet Taskbar */}
             <SpreadsheetTaskbar
               isAuthenticated={isAuthenticated}
@@ -332,54 +332,6 @@ function App() {
 
               {/* Desktop header layout - hidden on mobile */}
               <div className="desktop-header-wrapper">
-                <div className="connection-badge" onClick={() => setShowConnectionsModal(true)}>
-                  {connectedServices.length === 0 ? (
-                    <button className="connect-badge-btn">
-                      Connect
-                    </button>
-                  ) : (
-                    <>
-                      <div className="connected-avatars">
-                        {connectedServices.slice(0, 3).map((service, index) => (
-                          <div 
-                            key={service} 
-                            className="service-avatar" 
-                            style={{ 
-                              marginLeft: index > 0 ? '-8px' : '0',
-                              zIndex: 3 - index 
-                            }}
-                            title={service}
-                          >
-                            {service === 'HandCash' ? (
-                              <img src="https://handcash.io/favicon.ico" alt="HandCash" />
-                            ) : service === 'Salesforce' ? (
-                              <div className="avatar-icon salesforce">S</div>
-                            ) : service === 'Stripe' ? (
-                              <div className="avatar-icon stripe">$</div>
-                            ) : service === 'Google Sheets' ? (
-                              <div className="avatar-icon sheets">G</div>
-                            ) : service === 'QuickBooks' ? (
-                              <div className="avatar-icon quickbooks">Q</div>
-                            ) : (
-                              <div className="avatar-icon default">{service.charAt(0)}</div>
-                            )}
-                          </div>
-                        ))}
-                        {connectedServices.length > 3 && (
-                          <div 
-                            className="service-avatar more-count" 
-                            style={{ marginLeft: '-8px', zIndex: 0 }}
-                          >
-                            <span>+{connectedServices.length - 3}</span>
-                          </div>
-                        )}
-                      </div>
-                      <span className="connection-count">
-                        {connectedServices.length} connected
-                      </span>
-                    </>
-                  )}
-                </div>
                 <h1
                   onClick={() => navigate('/')}
                   style={{ cursor: 'pointer' }}
@@ -556,9 +508,6 @@ function App() {
                 )}
               </div>
             </header>
-            <div className="disclaimer">
-              <small>This is a demonstration version. Use at your own risk.</small>
-            </div>
             <main className="main-container">
               {bitcoinService ? (
                 showExchange ? (

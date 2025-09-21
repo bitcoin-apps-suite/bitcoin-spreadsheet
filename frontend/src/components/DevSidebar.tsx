@@ -60,23 +60,39 @@ const DevSidebar: React.FC = () => {
 
   return (
     <div className={`dev-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
-      <div className="dev-sidebar-header">
-        {!isCollapsed && (
-          <div className="dev-sidebar-title">
-            <Zap className="dev-sidebar-logo" />
-            <span>Developer Hub</span>
-          </div>
-        )}
-        <button 
-          className="dev-sidebar-toggle"
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-        >
-          {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
-        </button>
-      </div>
+      <button 
+        className="dev-sidebar-toggle-standalone"
+        onClick={() => setIsCollapsed(!isCollapsed)}
+        aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        style={{
+          position: 'absolute',
+          top: '8px',
+          right: '8px',
+          background: 'transparent',
+          border: 'none',
+          color: 'rgba(255, 255, 255, 0.6)',
+          cursor: 'pointer',
+          padding: '4px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '4px',
+          transition: 'all 0.2s ease',
+          zIndex: 10
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+          e.currentTarget.style.transform = 'scale(1.1)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = 'transparent';
+          e.currentTarget.style.transform = 'scale(1)';
+        }}
+      >
+        {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
+      </button>
 
-      <nav className="dev-sidebar-nav">
+      <nav className="dev-sidebar-nav" style={{ paddingTop: '40px' }}>
         {menuItems.map((item, index) => {
           if (item.divider) {
             return <div key={index} className="dev-sidebar-divider" />;

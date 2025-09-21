@@ -52,6 +52,8 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
     {
       label: 'Bitcoin Spreadsheet',
       items: [
+        { label: 'Home', shortcut: '⇧⌘H', action: () => navigate('/') },
+        { divider: true },
         { label: 'About Bitcoin Spreadsheet', action: () => alert('Bitcoin Spreadsheet v1.0\n\nDecentralized spreadsheets on Bitcoin SV\n\n© @b0ase 2025\nBuilt with HandCash integration') },
         { divider: true },
         { label: 'Preferences...', shortcut: '⌘,', action: () => console.log('Preferences') },
@@ -545,8 +547,8 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
         zIndex: 10000
       }}
     >
-      {/* Bitcoin Logo - Aligned with collapsed dev sidebar center */}
-      <div style={{ position: 'relative', marginLeft: '30px' }}>
+      {/* Bitcoin Logo - Aligned with dev sidebar center */}
+      <div style={{ position: 'relative', marginLeft: '18px' }}>
         <button
           onClick={() => {
             setShowBitcoinSuite(!showBitcoinSuite);

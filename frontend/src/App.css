@@ -4,14 +4,25 @@
   box-sizing: border-box;
 }
 
-/* App with Sidebar Layout - No margin shifts to prevent layout jumps */
+/* App with Sidebar Layout - Dynamic margin for dev sidebar */
 .app-with-sidebar {
   position: relative;
+  margin-left: 260px; /* Default margin when dev sidebar is expanded */
+  transition: margin-left 0.3s ease; /* Smooth transition */
+}
+
+/* Adjust app when dev sidebar is collapsed */
+body:has(.dev-sidebar.collapsed) .app-with-sidebar {
+  margin-left: 60px !important; /* Collapsed sidebar width */
 }
 
 @media (max-width: 768px) {
   .app-with-sidebar {
-    margin-left: 0;
+    margin-left: 0 !important;
+  }
+  
+  body:has(.dev-sidebar.collapsed) .app-with-sidebar {
+    margin-left: 0 !important;
   }
 }
 
@@ -487,12 +498,19 @@ main {
 /* Main container with sidebar layout */
 .main-container {
   background: #000000;
-  min-height: calc(100vh - 172px);
+  min-height: calc(100vh - 148px); /* Updated: 68px header + 80px for margins */
   margin: 20px;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(25, 118, 210, 0.12),
               0 0 0 1px rgba(25, 118, 210, 0.05);
+}
+
+/* Mobile: Remove left margin since dev sidebar is hidden */
+@media (max-width: 768px) {
+  .main-container {
+    margin: 20px !important;
+  }
 }
 
 .app-content {

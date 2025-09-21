@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ProofOfConceptBanner.css';
 
 const ProofOfConceptBanner: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
+  const navigate = useNavigate();
 
   if (!isVisible) return null;
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
 
   return (
     <div className="poc-banner">
@@ -18,9 +24,21 @@ const ProofOfConceptBanner: React.FC = () => {
         </div>
         <div className="poc-banner-text">
           <span className="poc-banner-message">
-            <strong>PROOF OF CONCEPT:</strong> This is a demonstration version. Features are under active development.
-            <a href="https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet" target="_blank" rel="noopener noreferrer">
-              Contribute on GitHub →
+            <strong>PROOF OF CONCEPT:</strong> This is a demonstration version.
+            <button className="poc-banner-link" onClick={() => handleNavigation('/tasks')}>
+              Tasks
+            </button>
+            <span className="poc-banner-separator">•</span>
+            <button className="poc-banner-link" onClick={() => handleNavigation('/contributions')}>
+              Contributions
+            </button>
+            <span className="poc-banner-separator">•</span>
+            <button className="poc-banner-link" onClick={() => handleNavigation('/docs')}>
+              Docs
+            </button>
+            <span className="poc-banner-separator">•</span>
+            <a href="https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet" target="_blank" rel="noopener noreferrer" className="poc-banner-link">
+              GitHub
             </a>
           </span>
         </div>

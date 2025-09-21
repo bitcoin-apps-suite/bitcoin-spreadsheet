@@ -151,33 +151,35 @@ const DocsPage: React.FC = () => {
                 <p>Total $BSHEETS Supply</p>
               </div>
               <div className="token-stat">
-                <h3>51%</h3>
-                <p>Reserved for Company</p>
+                <h3>100%</h3>
+                <p>For Contributors</p>
               </div>
               <div className="token-stat">
-                <h3>49%</h3>
-                <p>Available for Developers</p>
+                <h3>425,000</h3>
+                <p>Already Distributed</p>
               </div>
               <div className="token-stat">
-                <h3>1%</h3>
-                <p>Maximum per PR</p>
+                <h3>0%</h3>
+                <p>Company Reserve</p>
               </div>
             </div>
 
             <div className="tokenomics-details">
               <h3>Developer Token Distribution</h3>
               <p>
-                We're offering <strong>490,000,000 $BSHEETS tokens</strong> (49% of total supply) to developers 
-                who contribute to the project. Each successfully merged pull request can earn up to 1% of the 
-                total supply (10,000,000 tokens), depending on the complexity and impact of the contribution.
+                We're offering <strong>1,000,000,000 $BSHEETS tokens</strong> (100% of total supply) to developers 
+                and contributors. This is a pure meritocracy - no company reserves, no pre-mine, just rewards for 
+                those who build. Each contribution earns tokens based on impact and complexity.
               </p>
               
               <h4>Token Allocation Guidelines:</h4>
               <ul>
-                <li><strong>Major Features (0.5-1%)</strong>: New core functionality, blockchain integration, real-time collaboration</li>
-                <li><strong>Medium Features (0.2-0.5%)</strong>: UI improvements, formula functions, mobile optimization, testing suites</li>
-                <li><strong>Minor Features (0.05-0.2%)</strong>: Bug fixes, documentation, small enhancements, accessibility improvements</li>
-                <li><strong>Critical Fixes (0.1-0.3%)</strong>: Security fixes, performance improvements, data integrity patches</li>
+                <li><strong>Major Features (5,000-10,000 BSHEETS)</strong>: Core functionality, blockchain integration, architecture improvements</li>
+                <li><strong>Standard Features (2,000-5,000 BSHEETS)</strong>: Regular features, API endpoints, service integrations</li>
+                <li><strong>Enhancements (1,000-3,000 BSHEETS)</strong>: Performance improvements, optimizations, refactoring</li>
+                <li><strong>Bug Fixes (500-2,000 BSHEETS)</strong>: Critical to minor bug fixes based on severity</li>
+                <li><strong>UI/UX (1,000-2,500 BSHEETS)</strong>: Design improvements, component updates, mobile optimization</li>
+                <li><strong>Documentation (500-1,500 BSHEETS)</strong>: Technical docs, user guides, code comments</li>
               </ul>
 
               <h4>Token Utility & Use Cases:</h4>
@@ -190,12 +192,13 @@ const DocsPage: React.FC = () => {
                 <li><strong>API Credits</strong>: Pay for API usage and blockchain storage costs</li>
               </ul>
 
-              <h4>Vesting & Distribution:</h4>
+              <h4>Distribution Process:</h4>
               <div className="vesting-info">
-                <p><strong>Developer Tokens:</strong> 100% unlocked upon PR merge - no vesting period</p>
-                <p><strong>Company Reserve:</strong> 4-year linear vesting with 1-year cliff</p>
-                <p><strong>Initial Distribution:</strong> Tokens distributed via Bitcoin SV smart contracts</p>
-                <p><strong>Future Issuance:</strong> Capped at 1B total supply - no additional minting</p>
+                <p><strong>Immediate Rewards:</strong> 100% unlocked upon PR merge - no vesting period</p>
+                <p><strong>Monthly Distribution:</strong> Tokens distributed on the 1st of each month for previous month's contributions</p>
+                <p><strong>Transparent Tracking:</strong> All contributions publicly tracked in CONTRIBUTIONS.md</p>
+                <p><strong>No Hidden Reserves:</strong> 100% of tokens go to contributors - zero company allocation</p>
+                <p><strong>Current Distribution:</strong> 425,000 BSHEETS already distributed to founding developer</p>
               </div>
 
               <h4>Economic Model:</h4>
@@ -223,8 +226,8 @@ const DocsPage: React.FC = () => {
 
               <h4>Getting Started:</h4>
               <div className="getting-started-tokens">
-                <p>Ready to earn $BSHEETS tokens? Check out our <a href="/tasks" className="inline-link">Tasks page</a> to find development opportunities, or browse our <a href="https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues" target="_blank" rel="noopener noreferrer" className="inline-link">GitHub issues</a> for specific tasks with token rewards listed.</p>
-                <p>All token distributions are subject to code review and community approval. Quality contributions that advance the platform will be rewarded generously.</p>
+                <p>Ready to earn $BSHEETS tokens? Check out our <a href="/tasks" className="inline-link">Tasks page</a> for available work, or browse our <a href="https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues" target="_blank" rel="noopener noreferrer" className="inline-link">GitHub issues</a>. Every contribution counts!</p>
+                <p>View our <a href="/contributions" className="inline-link">Contributions tracker</a> to see how tokens are distributed. This is a 100% community-driven project where every developer is rewarded fairly for their work.</p>
               </div>
             </div>
           </section>

@@ -45,10 +45,6 @@ function App() {
     const savedMode = localStorage.getItem('darkMode');
     return savedMode !== 'false'; // Default to true unless explicitly set to false
   });
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(() => {
-    const saved = localStorage.getItem('devSidebarCollapsed');
-    return saved === 'true';
-  });
   const navigate = useNavigate();
 
   // Toggle dark mode
@@ -201,7 +197,7 @@ function App() {
     <>
       <ProofOfConceptBanner />
       <DevSidebar />
-      <div className={`app-with-sidebar ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
+      <div className="app-with-sidebar">
       <Routes>
       <Route path="/bitcoin-spreadsheet" element={<BitcoinSpreadsheetPage />} />
       <Route path="/bap" element={<BapsPage />} />

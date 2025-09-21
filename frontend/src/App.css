@@ -4,22 +4,13 @@
   box-sizing: border-box;
 }
 
-/* App with Sidebar Layout */
+/* App with Sidebar Layout - No margin shifts to prevent layout jumps */
 .app-with-sidebar {
-  margin-left: 260px;
-  transition: margin-left 0.3s ease;
-}
-
-.app-with-sidebar.sidebar-collapsed {
-  margin-left: 60px;
+  position: relative;
 }
 
 @media (max-width: 768px) {
   .app-with-sidebar {
-    margin-left: 0;
-  }
-  
-  .app-with-sidebar.sidebar-collapsed {
     margin-left: 0;
   }
 }

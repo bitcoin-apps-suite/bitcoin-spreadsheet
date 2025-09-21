@@ -10,12 +10,13 @@
   display: flex;
   flex-direction: column;
   transition: width 0.3s ease;
-  z-index: 9990; /* Below PoC banner (9999) but above content */
+  z-index: 9989; /* Below taskbar (10000) and PoC banner (9999) */
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .dev-sidebar.collapsed {
   width: 60px;
+  overflow: hidden;
 }
 
 .dev-sidebar-header {
@@ -236,12 +237,4 @@
   }
 }
 
-/* Content adjustment when sidebar is present */
-.with-dev-sidebar {
-  margin-left: 260px;
-  transition: margin-left 0.3s ease;
-}
-
-.with-dev-sidebar.sidebar-collapsed {
-  margin-left: 60px;
-}
+/* Content adjustment - removed to prevent layout shifts */

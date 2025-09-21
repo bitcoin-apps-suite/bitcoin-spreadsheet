@@ -237,7 +237,7 @@ const ContractsPage: React.FC = () => {
       // 3. Update GitHub issue assignee
       // 4. Send confirmation to HandCash wallet
       
-      alert(`Successfully signed up for contract #${selectedContract.issueNumber}!\n\nYou will receive ${selectedContract.reward} upon successful completion and merge of your PR.\n\nPayment wallet: @${currentUser.handle}`);
+      alert(`Contract signing recorded!\n\nTask: ${selectedContract.title}\nReward: ${selectedContract.reward}\nWallet: @${currentUser.handle}\n\nNext steps:\n1. Contact @b0ase on GitHub to claim this task\n2. Fork the repository and start development\n3. Submit PR when complete for review`);
       
       setShowSignupModal(false);
       setSelectedContract(null);
@@ -299,6 +299,17 @@ const ContractsPage: React.FC = () => {
             <p className="subtitle">
               Sign up for development tasks and earn $BSHEETS tokens upon successful PR merge
             </p>
+            <div style={{
+              marginTop: '12px',
+              padding: '12px',
+              background: 'rgba(247, 147, 26, 0.1)',
+              border: '1px solid rgba(247, 147, 26, 0.3)',
+              borderRadius: '8px'
+            }}>
+              <p style={{ color: '#F7931A', fontSize: '14px', margin: 0 }}>
+                ⚠️ These contracts will be created as GitHub issues soon. For now, contact @b0ase on GitHub to claim a task.
+              </p>
+            </div>
           </div>
           
           <div className="header-stats">
@@ -416,14 +427,18 @@ const ContractsPage: React.FC = () => {
                 )}
 
                 <div className="contract-actions">
-                  <a 
-                    href={contract.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button 
                     className="github-link"
+                    onClick={() => alert('GitHub issues will be created soon. For now, contact @b0ase on GitHub to claim this task.')}
+                    style={{
+                      border: '1px solid rgba(247, 147, 26, 0.3)',
+                      background: 'rgba(247, 147, 26, 0.05)',
+                      color: '#F7931A',
+                      cursor: 'pointer'
+                    }}
                   >
-                    View on GitHub
-                  </a>
+                    Coming Soon
+                  </button>
                   {contract.status === 'open' && (
                     <button 
                       className="signup-button"

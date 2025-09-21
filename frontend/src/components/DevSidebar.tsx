@@ -28,7 +28,14 @@ const DevSidebar: React.FC = () => {
     localStorage.setItem('devSidebarCollapsed', isCollapsed.toString());
   }, [isCollapsed]);
 
-  const menuItems = [
+  const menuItems: Array<{
+    path?: string;
+    icon?: any;
+    label?: string;
+    badge?: string;
+    divider?: boolean;
+    external?: boolean;
+  }> = [
     { path: '/tasks', icon: Terminal, label: 'Tasks', badge: '25+' },
     { path: '/contributions', icon: Users, label: 'Contributors', badge: '1' },
     { path: '/docs', icon: BookOpen, label: 'Documentation' },
@@ -101,7 +108,7 @@ const DevSidebar: React.FC = () => {
           return (
             <Link
               key={item.path}
-              to={item.path}
+              to={item.path || '/'}
               className={`dev-sidebar-item ${isActive ? 'active' : ''}`}
               title={isCollapsed ? item.label : undefined}
             >

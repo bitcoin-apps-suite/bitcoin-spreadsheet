@@ -8,10 +8,23 @@ body {
   background: linear-gradient(135deg, #E3F2FD 0%, #FFFFFF 50%, #E1F5FE 100%);
   margin: 0;
   padding: 0;
+  padding-top: 48px; /* Space for proof of concept banner */
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 44px; /* Smaller banner on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 60px; /* Account for text wrapping on very small screens */
+  }
 }
 
 .App {

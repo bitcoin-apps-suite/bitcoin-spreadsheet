@@ -19,6 +19,7 @@ import ContributionsPage from './pages/ContributionsPage';
 import TasksPage from './pages/TasksPage';
 import ClaudeChat from './components/ClaudeChat';
 import SpreadsheetTaskbar from './components/SpreadsheetTaskbar';
+import ProofOfConceptBanner from './components/ProofOfConceptBanner';
 import SpreadsheetExchangeView from './components/SpreadsheetExchangeView';
 import InstallPrompt from './components/InstallPrompt';
 import { BitcoinService, SpreadsheetData } from './services/BitcoinService';
@@ -191,7 +192,9 @@ function App() {
   };
 
   return (
-    <Routes>
+    <>
+      <ProofOfConceptBanner />
+      <Routes>
       <Route path="/bitcoin-spreadsheet" element={<BitcoinSpreadsheetPage />} />
       <Route path="/bap" element={<BapsPage />} />
       <Route path="/developers" element={<BapsPage />} /> {/* Keep for backwards compatibility */}
@@ -208,7 +211,7 @@ function App() {
             <div className="loading">Loading Bitcoin Spreadsheet...</div>
           </div>
         ) : (
-          <div className="App" style={{ paddingTop: isMobile ? '0' : '28px' }}>
+          <div className="App" style={{ paddingTop: isMobile ? '0' : '76px' }}> {/* 48px banner + 28px taskbar */}
             {/* Bitcoin Spreadsheet Taskbar */}
             <SpreadsheetTaskbar
               isAuthenticated={isAuthenticated}
@@ -662,6 +665,7 @@ function App() {
         )
       } />
     </Routes>
+    </>
   );
 }
 

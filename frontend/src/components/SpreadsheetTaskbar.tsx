@@ -163,6 +163,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
     {
       label: 'Blockchain',
       items: [
+        { label: 'Developer Contracts', href: '/contracts' },
         { label: '$BSHEETS Token', href: '/token' },
         { label: 'Contributions', href: '/contributions' },
         { divider: true },
@@ -260,6 +261,21 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
         { label: 'Bitcoin Drive', href: 'https://bitcoin-drive.vercel.app' },
         { divider: true },
         { label: 'BAP Executive Summary', href: '/bap' }
+      ]
+    },
+    {
+      label: 'Developers',
+      items: [
+        { label: 'Developer Contracts', href: '/contracts' },
+        { label: 'Open Tasks', href: '/tasks' },
+        { label: 'My Contributions', href: '/contributions' },
+        { divider: true },
+        { label: 'Documentation', href: '/docs' },
+        { label: 'API Reference', href: '/api' },
+        { divider: true },
+        { label: 'GitHub Repository', href: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet' },
+        { label: 'Report Issue', href: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/new' },
+        { label: 'Submit Pull Request', href: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/pulls' }
       ]
     },
     {

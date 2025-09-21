@@ -36,6 +36,7 @@ const DevSidebar: React.FC = () => {
     divider?: boolean;
     external?: boolean;
   }> = [
+    { path: '/contracts', icon: FileText, label: 'Contracts', badge: '8' },
     { path: '/tasks', icon: Terminal, label: 'Tasks', badge: '25+' },
     { path: '/contributions', icon: Users, label: 'Contributors', badge: '1' },
     { path: '/docs', icon: BookOpen, label: 'Documentation' },

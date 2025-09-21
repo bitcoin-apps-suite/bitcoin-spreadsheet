@@ -33,250 +33,163 @@ const TasksPage: React.FC = () => {
     experience: ''
   });
 
-  // Mock tasks data
+  // GitHub Issues - Real tasks from GitHub
   const tasks: Task[] = [
     {
-      id: 'TASK-001',
-      title: 'Enhance Formula Engine with Array Functions',
-      description: 'Extend the existing formula engine to support advanced array functions, XLOOKUP, dynamic arrays, and complex financial calculations. Current engine supports basic formulas only.',
+      id: 'ISSUE-2',
+      title: 'Implement Real-time Collaboration',
+      description: 'Add WebRTC-based real-time collaboration so multiple users can edit the same spreadsheet simultaneously.',
       difficulty: 'Expert',
       category: 'Frontend',
       estimatedHours: 40,
-      reward: 150000,
+      reward: 10000,
       priority: 'High',
       status: 'Open',
       requirements: [
-        'Experience with React and TypeScript',
-        'Knowledge of Excel formulas and spreadsheet engines',
-        'Familiarity with HyperFormula or similar libraries',
-        'Strong problem-solving skills'
+        'WebRTC',
+        'React',
+        'TypeScript',
+        'Real-time Systems'
       ],
-      tags: ['formulas', 'excel', 'hyperformula', 'calculations'],
+      tags: ['webrtc', 'collaboration', 'real-time', 'multiplayer'],
       interestedDevs: [],
-      datePosted: '2025-09-19',
-      deadline: '2025-10-30'
+      datePosted: '2025-09-21'
     },
     {
-      id: 'TASK-002',
-      title: 'Improve Mobile Touch Gestures',
-      description: 'Enhance the existing mobile interface with better touch gestures, pinch-to-zoom, cell selection improvements, and smoother scrolling for large spreadsheets.',
-      difficulty: 'Hard',
-      category: 'Frontend',
-      estimatedHours: 30,
-      reward: 100000,
-      priority: 'Medium',
-      status: 'Open',
-      requirements: [
-        'React Native or responsive web development',
-        'Touch gesture implementation experience',
-        'Mobile UI/UX best practices',
-        'Cross-platform testing capabilities'
-      ],
-      tags: ['mobile', 'touch', 'responsive', 'gestures'],
-      interestedDevs: ['dev1', 'dev2'],
-      datePosted: '2025-09-20'
-    },
-    {
-      id: 'TASK-003',
-      title: 'Bitcoin SV Smart Contract Integration',
-      description: 'Develop smart contracts for spreadsheet storage, ownership, and revenue sharing on Bitcoin SV blockchain.',
-      difficulty: 'Expert',
-      category: 'Blockchain',
-      estimatedHours: 60,
-      reward: 200000,
-      priority: 'Critical',
-      status: 'Open',
-      requirements: [
-        'Bitcoin SV development experience',
-        'Smart contract programming (sCrypt)',
-        'Understanding of UTXO model',
-        'Cryptocurrency and blockchain expertise'
-      ],
-      tags: ['bitcoin-sv', 'smart-contracts', 'scrypt', 'blockchain'],
-      interestedDevs: [],
-      datePosted: '2025-09-18',
-      deadline: '2025-11-01'
-    },
-    {
-      id: 'TASK-004',
-      title: 'Complete Real-time Collaboration',
-      description: 'Finish the WebRTC-based real-time collaboration system. Foundation exists but needs cursor tracking, conflict resolution, and presence indicators.',
-      difficulty: 'Hard',
-      category: 'Backend',
-      estimatedHours: 35,
-      reward: 120000,
-      priority: 'High',
-      status: 'In Progress',
-      requirements: [
-        'WebSocket implementation experience',
-        'Real-time synchronization algorithms',
-        'Node.js and backend development',
-        'Conflict resolution strategies'
-      ],
-      tags: ['websockets', 'collaboration', 'real-time', 'sync'],
-      interestedDevs: ['dev3'],
-      assignedTo: 'dev3',
-      datePosted: '2025-09-17'
-    },
-    {
-      id: 'TASK-005',
-      title: 'Implement Chart Visualization',
-      description: 'Add Chart.js or D3.js integration for creating charts from spreadsheet data. Currently mentioned in docs but not yet implemented.',
+      id: 'ISSUE-3',
+      title: 'Add Advanced Charting Library',
+      description: 'Integrate a comprehensive charting library (Chart.js or D3.js) to allow users to create various chart types from spreadsheet data.',
       difficulty: 'Medium',
       category: 'Frontend',
       estimatedHours: 25,
-      reward: 80000,
+      reward: 5000,
       priority: 'Medium',
       status: 'Open',
       requirements: [
-        'Data visualization libraries (D3.js, Chart.js)',
-        'React component development',
-        'Interactive chart design',
-        'Data binding and updates'
+        'Chart.js/D3.js',
+        'Data Visualization',
+        'React'
       ],
-      tags: ['charts', 'visualization', 'd3', 'data'],
-      interestedDevs: ['dev4', 'dev5'],
-      datePosted: '2025-09-21'
-    },
-    {
-      id: 'TASK-006',
-      title: 'Comprehensive Testing Suite',
-      description: 'Develop unit tests, integration tests, and end-to-end tests covering all spreadsheet functionality and edge cases.',
-      difficulty: 'Medium',
-      category: 'Testing',
-      estimatedHours: 20,
-      reward: 60000,
-      priority: 'High',
-      status: 'Open',
-      requirements: [
-        'Jest and React Testing Library',
-        'Cypress or Playwright for E2E testing',
-        'Test-driven development experience',
-        'Quality assurance mindset'
-      ],
-      tags: ['testing', 'jest', 'cypress', 'qa'],
+      tags: ['charts', 'visualization', 'd3', 'chartjs'],
       interestedDevs: [],
       datePosted: '2025-09-21'
     },
     {
-      id: 'TASK-007',
+      id: 'ISSUE-4',
       title: 'Implement Pivot Tables',
-      description: 'Build full pivot table functionality with drag-and-drop interface, multiple aggregation functions, and dynamic data summarization.',
+      description: 'Build a full-featured pivot table functionality similar to Excel, allowing users to summarize and analyze data dynamically.',
       difficulty: 'Hard',
       category: 'Frontend',
-      estimatedHours: 40,
-      reward: 100000,
+      estimatedHours: 35,
+      reward: 8000,
       priority: 'Medium',
       status: 'Open',
       requirements: [
-        'Data aggregation algorithms',
-        'Drag-and-drop UI implementation',
-        'React and TypeScript expertise',
-        'Experience with data transformation'
+        'Data Processing',
+        'Algorithms',
+        'React',
+        'TypeScript'
       ],
       tags: ['pivot-tables', 'data', 'aggregation', 'analytics'],
       interestedDevs: [],
-      datePosted: '2025-09-20'
+      datePosted: '2025-09-21'
     },
     {
-      id: 'TASK-008',
-      title: 'Excel/CSV Import Export Enhancement',
-      description: 'Improve import/export to handle complex Excel files with formulas, formatting, multiple sheets, and large datasets efficiently.',
-      difficulty: 'Medium',
-      category: 'Backend',
-      estimatedHours: 25,
-      reward: 75000,
+      id: 'ISSUE-5',
+      title: 'Mobile App Development',
+      description: 'Create a React Native mobile app for Bitcoin Spreadsheet with full functionality and offline support.',
+      difficulty: 'Expert',
+      category: 'Frontend',
+      estimatedHours: 60,
+      reward: 15000,
       priority: 'High',
       status: 'Open',
       requirements: [
-        'Excel file format knowledge',
-        'File parsing experience',
-        'Memory optimization skills',
-        'Data transformation expertise'
+        'React Native',
+        'Mobile Development',
+        'Offline Storage',
+        'BSV Integration'
       ],
-      tags: ['excel', 'csv', 'import', 'export', 'files'],
+      tags: ['mobile', 'react-native', 'offline', 'bsv'],
       interestedDevs: [],
       datePosted: '2025-09-21'
     },
     {
-      id: 'TASK-009',
-      title: 'Conditional Formatting Engine',
-      description: 'Create a conditional formatting system with rules based on cell values, formulas, data bars, color scales, and icon sets.',
+      id: 'ISSUE-6',
+      title: 'Excel Import/Export Enhancement',
+      description: 'Improve Excel file import/export to support advanced features like macros, pivot tables, and complex formatting.',
       difficulty: 'Medium',
-      category: 'Frontend',
+      category: 'Backend',
       estimatedHours: 20,
-      reward: 60000,
+      reward: 3000,
       priority: 'Medium',
       status: 'Open',
       requirements: [
-        'CSS and styling expertise',
-        'Rule engine development',
-        'React component optimization',
-        'UI/UX design skills'
+        'Excel File Format',
+        'File Parsing',
+        'TypeScript'
       ],
-      tags: ['formatting', 'rules', 'styling', 'visualization'],
+      tags: ['excel', 'import', 'export', 'file-format'],
       interestedDevs: [],
-      datePosted: '2025-09-19'
+      datePosted: '2025-09-21'
     },
     {
-      id: 'TASK-010',
+      id: 'ISSUE-7',
       title: 'Performance Optimization for Large Datasets',
-      description: 'Optimize rendering and calculations for spreadsheets with 100,000+ cells using virtual scrolling, web workers, and lazy loading.',
-      difficulty: 'Expert',
+      description: 'Optimize rendering and calculation performance for spreadsheets with 100,000+ cells.',
+      difficulty: 'Hard',
       category: 'Frontend',
-      estimatedHours: 50,
-      reward: 150000,
-      priority: 'Critical',
+      estimatedHours: 30,
+      reward: 6000,
+      priority: 'High',
       status: 'Open',
       requirements: [
-        'Virtual scrolling implementation',
-        'Web Workers expertise',
-        'Performance profiling skills',
-        'Memory management knowledge'
+        'Performance Optimization',
+        'Virtual Scrolling',
+        'Web Workers'
       ],
       tags: ['performance', 'optimization', 'virtual-scrolling', 'web-workers'],
       interestedDevs: [],
       datePosted: '2025-09-21'
     },
     {
-      id: 'TASK-011',
-      title: 'Macro Recording and Playback',
-      description: 'Implement macro recording system to capture user actions and replay them, with basic scripting support for automation.',
-      difficulty: 'Hard',
-      category: 'Frontend',
-      estimatedHours: 35,
-      reward: 90000,
-      priority: 'Low',
+      id: 'ISSUE-8',
+      title: 'Create API Documentation',
+      description: 'Create comprehensive API documentation with examples and interactive playground.',
+      difficulty: 'Easy',
+      category: 'Documentation',
+      estimatedHours: 15,
+      reward: 2000,
+      priority: 'Medium',
       status: 'Open',
       requirements: [
-        'Event recording and replay',
-        'Scripting language design',
-        'Security considerations',
-        'User action tracking'
+        'Technical Writing',
+        'API Documentation',
+        'Swagger/OpenAPI'
       ],
-      tags: ['macros', 'automation', 'scripting', 'recording'],
+      tags: ['documentation', 'api', 'swagger', 'docs'],
       interestedDevs: [],
-      datePosted: '2025-09-18'
+      datePosted: '2025-09-21'
     },
     {
-      id: 'TASK-012',
+      id: 'ISSUE-9',
       title: 'Accessibility and Screen Reader Support',
-      description: 'Ensure full WCAG 2.1 AA compliance with proper ARIA labels, keyboard navigation, and screen reader compatibility.',
+      description: 'Ensure WCAG 2.1 AA compliance with screen reader support and keyboard navigation.',
       difficulty: 'Medium',
       category: 'Frontend',
-      estimatedHours: 30,
-      reward: 70000,
+      estimatedHours: 25,
+      reward: 4000,
       priority: 'High',
       status: 'Open',
       requirements: [
-        'WCAG guidelines knowledge',
-        'ARIA implementation',
-        'Screen reader testing',
-        'Keyboard navigation expertise'
+        'WCAG',
+        'ARIA',
+        'Screen Readers',
+        'Accessibility Testing'
       ],
       tags: ['accessibility', 'a11y', 'wcag', 'aria'],
       interestedDevs: [],
-      datePosted: '2025-09-20'
+      datePosted: '2025-09-21'
     }
   ];
 

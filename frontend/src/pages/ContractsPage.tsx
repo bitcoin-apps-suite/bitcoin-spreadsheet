@@ -49,14 +49,14 @@ const ContractsPage: React.FC = () => {
       const mockContracts: Contract[] = [
         {
           id: 'contract-1',
-          issueNumber: 1,
+          issueNumber: 2,
           title: 'Implement Real-time Collaboration',
           description: 'Add WebRTC-based real-time collaboration so multiple users can edit the same spreadsheet simultaneously. Should include cursor tracking, cell locking, and conflict resolution.',
           reward: '10,000 BSHEETS',
           status: 'open',
           difficulty: 'Expert',
           category: 'Feature',
-          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/1',
+          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/2',
           createdAt: '2025-09-19',
           requiredSkills: ['WebRTC', 'React', 'TypeScript', 'Real-time Systems'],
           deliverables: [
@@ -69,7 +69,7 @@ const ContractsPage: React.FC = () => {
         },
         {
           id: 'contract-2',
-          issueNumber: 2,
+          issueNumber: 3,
           title: 'Add Advanced Charting Library',
           description: 'Integrate a comprehensive charting library (Chart.js or D3.js) to allow users to create various chart types from spreadsheet data.',
           reward: '5,000 BSHEETS',
@@ -77,7 +77,7 @@ const ContractsPage: React.FC = () => {
           difficulty: 'Medium',
           category: 'Feature',
           assignee: '@developer123',
-          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/2',
+          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/3',
           createdAt: '2025-09-18',
           deadline: '2025-10-15',
           requiredSkills: ['Chart.js/D3.js', 'Data Visualization', 'React'],
@@ -90,14 +90,14 @@ const ContractsPage: React.FC = () => {
         },
         {
           id: 'contract-3',
-          issueNumber: 3,
+          issueNumber: 4,
           title: 'Implement Pivot Tables',
           description: 'Build a full-featured pivot table functionality similar to Excel, allowing users to summarize and analyze data dynamically.',
           reward: '8,000 BSHEETS',
           status: 'open',
           difficulty: 'Hard',
           category: 'Feature',
-          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/3',
+          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/4',
           createdAt: '2025-09-20',
           requiredSkills: ['Data Processing', 'Algorithms', 'React', 'TypeScript'],
           deliverables: [
@@ -109,14 +109,14 @@ const ContractsPage: React.FC = () => {
         },
         {
           id: 'contract-4',
-          issueNumber: 4,
+          issueNumber: 5,
           title: 'Mobile App Development',
           description: 'Create a React Native mobile app for Bitcoin Spreadsheet with full functionality and offline support.',
           reward: '15,000 BSHEETS',
           status: 'open',
           difficulty: 'Expert',
           category: 'Mobile',
-          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/4',
+          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/5',
           createdAt: '2025-09-21',
           requiredSkills: ['React Native', 'Mobile Development', 'Offline Storage', 'BSV Integration'],
           deliverables: [
@@ -129,7 +129,7 @@ const ContractsPage: React.FC = () => {
         },
         {
           id: 'contract-5',
-          issueNumber: 5,
+          issueNumber: 6,
           title: 'Excel Import/Export Enhancement',
           description: 'Improve Excel file import/export to support advanced features like macros, pivot tables, and complex formatting.',
           reward: '3,000 BSHEETS',
@@ -137,7 +137,7 @@ const ContractsPage: React.FC = () => {
           difficulty: 'Medium',
           category: 'Enhancement',
           assignee: '@coder456',
-          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/5',
+          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/6',
           createdAt: '2025-09-19',
           deadline: '2025-09-30',
           requiredSkills: ['Excel File Format', 'File Parsing', 'TypeScript'],
@@ -149,14 +149,14 @@ const ContractsPage: React.FC = () => {
         },
         {
           id: 'contract-6',
-          issueNumber: 6,
-          title: 'Performance Optimization',
+          issueNumber: 7,
+          title: 'Performance Optimization for Large Datasets',
           description: 'Optimize rendering and calculation performance for spreadsheets with 100,000+ cells.',
           reward: '6,000 BSHEETS',
           status: 'open',
           difficulty: 'Hard',
           category: 'Performance',
-          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/6',
+          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/7',
           createdAt: '2025-09-20',
           requiredSkills: ['Performance Optimization', 'Virtual Scrolling', 'Web Workers'],
           deliverables: [
@@ -168,14 +168,14 @@ const ContractsPage: React.FC = () => {
         },
         {
           id: 'contract-7',
-          issueNumber: 7,
-          title: 'API Documentation',
+          issueNumber: 8,
+          title: 'Create API Documentation',
           description: 'Create comprehensive API documentation with examples and interactive playground.',
           reward: '2,000 BSHEETS',
           status: 'open',
           difficulty: 'Easy',
           category: 'Documentation',
-          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/7',
+          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/8',
           createdAt: '2025-09-21',
           requiredSkills: ['Technical Writing', 'API Documentation', 'Swagger/OpenAPI'],
           deliverables: [
@@ -187,15 +187,15 @@ const ContractsPage: React.FC = () => {
         },
         {
           id: 'contract-8',
-          issueNumber: 8,
-          title: 'Accessibility Improvements',
+          issueNumber: 9,
+          title: 'Accessibility and Screen Reader Support',
           description: 'Ensure WCAG 2.1 AA compliance with screen reader support and keyboard navigation.',
           reward: '4,000 BSHEETS',
           status: 'review',
           difficulty: 'Medium',
           category: 'Accessibility',
           assignee: '@a11y_expert',
-          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/8',
+          githubUrl: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues/9',
           createdAt: '2025-09-18',
           requiredSkills: ['WCAG', 'ARIA', 'Screen Readers', 'Accessibility Testing'],
           deliverables: [
@@ -299,17 +299,6 @@ const ContractsPage: React.FC = () => {
             <p className="subtitle">
               Sign up for development tasks and earn $BSHEETS tokens upon successful PR merge
             </p>
-            <div style={{
-              marginTop: '12px',
-              padding: '12px',
-              background: 'rgba(247, 147, 26, 0.1)',
-              border: '1px solid rgba(247, 147, 26, 0.3)',
-              borderRadius: '8px'
-            }}>
-              <p style={{ color: '#F7931A', fontSize: '14px', margin: 0 }}>
-                ⚠️ These contracts will be created as GitHub issues soon. For now, contact @b0ase on GitHub to claim a task.
-              </p>
-            </div>
           </div>
           
           <div className="header-stats">
@@ -427,18 +416,27 @@ const ContractsPage: React.FC = () => {
                 )}
 
                 <div className="contract-actions">
-                  <button 
+                  <a 
+                    href={contract.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="github-link"
-                    onClick={() => alert('GitHub issues will be created soon. For now, contact @b0ase on GitHub to claim this task.')}
                     style={{
                       border: '1px solid rgba(247, 147, 26, 0.3)',
                       background: 'rgba(247, 147, 26, 0.05)',
                       color: '#F7931A',
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      textDecoration: 'none',
+                      display: 'inline-block',
+                      padding: '8px 16px',
+                      borderRadius: '4px',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      transition: 'all 0.2s ease'
                     }}
                   >
-                    Coming Soon
-                  </button>
+                    View on GitHub →
+                  </a>
                   {contract.status === 'open' && (
                     <button 
                       className="signup-button"

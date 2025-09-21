@@ -556,8 +556,8 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
         zIndex: 10000
       }}
     >
-      {/* Bitcoin Logo - Aligned with dev sidebar center */}
-      <div style={{ position: 'relative', marginLeft: '110px' }}>
+      {/* Bitcoin Logo - Aligned with collapsed dev sidebar center */}
+      <div style={{ position: 'relative', marginLeft: '30px' }}>
         <button
           onClick={() => {
             setShowBitcoinSuite(!showBitcoinSuite);

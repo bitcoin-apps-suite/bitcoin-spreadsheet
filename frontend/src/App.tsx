@@ -20,6 +20,7 @@ import TasksPage from './pages/TasksPage';
 import ClaudeChat from './components/ClaudeChat';
 import SpreadsheetTaskbar from './components/SpreadsheetTaskbar';
 import ProofOfConceptBanner from './components/ProofOfConceptBanner';
+import DevSidebar from './components/DevSidebar';
 import SpreadsheetExchangeView from './components/SpreadsheetExchangeView';
 import InstallPrompt from './components/InstallPrompt';
 import { BitcoinService, SpreadsheetData } from './services/BitcoinService';
@@ -42,6 +43,10 @@ function App() {
     // Check localStorage for saved preference, default to true (dark mode)
     const savedMode = localStorage.getItem('darkMode');
     return savedMode !== 'false'; // Default to true unless explicitly set to false
+  });
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(() => {
+    const saved = localStorage.getItem('devSidebarCollapsed');
+    return saved === 'true';
   });
   const navigate = useNavigate();
 
@@ -194,6 +199,8 @@ function App() {
   return (
     <>
       <ProofOfConceptBanner />
+      <DevSidebar />
+      <div className={`app-with-sidebar ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
       <Routes>
       <Route path="/bitcoin-spreadsheet" element={<BitcoinSpreadsheetPage />} />
       <Route path="/bap" element={<BapsPage />} />
@@ -665,6 +672,7 @@ function App() {
         )
       } />
     </Routes>
+      </div>
     </>
   );
 }

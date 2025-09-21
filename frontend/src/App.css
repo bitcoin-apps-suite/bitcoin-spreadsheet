@@ -4,6 +4,26 @@
   box-sizing: border-box;
 }
 
+/* App with Sidebar Layout */
+.app-with-sidebar {
+  margin-left: 260px;
+  transition: margin-left 0.3s ease;
+}
+
+.app-with-sidebar.sidebar-collapsed {
+  margin-left: 60px;
+}
+
+@media (max-width: 768px) {
+  .app-with-sidebar {
+    margin-left: 0;
+  }
+  
+  .app-with-sidebar.sidebar-collapsed {
+    margin-left: 0;
+  }
+}
+
 body {
   background: linear-gradient(135deg, #E3F2FD 0%, #FFFFFF 50%, #E1F5FE 100%);
   margin: 0;

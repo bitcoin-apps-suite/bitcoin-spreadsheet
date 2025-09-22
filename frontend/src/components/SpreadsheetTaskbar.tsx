@@ -182,7 +182,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
         { label: 'Publish to Chain', action: () => console.log('Publish to chain') },
         { label: 'View on Explorer', href: 'https://whatsonchain.com' },
         { divider: true },
-        { label: 'Exchange', action: () => window.dispatchEvent(new CustomEvent('openSpreadsheetExchange')) }
+        { label: 'Token Exchange', href: '/exchange' }
       ]
     },
     {

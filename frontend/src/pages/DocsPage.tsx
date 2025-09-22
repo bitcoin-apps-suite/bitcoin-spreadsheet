@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './DocsPage.css';
 import SpreadsheetTaskbar from '../components/SpreadsheetTaskbar';
+import PageLayout from '../components/PageLayout';
 
 const DocsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -45,13 +46,12 @@ const DocsPage: React.FC = () => {
         onLogout={() => {}}
       />
       
-      <div className="docs-container">
-        <header className="docs-header">
-          <h1>Bitcoin Spreadsheet Documentation</h1>
-          <p className="docs-subtitle">
-            Build the future of decentralized spreadsheets and earn $BSHEETS tokens
-          </p>
-        </header>
+      <PageLayout 
+        title="Bitcoin Spreadsheet Documentation"
+        description="Build the future of decentralized spreadsheets and earn $BSHEETS tokens"
+        className="docs-layout"
+      >
+        <div className="docs-container">
 
         <nav className="docs-nav">
           <ul>
@@ -447,7 +447,8 @@ const isAuth = handCashService.isAuthenticated();`}
             </div>
           </section>
         </main>
-      </div>
+        </div>
+      </PageLayout>
     </div>
   );
 };

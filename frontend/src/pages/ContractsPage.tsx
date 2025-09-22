@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ContractsPage.css';
 import SpreadsheetTaskbar from '../components/SpreadsheetTaskbar';
+import PageLayout from '../components/PageLayout';
 import { HandCashService } from '../services/HandCashService';
 
 interface Contract {
@@ -292,14 +293,12 @@ const ContractsPage: React.FC = () => {
         }}
       />
 
-      <div className="contracts-container">
-        <header className="contracts-header">
-          <div className="header-content">
-            <h1>Developer Contracts</h1>
-            <p className="subtitle">
-              Sign up for development tasks and earn $BSHEETS tokens upon successful PR merge
-            </p>
-          </div>
+      <PageLayout 
+        title="Developer Contracts"
+        description="Sign up for development tasks and earn $BSHEETS tokens upon successful PR merge"
+        className="contracts-layout"
+      >
+        <div className="contracts-container">
           
           <div className="header-stats">
             <div className="stat-card">
@@ -502,6 +501,8 @@ const ContractsPage: React.FC = () => {
           </div>
         </div>
       )}
+        </div>
+      </PageLayout>
     </div>
   );
 };

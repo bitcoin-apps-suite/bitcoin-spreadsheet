@@ -1,6 +1,7 @@
 import React from 'react';
 import './TokenPage.css';
 import SpreadsheetTaskbar from '../components/SpreadsheetTaskbar';
+import PageLayout from '../components/PageLayout';
 
 const TokenPage: React.FC = () => {
   return (
@@ -10,17 +11,12 @@ const TokenPage: React.FC = () => {
         currentUser={null}
         onLogout={() => {}}
       />
-      <div className="token-container">
-        {/* Hero Section */}
-        <section className="token-hero">
-          <h1 style={{color: '#ffffff'}}>
-            The <span style={{color: '#1976d2'}}>Bitcoin</span> Spreadsheet Token
-          </h1>
-          <p className="token-tagline">
-            Open-source spreadsheets meet sustainable blockchain economics
-          </p>
-          <div className="token-badge">$BSHEETS</div>
-        </section>
+      <PageLayout 
+        title="$BSHEETS Token"
+        description="Open-source spreadsheets meet sustainable blockchain economics"
+        className="token-layout"
+      >
+        <div className="token-container">
 
         {/* Philosophy Section */}
         <section className="philosophy-section">
@@ -292,7 +288,8 @@ const TokenPage: React.FC = () => {
             </a>
           </div>
         </section>
-      </div>
+        </div>
+      </PageLayout>
     </div>
   );
 };

@@ -321,7 +321,6 @@ const ContractsPage: React.FC = () => {
               <span className="stat-label">Completed</span>
             </div>
           </div>
-        </header>
 
         <div className="contracts-filters">
           <button
@@ -458,20 +457,20 @@ const ContractsPage: React.FC = () => {
             <h2>Contract Agreement</h2>
             
             <div className="contract-details">
-              <h3>{selectedContract.title}</h3>
+              <h3>{selectedContract?.title}</h3>
               <p className="contract-terms">
                 By signing this contract, you agree to:
               </p>
               <ul>
-                <li>Complete the deliverables as specified in issue #{selectedContract.issueNumber}</li>
+                <li>Complete the deliverables as specified in issue #{selectedContract?.issueNumber}</li>
                 <li>Submit a pull request that meets the project's quality standards</li>
                 <li>Respond to code review feedback within 48 hours</li>
-                <li>Receive {selectedContract.reward} upon successful merge</li>
+                <li>Receive {selectedContract?.reward} upon successful merge</li>
               </ul>
               
-              {selectedContract.deadline && (
+              {selectedContract?.deadline && (
                 <p className="deadline-warning">
-                  ⚠️ This contract has a deadline of {new Date(selectedContract.deadline).toLocaleDateString()}
+                  ⚠️ This contract has a deadline of {new Date(selectedContract.deadline!).toLocaleDateString()}
                 </p>
               )}
 
@@ -501,7 +500,6 @@ const ContractsPage: React.FC = () => {
           </div>
         </div>
       )}
-        </div>
       </PageLayout>
     </div>
   );

@@ -12,7 +12,7 @@ import HandCashCallback from './components/HandCashCallback';
 import BitcoinSpreadsheetPage from './pages/BitcoinSpreadsheetPage';
 import BapsPage from './pages/BapsPage';
 import DocsPage from './pages/DocsPage';
-import ExchangePage from './pages/ExchangePage';
+import JobExchangePage from './pages/JobExchangePage';
 import ThreeDPage from './pages/ThreeDPage';
 import TokenPage from './pages/TokenPage';
 import ContributionsPage from './pages/ContributionsPage';
@@ -204,7 +204,7 @@ function App() {
       <Route path="/bap" element={<BapsPage />} />
       <Route path="/developers" element={<BapsPage />} /> {/* Keep for backwards compatibility */}
       <Route path="/docs" element={<DocsPage />} />
-      <Route path="/exchange" element={<ExchangePage />} />
+      <Route path="/exchange" element={<JobExchangePage isAuthenticated={isAuthenticated} currentUser={currentUser} onLogout={handleLogout} />} />
       <Route path="/3d" element={<ThreeDPage />} />
       <Route path="/token" element={<TokenPage />} />
       <Route path="/contributions" element={<ContributionsPage />} />
@@ -214,11 +214,11 @@ function App() {
       <Route path="/*" element={
         isLoading ? (
           <div className="App">
-            <div className="loading">Loading Bitcoin Spreadsheet...</div>
+            <div className="loading">Loading Bitcoin Jobs...</div>
           </div>
         ) : (
           <div className="App" style={{ paddingTop: isMobile ? '0' : '68px' }}> {/* 40px banner + 28px taskbar */}
-            {/* Bitcoin Spreadsheet Taskbar */}
+            {/* Bitcoin Jobs Taskbar */}
             <SpreadsheetTaskbar
               isAuthenticated={isAuthenticated}
               currentUser={currentUser}

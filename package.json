@@ -1,7 +1,7 @@
 {
-  "name": "blockchain-spreadsheet",
+  "name": "bitcoin-jobs",
   "version": "1.0.0",
-  "description": "A decentralized spreadsheet application on Bitcoin SV blockchain",
+  "description": "Bitcoin Jobs - Decentralized Work Marketplace on Bitcoin SV",
   "main": "dist/index.js",
   "scripts": {
     "build": "npm run build:frontend",
@@ -17,8 +17,11 @@
     "bsv",
     "bitcoin-sv",
     "blockchain",
-    "spreadsheet",
-    "decentralized"
+    "jobs",
+    "careers",
+    "decentralized",
+    "marketplace",
+    "remote-work"
   ],
   "author": "",
   "license": "ISC",

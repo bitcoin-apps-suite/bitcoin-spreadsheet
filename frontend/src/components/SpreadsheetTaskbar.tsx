@@ -54,7 +54,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
       items: [
         { label: 'Home', shortcut: '⇧⌘H', action: () => navigate('/') },
         { divider: true },
-        { label: 'About Bitcoin Spreadsheet', action: () => alert('Bitcoin Spreadsheet v1.0\n\nDecentralized spreadsheets on Bitcoin SV\n\n© @b0ase 2025\nBuilt with HandCash integration') },
+        { label: 'About Bitcoin Spreadsheet', action: () => alert('Bitcoin Spreadsheet v1.0\n\nDecentralized spreadsheets on Bitcoin SV\n\n© 2025 THE BITCOIN CORPORATION LTD\nUK Company No. 16735102\n\nBuilt with HandCash integration') },
         { divider: true },
         { label: 'Preferences...', shortcut: '⌘,', action: () => console.log('Preferences') },
         { label: 'Encryption Settings...', action: () => console.log('Encryption') },
@@ -282,12 +282,12 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
     {
       label: 'Help',
       items: [
-        { label: 'Bitcoin Spreadsheet Help', shortcut: '⌘?', action: () => alert('Bitcoin Spreadsheet v1.0\n\nCreate, encrypt, and store spreadsheets on the Bitcoin blockchain') },
+        { label: 'Bitcoin Spreadsheet Help', shortcut: '⌘?', action: () => alert('Bitcoin Spreadsheet v1.0\n\nCreate, encrypt, and store spreadsheets on the Bitcoin blockchain\n\n© 2025 THE BITCOIN CORPORATION LTD\nUK Company No. 16735102') },
         { label: 'Keyboard Shortcuts', action: () => console.log('Show keyboard shortcuts') },
         { label: 'Function List', action: () => console.log('Show function list') },
         { divider: true },
         { label: 'Release Notes', href: '/releases' },
-        { label: 'What\'s New', action: () => alert('What\'s New in v1.0:\n\n• Handsontable integration\n• Dark mode support\n• Formula support with HyperFormula\n• Blockchain storage\n• HandCash authentication') },
+        { label: 'What\'s New', action: () => alert('What\'s New in v1.0:\n\n• Handsontable integration\n• Dark mode support\n• Formula support with HyperFormula\n• Blockchain storage\n• HandCash authentication\n\n© 2025 THE BITCOIN CORPORATION LTD') },
         { divider: true },
         { label: 'Report an Issue', href: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues' },
         { label: 'Contact @b0ase', href: 'https://twitter.com/b0ase' }

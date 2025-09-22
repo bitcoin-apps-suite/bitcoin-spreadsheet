@@ -1164,7 +1164,7 @@ class FinancialDataAsset extends BAP.Asset {
               </button>
             </div>
             <div className="footer-copyright">
-              © @b0ase September 2025
+              © 2025 THE BITCOIN CORPORATION LTD | UK Company No. 16735102
             </div>
           </div>
         </div>

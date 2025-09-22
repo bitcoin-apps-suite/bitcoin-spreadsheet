@@ -2,6 +2,14 @@
   "name": "bsv-spreadsheet-frontend",
   "version": "1.0.0",
   "private": true,
+  "license": "Open-BSV",
+  "author": "THE BITCOIN CORPORATION LTD (UK Company No. 16735102)",
+  "copyright": "Copyright (c) 2025 THE BITCOIN CORPORATION LTD",
+  "homepage": "https://bitcoinapps.store",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet.git"
+  },
   "dependencies": {
     "@bsv/sdk": "^1.7.6",
     "@handcash/handcash-connect": "^0.2.6",

@@ -498,8 +498,8 @@ main {
 /* Main container with sidebar layout */
 .main-container {
   background: #000000;
-  min-height: calc(100vh - 148px); /* Updated: 68px header + 80px for margins */
-  margin: 20px;
+  min-height: calc(100vh - 108px); /* Updated: 68px header + 40px for bottom/side margins */
+  margin: 0 20px 20px 20px;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(25, 118, 210, 0.12),

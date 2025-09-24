@@ -341,8 +341,7 @@ const EnhancedConnectionsModal: React.FC<EnhancedConnectionsModalProps> = ({
           {activeTab === 'connections' && (
             <div className="services-section">
               <div className="section-label">All Data Sources</div>
-                
-                <div className="services-grid">
+              <div className="services-grid">
               {/* Enterprise */}
               <div className="service-card">
                 <img 

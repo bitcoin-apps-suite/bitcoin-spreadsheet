@@ -322,184 +322,184 @@ const ContractsPage: React.FC = () => {
             </div>
           </div>
 
-        <div className="contracts-filters">
-          <button
-            className={filter === 'all' ? 'active' : ''}
-            onClick={() => setFilter('all')}
-          >
-            All Contracts
-          </button>
-          <button
-            className={filter === 'open' ? 'active' : ''}
-            onClick={() => setFilter('open')}
-          >
-            Open
-          </button>
-          <button
-            className={filter === 'assigned' ? 'active' : ''}
-            onClick={() => setFilter('assigned')}
-          >
-            In Progress
-          </button>
-          {isAuthenticated && (
+          <div className="contracts-filters">
             <button
-              className={filter === 'my_contracts' ? 'active' : ''}
-              onClick={() => setFilter('my_contracts')}
+              className={filter === 'all' ? 'active' : ''}
+              onClick={() => setFilter('all')}
             >
-              My Contracts
+              All Contracts
             </button>
+            <button
+              className={filter === 'open' ? 'active' : ''}
+              onClick={() => setFilter('open')}
+            >
+              Open
+            </button>
+            <button
+              className={filter === 'assigned' ? 'active' : ''}
+              onClick={() => setFilter('assigned')}
+            >
+              In Progress
+            </button>
+            {isAuthenticated && (
+              <button
+                className={filter === 'my_contracts' ? 'active' : ''}
+                onClick={() => setFilter('my_contracts')}
+              >
+                My Contracts
+              </button>
+            )}
+          </div>
+
+          {loading ? (
+            <div className="loading">Loading contracts...</div>
+          ) : (
+            <div className="contracts-grid">
+              {filteredContracts.map(contract => (
+                <div key={contract.id} className="contract-card">
+                  <div className="contract-header">
+                    <div className="contract-meta">
+                      <span className="issue-number">#{contract.issueNumber}</span>
+                      <span 
+                        className="contract-status"
+                        style={{ backgroundColor: getStatusColor(contract.status) }}
+                      >
+                        {contract.status.replace('_', ' ')}
+                      </span>
+                      <span 
+                        className="contract-difficulty"
+                        style={{ backgroundColor: getDifficultyColor(contract.difficulty) }}
+                      >
+                        {contract.difficulty}
+                      </span>
+                    </div>
+                    <div className="contract-reward">
+                      {contract.reward}
+                    </div>
+                  </div>
+
+                  <h3 className="contract-title">{contract.title}</h3>
+                  <p className="contract-description">{contract.description}</p>
+
+                  <div className="contract-skills">
+                    {contract.requiredSkills.map(skill => (
+                      <span key={skill} className="skill-tag">{skill}</span>
+                    ))}
+                  </div>
+
+                  <div className="contract-deliverables">
+                    <h4>Deliverables:</h4>
+                    <ul>
+                      {contract.deliverables.slice(0, 3).map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
+                      {contract.deliverables.length > 3 && (
+                        <li className="more">+{contract.deliverables.length - 3} more</li>
+                      )}
+                    </ul>
+                  </div>
+
+                  {contract.deadline && (
+                    <div className="contract-deadline">
+                      <span className="deadline-label">Deadline:</span>
+                      <span className="deadline-date">{new Date(contract.deadline).toLocaleDateString()}</span>
+                    </div>
+                  )}
+
+                  {contract.assignee && (
+                    <div className="contract-assignee">
+                      <span className="assignee-label">Assigned to:</span>
+                      <span className="assignee-name">{contract.assignee}</span>
+                    </div>
+                  )}
+
+                  <div className="contract-actions">
+                    <a 
+                      href={contract.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="github-link"
+                      style={{
+                        border: '1px solid rgba(247, 147, 26, 0.3)',
+                        background: 'rgba(247, 147, 26, 0.05)',
+                        color: '#F7931A',
+                        cursor: 'pointer',
+                        textDecoration: 'none',
+                        display: 'inline-block',
+                        padding: '8px 16px',
+                        borderRadius: '4px',
+                        fontSize: '14px',
+                        fontWeight: '500',
+                        transition: 'all 0.2s ease'
+                      }}
+                    >
+                      View on GitHub →
+                    </a>
+                    {contract.status === 'open' && (
+                      <button 
+                        className="signup-button"
+                        onClick={() => handleSignUp(contract)}
+                      >
+                        {isAuthenticated ? 'Sign Contract' : 'Login to Sign'}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Contract Signup Modal */}
+          {showSignupModal && selectedContract && (
+            <div className="modal-overlay" onClick={() => setShowSignupModal(false)}>
+              <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                <h2>Contract Agreement</h2>
+                
+                <div className="contract-details">
+                  <h3>{selectedContract.title}</h3>
+                  <p className="contract-terms">
+                    By signing this contract, you agree to:
+                  </p>
+                  <ul>
+                    <li>Complete the deliverables as specified in issue #{selectedContract.issueNumber}</li>
+                    <li>Submit a pull request that meets the project's quality standards</li>
+                    <li>Respond to code review feedback within 48 hours</li>
+                    <li>Receive {selectedContract.reward} upon successful merge</li>
+                  </ul>
+                  
+                  {selectedContract.deadline && (
+                    <p className="deadline-warning">
+                      ⚠️ This contract has a deadline of {new Date(selectedContract.deadline).toLocaleDateString()}
+                    </p>
+                  )}
+
+                  <div className="wallet-info">
+                    <p>Payment will be sent to:</p>
+                    <div className="wallet-display">
+                      <img src="https://handcash.io/favicon.ico" alt="HandCash" />
+                      <span>@{currentUser?.handle}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="modal-actions">
+                  <button 
+                    className="cancel-button" 
+                    onClick={() => setShowSignupModal(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    className="confirm-button"
+                    onClick={submitContractSignup}
+                  >
+                    Sign Contract & Start Work
+                  </button>
+                </div>
+              </div>
+            </div>
           )}
         </div>
-
-        {loading ? (
-          <div className="loading">Loading contracts...</div>
-        ) : (
-          <div className="contracts-grid">
-            {filteredContracts.map(contract => (
-              <div key={contract.id} className="contract-card">
-                <div className="contract-header">
-                  <div className="contract-meta">
-                    <span className="issue-number">#{contract.issueNumber}</span>
-                    <span 
-                      className="contract-status"
-                      style={{ backgroundColor: getStatusColor(contract.status) }}
-                    >
-                      {contract.status.replace('_', ' ')}
-                    </span>
-                    <span 
-                      className="contract-difficulty"
-                      style={{ backgroundColor: getDifficultyColor(contract.difficulty) }}
-                    >
-                      {contract.difficulty}
-                    </span>
-                  </div>
-                  <div className="contract-reward">
-                    {contract.reward}
-                  </div>
-                </div>
-
-                <h3 className="contract-title">{contract.title}</h3>
-                <p className="contract-description">{contract.description}</p>
-
-                <div className="contract-skills">
-                  {contract.requiredSkills.map(skill => (
-                    <span key={skill} className="skill-tag">{skill}</span>
-                  ))}
-                </div>
-
-                <div className="contract-deliverables">
-                  <h4>Deliverables:</h4>
-                  <ul>
-                    {contract.deliverables.slice(0, 3).map((item, index) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                    {contract.deliverables.length > 3 && (
-                      <li className="more">+{contract.deliverables.length - 3} more</li>
-                    )}
-                  </ul>
-                </div>
-
-                {contract.deadline && (
-                  <div className="contract-deadline">
-                    <span className="deadline-label">Deadline:</span>
-                    <span className="deadline-date">{new Date(contract.deadline).toLocaleDateString()}</span>
-                  </div>
-                )}
-
-                {contract.assignee && (
-                  <div className="contract-assignee">
-                    <span className="assignee-label">Assigned to:</span>
-                    <span className="assignee-name">{contract.assignee}</span>
-                  </div>
-                )}
-
-                <div className="contract-actions">
-                  <a 
-                    href={contract.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="github-link"
-                    style={{
-                      border: '1px solid rgba(247, 147, 26, 0.3)',
-                      background: 'rgba(247, 147, 26, 0.05)',
-                      color: '#F7931A',
-                      cursor: 'pointer',
-                      textDecoration: 'none',
-                      display: 'inline-block',
-                      padding: '8px 16px',
-                      borderRadius: '4px',
-                      fontSize: '14px',
-                      fontWeight: '500',
-                      transition: 'all 0.2s ease'
-                    }}
-                  >
-                    View on GitHub →
-                  </a>
-                  {contract.status === 'open' && (
-                    <button 
-                      className="signup-button"
-                      onClick={() => handleSignUp(contract)}
-                    >
-                      {isAuthenticated ? 'Sign Contract' : 'Login to Sign'}
-                    </button>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Contract Signup Modal */}
-      {showSignupModal && selectedContract && (
-        <div className="modal-overlay" onClick={() => setShowSignupModal(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>Contract Agreement</h2>
-            
-            <div className="contract-details">
-              <h3>{selectedContract?.title}</h3>
-              <p className="contract-terms">
-                By signing this contract, you agree to:
-              </p>
-              <ul>
-                <li>Complete the deliverables as specified in issue #{selectedContract?.issueNumber}</li>
-                <li>Submit a pull request that meets the project's quality standards</li>
-                <li>Respond to code review feedback within 48 hours</li>
-                <li>Receive {selectedContract?.reward} upon successful merge</li>
-              </ul>
-              
-              {selectedContract?.deadline && (
-                <p className="deadline-warning">
-                  ⚠️ This contract has a deadline of {new Date(selectedContract.deadline!).toLocaleDateString()}
-                </p>
-              )}
-
-              <div className="wallet-info">
-                <p>Payment will be sent to:</p>
-                <div className="wallet-display">
-                  <img src="https://handcash.io/favicon.ico" alt="HandCash" />
-                  <span>@{currentUser?.handle}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="modal-actions">
-              <button 
-                className="cancel-button" 
-                onClick={() => setShowSignupModal(false)}
-              >
-                Cancel
-              </button>
-              <button 
-                className="confirm-button"
-                onClick={submitContractSignup}
-              >
-                Sign Contract & Start Work
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
       </PageLayout>
     </div>
   );

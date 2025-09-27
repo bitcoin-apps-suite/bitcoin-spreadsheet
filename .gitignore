@@ -35,3 +35,8 @@ coverage/
 .temp/
 *.bak
 .vercel
+
+# Screenshots
+*Screenshot*
+Screenshot*
+*.png

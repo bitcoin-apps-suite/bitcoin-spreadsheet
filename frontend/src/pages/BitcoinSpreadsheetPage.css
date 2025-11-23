@@ -132,43 +132,35 @@
   color: rgba(255, 255, 255, 0.95);
 }
 
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
+.feature-content {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.feature-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 40px 30px;
-  text-align: center;
-  transition: all 0.3s ease;
+.feature-block {
+  margin-bottom: 40px;
+  padding: 0;
+  border-left: 4px solid #007acc;
+  padding-left: 24px;
+  margin-left: 0;
 }
 
-.feature-card:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(0, 122, 204, 0.3);
-  transform: translateY(-5px);
-}
-
-.feature-icon {
-  font-size: 48px;
-  margin-bottom: 20px;
-}
-
-.feature-title {
+.feature-block h3 {
   font-size: 24px;
   font-weight: 500;
-  margin: 0 0 15px 0;
-  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 12px 0;
+  color: #007acc;
 }
 
-.feature-description {
+.feature-block p {
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.8);
   line-height: 1.6;
+  margin: 0;
+}
+
+.feature-block:last-child {
+  margin-bottom: 0;
 }
 
 /* Tokenization Section */
@@ -429,8 +421,17 @@
     font-size: 36px;
   }
 
-  .features-grid {
-    grid-template-columns: 1fr;
+  .feature-content {
+    padding: 0 10px;
+  }
+  
+  .feature-block {
+    padding-left: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .feature-block h3 {
+    font-size: 20px;
   }
 
   .tokenization-content {

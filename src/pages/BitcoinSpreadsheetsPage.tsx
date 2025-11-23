@@ -5,38 +5,6 @@ import './BitcoinSpreadsheetPage.css';
 const BitcoinSpreadsheetsPage: React.FC = () => {
   const navigate = useNavigate();
 
-  const features = [
-    {
-      icon: '🔐',
-      title: 'Blockchain Security',
-      description: 'Every cell cryptographically secured on the Bitcoin SV blockchain with immutable audit trails'
-    },
-    {
-      icon: '🪙',
-      title: 'Tokenize Everything',
-      description: 'Convert spreadsheets, cells, and datasets into tradeable dividend-bearing shares'
-    },
-    {
-      icon: '💎',
-      title: 'NFT Storage',
-      description: 'Save your spreadsheets as permanent, immutable NFTs with fractional ownership'
-    },
-    {
-      icon: '🤝',
-      title: 'HandCash Integration', 
-      description: 'Seamless authentication and instant micropayments with HandCash wallet'
-    },
-    {
-      icon: '📊',
-      title: 'Real-time Collaboration',
-      description: 'Share spreadsheet ownership and collaborate with transparent on-chain tracking'
-    },
-    {
-      icon: '⚡',
-      title: 'Lightning Economics',
-      description: 'Earn from your data with dynamic pricing and subscription models'
-    }
-  ];
 
   const protocols = [
     { name: 'Ordinals', description: 'Inscribe data on satoshis' },
@@ -98,18 +66,41 @@ const BitcoinSpreadsheetsPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Features Grid */}
+      {/* Core Features Section */}
       <section className="features-section">
         <div className="container">
-          <h2 className="section-title">Revolutionary Features</h2>
-          <div className="features-grid">
-            {features.map((feature, index) => (
-              <div key={index} className="feature-card">
-                <div className="feature-icon">{feature.icon}</div>
-                <h3 className="feature-title">{feature.title}</h3>
-                <p className="feature-description">{feature.description}</p>
-              </div>
-            ))}
+          <h2 className="section-title">Core Features</h2>
+          
+          <div className="feature-content">
+            <div className="feature-block">
+              <h3>Blockchain Security</h3>
+              <p>Every cell cryptographically secured on the Bitcoin SV blockchain with immutable audit trails and transparent ownership verification.</p>
+            </div>
+
+            <div className="feature-block">
+              <h3>Tokenization Engine</h3>
+              <p>Convert spreadsheets, cells, and datasets into tradeable dividend-bearing shares with built-in fractional ownership and revenue distribution.</p>
+            </div>
+
+            <div className="feature-block">
+              <h3>NFT Storage</h3>
+              <p>Save your spreadsheets as permanent, immutable NFTs with fractional ownership capabilities and marketplace integration.</p>
+            </div>
+
+            <div className="feature-block">
+              <h3>HandCash Integration</h3>
+              <p>Seamless authentication and instant micropayments with HandCash wallet for streamlined user experience.</p>
+            </div>
+
+            <div className="feature-block">
+              <h3>Real-time Collaboration</h3>
+              <p>Share spreadsheet ownership and collaborate with transparent on-chain tracking and distributed permissions management.</p>
+            </div>
+
+            <div className="feature-block">
+              <h3>Economic Primitives</h3>
+              <p>Earn from your data with dynamic pricing models, subscription services, and automated dividend distribution systems.</p>
+            </div>
           </div>
         </div>
       </section>

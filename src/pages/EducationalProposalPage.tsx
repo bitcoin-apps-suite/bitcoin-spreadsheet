@@ -23,6 +23,10 @@ const EducationalProposalPage: React.FC = () => {
       `}</style>
       <div className="educational-proposal-page">
         <style>{`
+          .page-header {
+            padding: 80px 0 32px 0 !important;
+          }
+          
           .educational-proposal-page {
             max-width: 100%;
             margin: 0;

@@ -1,0 +1,645 @@
+{
+  "manifestVersion": "1.0.0",
+  "originVersioningInscription": "1e44cd5ea83816a85cce3537c63ad0f87e5d3371a2087da359de4ee542fc7525_0",
+  "originHtmlInscription": "b8b4af3acee48d7be519cf15099de27b24278072eb6892249e30fc1b73ee5fb1_0",
+  "totalDeployments": 3,
+  "deployments": [
+    {
+      "timestamp": "2025-11-23T17:21:25.919Z",
+      "entryPoint": "/content/b8b4af3acee48d7be519cf15099de27b24278072eb6892249e30fc1b73ee5fb1_0",
+      "files": [
+        {
+          "originalPath": "Bitcoin Spreadsheets Educational Initiative - Trust Funding Proposal.pdf",
+          "txid": "ca79ed0cf87a81ce25498b97677911ecbb53b4385bfeaec2ba85d4cfe34bfe68",
+          "vout": 0,
+          "urlPath": "/content/ca79ed0cf87a81ce25498b97677911ecbb53b4385bfeaec2ba85d4cfe34bfe68_0",
+          "size": 257046,
+          "contentHash": "cfce7b2e44239b4049bae1ba7b330071039202798e8ff0b91bc1ef92a622140e"
+        },
+        {
+          "originalPath": "asset-manifest.json",
+          "txid": "d70d02ca4604ed411dac6d5ca98ca7037a733d1ef75df5df42a2e4705fd34d1e",
+          "vout": 0,
+          "urlPath": "/content/d70d02ca4604ed411dac6d5ca98ca7037a733d1ef75df5df42a2e4705fd34d1e_0",
+          "size": 1105,
+          "contentHash": "6bf26aa1e1dfae1590c44740f4649877498538026966c82a0759afdc87d95cfd"
+        },
+        {
+          "originalPath": "bap_executive_summary.pdf",
+          "txid": "1ee5c435fbc6707c7af6bb67f6d3bdd57abf78848bfb0f60345a62689da93b46",
+          "vout": 0,
+          "urlPath": "/content/1ee5c435fbc6707c7af6bb67f6d3bdd57abf78848bfb0f60345a62689da93b46_0",
+          "size": 2952,
+          "contentHash": "23a407d8adad76dc61c75c45938644e75ece6e3a533358c06b29068c341bd26c"
+        },
+        {
+          "originalPath": "baps_executive_summary.pdf",
+          "txid": "98ad453f24d500d2c85223dedee40878264ad28d1ea75947592b9d40633d99aa",
+          "vout": 0,
+          "urlPath": "/content/98ad453f24d500d2c85223dedee40878264ad28d1ea75947592b9d40633d99aa_0",
+          "size": 2958,
+          "contentHash": "85337176e972abfff8286bf34ebfe038884f1247a04dc09276cd55552026a2af"
+        },
+        {
+          "originalPath": "bitcoin-spreadsheets-icon.png",
+          "txid": "07d7a627c0c43b4ebedadf8630d82100d50325eee05b0bb68e5c14705470fdcb",
+          "vout": 0,
+          "urlPath": "/content/07d7a627c0c43b4ebedadf8630d82100d50325eee05b0bb68e5c14705470fdcb_0",
+          "size": 738188,
+          "contentHash": "9af5cb7f8e2cdaa29da825d7f4aa8fa161b466f89283b11c7c94c8f4219ce485"
+        },
+        {
+          "originalPath": "bitcoin-watercolor-icon.png",
+          "txid": "df83786a2eb7f6f0e82892d8b75f87611d14293c49e11a21788da0feb6e1c6d8",
+          "vout": 0,
+          "urlPath": "/content/df83786a2eb7f6f0e82892d8b75f87611d14293c49e11a21788da0feb6e1c6d8_0",
+          "size": 738188,
+          "contentHash": "9af5cb7f8e2cdaa29da825d7f4aa8fa161b466f89283b11c7c94c8f4219ce485"
+        },
+        {
+          "originalPath": "favicon.png",
+          "txid": "3794aabbf6c4750017446023e4a2aef6c4634bb9a7de8bb6a9572b276aad1d6b",
+          "vout": 0,
+          "urlPath": "/content/3794aabbf6c4750017446023e4a2aef6c4634bb9a7de8bb6a9572b276aad1d6b_0",
+          "size": 738188,
+          "contentHash": "9af5cb7f8e2cdaa29da825d7f4aa8fa161b466f89283b11c7c94c8f4219ce485"
+        },
+        {
+          "originalPath": "icons/icon-128x128.png",
+          "txid": "42e92d1e08489b01259fffe6ed4d1e954e082eba4c2161598ca81be1e04b529e",
+          "vout": 0,
+          "urlPath": "/content/42e92d1e08489b01259fffe6ed4d1e954e082eba4c2161598ca81be1e04b529e_0",
+          "size": 3785,
+          "contentHash": "c1d9814fd8598f3e8d4e49ad9b2cda311909fbf4f05c7eb5c5a460c4b188af4f"
+        },
+        {
+          "originalPath": "icons/icon-144x144.png",
+          "txid": "e1d602b41b2fb7654b5d83e0d0d2d6142256551555539250a847b444bb3fd8ff",
+          "vout": 0,
+          "urlPath": "/content/e1d602b41b2fb7654b5d83e0d0d2d6142256551555539250a847b444bb3fd8ff_0",
+          "size": 4404,
+          "contentHash": "77f9adf49f21cd54dd96dab76c1b07e6d089b580c91f8792eaf2207b401674bc"
+        },
+        {
+          "originalPath": "icons/icon-152x152.png",
+          "txid": "102c57a5d8ec042db60eff92f99ca99f3ebf9b4648f19aba44e7ceee24bae59b",
+          "vout": 0,
+          "urlPath": "/content/102c57a5d8ec042db60eff92f99ca99f3ebf9b4648f19aba44e7ceee24bae59b_0",
+          "size": 4545,
+          "contentHash": "6c8b682a304b6a2c513162d02dc71f740b4767a03b1c2883c637966f594cd2d9"
+        },
+        {
+          "originalPath": "icons/icon-192x192.png",
+          "txid": "51231a12d078e930d23668c3420511a64f12eda3d1e37943dfd8a88f9994ea27",
+          "vout": 0,
+          "urlPath": "/content/51231a12d078e930d23668c3420511a64f12eda3d1e37943dfd8a88f9994ea27_0",
+          "size": 6237,
+          "contentHash": "fa4e8ff2773da47dd3b510d6cf2ff1f96431fa24e544018bba94f68a4159ab96"
+        },
+        {
+          "originalPath": "icons/icon-384x384.png",
+          "txid": "ddaf5b8d431a491a1066b194aaf461c97fe2c484bd05aae80630865df844de01",
+          "vout": 0,
+          "urlPath": "/content/ddaf5b8d431a491a1066b194aaf461c97fe2c484bd05aae80630865df844de01_0",
+          "size": 14510,
+          "contentHash": "18063658fdc4f17890aafafb83d2041bcc46a2a59563a29add80742a6825f922"
+        },
+        {
+          "originalPath": "icons/icon-512x512.png",
+          "txid": "b54c4c925987a10268450086aefb2f938520c1737196e85bc8bea56478241f58",
+          "vout": 0,
+          "urlPath": "/content/b54c4c925987a10268450086aefb2f938520c1737196e85bc8bea56478241f58_0",
+          "size": 22718,
+          "contentHash": "6bb1ec3a78b0a851e3671291f629b12f62b04f982c5360762533fc08fe0722d4"
+        },
+        {
+          "originalPath": "icons/icon-72x72.png",
+          "txid": "2a1b7a5b42f197930ea7175852324740e79555f7066238c2d175765eda7f46ec",
+          "vout": 0,
+          "urlPath": "/content/2a1b7a5b42f197930ea7175852324740e79555f7066238c2d175765eda7f46ec_0",
+          "size": 2154,
+          "contentHash": "d2d17ff620791821170f7d251ebff7a0a0ea2fad72a6cc6b6347ffb07f8a0483"
+        },
+        {
+          "originalPath": "icons/icon-96x96.png",
+          "txid": "58d34d81ac9ea223e034076ba9b4df007a6ffe312ef728323fb6d48a80a35077",
+          "vout": 0,
+          "urlPath": "/content/58d34d81ac9ea223e034076ba9b4df007a6ffe312ef728323fb6d48a80a35077_0",
+          "size": 2873,
+          "contentHash": "2a34cc066fde23f0b1df24bbf6a5e67fd24d9d2dcb6a1112450fdf185237e0b2"
+        },
+        {
+          "originalPath": "manifest.json",
+          "txid": "804f055bb0dbb64dd2343256c08cd431b5f95c977ba9573df94c448775ddcdd7",
+          "vout": 0,
+          "urlPath": "/content/804f055bb0dbb64dd2343256c08cd431b5f95c977ba9573df94c448775ddcdd7_0",
+          "size": 534,
+          "contentHash": "6bbaa52f8eb5f76d2bd61a1896627726370e00bd0d6cae6cc1525df62c038d20"
+        },
+        {
+          "originalPath": "static/css/main.7a1e4556.css",
+          "txid": "7390f31757fff959ee60eea1f0be054ecdfe3cf33c86a0f3eaa0887cb6cce688",
+          "vout": 0,
+          "urlPath": "/content/7390f31757fff959ee60eea1f0be054ecdfe3cf33c86a0f3eaa0887cb6cce688_0",
+          "size": 160470,
+          "contentHash": "6fef5180639eb463725e05cd87fccb42b5d37466dba833e81642d338632e1213"
+        },
+        {
+          "originalPath": "static/css/main.7a1e4556.css.map",
+          "txid": "304313597c9188664af328e0a45334d48bea8975383bec6ce989d5e6a57be661",
+          "vout": 0,
+          "urlPath": "/content/304313597c9188664af328e0a45334d48bea8975383bec6ce989d5e6a57be661_0",
+          "size": 328808,
+          "contentHash": "c1e3caddc962409d4e2cb26159d64a621f9f26539fe8998697ae421da61a7817"
+        },
+        {
+          "originalPath": "static/js/178.339603ee.chunk.js",
+          "txid": "04db48e0d1cefb61087e5513a47998021627c8835aab6a2d29f771d34b59ce5d",
+          "vout": 0,
+          "urlPath": "/content/04db48e0d1cefb61087e5513a47998021627c8835aab6a2d29f771d34b59ce5d_0",
+          "size": 25798,
+          "contentHash": "3b3ece3b79fa5741beb90e09bd2745dff4bd5065589297cfe650f3859b586245"
+        },
+        {
+          "originalPath": "static/js/178.339603ee.chunk.js.LICENSE.txt",
+          "txid": "9095d10f1a75480dd6d37c46486843deeb3f954ffb35f687a5ca470e89357973",
+          "vout": 0,
+          "urlPath": "/content/9095d10f1a75480dd6d37c46486843deeb3f954ffb35f687a5ca470e89357973_0",
+          "size": 39,
+          "contentHash": "0b4ddad7933bb1841f82eb5763b3c8e8a0e1c81637fec61b38efb22a87886884"
+        },
+        {
+          "originalPath": "static/js/178.339603ee.chunk.js.map",
+          "txid": "1385d035776a926040b77f5a71c8727c756c0d5a8e5feacfb5c46a053d63e1f4",
+          "vout": 0,
+          "urlPath": "/content/1385d035776a926040b77f5a71c8727c756c0d5a8e5feacfb5c46a053d63e1f4_0",
+          "size": 92381,
+          "contentHash": "b306262b630840d6f0a8e6fdb2cf3fd96a34ba5f2ad156a8a122c9f4aa14cfb2"
+        },
+        {
+          "originalPath": "static/js/218.1fb7d32a.chunk.js",
+          "txid": "7ebb1d75309212aa4629c7e1c12d5c9c4e615252a988a581868b343452195b1b",
+          "vout": 0,
+          "urlPath": "/content/7ebb1d75309212aa4629c7e1c12d5c9c4e615252a988a581868b343452195b1b_0",
+          "size": 56014,
+          "contentHash": "72830fec2004b05247805f31412a71cd397027f9186121682c8e2a7aed75d82f"
+        },
+        {
+          "originalPath": "static/js/218.1fb7d32a.chunk.js.LICENSE.txt",
+          "txid": "28cd2d9b1be71ef6ec6e7efb079a5d5d5b232351c7180b8bcb681f129f0ffb3c",
+          "vout": 0,
+          "urlPath": "/content/28cd2d9b1be71ef6ec6e7efb079a5d5d5b232351c7180b8bcb681f129f0ffb3c_0",
+          "size": 39,
+          "contentHash": "0b4ddad7933bb1841f82eb5763b3c8e8a0e1c81637fec61b38efb22a87886884"
+        },
+        {
+          "originalPath": "static/js/218.1fb7d32a.chunk.js.map",
+          "txid": "b698fe88253b78bf65a660fafc3e8bab488a2a55dc003c4f1abee26d0d1efa04",
+          "vout": 0,
+          "urlPath": "/content/b698fe88253b78bf65a660fafc3e8bab488a2a55dc003c4f1abee26d0d1efa04_0",
+          "size": 161449,
+          "contentHash": "44a8f3c02de3c5fc3d2be6e001c8466904d5571b3c9f07964049ddd72642f34e"
+        },
+        {
+          "originalPath": "static/js/26.58825651.chunk.js",
+          "txid": "3a01079e24ad89484ebc55b8db91bfff98626cd393ea465c4efa61e20b8b1938",
+          "vout": 0,
+          "urlPath": "/content/3a01079e24ad89484ebc55b8db91bfff98626cd393ea465c4efa61e20b8b1938_0",
+          "size": 33223,
+          "contentHash": "a1da8a513fb96d229782580b62566ca86d819b0eec39d2dd8193c4550a12e89e"
+        },
+        {
+          "originalPath": "static/js/26.58825651.chunk.js.LICENSE.txt",
+          "txid": "046f3dc9eeb6a0a960048b6ef2e198c3133e73c8bc232a78ce024e2460f56388",
+          "vout": 0,
+          "urlPath": "/content/046f3dc9eeb6a0a960048b6ef2e198c3133e73c8bc232a78ce024e2460f56388_0",
+          "size": 39,
+          "contentHash": "0b4ddad7933bb1841f82eb5763b3c8e8a0e1c81637fec61b38efb22a87886884"
+        },
+        {
+          "originalPath": "static/js/26.58825651.chunk.js.map",
+          "txid": "c48738b85fa6d400e627f8a74fe631024fcc36900feb297fbd773272448b413c",
+          "vout": 0,
+          "urlPath": "/content/c48738b85fa6d400e627f8a74fe631024fcc36900feb297fbd773272448b413c_0",
+          "size": 125160,
+          "contentHash": "f5d72c6e8bcfe0c5b3de35fc027f6350ce010ec636da3cff9358530789c72eb5"
+        },
+        {
+          "originalPath": "static/js/437.c2242acd.chunk.js",
+          "txid": "82b8786f64369d32b6b201286f8d20b2429fb112c9cf724cfd864393633e2a47",
+          "vout": 0,
+          "urlPath": "/content/82b8786f64369d32b6b201286f8d20b2429fb112c9cf724cfd864393633e2a47_0",
+          "size": 7525,
+          "contentHash": "6f77bbcde04e18ad69c640070a590dbc38d30c60c1416844c0296ece592c8465"
+        },
+        {
+          "originalPath": "static/js/437.c2242acd.chunk.js.LICENSE.txt",
+          "txid": "689ab3222eb5cd025bbaa4039cb3e05b26ab66bc3fc9c3317489598cb1790ed5",
+          "vout": 0,
+          "urlPath": "/content/689ab3222eb5cd025bbaa4039cb3e05b26ab66bc3fc9c3317489598cb1790ed5_0",
+          "size": 39,
+          "contentHash": "0b4ddad7933bb1841f82eb5763b3c8e8a0e1c81637fec61b38efb22a87886884"
+        },
+        {
+          "originalPath": "static/js/437.c2242acd.chunk.js.map",
+          "txid": "dec85018edebf55f8902d1913c777109a627459945fa00c5751721b910cb9c18",
+          "vout": 0,
+          "urlPath": "/content/dec85018edebf55f8902d1913c777109a627459945fa00c5751721b910cb9c18_0",
+          "size": 28725,
+          "contentHash": "229dec2171ab812cd3d0c9c8181a5a070e54a1a6f9defd703ec92d6e33334284"
+        },
+        {
+          "originalPath": "static/js/644.f25b7a1b.chunk.js",
+          "txid": "29777facfffd185c140820b62b060a12debe82519f4fa4a49fdaf5cf3f7d1cbe",
+          "vout": 0,
+          "urlPath": "/content/29777facfffd185c140820b62b060a12debe82519f4fa4a49fdaf5cf3f7d1cbe_0",
+          "size": 12491,
+          "contentHash": "df299043d5f86ca6f8144f96d792cb4486d16cbeb0c005dceed412d9d57093a5"
+        },
+        {
+          "originalPath": "static/js/644.f25b7a1b.chunk.js.map",
+          "txid": "e43ac91757a7d497aba9cc49ce982ab7939ad85df207303d522356b0c34d6c9f",
+          "vout": 0,
+          "urlPath": "/content/e43ac91757a7d497aba9cc49ce982ab7939ad85df207303d522356b0c34d6c9f_0",
+          "size": 31397,
+          "contentHash": "cd90ffb6f44bc52195db3e03d217a25c9e450d6d48ca6b940f34ec83fdee2e6e"
+        },
+        {
+          "originalPath": "static/js/main.2ac06027.js.LICENSE.txt",
+          "txid": "4235dcc9418b48d63254c27882e2b3af8a9850be9ac10f4654fbb9c6f21f0b77",
+          "vout": 0,
+          "urlPath": "/content/4235dcc9418b48d63254c27882e2b3af8a9850be9ac10f4654fbb9c6f21f0b77_0",
+          "size": 5459,
+          "contentHash": "68b24ca13c4ccaa339098ae25c7e5a1b9269cbafa37df0c5821a4210226b0e5a"
+        },
+        {
+          "originalPath": "static/js/main.2ac06027.js.map",
+          "txid": "ea5ed664298cc4a71aa165aa57f647067f5811a0d915828ea9ffe3f6899874b8",
+          "vout": 0,
+          "urlPath": "/content/ea5ed664298cc4a71aa165aa57f647067f5811a0d915828ea9ffe3f6899874b8_0",
+          "size": 29646726,
+          "contentHash": "f73b0dd7efdf4cb97c8b7e8f6696eb402c1345957cc193c1b5d79a9442e9e784",
+          "isChunked": true,
+          "chunkCount": 3,
+          "chunks": [
+            {
+              "index": 0,
+              "txid": "ea5ed664298cc4a71aa165aa57f647067f5811a0d915828ea9ffe3f6899874b8",
+              "vout": 0,
+              "size": 10485760
+            },
+            {
+              "index": 1,
+              "txid": "1d1aaf83b1337f833cee069c72765ad5711f09c05c51bc88e344da271a45d49e",
+              "vout": 0,
+              "size": 10485760
+            },
+            {
+              "index": 2,
+              "txid": "b5f9db5f511daec31fc0a0eb512af2d3108e2cb872a5565fdf1678a9cb955d33",
+              "vout": 0,
+              "size": 8675206
+            }
+          ]
+        },
+        {
+          "originalPath": "static/js/main.2ac06027.js",
+          "txid": "cb06cb0deee66ec8784354f71f0f6185450005e9af02ddac651b9661e36b751d",
+          "vout": 0,
+          "urlPath": "/content/cb06cb0deee66ec8784354f71f0f6185450005e9af02ddac651b9661e36b751d_0",
+          "size": 5971488,
+          "contentHash": "cb28dcda2d3dc79ba19e832eeae1a9cce4420b7d1af1f45834b367a53f8cfc6d",
+          "isChunked": true,
+          "chunkCount": 1,
+          "chunks": [
+            {
+              "index": 0,
+              "txid": "cb06cb0deee66ec8784354f71f0f6185450005e9af02ddac651b9661e36b751d",
+              "vout": 0,
+              "size": 5971488
+            }
+          ]
+        },
+        {
+          "originalPath": "chunk-reassembly-sw.js",
+          "txid": "8fc592c6b1f6dba0281ac1702c5e28a4fd5815da7ef32aeaec37e286c3a56de8",
+          "vout": 0,
+          "urlPath": "/content/8fc592c6b1f6dba0281ac1702c5e28a4fd5815da7ef32aeaec37e286c3a56de8_0",
+          "size": 12368,
+          "contentHash": "b3164f4956bba1d15d7ba5227a8d0c1fe5b775a2e4576f42e981d201771bec53"
+        },
+        {
+          "originalPath": "index.html",
+          "txid": "b8b4af3acee48d7be519cf15099de27b24278072eb6892249e30fc1b73ee5fb1",
+          "vout": 0,
+          "urlPath": "/content/b8b4af3acee48d7be519cf15099de27b24278072eb6892249e30fc1b73ee5fb1_0",
+          "size": 10142,
+          "contentHash": "819050b6a0f3e72fde0c3bac0e6bbc2f00ef1ef9dc7edb1a33954a960136ea33"
+        }
+      ],
+      "cachedFiles": [],
+      "totalFiles": 37,
+      "totalCost": 3925041,
+      "totalSize": 39250165,
+      "transactions": [
+        "1e44cd5ea83816a85cce3537c63ad0f87e5d3371a2087da359de4ee542fc7525",
+        "321a01c93fa9034d0d133e710aa616a610ae8401b65623b5c98ffd5290ddc130",
+        "ca79ed0cf87a81ce25498b97677911ecbb53b4385bfeaec2ba85d4cfe34bfe68",
+        "d70d02ca4604ed411dac6d5ca98ca7037a733d1ef75df5df42a2e4705fd34d1e",
+        "1ee5c435fbc6707c7af6bb67f6d3bdd57abf78848bfb0f60345a62689da93b46",
+        "98ad453f24d500d2c85223dedee40878264ad28d1ea75947592b9d40633d99aa",
+        "07d7a627c0c43b4ebedadf8630d82100d50325eee05b0bb68e5c14705470fdcb",
+        "df83786a2eb7f6f0e82892d8b75f87611d14293c49e11a21788da0feb6e1c6d8",
+        "3794aabbf6c4750017446023e4a2aef6c4634bb9a7de8bb6a9572b276aad1d6b",
+        "42e92d1e08489b01259fffe6ed4d1e954e082eba4c2161598ca81be1e04b529e",
+        "e1d602b41b2fb7654b5d83e0d0d2d6142256551555539250a847b444bb3fd8ff",
+        "102c57a5d8ec042db60eff92f99ca99f3ebf9b4648f19aba44e7ceee24bae59b",
+        "51231a12d078e930d23668c3420511a64f12eda3d1e37943dfd8a88f9994ea27",
+        "ddaf5b8d431a491a1066b194aaf461c97fe2c484bd05aae80630865df844de01",
+        "b54c4c925987a10268450086aefb2f938520c1737196e85bc8bea56478241f58",
+        "2a1b7a5b42f197930ea7175852324740e79555f7066238c2d175765eda7f46ec",
+        "58d34d81ac9ea223e034076ba9b4df007a6ffe312ef728323fb6d48a80a35077",
+        "804f055bb0dbb64dd2343256c08cd431b5f95c977ba9573df94c448775ddcdd7",
+        "7390f31757fff959ee60eea1f0be054ecdfe3cf33c86a0f3eaa0887cb6cce688",
+        "304313597c9188664af328e0a45334d48bea8975383bec6ce989d5e6a57be661",
+        "04db48e0d1cefb61087e5513a47998021627c8835aab6a2d29f771d34b59ce5d",
+        "9095d10f1a75480dd6d37c46486843deeb3f954ffb35f687a5ca470e89357973",
+        "1385d035776a926040b77f5a71c8727c756c0d5a8e5feacfb5c46a053d63e1f4",
+        "7ebb1d75309212aa4629c7e1c12d5c9c4e615252a988a581868b343452195b1b",
+        "28cd2d9b1be71ef6ec6e7efb079a5d5d5b232351c7180b8bcb681f129f0ffb3c",
+        "b698fe88253b78bf65a660fafc3e8bab488a2a55dc003c4f1abee26d0d1efa04",
+        "3a01079e24ad89484ebc55b8db91bfff98626cd393ea465c4efa61e20b8b1938",
+        "046f3dc9eeb6a0a960048b6ef2e198c3133e73c8bc232a78ce024e2460f56388",
+        "c48738b85fa6d400e627f8a74fe631024fcc36900feb297fbd773272448b413c",
+        "82b8786f64369d32b6b201286f8d20b2429fb112c9cf724cfd864393633e2a47",
+        "689ab3222eb5cd025bbaa4039cb3e05b26ab66bc3fc9c3317489598cb1790ed5",
+        "dec85018edebf55f8902d1913c777109a627459945fa00c5751721b910cb9c18",
+        "29777facfffd185c140820b62b060a12debe82519f4fa4a49fdaf5cf3f7d1cbe",
+        "e43ac91757a7d497aba9cc49ce982ab7939ad85df207303d522356b0c34d6c9f",
+        "4235dcc9418b48d63254c27882e2b3af8a9850be9ac10f4654fbb9c6f21f0b77",
+        "ea5ed664298cc4a71aa165aa57f647067f5811a0d915828ea9ffe3f6899874b8",
+        "1d1aaf83b1337f833cee069c72765ad5711f09c05c51bc88e344da271a45d49e",
+        "b5f9db5f511daec31fc0a0eb512af2d3108e2cb872a5565fdf1678a9cb955d33",
+        "f1d96f9842cc42c20cea254cdbfcd609aee79f39a92583475db8e8ed341a99bb",
+        "cb06cb0deee66ec8784354f71f0f6185450005e9af02ddac651b9661e36b751d",
+        "01bab392c211c31a3b53187e864e688298e180e493cdfcd3e1361d2b6eec50cd",
+        "8fc592c6b1f6dba0281ac1702c5e28a4fd5815da7ef32aeaec37e286c3a56de8",
+        "b8b4af3acee48d7be519cf15099de27b24278072eb6892249e30fc1b73ee5fb1",
+        "88c35cdeaa6bb6b0c9c5cf1c389c02ffec9a3e570bc561cd59ec48113368b47e"
+      ],
+      "latestVersioningInscription": "88c35cdeaa6bb6b0c9c5cf1c389c02ffec9a3e570bc561cd59ec48113368b47e_0",
+      "latestHtmlInscription": "b8b4af3acee48d7be519cf15099de27b24278072eb6892249e30fc1b73ee5fb1_0",
+      "version": "1.0.0",
+      "versionDescription": "Integrate Bitcoin OS dock system with proper state management\n\n- Add DockManager component for state switching between minimal and full dock\n- Copy MinimalDock and Dock components from Bitcoin OS parent project\n- Update App.tsx to use DockManager instead of direct Dock component\n- Implement proper localStorage state persistence and custom event handling\n- Fix icon theme imports and mappings for complete dock functionality\n- Dock now starts in minimal mode by default and supports expansion/collapse\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "buildDir": "/Users/b0ase/Projects/bitcoin-OS/apps/bitcoin-spreadsheets/frontend/build",
+      "destinationAddress": "1Hx4MiMRKsoyCEJLtXYCdUEBK7WNLE4eib",
+      "ordinalContentUrl": "https://app.reactonchain.com",
+      "newFiles": 37,
+      "cachedCount": 0,
+      "newTransactions": 44
+    },
+    {
+      "timestamp": "2025-11-23T17:54:22.107Z",
+      "entryPoint": "/content/54cb5423a627644d3241c647d9c6a616866cb674707b0a8f7b89ca65f47e5a9f_0",
+      "files": [
+        {
+          "originalPath": "asset-manifest.json",
+          "txid": "118cfd998a76b9c794b4ed7298e17ae5eb10afcb0891b2799526ecb61fe8580d",
+          "vout": 0,
+          "urlPath": "/content/118cfd998a76b9c794b4ed7298e17ae5eb10afcb0891b2799526ecb61fe8580d_0",
+          "size": 1120,
+          "contentHash": "ee220eed3e02f7ff560e565423c3eca7cf8b3c29a67d687d746df5a710998dbd"
+        },
+        {
+          "originalPath": "static/js/main.bdf19237.js.LICENSE.txt",
+          "txid": "d1f9a471e6bb6529155e8353362a6bff8605ef9500719eb2777c5ccd84ffa46f",
+          "vout": 0,
+          "urlPath": "/content/d1f9a471e6bb6529155e8353362a6bff8605ef9500719eb2777c5ccd84ffa46f_0",
+          "size": 5459,
+          "contentHash": "68b24ca13c4ccaa339098ae25c7e5a1b9269cbafa37df0c5821a4210226b0e5a"
+        },
+        {
+          "originalPath": "static/js/main.bdf19237.js.map",
+          "txid": "5ae64ff7a3181a382c1880685deebb821ac3ae922f65ce01e74d73ce9017c96a",
+          "vout": 0,
+          "urlPath": "/content/5ae64ff7a3181a382c1880685deebb821ac3ae922f65ce01e74d73ce9017c96a_0",
+          "size": 29646727,
+          "contentHash": "6ba90242d5f718e4ae9c3d57abe96a73fa6008f737673774204fb94980cd5388",
+          "isChunked": true,
+          "chunkCount": 3,
+          "chunks": [
+            {
+              "index": 0,
+              "txid": "5ae64ff7a3181a382c1880685deebb821ac3ae922f65ce01e74d73ce9017c96a",
+              "vout": 0,
+              "size": 10485760
+            },
+            {
+              "index": 1,
+              "txid": "8e862651709257d62af01dca847ec984648e5d57b6c81e5abe4d8465a3cac894",
+              "vout": 0,
+              "size": 10485760
+            },
+            {
+              "index": 2,
+              "txid": "2f171aa0fd115af75f90bde22875d5f2905f3bd48ffa75be4ed526b1fd15da6b",
+              "vout": 0,
+              "size": 8675207
+            }
+          ]
+        },
+        {
+          "originalPath": "static/js/main.bdf19237.js",
+          "txid": "5fe8abe5ef4d84047c0f6b60d93f18836d43592e90078e8b4c4227a0771b3d8d",
+          "vout": 0,
+          "urlPath": "/content/5fe8abe5ef4d84047c0f6b60d93f18836d43592e90078e8b4c4227a0771b3d8d_0",
+          "size": 5971492,
+          "contentHash": "3a1ba879a659a28f6dd179c637003b424ea7c7ab9afbc896ac9742c47a421f5f",
+          "isChunked": true,
+          "chunkCount": 1,
+          "chunks": [
+            {
+              "index": 0,
+              "txid": "5fe8abe5ef4d84047c0f6b60d93f18836d43592e90078e8b4c4227a0771b3d8d",
+              "vout": 0,
+              "size": 5971492
+            }
+          ]
+        },
+        {
+          "originalPath": "chunk-reassembly-sw.js",
+          "txid": "49930b4a4d1780b44485bbbd2d6a72165a2e92a3f6cdcce887e72af48a7e1982",
+          "vout": 0,
+          "urlPath": "/content/49930b4a4d1780b44485bbbd2d6a72165a2e92a3f6cdcce887e72af48a7e1982_0",
+          "size": 12368,
+          "contentHash": "89c6223f70f30b4f9d58ff552a773a0c555de4d00f65c11a58596517a920c67b"
+        },
+        {
+          "originalPath": "index.html",
+          "txid": "54cb5423a627644d3241c647d9c6a616866cb674707b0a8f7b89ca65f47e5a9f",
+          "vout": 0,
+          "urlPath": "/content/54cb5423a627644d3241c647d9c6a616866cb674707b0a8f7b89ca65f47e5a9f_0",
+          "size": 10143,
+          "contentHash": "228c2a1ba875e1d57c684052839bcaf4346c8dbb3dfa6a501d5a474c3de315c1"
+        }
+      ],
+      "cachedFiles": [
+        "Bitcoin Spreadsheets Educational Initiative - Trust Funding Proposal.pdf:::ca79ed0cf87a81ce25498b97677911ecbb53b4385bfeaec2ba85d4cfe34bfe68_0",
+        "bap_executive_summary.pdf:::1ee5c435fbc6707c7af6bb67f6d3bdd57abf78848bfb0f60345a62689da93b46_0",
+        "baps_executive_summary.pdf:::98ad453f24d500d2c85223dedee40878264ad28d1ea75947592b9d40633d99aa_0",
+        "bitcoin-spreadsheets-icon.png:::07d7a627c0c43b4ebedadf8630d82100d50325eee05b0bb68e5c14705470fdcb_0",
+        "bitcoin-watercolor-icon.png:::df83786a2eb7f6f0e82892d8b75f87611d14293c49e11a21788da0feb6e1c6d8_0",
+        "favicon.png:::3794aabbf6c4750017446023e4a2aef6c4634bb9a7de8bb6a9572b276aad1d6b_0",
+        "icons/icon-128x128.png:::42e92d1e08489b01259fffe6ed4d1e954e082eba4c2161598ca81be1e04b529e_0",
+        "icons/icon-144x144.png:::e1d602b41b2fb7654b5d83e0d0d2d6142256551555539250a847b444bb3fd8ff_0",
+        "icons/icon-152x152.png:::102c57a5d8ec042db60eff92f99ca99f3ebf9b4648f19aba44e7ceee24bae59b_0",
+        "icons/icon-192x192.png:::51231a12d078e930d23668c3420511a64f12eda3d1e37943dfd8a88f9994ea27_0",
+        "icons/icon-384x384.png:::ddaf5b8d431a491a1066b194aaf461c97fe2c484bd05aae80630865df844de01_0",
+        "icons/icon-512x512.png:::b54c4c925987a10268450086aefb2f938520c1737196e85bc8bea56478241f58_0",
+        "icons/icon-72x72.png:::2a1b7a5b42f197930ea7175852324740e79555f7066238c2d175765eda7f46ec_0",
+        "icons/icon-96x96.png:::58d34d81ac9ea223e034076ba9b4df007a6ffe312ef728323fb6d48a80a35077_0",
+        "manifest.json:::804f055bb0dbb64dd2343256c08cd431b5f95c977ba9573df94c448775ddcdd7_0",
+        "static/css/main.7a1e4556.css:::7390f31757fff959ee60eea1f0be054ecdfe3cf33c86a0f3eaa0887cb6cce688_0",
+        "static/css/main.7a1e4556.css.map:::304313597c9188664af328e0a45334d48bea8975383bec6ce989d5e6a57be661_0",
+        "static/js/178.339603ee.chunk.js:::04db48e0d1cefb61087e5513a47998021627c8835aab6a2d29f771d34b59ce5d_0",
+        "static/js/178.339603ee.chunk.js.LICENSE.txt:::9095d10f1a75480dd6d37c46486843deeb3f954ffb35f687a5ca470e89357973_0",
+        "static/js/178.339603ee.chunk.js.map:::1385d035776a926040b77f5a71c8727c756c0d5a8e5feacfb5c46a053d63e1f4_0",
+        "static/js/218.1fb7d32a.chunk.js:::7ebb1d75309212aa4629c7e1c12d5c9c4e615252a988a581868b343452195b1b_0",
+        "static/js/218.1fb7d32a.chunk.js.LICENSE.txt:::28cd2d9b1be71ef6ec6e7efb079a5d5d5b232351c7180b8bcb681f129f0ffb3c_0",
+        "static/js/218.1fb7d32a.chunk.js.map:::b698fe88253b78bf65a660fafc3e8bab488a2a55dc003c4f1abee26d0d1efa04_0",
+        "static/js/26.58825651.chunk.js:::3a01079e24ad89484ebc55b8db91bfff98626cd393ea465c4efa61e20b8b1938_0",
+        "static/js/26.58825651.chunk.js.LICENSE.txt:::046f3dc9eeb6a0a960048b6ef2e198c3133e73c8bc232a78ce024e2460f56388_0",
+        "static/js/26.58825651.chunk.js.map:::c48738b85fa6d400e627f8a74fe631024fcc36900feb297fbd773272448b413c_0",
+        "static/js/437.c2242acd.chunk.js:::82b8786f64369d32b6b201286f8d20b2429fb112c9cf724cfd864393633e2a47_0",
+        "static/js/437.c2242acd.chunk.js.LICENSE.txt:::689ab3222eb5cd025bbaa4039cb3e05b26ab66bc3fc9c3317489598cb1790ed5_0",
+        "static/js/437.c2242acd.chunk.js.map:::dec85018edebf55f8902d1913c777109a627459945fa00c5751721b910cb9c18_0",
+        "static/js/644.f25b7a1b.chunk.js:::29777facfffd185c140820b62b060a12debe82519f4fa4a49fdaf5cf3f7d1cbe_0",
+        "static/js/644.f25b7a1b.chunk.js.map:::e43ac91757a7d497aba9cc49ce982ab7939ad85df207303d522356b0c34d6c9f_0"
+      ],
+      "totalFiles": 6,
+      "totalCost": 3563912,
+      "totalSize": 35647309,
+      "transactions": [
+        "99f19b6164c55bd8695f2c138fabb9d11bc292d99e93c1ca92939fee87fc3e5c",
+        "118cfd998a76b9c794b4ed7298e17ae5eb10afcb0891b2799526ecb61fe8580d",
+        "d1f9a471e6bb6529155e8353362a6bff8605ef9500719eb2777c5ccd84ffa46f",
+        "5ae64ff7a3181a382c1880685deebb821ac3ae922f65ce01e74d73ce9017c96a",
+        "8e862651709257d62af01dca847ec984648e5d57b6c81e5abe4d8465a3cac894",
+        "2f171aa0fd115af75f90bde22875d5f2905f3bd48ffa75be4ed526b1fd15da6b",
+        "f3202691beb326ee45b890fcd6f2f28c4fbc64582cd23cdc93315e111b9fcd08",
+        "5fe8abe5ef4d84047c0f6b60d93f18836d43592e90078e8b4c4227a0771b3d8d",
+        "a3fc27ed82f6e1c53bb460c5a93f7ff73201b27131dbdf44e36ae252bdae1682",
+        "49930b4a4d1780b44485bbbd2d6a72165a2e92a3f6cdcce887e72af48a7e1982",
+        "54cb5423a627644d3241c647d9c6a616866cb674707b0a8f7b89ca65f47e5a9f",
+        "97b9638e763e6e271de633d98d6d00f387f135dd7b6bcef51893cbe934c8dbc1"
+      ],
+      "latestVersioningInscription": "97b9638e763e6e271de633d98d6d00f387f135dd7b6bcef51893cbe934c8dbc1_0",
+      "latestHtmlInscription": "54cb5423a627644d3241c647d9c6a616866cb674707b0a8f7b89ca65f47e5a9f_0",
+      "version": "1.0.1",
+      "versionDescription": "Integrate Bitcoin OS dock system with proper state management\n\n- Add DockManager component for state switching between minimal and full dock\n- Copy MinimalDock and Dock components from Bitcoin OS parent project\n- Update App.tsx to use DockManager instead of direct Dock component\n- Implement proper localStorage state persistence and custom event handling\n- Fix icon theme imports and mappings for complete dock functionality\n- Dock now starts in minimal mode by default and supports expansion/collapse\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "buildDir": "/Users/b0ase/Projects/bitcoin-OS/apps/bitcoin-spreadsheets/frontend/build",
+      "destinationAddress": "1Hx4MiMRKsoyCEJLtXYCdUEBK7WNLE4eib",
+      "ordinalContentUrl": "https://app.reactonchain.com",
+      "newFiles": 6,
+      "cachedCount": 31,
+      "newTransactions": 12
+    },
+    {
+      "timestamp": "2025-11-23T18:01:19.659Z",
+      "entryPoint": "/content/b3cf61b4860befd616236f699a906f65378c207de9845a333e7d6c5bedf8135f_0",
+      "files": [
+        {
+          "originalPath": "static/js/main.bdf19237.js",
+          "txid": "8afb1c1d4b573798a36062ef1b324486977466ce497022a38770ec2317e17fb2",
+          "vout": 0,
+          "urlPath": "/content/8afb1c1d4b573798a36062ef1b324486977466ce497022a38770ec2317e17fb2_0",
+          "size": 5971492,
+          "contentHash": "3a1ba879a659a28f6dd179c637003b424ea7c7ab9afbc896ac9742c47a421f5f",
+          "isChunked": true,
+          "chunkCount": 1,
+          "chunks": [
+            {
+              "index": 0,
+              "txid": "8afb1c1d4b573798a36062ef1b324486977466ce497022a38770ec2317e17fb2",
+              "vout": 0,
+              "size": 5971492
+            }
+          ]
+        },
+        {
+          "originalPath": "chunk-reassembly-sw.js",
+          "txid": "66922c9128366fbbdb6597d799743b6bcc35bbed12197c9430799fabac3c2bd1",
+          "vout": 0,
+          "urlPath": "/content/66922c9128366fbbdb6597d799743b6bcc35bbed12197c9430799fabac3c2bd1_0",
+          "size": 11124,
+          "contentHash": "cb6ec00b1508672419baf07880165e59e98e5b957599aeeec058c979f3283165"
+        },
+        {
+          "originalPath": "index.html",
+          "txid": "b3cf61b4860befd616236f699a906f65378c207de9845a333e7d6c5bedf8135f",
+          "vout": 0,
+          "urlPath": "/content/b3cf61b4860befd616236f699a906f65378c207de9845a333e7d6c5bedf8135f_0",
+          "size": 10143,
+          "contentHash": "8d69197f285e1be0f3ef60bd7324a67e3033ea094a0a6c0d2bd61b6e35fd158c"
+        }
+      ],
+      "cachedFiles": [
+        "Bitcoin Spreadsheets Educational Initiative - Trust Funding Proposal.pdf:::ca79ed0cf87a81ce25498b97677911ecbb53b4385bfeaec2ba85d4cfe34bfe68_0",
+        "asset-manifest.json:::118cfd998a76b9c794b4ed7298e17ae5eb10afcb0891b2799526ecb61fe8580d_0",
+        "bap_executive_summary.pdf:::1ee5c435fbc6707c7af6bb67f6d3bdd57abf78848bfb0f60345a62689da93b46_0",
+        "baps_executive_summary.pdf:::98ad453f24d500d2c85223dedee40878264ad28d1ea75947592b9d40633d99aa_0",
+        "bitcoin-spreadsheets-icon.png:::07d7a627c0c43b4ebedadf8630d82100d50325eee05b0bb68e5c14705470fdcb_0",
+        "bitcoin-watercolor-icon.png:::df83786a2eb7f6f0e82892d8b75f87611d14293c49e11a21788da0feb6e1c6d8_0",
+        "favicon.png:::3794aabbf6c4750017446023e4a2aef6c4634bb9a7de8bb6a9572b276aad1d6b_0",
+        "icons/icon-128x128.png:::42e92d1e08489b01259fffe6ed4d1e954e082eba4c2161598ca81be1e04b529e_0",
+        "icons/icon-144x144.png:::e1d602b41b2fb7654b5d83e0d0d2d6142256551555539250a847b444bb3fd8ff_0",
+        "icons/icon-152x152.png:::102c57a5d8ec042db60eff92f99ca99f3ebf9b4648f19aba44e7ceee24bae59b_0",
+        "icons/icon-192x192.png:::51231a12d078e930d23668c3420511a64f12eda3d1e37943dfd8a88f9994ea27_0",
+        "icons/icon-384x384.png:::ddaf5b8d431a491a1066b194aaf461c97fe2c484bd05aae80630865df844de01_0",
+        "icons/icon-512x512.png:::b54c4c925987a10268450086aefb2f938520c1737196e85bc8bea56478241f58_0",
+        "icons/icon-72x72.png:::2a1b7a5b42f197930ea7175852324740e79555f7066238c2d175765eda7f46ec_0",
+        "icons/icon-96x96.png:::58d34d81ac9ea223e034076ba9b4df007a6ffe312ef728323fb6d48a80a35077_0",
+        "manifest.json:::804f055bb0dbb64dd2343256c08cd431b5f95c977ba9573df94c448775ddcdd7_0",
+        "static/css/main.7a1e4556.css:::7390f31757fff959ee60eea1f0be054ecdfe3cf33c86a0f3eaa0887cb6cce688_0",
+        "static/css/main.7a1e4556.css.map:::304313597c9188664af328e0a45334d48bea8975383bec6ce989d5e6a57be661_0",
+        "static/js/178.339603ee.chunk.js:::04db48e0d1cefb61087e5513a47998021627c8835aab6a2d29f771d34b59ce5d_0",
+        "static/js/178.339603ee.chunk.js.LICENSE.txt:::9095d10f1a75480dd6d37c46486843deeb3f954ffb35f687a5ca470e89357973_0",
+        "static/js/178.339603ee.chunk.js.map:::1385d035776a926040b77f5a71c8727c756c0d5a8e5feacfb5c46a053d63e1f4_0",
+        "static/js/218.1fb7d32a.chunk.js:::7ebb1d75309212aa4629c7e1c12d5c9c4e615252a988a581868b343452195b1b_0",
+        "static/js/218.1fb7d32a.chunk.js.LICENSE.txt:::28cd2d9b1be71ef6ec6e7efb079a5d5d5b232351c7180b8bcb681f129f0ffb3c_0",
+        "static/js/218.1fb7d32a.chunk.js.map:::b698fe88253b78bf65a660fafc3e8bab488a2a55dc003c4f1abee26d0d1efa04_0",
+        "static/js/26.58825651.chunk.js:::3a01079e24ad89484ebc55b8db91bfff98626cd393ea465c4efa61e20b8b1938_0",
+        "static/js/26.58825651.chunk.js.LICENSE.txt:::046f3dc9eeb6a0a960048b6ef2e198c3133e73c8bc232a78ce024e2460f56388_0",
+        "static/js/26.58825651.chunk.js.map:::c48738b85fa6d400e627f8a74fe631024fcc36900feb297fbd773272448b413c_0",
+        "static/js/437.c2242acd.chunk.js:::82b8786f64369d32b6b201286f8d20b2429fb112c9cf724cfd864393633e2a47_0",
+        "static/js/437.c2242acd.chunk.js.LICENSE.txt:::689ab3222eb5cd025bbaa4039cb3e05b26ab66bc3fc9c3317489598cb1790ed5_0",
+        "static/js/437.c2242acd.chunk.js.map:::dec85018edebf55f8902d1913c777109a627459945fa00c5751721b910cb9c18_0",
+        "static/js/644.f25b7a1b.chunk.js:::29777facfffd185c140820b62b060a12debe82519f4fa4a49fdaf5cf3f7d1cbe_0",
+        "static/js/644.f25b7a1b.chunk.js.map:::e43ac91757a7d497aba9cc49ce982ab7939ad85df207303d522356b0c34d6c9f_0",
+        "static/js/main.bdf19237.js.LICENSE.txt:::d1f9a471e6bb6529155e8353362a6bff8605ef9500719eb2777c5ccd84ffa46f_0",
+        "static/js/main.bdf19237.js.map:::5ae64ff7a3181a382c1880685deebb821ac3ae922f65ce01e74d73ce9017c96a_0"
+      ],
+      "totalFiles": 3,
+      "totalCost": 598318,
+      "totalSize": 5992759,
+      "transactions": [
+        "304f29a86c421ee5a9e8f0bb1313c30f9d5aef7388575ba85c8c8e9263c565fc",
+        "8afb1c1d4b573798a36062ef1b324486977466ce497022a38770ec2317e17fb2",
+        "2658152b887bf4e5bff07c0312151631fa6556acf0fa034371e9832662be7ad0",
+        "66922c9128366fbbdb6597d799743b6bcc35bbed12197c9430799fabac3c2bd1",
+        "b3cf61b4860befd616236f699a906f65378c207de9845a333e7d6c5bedf8135f",
+        "d3e7bfbfcf8a11ab64c4283f07fdce126df815d233f0090a9430430a69d357f8"
+      ],
+      "latestVersioningInscription": "d3e7bfbfcf8a11ab64c4283f07fdce126df815d233f0090a9430430a69d357f8_0",
+      "latestHtmlInscription": "b3cf61b4860befd616236f699a906f65378c207de9845a333e7d6c5bedf8135f_0",
+      "version": "1.0.2",
+      "versionDescription": "Integrate Bitcoin OS dock system with proper state management\n\n- Add DockManager component for state switching between minimal and full dock\n- Copy MinimalDock and Dock components from Bitcoin OS parent project\n- Update App.tsx to use DockManager instead of direct Dock component\n- Implement proper localStorage state persistence and custom event handling\n- Fix icon theme imports and mappings for complete dock functionality\n- Dock now starts in minimal mode by default and supports expansion/collapse\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      "buildDir": "/Users/b0ase/Projects/bitcoin-OS/apps/bitcoin-spreadsheets/frontend/build",
+      "destinationAddress": "1Hx4MiMRKsoyCEJLtXYCdUEBK7WNLE4eib",
+      "ordinalContentUrl": "https://app.reactonchain.com",
+      "newFiles": 3,
+      "cachedCount": 34,
+      "newTransactions": 6
+    }
+  ]
+}

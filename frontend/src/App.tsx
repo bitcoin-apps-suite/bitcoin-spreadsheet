@@ -25,6 +25,7 @@ import SavePage from './pages/SavePage';
 import MintPage from './pages/MintPage';
 import MarketPage from './pages/MarketPage';
 import ExchangePage from './pages/ExchangePage';
+import ReactOnChainBugsPage from './pages/ReactOnChainBugsPage';
 import ClaudeChat from './components/ClaudeChat';
 import SpreadsheetTaskbar from './components/SpreadsheetTaskbar';
 import ProofOfConceptBanner from './components/ProofOfConceptBanner';
@@ -226,6 +227,7 @@ function App() {
       <Route path="/mint" element={<MintPage />} />
       <Route path="/market" element={<MarketPage />} />
       <Route path="/exchange" element={<ExchangePage />} />
+      <Route path="/react-on-chain-bugs" element={<ReactOnChainBugsPage />} />
       <Route path="/auth/handcash/callback" element={<HandCashCallback />} />
       <Route path="/*" element={
         isLoading ? (

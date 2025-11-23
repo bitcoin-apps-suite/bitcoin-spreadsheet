@@ -16,5 +16,5 @@ root.render(
   </React.StrictMode>
 );
 
-// Register service worker for PWA functionality
-serviceWorkerRegistration.register();
+// Register service worker for PWA functionality - DISABLED for blockchain deployment
+// serviceWorkerRegistration.register();

@@ -403,7 +403,7 @@ const EducationalProposalPage: React.FC = () => {
           <tbody>
             <tr>
               <td>Phase 1: Platform Development</td>
-              <td>£750,000</td>
+              <td>£75,000</td>
               <td>Complete educational spreadsheet platform with financial literacy modules and blockchain integration</td>
               <td>Development team, initial pilot schools</td>
             </tr>

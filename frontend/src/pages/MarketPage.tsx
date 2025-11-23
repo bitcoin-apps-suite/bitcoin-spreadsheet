@@ -42,7 +42,7 @@ const MarketPage: React.FC = () => {
           .hero-market h1 {
             font-size: 2.5rem;
             margin-bottom: 16px;
-            color: #4caf50;
+            color: #4fc3f7;
             font-weight: 200;
             line-height: 1.2;
           }
@@ -69,12 +69,12 @@ const MarketPage: React.FC = () => {
             padding: 32px 24px;
             text-align: left;
             transition: all 0.2s ease;
-            border-left: 3px solid #4caf50;
+            border-left: 3px solid #4fc3f7;
           }
 
           .feature-card:hover {
-            border-color: #4caf50;
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+            border-color: #4fc3f7;
+            box-shadow: 0 4px 12px rgba(79, 195, 247, 0.2);
           }
 
           .feature-icon {
@@ -84,7 +84,7 @@ const MarketPage: React.FC = () => {
           }
 
           .feature-card h3 {
-            color: #4caf50;
+            color: #4fc3f7;
             margin-bottom: 12px;
             font-size: 1.25rem;
             font-weight: 300;
@@ -106,7 +106,7 @@ const MarketPage: React.FC = () => {
           }
 
           .pricing-models h2 {
-            color: #4caf50;
+            color: #4fc3f7;
             text-align: center;
             margin-bottom: 40px;
             font-size: 1.875rem;
@@ -132,15 +132,15 @@ const MarketPage: React.FC = () => {
           }
 
           .pricing-option:hover {
-            border-color: #4caf50;
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+            border-color: #4fc3f7;
+            box-shadow: 0 4px 12px rgba(79, 195, 247, 0.2);
           }
 
           .pricing-badge {
             position: absolute;
             top: -8px;
             right: 16px;
-            background: #4caf50;
+            background: #4fc3f7;
             color: #ffffff;
             padding: 4px 12px;
             border-radius: 12px;
@@ -149,7 +149,7 @@ const MarketPage: React.FC = () => {
           }
 
           .pricing-title {
-            color: #4caf50;
+            color: #4fc3f7;
             font-size: 1.25rem;
             margin-bottom: 12px;
             font-weight: 300;
@@ -158,7 +158,7 @@ const MarketPage: React.FC = () => {
           .pricing-amount {
             font-size: 2rem;
             font-weight: 300;
-            color: #4caf50;
+            color: #4fc3f7;
             margin-bottom: 8px;
           }
 
@@ -185,7 +185,7 @@ const MarketPage: React.FC = () => {
 
           .pricing-features li::before {
             content: '✓';
-            color: #4caf50;
+            color: #4fc3f7;
             font-weight: bold;
             position: absolute;
             left: 0;
@@ -201,7 +201,7 @@ const MarketPage: React.FC = () => {
           }
 
           .marketplace-demo h3 {
-            color: #4caf50;
+            color: #4fc3f7;
             margin-top: 0;
             margin-bottom: 32px;
             text-align: center;
@@ -225,8 +225,8 @@ const MarketPage: React.FC = () => {
           }
 
           .listing-card:hover {
-            border-color: #4caf50;
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+            border-color: #4fc3f7;
+            box-shadow: 0 4px 12px rgba(79, 195, 247, 0.2);
           }
 
           .listing-header {
@@ -238,12 +238,12 @@ const MarketPage: React.FC = () => {
 
           .listing-title {
             font-size: 1.125rem;
-            color: #4caf50;
+            color: #4fc3f7;
             font-weight: 300;
           }
 
           .listing-price {
-            background: #4caf50;
+            background: #4fc3f7;
             color: #ffffff;
             padding: 4px 12px;
             border-radius: 12px;
@@ -305,22 +305,22 @@ const MarketPage: React.FC = () => {
           }
 
           .action-btn.primary {
-            background: #4caf50;
+            background: #4fc3f7;
             color: #ffffff;
           }
 
           .action-btn.secondary {
             background: transparent;
-            border: 1px solid #4caf50;
-            color: #4caf50;
+            border: 1px solid #4fc3f7;
+            color: #4fc3f7;
           }
 
           .action-btn.primary:hover {
-            background: #388e3c;
+            background: #29b6f6;
           }
 
           .action-btn.secondary:hover {
-            background: #4caf50;
+            background: #4fc3f7;
             color: #ffffff;
           }
 
@@ -333,7 +333,7 @@ const MarketPage: React.FC = () => {
           }
 
           .revenue-breakdown h2 {
-            color: #4caf50;
+            color: #4fc3f7;
             text-align: center;
             margin-bottom: 32px;
             font-size: 1.5rem;
@@ -356,7 +356,7 @@ const MarketPage: React.FC = () => {
           }
 
           .revenue-step-number {
-            background: #4caf50;
+            background: #4fc3f7;
             color: #ffffff;
             width: 32px;
             height: 32px;
@@ -370,7 +370,7 @@ const MarketPage: React.FC = () => {
           }
 
           .revenue-step h4 {
-            color: #4caf50;
+            color: #4fc3f7;
             margin-bottom: 8px;
             font-size: 1rem;
             font-weight: 300;
@@ -392,7 +392,7 @@ const MarketPage: React.FC = () => {
           }
 
           .success-stories h3 {
-            color: #4caf50;
+            color: #4fc3f7;
             text-align: center;
             margin-bottom: 32px;
             font-size: 1.5rem;
@@ -411,7 +411,7 @@ const MarketPage: React.FC = () => {
             border: 1px solid #444444;
             border-radius: 8px;
             padding: 24px;
-            border-left: 3px solid #4caf50;
+            border-left: 3px solid #4fc3f7;
           }
 
           .story-quote {
@@ -430,7 +430,7 @@ const MarketPage: React.FC = () => {
           }
 
           .story-earnings {
-            color: #4caf50;
+            color: #4fc3f7;
             font-weight: 300;
             font-size: 1.125rem;
             margin-top: 8px;
@@ -446,7 +446,7 @@ const MarketPage: React.FC = () => {
           }
 
           .cta-section h2 {
-            color: #4caf50;
+            color: #4fc3f7;
             margin-bottom: 16px;
             font-size: 1.5rem;
             font-weight: 200;
@@ -460,7 +460,7 @@ const MarketPage: React.FC = () => {
           }
 
           .cta-button {
-            background: #4caf50;
+            background: #4fc3f7;
             color: #ffffff;
             border: none;
             padding: 12px 24px;
@@ -475,18 +475,18 @@ const MarketPage: React.FC = () => {
           }
 
           .cta-button:hover {
-            background: #388e3c;
+            background: #29b6f6;
             transform: translateY(-1px);
           }
 
           .cta-button.secondary {
             background: transparent;
-            border: 1px solid #4caf50;
-            color: #4caf50;
+            border: 1px solid #4fc3f7;
+            color: #4fc3f7;
           }
 
           .cta-button.secondary:hover {
-            background: #4caf50;
+            background: #4fc3f7;
             color: #ffffff;
           }
 
@@ -602,7 +602,7 @@ const MarketPage: React.FC = () => {
         </div>
 
         <div className="pricing-models">
-          <h2 style={{ color: '#4caf50', textAlign: 'center', marginBottom: '20px' }}>
+          <h2 style={{ color: '#4fc3f7', textAlign: 'center', marginBottom: '20px' }}>
             Flexible Pricing Models
           </h2>
           <p style={{ textAlign: 'center', color: '#cccccc', marginBottom: '30px' }}>
@@ -776,7 +776,7 @@ const MarketPage: React.FC = () => {
         </div>
 
         <div className="success-stories">
-          <h2 style={{ color: '#4caf50', textAlign: 'center', marginBottom: '20px' }}>
+          <h2 style={{ color: '#4fc3f7', textAlign: 'center', marginBottom: '20px' }}>
             Creator Success Stories
           </h2>
           

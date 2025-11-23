@@ -665,7 +665,7 @@ function App() {
       <Footer />
       
       {/* Bitcoin OS Dock - Global on all pages */}
-      <DockManager currentApp="bitcoin-spreadsheet" />
+      <DockManager currentApp="bitcoin-spreadsheets" />
       </div>
     </>
   );

@@ -552,7 +552,7 @@ const EducationalProposalPage: React.FC = () => {
           <p>
             <strong>The Bitcoin Corporation Development Trust</strong><br />
             Bitcoin Spreadsheets Educational Initiative Funding Proposal<br />
-            November 2025 - Confidential Trust Development Document
+            November 2025 - Public Funding Proposal
           </p>
         </footer>
       </div>

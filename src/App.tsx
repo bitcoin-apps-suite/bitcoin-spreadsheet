@@ -277,7 +277,7 @@ function App() {
                       className="bitcoin-icon-beveled"
                       style={{ width: '40px', height: '40px', marginRight: '16px', verticalAlign: 'middle' }}
                     />
-                    <span className="bitcoin-orange">Bitcoin</span> Spreadsheet
+                    Spreadsheet
                   </h1>
                 </div>
                 <div className="mobile-header-connections">
@@ -361,7 +361,7 @@ function App() {
                     className="bitcoin-icon-beveled"
                     style={{ width: '40px', height: '40px', marginRight: '16px', verticalAlign: 'middle' }}
                   />
-                  <span className="bitcoin-orange">Bitcoin</span> Spreadsheet
+                  Spreadsheet
                 </h1>
                 <p className="app-subtitle">Secure, encrypted spreadsheets on the blockchain</p>
               </div>

@@ -1,5 +1,15 @@
 {
   "framework": "create-react-app",
+  "builds": [
+    {
+      "src": "api/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/server.js" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
   "git": {
     "deploymentEnabled": {
       "main": true
@@ -8,11 +18,5 @@
   "github": {
     "enabled": true,
     "autoAlias": true
-  },
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+  }
 }

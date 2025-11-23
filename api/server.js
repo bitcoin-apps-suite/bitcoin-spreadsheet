@@ -180,8 +180,4 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`HandCash API server running on port ${PORT}`);
-  console.log(`App ID: ${APP_ID}`);
-  console.log(`Has App Secret: ${!!APP_SECRET}`);
-});
+module.exports = app;

@@ -17,8 +17,15 @@ const EducationalProposalPage: React.FC = () => {
       <PageLayout title="Educational Funding Proposal">
       {/* Hide dev sidebar for presentation */}
       <style>{`
-        .dev-sidebar { display: none !important; }
-        .app-with-sidebar { margin-left: 0 !important; }
+        body .dev-sidebar { 
+          display: none !important; 
+        }
+        body .app-with-sidebar { 
+          margin-left: 0 !important; 
+        }
+        body {
+          background: #000000 !important;
+        }
       `}</style>
       <div className="educational-proposal-page">
         <style>{`
@@ -27,21 +34,21 @@ const EducationalProposalPage: React.FC = () => {
             margin: 0;
             padding: 40px 20px;
             line-height: 1.6;
-            color: #333333;
-            background: #ffffff;
+            color: #ffffff;
+            background: #000000;
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
           }
           
           .executive-summary {
-            background: #f8f9fa;
+            background: #111111;
             padding: 20px;
             border-left: 4px solid #2196f3;
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
-            color: #333333;
-            border: 1px solid #e0e0e0;
+            color: #ffffff;
+            border: 1px solid #333333;
           }
           
           .feature-grid {
@@ -55,12 +62,12 @@ const EducationalProposalPage: React.FC = () => {
           }
           
           .feature-box {
-            background: #ffffff;
+            background: #1a1a1a;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(33, 150, 243, 0.1);
-            color: #333333;
-            border: 1px solid #e0e0e0;
+            color: #ffffff;
+            border: 1px solid #444444;
           }
           
           .feature-box h4 {
@@ -79,19 +86,19 @@ const EducationalProposalPage: React.FC = () => {
           .feature-box li {
             margin: 8px 0;
             font-size: 14px;
-            color: #666666;
+            color: #cccccc;
             font-weight: 300;
           }
           
           .quote {
             font-style: italic;
             text-align: center;
-            background: #f8f9fa;
+            background: #111111;
             padding: 20px;
             margin: 20px 0;
             border-radius: 8px;
             border: 1px solid #2196f3;
-            color: #333333;
+            color: #ffffff;
             font-weight: 300;
           }
           
@@ -99,41 +106,41 @@ const EducationalProposalPage: React.FC = () => {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            background: #ffffff;
+            background: #1a1a1a;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(33, 150, 243, 0.1);
-            border: 1px solid #e0e0e0;
+            border: 1px solid #444444;
           }
           
           .funding-table th,
           .funding-table td {
-            border: 1px solid #e0e0e0;
+            border: 1px solid #444444;
             padding: 12px;
             text-align: left;
           }
           
           .funding-table th {
-            background: #f8f9fa;
-            font-weight: 600;
+            background: #2a2a2a;
+            font-weight: 300;
             font-size: 14px;
             color: #2196f3;
           }
           
           .funding-table td {
             font-size: 14px;
-            color: #333333;
+            color: #cccccc;
             font-weight: 300;
           }
           
           .roadmap-phase {
-            background: #ffffff;
+            background: #1a1a1a;
             padding: 20px;
             margin: 15px 0;
             border-left: 4px solid #f44336;
             border-radius: 0 8px 8px 0;
-            border: 1px solid #e0e0e0;
-            color: #333333;
+            border: 1px solid #444444;
+            color: #ffffff;
           }
           
           .roadmap-phase h3 {
@@ -238,7 +245,7 @@ const EducationalProposalPage: React.FC = () => {
         `}</style>
 
         <div className="proposal-header">
-          <h1 style={{ color: '#000000', fontSize: '32px', marginBottom: '10px', fontWeight: '600' }}>
+          <h1 style={{ color: '#ffffff', fontSize: '32px', marginBottom: '10px', fontWeight: '600' }}>
             BITCOIN SPREADSHEETS EDUCATIONAL INITIATIVE
           </h1>
           <h2 style={{ color: '#3498db', fontSize: '20px', marginBottom: '10px' }}>
@@ -250,7 +257,7 @@ const EducationalProposalPage: React.FC = () => {
         </div>
 
         <div className="executive-summary">
-          <h2 style={{ marginTop: 0, color: '#000000', fontSize: '24px', fontWeight: '600' }}>EXECUTIVE SUMMARY</h2>
+          <h2 style={{ marginTop: 0, color: '#ffffff', fontSize: '24px', fontWeight: '600' }}>EXECUTIVE SUMMARY</h2>
           <p>
             Bitcoin Spreadsheets represents a revolutionary educational technology platform that enables students and educators to manage financial data, create budgets, and perform economic analysis using a fully decentralized spreadsheet application built on the Bitcoin SV blockchain. Through complete data ownership, cryptographic security, and immutable audit trails, the platform teaches students practical financial literacy while demonstrating the principles of data sovereignty and digital currency systems. This proposal outlines how the <strong>Bitcoin Corporation Development Trust</strong> can fund the development and deployment of this educational application to schools and universities globally.
           </p>

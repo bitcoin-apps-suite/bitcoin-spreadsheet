@@ -162,14 +162,14 @@ const EducationalProposalPage: React.FC = () => {
 
           .download-button {
             background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
-            color: #000000;
+            color: #000000 !important;
             border: none;
             padding: 12px 24px;
             border-radius: 6px;
             font-size: 16px;
             font-weight: 500;
             cursor: pointer;
-            text-decoration: none;
+            text-decoration: none !important;
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -177,8 +177,17 @@ const EducationalProposalPage: React.FC = () => {
             margin-top: 12px;
           }
 
+          .download-button:visited {
+            color: #000000 !important;
+          }
+
+          .download-button:link {
+            color: #000000 !important;
+          }
+
           .download-button:hover {
             background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+            color: #000000 !important;
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
           }

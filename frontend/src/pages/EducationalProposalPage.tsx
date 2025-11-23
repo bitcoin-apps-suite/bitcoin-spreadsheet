@@ -162,7 +162,7 @@ const EducationalProposalPage: React.FC = () => {
 
           .download-button {
             background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
-            color: #ffffff;
+            color: #000000;
             border: none;
             padding: 12px 24px;
             border-radius: 6px;

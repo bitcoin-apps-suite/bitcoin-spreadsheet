@@ -186,7 +186,7 @@ const BitcoinSpreadsheetsPage: React.FC = () => {
                 <span className="dividend">8.5% APY</span>
               </div>
               <div className="table-row">
-                <span className="dataset-name">$bSheets_CRYPTO_PORTFOLIO_03</span>
+                <span className="dataset-name">$bSheets_ENERGY_MARKETS_03</span>
                 <span className="price">₿0.00089</span>
                 <span className="change negative">-3.2%</span>
                 <span className="volume">₿0.8</span>

@@ -500,7 +500,7 @@ const MarketingPage: React.FC = () => {
                 <td>30 days</td>
               </tr>
               <tr>
-                <td className="token-name">$bSheets_CRYPTO_PORT_03</td>
+                <td className="token-name">$bSheets_ENERGY_MARKETS_03</td>
                 <td className="price">0.00089</td>
                 <td className="change-negative">-3.2%</td>
                 <td>₿0.83</td>
@@ -518,7 +518,7 @@ const MarketingPage: React.FC = () => {
                 <td>90 days</td>
               </tr>
               <tr>
-                <td className="token-name">$bSheets_FOREX_ANAL_07</td>
+                <td className="token-name">$bSheets_FOREX_ANALYSIS_07</td>
                 <td className="price">0.00312</td>
                 <td className="change-positive">+15.6%</td>
                 <td>₿3.67</td>

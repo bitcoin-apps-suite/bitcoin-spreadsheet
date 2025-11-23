@@ -9,7 +9,6 @@ import SpreadsheetManager from './components/SpreadsheetManager';
 import NavbarLogin from './components/NavbarLogin';
 import EnhancedConnectionsModal from './components/EnhancedConnectionsModal';
 import HandCashCallback from './components/HandCashCallback';
-import BitcoinSpreadsheetPage from './pages/BitcoinSpreadsheetPage';
 import BapsPage from './pages/BapsPage';
 import DocsPage from './pages/DocsPage';
 import JobExchangePage from './pages/JobExchangePage';
@@ -209,7 +208,6 @@ function App() {
       <DevSidebar />
       <div className="app-with-sidebar">
       <Routes>
-      <Route path="/bitcoin-spreadsheet" element={<BitcoinSpreadsheetPage />} />
       <Route path="/bap" element={<BapsPage />} />
       <Route path="/developers" element={<BapsPage />} /> {/* Keep for backwards compatibility */}
       <Route path="/docs" element={<DocsPage />} />
@@ -220,7 +218,6 @@ function App() {
       <Route path="/tasks" element={<TasksPage />} />
       <Route path="/contracts" element={<ContractsPage />} />
       <Route path="/educational-proposal" element={<EducationalProposalPage />} />
-      <Route path="/bitcoin-spreadsheet" element={<Navigate to="/bitcoin-spreadsheets" replace />} />
       <Route path="/bitcoin-spreadsheets" element={<BitcoinSpreadsheetsPage />} />
       <Route path="/marketing" element={<MarketingPage />} />
       <Route path="/save" element={<SavePage />} />

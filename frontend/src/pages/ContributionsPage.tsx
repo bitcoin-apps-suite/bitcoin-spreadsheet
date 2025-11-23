@@ -125,7 +125,7 @@ const ContributionsPage: React.FC = () => {
             </div>
             <div className="stat-card">
               <div className="stat-value">{totalTokensDistributed.toLocaleString()}</div>
-              <div className="stat-label">$BSHEETS Distributed</div>
+              <div className="stat-label">$bSheets Distributed</div>
             </div>
             <div className="stat-card">
               <div className="stat-value">{totalPRs}</div>
@@ -176,7 +176,7 @@ const ContributionsPage: React.FC = () => {
                   </div>
                   <div className="tokens-awarded">
                     <div className="token-amount">{contributor.tokensAwarded.toLocaleString()}</div>
-                    <div className="token-label">$BSHEETS</div>
+                    <div className="token-label">$bSheets</div>
                   </div>
                 </div>
               ))}
@@ -217,7 +217,7 @@ const ContributionsPage: React.FC = () => {
                 </div>
                 <div className="contribution-reward">
                   <span className="reward-amount">+{contribution.tokens.toLocaleString()}</span>
-                  <span className="reward-currency">$BSHEETS</span>
+                  <span className="reward-currency">$bSheets</span>
                 </div>
               </div>
             ))}
@@ -246,7 +246,7 @@ const ContributionsPage: React.FC = () => {
             <div className="step-card">
               <div className="step-number">4</div>
               <h3>Earn Tokens</h3>
-              <p>Receive $BSHEETS tokens when your PR is merged</p>
+              <p>Receive $bSheets tokens when your PR is merged</p>
             </div>
           </div>
           
@@ -263,7 +263,7 @@ const ContributionsPage: React.FC = () => {
               href="/token"
               className="cta-button secondary"
             >
-              Learn About $BSHEETS
+              Learn About $bSheets
             </a>
           </div>
         </section>

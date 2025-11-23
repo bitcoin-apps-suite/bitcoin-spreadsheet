@@ -48,7 +48,7 @@ const DocsPage: React.FC = () => {
       
       <PageLayout 
         title="Bitcoin Spreadsheet Documentation"
-        description="Build the future of decentralized spreadsheets and earn $BSHEETS tokens"
+        description="Build the future of decentralized spreadsheets and earn $bSheets tokens"
         className="docs-layout"
       >
         <div className="docs-container">
@@ -148,7 +148,7 @@ const DocsPage: React.FC = () => {
             <div className="tokenomics-overview">
               <div className="token-stat">
                 <h3>1,000,000,000</h3>
-                <p>Total $BSHEETS Supply</p>
+                <p>Total $bSheets Supply</p>
               </div>
               <div className="token-stat">
                 <h3>100%</h3>
@@ -167,7 +167,7 @@ const DocsPage: React.FC = () => {
             <div className="tokenomics-details">
               <h3>Developer Token Distribution</h3>
               <p>
-                We're offering <strong>1,000,000,000 $BSHEETS tokens</strong> (100% of total supply) to developers 
+                We're offering <strong>1,000,000,000 $bSheets tokens</strong> (100% of total supply) to developers 
                 and contributors. This is a pure meritocracy - no company reserves, no pre-mine, just rewards for 
                 those who build. Each contribution earns tokens based on impact and complexity.
               </p>
@@ -226,7 +226,7 @@ const DocsPage: React.FC = () => {
 
               <h4>Getting Started:</h4>
               <div className="getting-started-tokens">
-                <p>Ready to earn $BSHEETS tokens? Check out our <a href="/tasks" className="inline-link">Tasks page</a> for available work, or browse our <a href="https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues" target="_blank" rel="noopener noreferrer" className="inline-link">GitHub issues</a>. Every contribution counts!</p>
+                <p>Ready to earn $bSheets tokens? Check out our <a href="/tasks" className="inline-link">Tasks page</a> for available work, or browse our <a href="https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues" target="_blank" rel="noopener noreferrer" className="inline-link">GitHub issues</a>. Every contribution counts!</p>
                 <p>View our <a href="/contributions" className="inline-link">Contributions tracker</a> to see how tokens are distributed. This is a 100% community-driven project where every developer is rewarded fairly for their work.</p>
               </div>
             </div>
@@ -437,7 +437,7 @@ const isAuth = handCashService.isAuthenticated();`}
                 <p>Find tasks to work on</p>
               </a>
               <a href="/token" className="link-card">
-                <h3>$BSHEETS Token</h3>
+                <h3>$bSheets Token</h3>
                 <p>Learn about tokenomics</p>
               </a>
               <a href="/contributions" className="link-card">

@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PageLayout from '../components/PageLayout';
+import SpreadsheetTaskbar from '../components/SpreadsheetTaskbar';
 
 const EducationalProposalPage: React.FC = () => {
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
   return (
-    <PageLayout title="Educational Funding Proposal">
+    <>
+      <SpreadsheetTaskbar
+        isAuthenticated={false}
+        currentUser={null}
+        onLogout={() => {}}
+        toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
+        isDarkMode={isDarkMode}
+      />
+      <PageLayout title="Educational Funding Proposal">
       <div className="educational-proposal-page">
         <style>{`
           .educational-proposal-page {
@@ -12,15 +23,20 @@ const EducationalProposalPage: React.FC = () => {
             padding: 20px;
             line-height: 1.6;
             color: #ffffff;
+            background: #000000;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
           }
           
           .executive-summary {
-            background: #f8f9fa;
+            background: #111111;
             padding: 20px;
-            border-left: 4px solid #3498db;
+            border-left: 4px solid #2196f3;
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
-            color: #333333;
+            color: #ffffff;
+            border: 1px solid #333333;
           }
           
           .feature-grid {
@@ -31,19 +47,20 @@ const EducationalProposalPage: React.FC = () => {
           }
           
           .feature-box {
-            background: #f1f3f4;
+            background: #1a1a1a;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            color: #333333;
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.1);
+            color: #ffffff;
+            border: 1px solid #444444;
           }
           
           .feature-box h4 {
-            color: #1a73e8;
+            color: #2196f3;
             margin-top: 0;
             margin-bottom: 15px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 300;
           }
           
           .feature-box ul {
@@ -54,82 +71,106 @@ const EducationalProposalPage: React.FC = () => {
           .feature-box li {
             margin: 8px 0;
             font-size: 14px;
+            color: #cccccc;
+            font-weight: 300;
           }
           
           .quote {
             font-style: italic;
             text-align: center;
-            background: #e8f4fd;
+            background: #111111;
             padding: 20px;
             margin: 20px 0;
             border-radius: 8px;
-            border: 1px solid #bee5eb;
+            border: 1px solid #2196f3;
+            color: #ffffff;
+            font-weight: 300;
           }
           
           .funding-table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            background: white;
+            background: #1a1a1a;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.1);
+            border: 1px solid #444444;
           }
           
           .funding-table th,
           .funding-table td {
-            border: 1px solid #ddd;
+            border: 1px solid #444444;
             padding: 12px;
             text-align: left;
           }
           
           .funding-table th {
-            background: #f5f5f5;
-            font-weight: 600;
+            background: #2a2a2a;
+            font-weight: 300;
             font-size: 14px;
+            color: #2196f3;
           }
           
           .funding-table td {
             font-size: 14px;
+            color: #cccccc;
+            font-weight: 300;
           }
           
           .roadmap-phase {
-            background: #fafafa;
+            background: #1a1a1a;
             padding: 20px;
             margin: 15px 0;
-            border-left: 4px solid #e74c3c;
+            border-left: 4px solid #f44336;
             border-radius: 0 8px 8px 0;
+            border: 1px solid #444444;
+            color: #ffffff;
           }
           
           .roadmap-phase h3 {
             margin-top: 0;
-            color: #e74c3c;
+            color: #f44336;
             font-size: 18px;
+            font-weight: 300;
           }
           
           .roadmap-phase ul {
             margin-bottom: 0;
           }
           
+          .roadmap-phase li {
+            color: #cccccc;
+            font-weight: 300;
+          }
+          
           .conclusion-box {
-            border: 2px solid #27ae60;
-            background: #f0fff4;
+            border: 2px solid #4caf50;
+            background: #111111;
             padding: 20px;
             margin: 20px 0;
             border-radius: 8px;
+            color: #ffffff;
           }
           
           .conclusion-box h2 {
-            color: #27ae60;
+            color: #4caf50;
             margin-top: 0;
+            font-weight: 200;
+          }
+          
+          .conclusion-box p {
+            color: #cccccc;
+            font-weight: 300;
           }
           
           .section-header {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
+            color: #2196f3;
+            border-bottom: 2px solid #2196f3;
             padding-bottom: 10px;
             margin-top: 40px;
             margin-bottom: 20px;
+            font-weight: 200;
           }
           
           .metrics-grid {
@@ -140,15 +181,32 @@ const EducationalProposalPage: React.FC = () => {
           }
           
           .metric-item {
-            background: #fff;
+            background: #1a1a1a;
             padding: 15px;
             border-radius: 8px;
-            border-left: 4px solid #3498db;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-left: 4px solid #2196f3;
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.1);
+            border: 1px solid #444444;
+            color: #cccccc;
           }
           
           .metric-item strong {
-            color: #2c3e50;
+            color: #2196f3;
+            font-weight: 300;
+          }
+          
+          .educational-proposal-page h1,
+          .educational-proposal-page h2,
+          .educational-proposal-page h3,
+          .educational-proposal-page h4 {
+            color: #2196f3;
+            font-weight: 200;
+          }
+          
+          .educational-proposal-page p,
+          .educational-proposal-page li {
+            color: #cccccc;
+            font-weight: 300;
           }
 
           @media (max-width: 768px) {
@@ -409,7 +467,8 @@ const EducationalProposalPage: React.FC = () => {
           </p>
         </footer>
       </div>
-    </PageLayout>
+      </PageLayout>
+    </>
   );
 };
 

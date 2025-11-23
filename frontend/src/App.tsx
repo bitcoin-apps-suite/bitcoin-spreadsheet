@@ -21,6 +21,10 @@ import ContractsPage from './pages/ContractsPage';
 import EducationalProposalPage from './pages/EducationalProposalPage';
 import BitcoinSpreadsheetsPage from './pages/BitcoinSpreadsheetsPage';
 import MarketingPage from './pages/MarketingPage';
+import SavePage from './pages/SavePage';
+import MintPage from './pages/MintPage';
+import MarketPage from './pages/MarketPage';
+import ExchangePage from './pages/ExchangePage';
 import ClaudeChat from './components/ClaudeChat';
 import SpreadsheetTaskbar from './components/SpreadsheetTaskbar';
 import ProofOfConceptBanner from './components/ProofOfConceptBanner';
@@ -207,7 +211,7 @@ function App() {
       <Route path="/bap" element={<BapsPage />} />
       <Route path="/developers" element={<BapsPage />} /> {/* Keep for backwards compatibility */}
       <Route path="/docs" element={<DocsPage />} />
-      <Route path="/exchange" element={<JobExchangePage isAuthenticated={isAuthenticated} currentUser={currentUser} onLogout={handleLogout} />} />
+      <Route path="/jobs" element={<JobExchangePage isAuthenticated={isAuthenticated} currentUser={currentUser} onLogout={handleLogout} />} />
       <Route path="/3d" element={<ThreeDPage />} />
       <Route path="/token" element={<TokenPage />} />
       <Route path="/contributions" element={<ContributionsPage />} />
@@ -217,6 +221,10 @@ function App() {
       <Route path="/bitcoin-spreadsheet" element={<Navigate to="/bitcoin-spreadsheets" replace />} />
       <Route path="/bitcoin-spreadsheets" element={<BitcoinSpreadsheetsPage />} />
       <Route path="/marketing" element={<MarketingPage />} />
+      <Route path="/save" element={<SavePage />} />
+      <Route path="/mint" element={<MintPage />} />
+      <Route path="/market" element={<MarketPage />} />
+      <Route path="/exchange" element={<ExchangePage />} />
       <Route path="/auth/handcash/callback" element={<HandCashCallback />} />
       <Route path="/*" element={
         isLoading ? (

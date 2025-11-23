@@ -166,7 +166,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
       label: 'Blockchain',
       items: [
         { label: 'Developer Contracts', href: '/contracts' },
-        { label: '$BSHEETS Token', href: '/token' },
+        { label: '$bSheets Token', href: '/token' },
         { label: 'Contributions', href: '/contributions' },
         { divider: true },
         { label: 'Encrypt Spreadsheet', shortcut: '⌘L', action: () => console.log('Encrypt') },
@@ -253,7 +253,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
         { label: 'Developer Contracts', href: '/contracts' },
         { label: 'Open Tasks', href: '/tasks' },
         { label: 'Contributions', href: '/contributions' },
-        { label: '$BSHEETS Token', href: '/token' },
+        { label: '$bSheets Token', href: '/token' },
         { divider: true },
         { label: 'Documentation', href: '/docs' },
         { label: 'API Documentation', action: () => console.log('API Documentation') },
@@ -509,7 +509,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
               {activeMenu === 'more' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <button onClick={() => { navigate('/docs'); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>Documentation</button>
-                  <button onClick={() => { navigate('/token'); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>$BSHEETS Token</button>
+                  <button onClick={() => { navigate('/token'); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>$bSheets Token</button>
                   <button onClick={() => { navigate('/tasks'); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>Tasks</button>
                   <button onClick={() => { navigate('/contributions'); setActiveMenu(null); }} style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: 'none', borderRadius: '8px', color: '#fff', textAlign: 'left' }}>Contributions</button>
                   {isAuthenticated ? (
@@ -884,7 +884,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
             }}
             onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
             onMouseLeave={(e) => e.currentTarget.style.opacity = '0.9'}
-            title="$BSHEETS Token"
+            title="$bSheets Token"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2"/>

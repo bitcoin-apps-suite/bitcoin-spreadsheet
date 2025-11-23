@@ -295,7 +295,7 @@ const ContractsPage: React.FC = () => {
 
       <PageLayout 
         title="Developer Contracts"
-        description="Sign up for development tasks and earn $BSHEETS tokens upon successful PR merge"
+        description="Sign up for development tasks and earn $bSheets tokens upon successful PR merge"
         className="contracts-layout"
       >
         <div className="contracts-container">

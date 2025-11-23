@@ -12,7 +12,7 @@ const TokenPage: React.FC = () => {
         onLogout={() => {}}
       />
       <PageLayout 
-        title="$BSHEETS Token"
+        title="$bSheets Token"
         description="Open-source spreadsheets meet sustainable blockchain economics"
         className="token-layout"
       >
@@ -28,7 +28,7 @@ const TokenPage: React.FC = () => {
               and features is welcomed and encouraged.
             </p>
             <p>
-              The $BSHEETS token represents our approach to creating a sustainable economic model that 
+              The $bSheets token represents our approach to creating a sustainable economic model that 
               aims to reward contributors while maintaining transparency and openness in blockchain-based spreadsheets.
             </p>
             <div className="philosophy-points">
@@ -50,7 +50,7 @@ const TokenPage: React.FC = () => {
 
         {/* Token Model Section */}
         <section className="token-model-section">
-          <h2>The $BSHEETS Token Model</h2>
+          <h2>The $bSheets Token Model</h2>
           <div className="model-card">
             <h3>How It Works</h3>
             <ul>
@@ -84,7 +84,7 @@ const TokenPage: React.FC = () => {
               </li>
               <li>
                 <strong>Not a Public Offering:</strong> This is not a solicitation for investment or 
-                capital raising. $BSHEETS tokens are rewards for contribution, not investment instruments
+                capital raising. $bSheets tokens are rewards for contribution, not investment instruments
               </li>
               <li>
                 <strong>Future Equity:</strong> The Bitcoin Software Company may incorporate and offer 
@@ -155,7 +155,7 @@ const TokenPage: React.FC = () => {
                   <span className="arrow">→</span>
                 </div>
                 <div className="flow-item">
-                  <span>Dividends to $BSHEETS holders</span>
+                  <span>Dividends to $bSheets holders</span>
                   <span className="arrow">→</span>
                 </div>
                 <div className="flow-item">
@@ -172,7 +172,7 @@ const TokenPage: React.FC = () => {
 
         {/* How to Contribute Section */}
         <section className="contribute-section">
-          <h2>How to Earn $BSHEETS Tokens</h2>
+          <h2>How to Earn $bSheets Tokens</h2>
           <div className="contribute-steps">
             <div className="step">
               <div className="step-number">1</div>
@@ -218,7 +218,7 @@ const TokenPage: React.FC = () => {
             <div className="stat">
               <h3>Total Supply</h3>
               <p className="stat-value">1,000,000,000</p>
-              <p className="stat-label">$BSHEETS tokens</p>
+              <p className="stat-label">$bSheets tokens</p>
             </div>
             <div className="stat">
               <h3>Distributed</h3>
@@ -243,24 +243,19 @@ const TokenPage: React.FC = () => {
           <h2>Legal & Regulatory Notice</h2>
           <div className="legal-content">
             <p>
-              <strong>Revenue Sharing Model:</strong> The $BSHEETS token is designed to enable revenue 
+              <strong>Revenue Sharing Model:</strong> The $bSheets token is designed to enable revenue 
               sharing with contributors through dividend distributions. Token holders may receive dividends 
               based on platform revenues from subscriptions and exchange fees.
             </p>
             <p>
-              <strong>Trading & Liquidity:</strong> The $BSHEETS token is intended to be freely tradable 
+              <strong>Trading & Liquidity:</strong> The $bSheets token is intended to be freely tradable 
               on the Bitcoin Spreadsheet Exchange and associated platforms. We encourage an active secondary 
               market to provide liquidity and price discovery for contributors' work.
             </p>
             <p>
-              <strong>$BSHARE Fundraising:</strong> The Bitcoin Software Company intends to issue $BSHARE 
-              tokens as a fundraising mechanism. These tokens will represent participation in the platform's 
-              success and may be offered through appropriate channels.
-            </p>
-            <p>
-              By participating in the token ecosystem, you acknowledge that token allocation is discretionary, 
-              regulatory frameworks may evolve, and you should conduct your own due diligence regarding 
-              tax and legal implications in your jurisdiction.
+              <strong>Legal Compliance:</strong> The $bSheets token system operates within established 
+              legal frameworks. Token allocation is discretionary and based on meaningful contributions 
+              to the open-source project.
             </p>
           </div>
         </section>

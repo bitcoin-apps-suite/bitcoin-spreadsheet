@@ -278,7 +278,7 @@ const TasksPage: React.FC = () => {
         <section className="tasks-hero">
           <h1>Development Tasks</h1>
           <p className="tasks-tagline">
-            Help build the future of decentralized spreadsheets and earn $BSHEETS tokens
+            Help build the future of decentralized spreadsheets and earn $bSheets tokens
           </p>
           
           {/* Quick Stats */}
@@ -362,7 +362,7 @@ const TasksPage: React.FC = () => {
                   </div>
                   <div className="task-reward">
                     <div className="reward-amount">{task.reward.toLocaleString()}</div>
-                    <div className="reward-label">$BSHEETS</div>
+                    <div className="reward-label">$bSheets</div>
                   </div>
                 </div>
 
@@ -436,7 +436,7 @@ const TasksPage: React.FC = () => {
             <div className="step-card">
               <div className="step-number">4</div>
               <h3>Build & Earn</h3>
-              <p>Complete the task, submit a PR, and earn $BSHEETS tokens upon approval</p>
+              <p>Complete the task, submit a PR, and earn $bSheets tokens upon approval</p>
             </div>
           </div>
         </section>

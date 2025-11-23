@@ -40,7 +40,7 @@ const DevSidebar: React.FC = () => {
     { path: '/tasks', icon: Terminal, label: 'Tasks', badge: '25+' },
     { path: '/contributions', icon: Users, label: 'Contributors', badge: '1' },
     { path: '/docs', icon: BookOpen, label: 'Documentation' },
-    { path: '/token', icon: DollarSign, label: '$BSHEETS', badge: 'NEW' },
+    { path: '/token', icon: DollarSign, label: '$bSheets', badge: 'NEW' },
     { divider: true },
     { path: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet', icon: GitBranch, label: 'GitHub', external: true },
     { path: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues', icon: Bug, label: 'Issues', external: true, badge: '12' },

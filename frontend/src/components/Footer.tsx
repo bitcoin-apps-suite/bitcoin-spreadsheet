@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
             <div className="footer-column">
               <h4>Product</h4>
               <a href="/docs">Documentation</a>
-              <a href="/token">$BSHEETS Token</a>
+              <a href="/token">$bSheets Token</a>
               <a href="/exchange">Exchange</a>
               <a href="/3d">3D View</a>
             </div>

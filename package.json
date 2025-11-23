@@ -5,7 +5,7 @@
   "license": "Open-BSV",
   "author": "THE BITCOIN CORPORATION LTD (UK Company No. 16735102)",
   "copyright": "Copyright (c) 2025 THE BITCOIN CORPORATION LTD",
-  "homepage": "./",
+  "homepage": "/",
   "repository": {
     "type": "git",
     "url": "https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet.git"

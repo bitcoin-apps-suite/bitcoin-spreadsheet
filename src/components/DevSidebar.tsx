@@ -59,7 +59,13 @@ const DevSidebar: React.FC = () => {
   };
 
   return (
-    <div className={`dev-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+    <div 
+      className={`dev-sidebar ${isCollapsed ? 'collapsed' : ''}`}
+      style={{
+        // Ensure no white background at top
+        background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+      }}
+    >
       <button 
         className="dev-sidebar-toggle-standalone"
         onClick={() => setIsCollapsed(!isCollapsed)}

@@ -50,16 +50,16 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
 
   const menus: MenuData[] = [
     {
-      label: 'Bitcoin Spreadsheet',
+      label: 'Bitcoin Spreadsheets',
       items: [
         { label: 'Home', shortcut: '⇧⌘H', action: () => navigate('/') },
         { divider: true },
-        { label: 'About Bitcoin Spreadsheet', action: () => alert('Bitcoin Spreadsheet v1.0\n\nDecentralized spreadsheets on Bitcoin SV\n\n© 2025 THE BITCOIN CORPORATION LTD\nUK Company No. 16735102\n\nBuilt with HandCash integration') },
+        { label: 'About Bitcoin Spreadsheets', action: () => alert('Bitcoin Spreadsheets v1.0\n\nSecure, encrypted spreadsheets on the blockchain\n\n© 2025 THE BITCOIN CORPORATION LTD\nUK Company No. 16735102\n\nBuilt with HandCash integration') },
         { divider: true },
         { label: 'Preferences...', shortcut: '⌘,', action: () => console.log('Preferences') },
         { label: 'Encryption Settings...', action: () => console.log('Encryption') },
         { divider: true },
-        { label: 'Hide Bitcoin Spreadsheet', shortcut: '⌘H', action: () => console.log('Hide') },
+        { label: 'Hide Bitcoin Spreadsheets', shortcut: '⌘H', action: () => console.log('Hide') },
         { label: 'Hide Others', shortcut: '⌥⌘H', action: () => console.log('Hide Others') },
         { divider: true },
         { label: isAuthenticated ? 'Sign Out' : 'Sign In', shortcut: '⌘Q', action: isAuthenticated ? onLogout : () => document.querySelector<HTMLButtonElement>('.login-btn')?.click() }
@@ -282,7 +282,7 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
     {
       label: 'Help',
       items: [
-        { label: 'Bitcoin Spreadsheet Help', shortcut: '⌘?', action: () => alert('Bitcoin Spreadsheet v1.0\n\nCreate, encrypt, and store spreadsheets on the Bitcoin blockchain\n\n© 2025 THE BITCOIN CORPORATION LTD\nUK Company No. 16735102') },
+        { label: 'Bitcoin Spreadsheets Help', shortcut: '⌘?', action: () => alert('Bitcoin Spreadsheets v1.0\n\nSecure, encrypted spreadsheets on the blockchain\n\n© 2025 THE BITCOIN CORPORATION LTD\nUK Company No. 16735102') },
         { label: 'Keyboard Shortcuts', action: () => console.log('Show keyboard shortcuts') },
         { label: 'Function List', action: () => console.log('Show function list') },
         { divider: true },

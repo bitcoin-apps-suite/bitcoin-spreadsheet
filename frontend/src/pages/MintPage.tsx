@@ -35,6 +35,7 @@ const MintPage: React.FC = () => {
             text-align: center;
             padding: 40px 20px;
             background: #000000;
+            margin-top: 100px;
             margin-bottom: 60px;
             border-bottom: 1px solid #333333;
           }

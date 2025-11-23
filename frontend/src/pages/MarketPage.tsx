@@ -57,43 +57,77 @@ const MarketPage: React.FC = () => {
           }
 
           .market-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 32px;
-            margin: 60px 0;
-          }
-
-          .feature-card {
             background: #111111;
             border: 1px solid #333333;
             border-radius: 8px;
-            padding: 32px 24px;
-            text-align: left;
-            transition: all 0.2s ease;
-            border-left: 3px solid #4fc3f7;
+            padding: 48px 32px;
+            margin: 60px 0;
           }
 
-          .feature-card:hover {
-            border-color: #4fc3f7;
-            box-shadow: 0 4px 12px rgba(79, 195, 247, 0.2);
+          .features-header {
+            text-align: center;
+            margin-bottom: 40px;
           }
 
-          .feature-icon {
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-            display: block;
-          }
-
-          .feature-card h3 {
+          .features-header h2 {
             color: #4fc3f7;
-            margin-bottom: 12px;
-            font-size: 1.25rem;
+            font-size: 1.875rem;
+            margin-bottom: 16px;
+            font-weight: 200;
+          }
+
+          .features-header p {
+            color: #cccccc;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
             font-weight: 300;
           }
 
-          .feature-card p {
+          .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+          }
+
+          .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 24px 0;
+            border-bottom: 1px solid #333333;
+          }
+
+          .feature-item:last-child {
+            border-bottom: none;
+          }
+
+          .feature-number {
+            background: #4fc3f7;
+            color: #000000;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+          }
+
+          .feature-content h3 {
+            color: #ffffff;
+            margin: 0 0 8px 0;
+            font-size: 1.125rem;
+            font-weight: 500;
+          }
+
+          .feature-content p {
             color: #cccccc;
-            font-size: 1rem;
+            margin: 0;
+            font-size: 0.95rem;
             line-height: 1.5;
             font-weight: 300;
           }
@@ -505,9 +539,17 @@ const MarketPage: React.FC = () => {
             }
             
             .market-features {
+              padding: 32px 20px;
+              margin: 40px 0;
+            }
+            
+            .features-list {
               grid-template-columns: 1fr;
               gap: 20px;
-              margin: 40px 0;
+            }
+            
+            .feature-item {
+              padding: 20px 0;
             }
 
             .pricing-models {
@@ -565,40 +607,59 @@ const MarketPage: React.FC = () => {
         </div>
 
         <div className="market-features">
-          <div className="feature-card">
-            <span className="feature-icon">💰</span>
-            <h3>Multiple Revenue Streams</h3>
-            <p>Sell one-time access, monthly subscriptions, or usage-based pricing for your spreadsheet data.</p>
+          <div className="features-header">
+            <h2>Platform Capabilities</h2>
+            <p>Comprehensive tools for monetizing your spreadsheet data with enterprise-grade security and blockchain technology</p>
           </div>
+          
+          <div className="features-list">
+            <div className="feature-item">
+              <div className="feature-number">1</div>
+              <div className="feature-content">
+                <h3>Multiple Revenue Streams</h3>
+                <p>Implement flexible pricing models: one-time purchases, subscription-based access, or usage-based micro-transactions for your spreadsheet data.</p>
+              </div>
+            </div>
 
-          <div className="feature-card">
-            <span className="feature-icon">🎯</span>
-            <h3>Dynamic Pricing</h3>
-            <p>Adjust prices based on demand, data freshness, and market conditions. AI suggests optimal pricing.</p>
-          </div>
+            <div className="feature-item">
+              <div className="feature-number">2</div>
+              <div className="feature-content">
+                <h3>Dynamic Pricing Engine</h3>
+                <p>Intelligent pricing algorithms adjust rates based on market demand, data freshness, and historical performance to maximize revenue.</p>
+              </div>
+            </div>
 
-          <div className="feature-card">
-            <span className="feature-icon">📊</span>
-            <h3>Analytics Dashboard</h3>
-            <p>Track earnings, subscriber growth, and data usage patterns with comprehensive analytics.</p>
-          </div>
+            <div className="feature-item">
+              <div className="feature-number">3</div>
+              <div className="feature-content">
+                <h3>Analytics Dashboard</h3>
+                <p>Comprehensive reporting on earnings, subscriber growth, usage patterns, and market performance with real-time insights.</p>
+              </div>
+            </div>
 
-          <div className="feature-card">
-            <span className="feature-icon">🔒</span>
-            <h3>Access Control</h3>
-            <p>Granular permissions: sell full sheets, specific ranges, or read-only access with watermarks.</p>
-          </div>
+            <div className="feature-item">
+              <div className="feature-number">4</div>
+              <div className="feature-content">
+                <h3>Access Control System</h3>
+                <p>Granular permission management allowing selective data sharing, read-only access, watermarking, and time-limited licenses.</p>
+              </div>
+            </div>
 
-          <div className="feature-card">
-            <span className="feature-icon">🌍</span>
-            <h3>Global Marketplace</h3>
-            <p>Reach buyers worldwide. All payments in Bitcoin with instant settlement and low fees.</p>
-          </div>
+            <div className="feature-item">
+              <div className="feature-number">5</div>
+              <div className="feature-content">
+                <h3>Global Distribution</h3>
+                <p>Reach international markets with Bitcoin-based payments, instant settlement, and minimal transaction fees.</p>
+              </div>
+            </div>
 
-          <div className="feature-card">
-            <span className="feature-icon">⚖️</span>
-            <h3>Smart Contracts</h3>
-            <p>Automated revenue distribution, access management, and dispute resolution through blockchain.</p>
+            <div className="feature-item">
+              <div className="feature-number">6</div>
+              <div className="feature-content">
+                <h3>Smart Contract Automation</h3>
+                <p>Automated revenue distribution, access provisioning, and dispute resolution through immutable blockchain contracts.</p>
+              </div>
+            </div>
           </div>
         </div>
 

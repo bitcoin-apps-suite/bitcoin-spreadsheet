@@ -197,6 +197,11 @@ const EducationalProposalPage: React.FC = () => {
             margin: 0 0 8px 0;
             font-size: 14px;
           }
+
+          .proposal-header {
+            margin-top: 100px;
+            margin-bottom: 40px;
+          }
           
           .roadmap-phase ul {
             margin-bottom: 0;

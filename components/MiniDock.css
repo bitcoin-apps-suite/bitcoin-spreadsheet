@@ -1,0 +1,155 @@
+/* Compact mini dock for mobile/tablet */
+.bitcoin-mini-dock {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 999999;
+  padding: 4px;
+  background: rgba(22, 22, 22, 0.85);
+  backdrop-filter: blur(15px) saturate(180%);
+  -webkit-backdrop-filter: blur(15px) saturate(180%);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    0 0 0 0.5px rgba(255, 255, 255, 0.1) inset;
+}
+
+.mini-dock-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+}
+
+.mini-dock-app {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+}
+
+.mini-dock-app:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.mini-dock-app:hover::before {
+  content: attr(title);
+  position: absolute;
+  right: 100%;
+  margin-right: 8px;
+  padding: 2px 6px;
+  background: rgba(40, 40, 40, 0.95);
+  color: white;
+  font-size: 10px;
+  white-space: nowrap;
+  border-radius: 3px;
+  pointer-events: none;
+  opacity: 0;
+  animation: tooltip-appear-mini 0.2s ease forwards;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+}
+
+@keyframes tooltip-appear-mini {
+  to {
+    opacity: 1;
+  }
+}
+
+.mini-dock-app.active {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+.mini-dock-app.active::after {
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 12px;
+  background: #3b82f6;
+  border-radius: 1px;
+  box-shadow: 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+.mini-dock-app-icon {
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.2s ease;
+}
+
+.mini-dock-app:hover .mini-dock-app-icon {
+  color: rgba(255, 255, 255, 1);
+}
+
+.mini-dock-app.active .mini-dock-app-icon {
+  color: #3b82f6;
+}
+
+.mini-dock-indicator {
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 3px;
+  background: #3b82f6;
+  border-radius: 50%;
+  animation: pulse-mini 2s infinite;
+}
+
+@keyframes pulse-mini {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateY(-50%) scale(1.2);
+  }
+}
+
+/* Hide on desktop where main dock is shown */
+@media (min-width: 769px) {
+  .bitcoin-mini-dock {
+    display: none;
+  }
+}
+
+/* Adjust position on very small screens */
+@media (max-width: 480px) {
+  .bitcoin-mini-dock {
+    bottom: 5px;
+    right: 5px;
+    padding: 3px;
+  }
+  
+  .mini-dock-container {
+    gap: 3px;
+    padding: 3px;
+  }
+  
+  .mini-dock-app {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .mini-dock-app-icon {
+    width: 18px;
+    height: 18px;
+  }
+}

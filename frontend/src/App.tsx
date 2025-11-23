@@ -32,6 +32,7 @@ import DevSidebar from './components/DevSidebar';
 import SpreadsheetExchangeView from './components/SpreadsheetExchangeView';
 import InstallPrompt from './components/InstallPrompt';
 import Footer from './components/Footer';
+import DockManager from './components/DockManager';
 import { BitcoinService, SpreadsheetData } from './services/BitcoinService';
 import { HandCashService, HandCashUser } from './services/HandCashService';
 
@@ -631,6 +632,9 @@ function App() {
              
              {/* PWA Install Prompt */}
              <InstallPrompt />
+             
+             {/* Bitcoin OS Dock */}
+             <DockManager currentApp="bitcoin-spreadsheet" />
           </div>
         )
       } />

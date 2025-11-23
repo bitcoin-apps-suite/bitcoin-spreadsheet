@@ -15,14 +15,8 @@ const EducationalProposalPage: React.FC = () => {
         isDarkMode={isDarkMode}
       />
       <PageLayout title="Educational Funding Proposal">
-      {/* Hide dev sidebar for presentation */}
+      {/* Dev sidebar enabled for navigation */}
       <style>{`
-        body .dev-sidebar { 
-          display: none !important; 
-        }
-        body .app-with-sidebar { 
-          margin-left: 0 !important; 
-        }
         body {
           background: #000000 !important;
         }

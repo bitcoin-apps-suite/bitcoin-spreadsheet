@@ -40,3 +40,11 @@ coverage/
 *Screenshot*
 Screenshot*
 *.png
+
+# Environment files - NEVER commit these!
+.env
+.env.*
+.env*
+*.env
+.env copy.local
+.env.deployment

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import './App.css';
 import './styles/app-dark.css';
 import './styles/mobile.css';
@@ -19,6 +19,8 @@ import ContributionsPage from './pages/ContributionsPage';
 import TasksPage from './pages/TasksPage';
 import ContractsPage from './pages/ContractsPage';
 import EducationalProposalPage from './pages/EducationalProposalPage';
+import BitcoinSpreadsheetsPage from './pages/BitcoinSpreadsheetsPage';
+import MarketingPage from './pages/MarketingPage';
 import ClaudeChat from './components/ClaudeChat';
 import SpreadsheetTaskbar from './components/SpreadsheetTaskbar';
 import ProofOfConceptBanner from './components/ProofOfConceptBanner';
@@ -212,6 +214,9 @@ function App() {
       <Route path="/tasks" element={<TasksPage />} />
       <Route path="/contracts" element={<ContractsPage />} />
       <Route path="/educational-proposal" element={<EducationalProposalPage />} />
+      <Route path="/bitcoin-spreadsheet" element={<Navigate to="/bitcoin-spreadsheets" replace />} />
+      <Route path="/bitcoin-spreadsheets" element={<BitcoinSpreadsheetsPage />} />
+      <Route path="/marketing" element={<MarketingPage />} />
       <Route path="/auth/handcash/callback" element={<HandCashCallback />} />
       <Route path="/*" element={
         isLoading ? (

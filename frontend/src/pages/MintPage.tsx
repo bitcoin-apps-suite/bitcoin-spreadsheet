@@ -430,7 +430,7 @@ const MintPage: React.FC = () => {
         `}</style>
 
         <div className="hero-mint">
-          <h1>/mint - Tokenize Your Spreadsheets</h1>
+          <h1>Tokenize Your Spreadsheets</h1>
           <p className="subtitle">
             Transform saved spreadsheets into tradeable tokens with fractional ownership 
             and automatic dividend distribution.

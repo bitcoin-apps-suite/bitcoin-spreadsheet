@@ -556,7 +556,7 @@ const MarketPage: React.FC = () => {
         `}</style>
 
         <div className="hero-market">
-          <h1>/market - Sell Access to Your Data</h1>
+          <h1>Sell Access to Your Data</h1>
           <p className="subtitle">
             Monetize your spreadsheets by selling access to valuable datasets. 
             Set your own prices and earn from every view, download, and subscription.

@@ -250,7 +250,7 @@ function App() {
       <Route path="/exchange" element={<ExchangePage />} />
       <Route path="/react-on-chain-bugs" element={<ReactOnChainBugsPage />} />
       <Route path="/auth/handcash/callback" element={<HandCashCallback />} />
-      <Route path="/*" element={
+      <Route path="/" element={
         isLoading ? (
           <div className="App">
             <div className="loading">Loading Bitcoin Jobs...</div>
@@ -660,6 +660,25 @@ function App() {
              
           </div>
         )
+      } />
+      <Route path="*" element={
+        <div className="App">
+          <header className="App-header">
+            <h1>404 - Page Not Found</h1>
+            <p>The page you're looking for doesn't exist.</p>
+            <button onClick={() => navigate('/')} style={{
+              padding: '10px 20px',
+              margin: '20px',
+              backgroundColor: '#f7931a',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}>
+              Go Home
+            </button>
+          </header>
+        </div>
       } />
     </Routes>
       <Footer />

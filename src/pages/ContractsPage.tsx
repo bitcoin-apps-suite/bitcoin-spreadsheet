@@ -1,8 +1,115 @@
 import React, { useState, useEffect } from 'react';
-import './ContractsPage.css';
+import './TokenPage.css'; // Use TokenPage styles for consistent formatting
 import SpreadsheetTaskbar from '../components/SpreadsheetTaskbar';
 import PageLayout from '../components/PageLayout';
 import { HandCashService } from '../services/HandCashService';
+
+// Additional styles for contract-specific elements
+const contractStyles = `
+  .filter-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .filter-buttons button {
+    padding: 8px 16px;
+    border: 1px solid rgba(66, 133, 244, 0.3);
+    background: rgba(66, 133, 244, 0.05);
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: 100px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 300;
+  }
+  .filter-buttons button:hover {
+    background: rgba(66, 133, 244, 0.1);
+    border-color: #4285F4;
+    color: #4285F4;
+  }
+  .filter-buttons button.active {
+    background: linear-gradient(135deg, #4285F4, #5A9BF5);
+    border-color: #4285F4;
+    color: #000;
+    font-weight: 500;
+  }
+  .contract-header {
+    display: flex;
+    justify-content: between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .contract-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .contract-reward {
+    font-size: 18px;
+    font-weight: 500;
+    color: #4285F4;
+  }
+  .contract-details {
+    margin: 20px 0;
+  }
+  .contract-details h4 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #4285F4;
+    margin: 16px 0 8px 0;
+  }
+  .skills-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    margin: 8px 0;
+  }
+  .skills-list li {
+    background: rgba(66, 133, 244, 0.1);
+    color: #4285F4;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    border: 1px solid rgba(66, 133, 244, 0.2);
+  }
+  .contract-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .contracts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .issue-number {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .contract-info {
+    margin: 12px 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+`;
+
+// Inject styles
+if (typeof document !== 'undefined') {
+  const styleSheet = document.createElement('style');
+  styleSheet.innerText = contractStyles;
+  document.head.appendChild(styleSheet);
+}
 
 interface Contract {
   id: string;
@@ -283,7 +390,7 @@ const ContractsPage: React.FC = () => {
   });
 
   return (
-    <div className="contracts-page">
+    <div className="token-page">
       <SpreadsheetTaskbar
         isAuthenticated={isAuthenticated}
         currentUser={currentUser}
@@ -296,158 +403,184 @@ const ContractsPage: React.FC = () => {
       <PageLayout 
         title="Developer Contracts"
         description="Sign up for development tasks and earn $bSheets tokens upon successful PR merge"
-        className="contracts-layout"
+        className="token-layout"
       >
-        <div className="contracts-container">
-          
-          <div className="header-stats">
-            <div className="stat-card">
-              <span className="stat-value">{contracts.filter(c => c.status === 'open').length}</span>
-              <span className="stat-label">Open Contracts</span>
+        <div className="token-container">
+
+          {/* Overview Section */}
+          <section className="overview-section">
+            <h2>Contract Overview</h2>
+            <div className="stats-grid">
+              <div className="stat">
+                <h3>Open Contracts</h3>
+                <p className="stat-value">{contracts.filter(c => c.status === 'open').length}</p>
+                <p className="stat-label">Available tasks</p>
+              </div>
+              <div className="stat">
+                <h3>Tokens Available</h3>
+                <p className="stat-value">
+                  {contracts.reduce((sum, c) => {
+                    if (c.status === 'open') {
+                      return sum + parseInt(c.reward.replace(/[^0-9]/g, ''));
+                    }
+                    return sum;
+                  }, 0).toLocaleString()}
+                </p>
+                <p className="stat-label">$bSheets rewards</p>
+              </div>
+              <div className="stat">
+                <h3>Completed</h3>
+                <p className="stat-value">{contracts.filter(c => c.status === 'completed').length}</p>
+                <p className="stat-label">Finished tasks</p>
+              </div>
+              <div className="stat">
+                <h3>Active</h3>
+                <p className="stat-value">{contracts.filter(c => c.status === 'assigned' || c.status === 'in_progress').length}</p>
+                <p className="stat-label">In progress</p>
+              </div>
             </div>
-            <div className="stat-card">
-              <span className="stat-value">
-                {contracts.reduce((sum, c) => {
-                  if (c.status === 'open') {
-                    return sum + parseInt(c.reward.replace(/[^0-9]/g, ''));
-                  }
-                  return sum;
-                }, 0).toLocaleString()}
-              </span>
-              <span className="stat-label">Tokens Available</span>
+          </section>
+
+          {/* Filters Section */}
+          <section className="filters-section">
+            <div className="model-card">
+              <h3>Filter Contracts</h3>
+              <div className="filter-buttons">
+                <button
+                  className={filter === 'all' ? 'active' : ''}
+                  onClick={() => setFilter('all')}
+                >
+                  All Contracts
+                </button>
+                <button
+                  className={filter === 'open' ? 'active' : ''}
+                  onClick={() => setFilter('open')}
+                >
+                  Available
+                </button>
+                <button
+                  className={filter === 'assigned' ? 'active' : ''}
+                  onClick={() => setFilter('assigned')}
+                >
+                  In Progress
+                </button>
+                {isAuthenticated && (
+                  <button
+                    className={filter === 'my_contracts' ? 'active' : ''}
+                    onClick={() => setFilter('my_contracts')}
+                  >
+                    My Contracts
+                  </button>
+                )}
+              </div>
             </div>
-            <div className="stat-card">
-              <span className="stat-value">{contracts.filter(c => c.status === 'completed').length}</span>
-              <span className="stat-label">Completed</span>
-            </div>
-          </div>
+          </section>
 
-          <div className="contracts-filters">
-            <button
-              className={filter === 'all' ? 'active' : ''}
-              onClick={() => setFilter('all')}
-            >
-              All Contracts
-            </button>
-            <button
-              className={filter === 'open' ? 'active' : ''}
-              onClick={() => setFilter('open')}
-            >
-              Open
-            </button>
-            <button
-              className={filter === 'assigned' ? 'active' : ''}
-              onClick={() => setFilter('assigned')}
-            >
-              In Progress
-            </button>
-            {isAuthenticated && (
-              <button
-                className={filter === 'my_contracts' ? 'active' : ''}
-                onClick={() => setFilter('my_contracts')}
-              >
-                My Contracts
-              </button>
-            )}
-          </div>
-
-          {loading ? (
-            <div className="loading">Loading contracts...</div>
-          ) : (
-            <div className="contracts-grid">
-              {filteredContracts.map(contract => (
-                <div key={contract.id} className="contract-card">
-                  <div className="contract-header">
-                    <div className="contract-meta">
-                      <span className="issue-number">#{contract.issueNumber}</span>
-                      <span 
-                        className="contract-status"
-                        style={{ backgroundColor: getStatusColor(contract.status) }}
-                      >
-                        {contract.status.replace('_', ' ')}
-                      </span>
-                      <span 
-                        className="contract-difficulty"
-                        style={{ backgroundColor: getDifficultyColor(contract.difficulty) }}
-                      >
-                        {contract.difficulty}
-                      </span>
+          {/* Available Contracts Section */}
+          <section className="contracts-section">
+            <h2>Available Development Contracts</h2>
+            {loading ? (
+              <div className="loading">Loading contracts...</div>
+            ) : (
+              <div className="contracts-list">
+                {filteredContracts.map(contract => (
+                  <div key={contract.id} className="model-card">
+                    <div className="contract-header">
+                      <div className="contract-meta">
+                        <span className="issue-number">#{contract.issueNumber}</span>
+                        <span 
+                          className="contract-status"
+                          style={{ 
+                            backgroundColor: getStatusColor(contract.status),
+                            color: 'white',
+                            padding: '4px 8px',
+                            borderRadius: '4px',
+                            fontSize: '12px',
+                            fontWeight: '500'
+                          }}
+                        >
+                          {contract.status.replace('_', ' ').toUpperCase()}
+                        </span>
+                        <span 
+                          className="contract-difficulty"
+                          style={{ 
+                            backgroundColor: getDifficultyColor(contract.difficulty),
+                            color: 'white',
+                            padding: '4px 8px',
+                            borderRadius: '4px',
+                            fontSize: '12px',
+                            fontWeight: '500'
+                          }}
+                        >
+                          {contract.difficulty}
+                        </span>
+                      </div>
+                      <div className="contract-reward">
+                        <strong>{contract.reward}</strong>
+                      </div>
                     </div>
-                    <div className="contract-reward">
-                      {contract.reward}
+
+                    <h3>{contract.title}</h3>
+                    <p>{contract.description}</p>
+
+                    <div className="contract-details">
+                      <div className="contract-skills">
+                        <h4>Required Skills</h4>
+                        <ul className="skills-list">
+                          {contract.requiredSkills.map(skill => (
+                            <li key={skill}>{skill}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="contract-deliverables">
+                        <h4>Key Deliverables</h4>
+                        <ul>
+                          {contract.deliverables.slice(0, 4).map((item, index) => (
+                            <li key={index}>{item}</li>
+                          ))}
+                          {contract.deliverables.length > 4 && (
+                            <li><em>+{contract.deliverables.length - 4} additional requirements</em></li>
+                          )}
+                        </ul>
+                      </div>
                     </div>
-                  </div>
 
-                  <h3 className="contract-title">{contract.title}</h3>
-                  <p className="contract-description">{contract.description}</p>
-
-                  <div className="contract-skills">
-                    {contract.requiredSkills.map(skill => (
-                      <span key={skill} className="skill-tag">{skill}</span>
-                    ))}
-                  </div>
-
-                  <div className="contract-deliverables">
-                    <h4>Deliverables:</h4>
-                    <ul>
-                      {contract.deliverables.slice(0, 3).map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                      {contract.deliverables.length > 3 && (
-                        <li className="more">+{contract.deliverables.length - 3} more</li>
-                      )}
-                    </ul>
-                  </div>
-
-                  {contract.deadline && (
-                    <div className="contract-deadline">
-                      <span className="deadline-label">Deadline:</span>
-                      <span className="deadline-date">{new Date(contract.deadline).toLocaleDateString()}</span>
-                    </div>
-                  )}
-
-                  {contract.assignee && (
-                    <div className="contract-assignee">
-                      <span className="assignee-label">Assigned to:</span>
-                      <span className="assignee-name">{contract.assignee}</span>
-                    </div>
-                  )}
-
-                  <div className="contract-actions">
-                    <a 
-                      href={contract.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="github-link"
-                      style={{
-                        border: '1px solid rgba(247, 147, 26, 0.3)',
-                        background: 'rgba(247, 147, 26, 0.05)',
-                        color: '#F7931A',
-                        cursor: 'pointer',
-                        textDecoration: 'none',
-                        display: 'inline-block',
-                        padding: '8px 16px',
-                        borderRadius: '4px',
-                        fontSize: '14px',
-                        fontWeight: '500',
-                        transition: 'all 0.2s ease'
-                      }}
-                    >
-                      View on GitHub →
-                    </a>
-                    {contract.status === 'open' && (
-                      <button 
-                        className="signup-button"
-                        onClick={() => handleSignUp(contract)}
-                      >
-                        {isAuthenticated ? 'Sign Contract' : 'Login to Sign'}
-                      </button>
+                    {(contract.deadline || contract.assignee) && (
+                      <div className="contract-info">
+                        {contract.deadline && (
+                          <p><strong>Deadline:</strong> {new Date(contract.deadline).toLocaleDateString()}</p>
+                        )}
+                        {contract.assignee && (
+                          <p><strong>Assigned to:</strong> {contract.assignee}</p>
+                        )}
+                      </div>
                     )}
+
+                    <div className="contract-actions">
+                      <a 
+                        href={contract.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cta-btn secondary"
+                        style={{ marginRight: '12px' }}
+                      >
+                        View on GitHub
+                      </a>
+                      {contract.status === 'open' && (
+                        <button 
+                          className="cta-btn primary"
+                          onClick={() => handleSignUp(contract)}
+                        >
+                          {isAuthenticated ? 'Sign Contract' : 'Login to Sign'}
+                        </button>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
+          </section>
 
           {/* Contract Signup Modal */}
           {showSignupModal && selectedContract && (

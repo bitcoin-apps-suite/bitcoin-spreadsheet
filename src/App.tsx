@@ -295,7 +295,7 @@ function App() {
                   >
                     <img 
                       src="/bitcoin-watercolor-icon.png" 
-                      alt="Bitcoin" 
+                      alt="" 
                       className="bitcoin-icon-beveled"
                       style={{ width: '40px', height: '40px', marginRight: '16px', verticalAlign: 'middle' }}
                     />
@@ -379,7 +379,7 @@ function App() {
                 >
                   <img 
                     src="/bitcoin-watercolor-icon.png" 
-                    alt="Bitcoin" 
+                    alt="" 
                     className="bitcoin-icon-beveled"
                     style={{ width: '40px', height: '40px', marginRight: '16px', verticalAlign: 'middle' }}
                   />

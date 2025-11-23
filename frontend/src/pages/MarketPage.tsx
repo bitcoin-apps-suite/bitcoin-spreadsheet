@@ -804,6 +804,35 @@ const MarketPage: React.FC = () => {
                 <button className="action-btn secondary">Preview</button>
               </div>
             </div>
+
+            <div className="listing-card">
+              <div className="listing-header">
+                <span className="listing-title">Game Revenue Analytics</span>
+                <span className="listing-price">₿0.025/month</span>
+              </div>
+              <p className="listing-description">
+                Comprehensive video game monetization tracking with player spending patterns, 
+                in-app purchase optimization, and seasonal revenue forecasting models.
+              </p>
+              <div className="listing-stats">
+                <div className="stat-box">
+                  <span className="stat-value">1,156</span>
+                  <span className="stat-label">Subscribers</span>
+                </div>
+                <div className="stat-box">
+                  <span className="stat-value">92.4%</span>
+                  <span className="stat-label">Accuracy</span>
+                </div>
+                <div className="stat-box">
+                  <span className="stat-value">Weekly</span>
+                  <span className="stat-label">Updates</span>
+                </div>
+              </div>
+              <div className="listing-actions">
+                <button className="action-btn primary">Subscribe</button>
+                <button className="action-btn secondary">Preview</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -845,29 +874,29 @@ const MarketPage: React.FC = () => {
           <div className="stories-grid">
             <div className="story-card">
               <p className="story-quote">
-                "My financial models now generate ₿0.5 monthly from 200+ subscribers. 
+                "My financial models now generate $2,400 monthly from 200+ subscribers. 
                 The automated payments and access control make it completely passive income."
               </p>
               <div className="story-author">Sarah Chen - Financial Analyst</div>
-              <div className="story-earnings">Monthly Earnings: ₿0.5 ($32,500)</div>
+              <div className="story-earnings">Monthly Earnings: $2,400</div>
             </div>
 
             <div className="story-card">
               <p className="story-quote">
-                "I tokenized my energy market research and sold 40% of shares for ₿2.1. 
+                "I tokenized my energy market research and sold 40% of shares for $8,500. 
                 Now I earn dividends while keeping majority control of my work."
               </p>
               <div className="story-author">Dr. Michael Torres - Energy Economist</div>
-              <div className="story-earnings">Token Sale: ₿2.1 ($136,500)</div>
+              <div className="story-earnings">Token Sale: $8,500</div>
             </div>
 
             <div className="story-card">
               <p className="story-quote">
                 "Converting my startup metrics template into a subscription model 
-                generates ₿0.2 monthly. Best decision I made for my consulting business."
+                generates $950 monthly. Best decision I made for my consulting business."
               </p>
               <div className="story-author">Lisa Park - Business Consultant</div>
-              <div className="story-earnings">Monthly Earnings: ₿0.2 ($13,000)</div>
+              <div className="story-earnings">Monthly Earnings: $950</div>
             </div>
           </div>
         </div>

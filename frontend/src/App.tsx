@@ -18,6 +18,7 @@ import TokenPage from './pages/TokenPage';
 import ContributionsPage from './pages/ContributionsPage';
 import TasksPage from './pages/TasksPage';
 import ContractsPage from './pages/ContractsPage';
+import EducationalProposalPage from './pages/EducationalProposalPage';
 import ClaudeChat from './components/ClaudeChat';
 import SpreadsheetTaskbar from './components/SpreadsheetTaskbar';
 import ProofOfConceptBanner from './components/ProofOfConceptBanner';
@@ -210,6 +211,7 @@ function App() {
       <Route path="/contributions" element={<ContributionsPage />} />
       <Route path="/tasks" element={<TasksPage />} />
       <Route path="/contracts" element={<ContractsPage />} />
+      <Route path="/educational-proposal" element={<EducationalProposalPage />} />
       <Route path="/auth/handcash/callback" element={<HandCashCallback />} />
       <Route path="/*" element={
         isLoading ? (

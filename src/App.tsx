@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom';
 import './App.css';
 import './styles/app-dark.css';
 import './styles/mobile.css';
@@ -55,6 +55,30 @@ function App() {
     return savedMode !== 'false'; // Default to true unless explicitly set to false
   });
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Pages that have their own headers and shouldn't show the main app header
+  const pagesWithOwnHeaders = [
+    '/bitcoin-spreadsheets',
+    '/marketing',
+    '/educational-proposal',
+    '/bap',
+    '/developers',
+    '/docs',
+    '/jobs',
+    '/3d',
+    '/token',
+    '/contributions',
+    '/tasks',
+    '/contracts',
+    '/save',
+    '/mint',
+    '/market',
+    '/exchange',
+    '/react-on-chain-bugs'
+  ];
+
+  const shouldShowMainHeader = !pagesWithOwnHeaders.includes(location.pathname);
 
   // Toggle dark mode
   const toggleDarkMode = () => {
@@ -260,6 +284,7 @@ function App() {
               toggleDarkMode={toggleDarkMode}
               isDarkMode={isDarkMode}
             />
+            {shouldShowMainHeader && (
             <header className="App-header">
               {/* Mobile header layout - only on mobile */}
               <div className="mobile-header-wrapper">
@@ -524,6 +549,7 @@ function App() {
                 )}
               </div>
             </header>
+            )}
             <main className="main-container">
               {bitcoinService ? (
                 showExchange ? (

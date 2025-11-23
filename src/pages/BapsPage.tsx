@@ -1159,7 +1159,7 @@ class FinancialDataAsset extends BAP.Asset {
               <a href="https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet" target="_blank" rel="noopener noreferrer">
                 GitHub
               </a>
-              <button onClick={() => navigate('/bitcoin-spreadsheet')}>
+              <button onClick={() => navigate('/bitcoin-spreadsheets')}>
                 Home
               </button>
             </div>

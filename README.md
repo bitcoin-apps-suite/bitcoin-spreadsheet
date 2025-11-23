@@ -1,5 +1,7 @@
 # Bitcoin Blockchain Spreadsheet
 
+> **Auto-deployment webhook configured ✅**
+
 A revolutionary decentralized spreadsheet application that stores data on the Bitcoin SV blockchain, featuring HandCash wallet integration for authentication and data encryption. This project aims to create a fully decentralized, secure, and collaborative spreadsheet platform rivaling Google Sheets and Microsoft Excel.
 
 ## 🌟 Vision

@@ -28,6 +28,7 @@ const BitcoinSpreadsheetsPage: React.FC = () => {
               <div className="bitcoin-logo-large">₿</div>
             </div>
             <h1 className="hero-title">
+              <img src="/bsheets.png" alt="Bitcoin Spreadsheets" style={{width: '40px', height: '40px', marginRight: '12px', verticalAlign: 'middle'}} />
               Spreadsheets
             </h1>
             <p className="hero-description">

@@ -26,7 +26,7 @@ const EducationalProposalPage: React.FC = () => {
           .educational-proposal-page {
             max-width: 100%;
             margin: 0;
-            padding: 80px 20px 40px 20px;
+            padding: 120px 20px 40px 20px;
             line-height: 1.6;
             color: #ffffff;
             background: #000000;
@@ -193,7 +193,7 @@ const EducationalProposalPage: React.FC = () => {
           }
 
           .proposal-header {
-            margin-top: 100px;
+            margin-top: 20px;
             margin-bottom: 40px;
           }
           

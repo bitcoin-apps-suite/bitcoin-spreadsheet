@@ -632,13 +632,14 @@ function App() {
              {/* PWA Install Prompt */}
              <InstallPrompt />
              
-             {/* Bitcoin OS Dock */}
-             <DockManager currentApp="bitcoin-spreadsheet" />
           </div>
         )
       } />
     </Routes>
       <Footer />
+      
+      {/* Bitcoin OS Dock - Global on all pages */}
+      <DockManager currentApp="bitcoin-spreadsheet" />
       </div>
     </>
   );

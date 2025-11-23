@@ -149,6 +149,45 @@ const EducationalProposalPage: React.FC = () => {
             font-size: 18px;
             font-weight: 300;
           }
+
+          .download-section {
+            background: #1a1a1a;
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid #2196f3;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+          }
+
+          .download-button {
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            margin-top: 12px;
+          }
+
+          .download-button:hover {
+            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+          }
+
+          .download-description {
+            color: #cccccc;
+            margin: 0 0 8px 0;
+            font-size: 14px;
+          }
           
           .roadmap-phase ul {
             margin-bottom: 0;
@@ -254,6 +293,17 @@ const EducationalProposalPage: React.FC = () => {
           <h3 style={{ color: '#7f8c8d', fontSize: '16px', fontStyle: 'italic', marginBottom: '30px' }}>
             Blockchain-Based Spreadsheet Application for Educational Financial Analysis and Data Sovereignty
           </h3>
+        </div>
+
+        <div className="download-section">
+          <p className="download-description">Download the complete proposal document</p>
+          <a 
+            href="/Bitcoin Spreadsheets Educational Initiative - Trust Funding Proposal.pdf" 
+            className="download-button"
+            download
+          >
+            📄 Download PDF Proposal
+          </a>
         </div>
 
         <div className="executive-summary">

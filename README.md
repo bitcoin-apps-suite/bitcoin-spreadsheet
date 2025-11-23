@@ -488,3 +488,4 @@ This is experimental software in active development. While we strive for securit
 **Built with determination to revolutionize spreadsheets on Bitcoin SV**
 
 *"Your data, your keys, your spreadsheet"*
+# Deployment trigger

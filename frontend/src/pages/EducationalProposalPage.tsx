@@ -18,9 +18,9 @@ const EducationalProposalPage: React.FC = () => {
       <div className="educational-proposal-page">
         <style>{`
           .educational-proposal-page {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            max-width: 100%;
+            margin: 0;
+            padding: 40px 20px;
             line-height: 1.6;
             color: #ffffff;
             background: #000000;
@@ -41,9 +41,12 @@ const EducationalProposalPage: React.FC = () => {
           
           .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin: 40px 0;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
           }
           
           .feature-box {

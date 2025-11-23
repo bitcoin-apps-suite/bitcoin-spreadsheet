@@ -11,6 +11,7 @@ const EducationalProposalPage: React.FC = () => {
             margin: 0 auto;
             padding: 20px;
             line-height: 1.6;
+            color: #ffffff;
           }
           
           .executive-summary {
@@ -19,6 +20,7 @@ const EducationalProposalPage: React.FC = () => {
             border-left: 4px solid #3498db;
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
+            color: #333333;
           }
           
           .feature-grid {
@@ -33,6 +35,7 @@ const EducationalProposalPage: React.FC = () => {
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            color: #333333;
           }
           
           .feature-box h4 {

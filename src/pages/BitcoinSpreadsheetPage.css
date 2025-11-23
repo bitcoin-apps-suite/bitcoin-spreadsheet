@@ -6,111 +6,6 @@
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
 }
 
-/* Hero Section */
-.hero-section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(ellipse at center, rgba(0, 122, 204, 0.1) 0%, transparent 70%);
-  position: relative;
-  padding: 60px 20px;
-}
-
-.hero-content {
-  text-align: center;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.logo-container {
-  margin-bottom: 30px;
-}
-
-.bitcoin-logo-large {
-  font-size: 80px;
-  color: #007acc;
-  font-weight: bold;
-  display: inline-block;
-  animation: pulse-glow 3s ease-in-out infinite;
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    text-shadow: 0 0 20px rgba(0, 122, 204, 0.5);
-  }
-  50% {
-    text-shadow: 0 0 40px rgba(0, 122, 204, 0.8);
-  }
-}
-
-.hero-title {
-  font-size: 72px;
-  font-weight: 200;
-  margin: 0 0 20px 0;
-  letter-spacing: -2px;
-}
-
-.bitcoin-text {
-  color: #007acc;
-}
-
-.hero-subtitle {
-  font-size: 28px;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.9);
-  margin: 0 0 20px 0;
-}
-
-.hero-description {
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.8;
-  max-width: 700px;
-  margin: 0 auto 40px;
-}
-
-.hero-buttons {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.cta-button {
-  padding: 14px 32px;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  border: none;
-}
-
-.cta-button.primary {
-  background: linear-gradient(135deg, #007acc, #0051a2);
-  color: white;
-}
-
-.cta-button.primary:hover {
-  background: linear-gradient(135deg, #0088dd, #0066bb);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 122, 204, 0.4);
-}
-
-.cta-button.secondary {
-  background: transparent;
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.cta-button.secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.5);
-}
-
 /* Container */
 .container {
   max-width: 1200px;
@@ -409,14 +304,6 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .hero-title {
-    font-size: 48px;
-  }
-
-  .hero-subtitle {
-    font-size: 20px;
-  }
-
   .section-title {
     font-size: 36px;
   }

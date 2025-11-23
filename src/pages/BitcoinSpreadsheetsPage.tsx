@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageLayout from '../components/PageLayout';
-import './BitcoinSpreadsheetPage.css';
+import '../styles/app-dark.css';
+import '../styles/mobile.css';
 
 const BitcoinSpreadsheetsPage: React.FC = () => {
   const navigate = useNavigate();

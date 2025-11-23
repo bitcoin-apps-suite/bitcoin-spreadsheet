@@ -294,7 +294,7 @@ function App() {
                     style={{ cursor: 'pointer' }}
                   >
                     <img 
-                      src="/bitcoin-watercolor-icon.png" 
+                      src="/bitcoin-spreadsheets-icon.png" 
                       alt="" 
                       className="bitcoin-icon-beveled"
                       style={{ width: '40px', height: '40px', marginRight: '16px', verticalAlign: 'middle' }}
@@ -378,7 +378,7 @@ function App() {
                   style={{ cursor: 'pointer' }}
                 >
                   <img 
-                    src="/bitcoin-watercolor-icon.png" 
+                    src="/bitcoin-spreadsheets-icon.png" 
                     alt="" 
                     className="bitcoin-icon-beveled"
                     style={{ width: '40px', height: '40px', marginRight: '16px', verticalAlign: 'middle' }}

@@ -402,25 +402,31 @@ const EducationalProposalPage: React.FC = () => {
           </thead>
           <tbody>
             <tr>
-              <td>Phase 1: Platform Development</td>
+              <td>Phase 1: Initial Platform Development</td>
               <td>£75,000</td>
-              <td>Complete educational spreadsheet platform with financial literacy modules and blockchain integration</td>
-              <td>Development team, initial pilot schools</td>
+              <td>Core spreadsheet platform prototype with basic financial literacy modules</td>
+              <td>Development team, proof of concept</td>
             </tr>
             <tr>
-              <td>Phase 2: UK Educational Pilot</td>
+              <td>Phase 2: Platform Completion & Testing</td>
+              <td>£750,000</td>
+              <td>Complete educational spreadsheet platform with blockchain integration and comprehensive testing</td>
+              <td>Development team, beta testing schools</td>
+            </tr>
+            <tr>
+              <td>Phase 3: UK Educational Pilot</td>
               <td>£1,200,000</td>
               <td>Deploy to 150 UK schools and universities with comprehensive financial literacy training</td>
               <td>15,000+ students, 1,500+ educators</td>
             </tr>
             <tr>
-              <td>Phase 3: International Expansion</td>
+              <td>Phase 4: International Expansion</td>
               <td>£3,000,000</td>
               <td>Global deployment with localization and educational partnerships</td>
               <td>150,000+ students worldwide</td>
             </tr>
             <tr>
-              <td>Phase 4: Advanced Features</td>
+              <td>Phase 5: Advanced Features</td>
               <td>£1,500,000</td>
               <td>AI enhancements, advanced financial tools, enterprise curriculum integration</td>
               <td>Enhanced financial literacy outcomes globally</td>
@@ -431,19 +437,29 @@ const EducationalProposalPage: React.FC = () => {
         <h2 className="section-header">IMPLEMENTATION ROADMAP</h2>
 
         <div className="roadmap-phase">
-          <h3>Phase 1: Educational Platform Development (Months 1-8)</h3>
+          <h3>Phase 1: Initial Platform Development (Months 1-3)</h3>
           <ul>
-            <li>Enhance existing Bitcoin Spreadsheets with education-specific features</li>
-            <li>Integrate comprehensive financial literacy curriculum modules</li>
-            <li>Develop teacher dashboard and student progress tracking</li>
-            <li>Create assessment and certification integration capabilities</li>
-            <li>Build micropayment system for educational achievements</li>
-            <li>Implement collaborative project management tools</li>
+            <li>Core spreadsheet platform prototype development</li>
+            <li>Basic financial literacy module integration</li>
+            <li>Proof of concept demonstration</li>
+            <li>Initial user interface design and testing</li>
           </ul>
         </div>
 
         <div className="roadmap-phase">
-          <h3>Phase 2: UK Educational Pilot (Months 9-14)</h3>
+          <h3>Phase 2: Platform Completion & Testing (Months 4-8)</h3>
+          <ul>
+            <li>Complete educational spreadsheet platform with blockchain integration</li>
+            <li>Comprehensive financial literacy curriculum modules</li>
+            <li>Teacher dashboard and student progress tracking</li>
+            <li>Assessment and certification capabilities</li>
+            <li>Micropayment system for educational achievements</li>
+            <li>Beta testing with select pilot schools</li>
+          </ul>
+        </div>
+
+        <div className="roadmap-phase">
+          <h3>Phase 3: UK Educational Pilot (Months 9-14)</h3>
           <ul>
             <li>Partner with 15 pilot schools across different educational levels</li>
             <li>Deploy comprehensive educator training programs</li>

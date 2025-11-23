@@ -106,7 +106,7 @@ const Dock: React.FC<DockProps> = ({ currentApp = 'bitcoin-os' }) => {
     { id: 'bitcoin-calendar', name: 'Bitcoin Calendar', icon: Calendar, color: 'rainbow', url: 'https://bitcoin-calendar.vercel.app', current: currentApp === 'bitcoin-calendar' },
     { id: 'bitcoin-exchange', name: 'Bitcoin Exchange', icon: TrendingUp, color: 'rainbow', url: 'https://bitcoin-exchange-iota.vercel.app', current: currentApp === 'bitcoin-exchange' },
     { id: 'bitcoin-search', name: 'Bitcoin Search', icon: Search, color: 'rainbow', url: 'https://bitcoin-search.vercel.app', current: currentApp === 'bitcoin-search' },
-    { id: 'bitcoin-spreadsheet', name: 'Bitcoin Spreadsheet', icon: Table, color: 'rainbow', url: 'https://bitcoin-spreadsheet.vercel.app', current: currentApp === 'bitcoin-spreadsheet' },
+    { id: 'bitcoin-spreadsheet', name: 'Bitcoin Spreadsheet', icon: Table, color: 'rainbow', url: 'https://www.bitcoin-spreadsheets.website', current: currentApp === 'bitcoin-spreadsheet' },
     { id: 'bitcoin-video', name: 'Bitcoin Video', icon: Video, color: 'rainbow', url: 'https://bitcoin-video-nine.vercel.app', current: currentApp === 'bitcoin-video' },
     { id: 'bitcoin-photos', name: 'Bitcoin Photos', icon: Camera, color: 'rainbow', url: 'https://bitcoin-photos.vercel.app', current: currentApp === 'bitcoin-photos' },
     { id: 'bitcoin-maps', name: 'Bitcoin Maps', icon: MapPin, color: 'rainbow', url: 'https://bitcoin-maps.vercel.app', current: currentApp === 'bitcoin-maps' },

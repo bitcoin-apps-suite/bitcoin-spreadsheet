@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(ellipse at center, rgba(255, 51, 51, 0.1) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(0, 122, 204, 0.1) 0%, transparent 70%);
   position: relative;
   padding: 60px 20px;
 }
@@ -29,7 +29,7 @@
 
 .bitcoin-logo-large {
   font-size: 80px;
-  color: #ff3333;
+  color: #007acc;
   font-weight: bold;
   display: inline-block;
   animation: pulse-glow 3s ease-in-out infinite;
@@ -37,10 +37,10 @@
 
 @keyframes pulse-glow {
   0%, 100% {
-    text-shadow: 0 0 20px rgba(255, 51, 51, 0.5);
+    text-shadow: 0 0 20px rgba(0, 122, 204, 0.5);
   }
   50% {
-    text-shadow: 0 0 40px rgba(255, 51, 51, 0.8);
+    text-shadow: 0 0 40px rgba(0, 122, 204, 0.8);
   }
 }
 
@@ -52,7 +52,7 @@
 }
 
 .bitcoin-text {
-  color: #ff3333;
+  color: #007acc;
 }
 
 .hero-subtitle {
@@ -90,14 +90,14 @@
 }
 
 .cta-button.primary {
-  background: linear-gradient(135deg, #ff3333, #cc0000);
+  background: linear-gradient(135deg, #007acc, #0051a2);
   color: white;
 }
 
 .cta-button.primary:hover {
-  background: linear-gradient(135deg, #ff4444, #dd1111);
+  background: linear-gradient(135deg, #0088dd, #0066bb);
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(255, 51, 51, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 122, 204, 0.4);
 }
 
 .cta-button.secondary {
@@ -121,7 +121,7 @@
 /* Features Section */
 .features-section {
   padding: 100px 20px;
-  background: linear-gradient(180deg, transparent, rgba(255, 51, 51, 0.02));
+  background: linear-gradient(180deg, transparent, rgba(0, 122, 204, 0.02));
 }
 
 .section-title {
@@ -149,7 +149,7 @@
 
 .feature-card:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 51, 51, 0.3);
+  border-color: rgba(0, 122, 204, 0.3);
   transform: translateY(-5px);
 }
 
@@ -174,7 +174,7 @@
 /* Tokenization Section */
 .tokenization-section {
   padding: 100px 20px;
-  background: rgba(255, 51, 51, 0.03);
+  background: rgba(0, 122, 204, 0.03);
 }
 
 .tokenization-content {
@@ -206,7 +206,7 @@
 
 .protocol-name {
   font-weight: 500;
-  color: #ff3333;
+  color: #007acc;
 }
 
 .protocol-desc {
@@ -214,8 +214,8 @@
 }
 
 .token-card {
-  background: linear-gradient(135deg, rgba(255, 51, 51, 0.1), rgba(255, 51, 51, 0.05));
-  border: 2px solid rgba(255, 51, 51, 0.3);
+  background: linear-gradient(135deg, rgba(0, 122, 204, 0.1), rgba(0, 122, 204, 0.05));
+  border: 2px solid rgba(0, 122, 204, 0.3);
   border-radius: 16px;
   padding: 30px;
   max-width: 400px;
@@ -233,7 +233,7 @@
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 2px;
-  color: #ff3333;
+  color: #007acc;
 }
 
 .token-badge {
@@ -292,8 +292,8 @@
 }
 
 .pricing-card.featured {
-  border-color: rgba(255, 51, 51, 0.5);
-  background: rgba(255, 51, 51, 0.05);
+  border-color: rgba(0, 122, 204, 0.5);
+  background: rgba(0, 122, 204, 0.05);
 }
 
 .featured-badge {
@@ -301,7 +301,7 @@
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #ff3333, #cc0000);
+  background: linear-gradient(135deg, #007acc, #0051a2);
   color: white;
   padding: 4px 20px;
   border-radius: 20px;
@@ -323,7 +323,7 @@
 .pricing-value {
   font-size: 36px;
   font-weight: 600;
-  color: #ff3333;
+  color: #007acc;
 }
 
 .pricing-unit {
@@ -342,7 +342,7 @@
 .cta-section {
   padding: 100px 20px;
   text-align: center;
-  background: radial-gradient(ellipse at center, rgba(255, 51, 51, 0.1) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(0, 122, 204, 0.1) 0%, transparent 70%);
 }
 
 .cta-title {
@@ -385,7 +385,7 @@
 
 .footer-logo {
   font-size: 24px;
-  color: #ff3333;
+  color: #007acc;
   font-weight: bold;
 }
 
@@ -407,7 +407,7 @@
 }
 
 .footer-links a:hover {
-  color: #ff3333;
+  color: #007acc;
 }
 
 .footer-copyright {
@@ -466,7 +466,7 @@
 }
 
 .infrastructure-item h3 {
-  color: #ff3333;
+  color: #007acc;
   font-size: 24px;
   margin-bottom: 15px;
 }
@@ -497,7 +497,7 @@
 .table-header {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-  background: #ff3333;
+  background: #007acc;
   color: white;
   font-weight: 600;
   font-size: 14px;
@@ -521,12 +521,12 @@
 }
 
 .table-row:hover {
-  background: rgba(255, 51, 51, 0.1);
+  background: rgba(0, 122, 204, 0.1);
 }
 
 .table-row.featured {
-  background: rgba(255, 51, 51, 0.05);
-  border: 1px solid rgba(255, 51, 51, 0.3);
+  background: rgba(0, 122, 204, 0.05);
+  border: 1px solid rgba(0, 122, 204, 0.3);
 }
 
 .dataset-name {
@@ -590,7 +590,7 @@
 }
 
 .testimonial-author strong {
-  color: #ff3333;
+  color: #007acc;
   display: block;
   margin-bottom: 5px;
 }

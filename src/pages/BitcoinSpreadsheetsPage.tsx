@@ -58,7 +58,7 @@ const BitcoinSpreadsheetsPage: React.FC = () => {
             <span className="bitcoin-text">Bitcoin</span> Spreadsheets
           </h1>
           <p className="hero-description">
-            The world's first fully decentralized spreadsheet platform. Own your data, tokenize your datasets, and earn dividends from every cell.
+            Save spreadsheets on the Bitcoin blockchain as NFTs. Track millions of shareholders in real-time.
           </p>
           <div className="hero-buttons">
             <button 

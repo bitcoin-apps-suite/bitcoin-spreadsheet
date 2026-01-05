@@ -1,0 +1,431 @@
+/* [project]/app/globals.css [app-client] (css) */
+:root {
+  --banner-height: 40px;
+  --taskbar-height: 36px;
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 60px;
+  --bg-dark: #0a0a0a;
+  --bg-card: #121212b3;
+  --border-glow: #007acc66;
+  --bitcoin-orange: #f7931a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg-dark);
+  color: #fff;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, SF Pro Display, Segoe UI, Roboto, sans-serif;
+  overflow: hidden;
+}
+
+.App {
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  position: relative;
+}
+
+.poc-banner {
+  height: var(--banner-height);
+  z-index: 10000;
+  color: #eee;
+  background: linear-gradient(135deg, #1e1e1e, #0a0a0a);
+  border-bottom: 1px solid #ffffff1a;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 13px;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.taskbar-container {
+  top: var(--banner-height);
+  height: var(--taskbar-height);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  z-index: 9999;
+  background: #0a0a0ad9;
+  border-bottom: 1px solid #ffffff14;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  display: flex;
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+.app-with-sidebar {
+  margin-top: calc(var(--banner-height)  + var(--taskbar-height));
+  height: calc(100vh - var(--banner-height)  - var(--taskbar-height));
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.dev-sidebar {
+  top: calc(var(--banner-height)  + var(--taskbar-height));
+  width: var(--sidebar-width);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  z-index: 9990;
+  background: #0f0f0fe6;
+  border-right: 1px solid #ffffff14;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 0;
+  transition: width .3s cubic-bezier(.4, 0, .2, 1);
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+.dev-sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+}
+
+.main-content {
+  margin-left: var(--sidebar-width);
+  background: radial-gradient(circle at 50% 0, #007acc0d 0%, #0000 70%);
+  flex: 1;
+  padding: 20px;
+  transition: margin-left .3s cubic-bezier(.4, 0, .2, 1);
+  overflow-y: auto;
+}
+
+.sidebar-collapsed .main-content {
+  margin-left: var(--sidebar-collapsed-width);
+}
+
+.dev-sidebar-item {
+  color: #888;
+  border-left: 2px solid #0000;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  font-size: 13px;
+  text-decoration: none;
+  transition: all .2s;
+  display: flex;
+}
+
+.dev-sidebar-item:hover {
+  color: #fff;
+  background: #ffffff08;
+}
+
+.dev-sidebar-item.active {
+  color: var(--bitcoin-orange);
+  border-left-color: var(--bitcoin-orange);
+  background: #f7931a0d;
+}
+
+.dev-sidebar-label {
+  flex: 1;
+}
+
+.dev-sidebar-badge {
+  background: var(--bitcoin-orange);
+  color: #000;
+  border-radius: 10px;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.dev-sidebar-divider {
+  background: #ffffff0d;
+  height: 1px;
+  margin: 15px 20px;
+}
+
+.dev-sidebar-stats {
+  background: #0003;
+  margin-top: auto;
+  padding: 20px;
+}
+
+.dev-sidebar-stats h4 {
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: 15px;
+  font-size: 11px;
+}
+
+.dev-stat {
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 12px;
+  display: flex;
+}
+
+.dev-stat-label {
+  color: #666;
+}
+
+.dev-stat-value {
+  color: #aaa;
+  font-family: monospace;
+}
+
+.minimal-dock {
+  pointer-events: none;
+  z-index: 10001;
+  justify-content: center;
+  align-items: flex-end;
+  height: 60px;
+  padding-bottom: 10px;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.minimal-dock-container {
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  pointer-events: auto;
+  background: #0f0f0fcc;
+  border: 1px solid #ffffff14;
+  border-radius: 100px;
+  align-items: center;
+  padding: 6px 16px;
+  transition: all .3s cubic-bezier(.4, 0, .2, 1);
+  display: flex;
+  box-shadow: 0 10px 40px #00000080;
+}
+
+.minimal-dock-apps {
+  border-right: 1px solid #ffffff1a;
+  gap: 8px;
+  padding-right: 15px;
+  display: flex;
+}
+
+.minimal-dock-app {
+  cursor: pointer;
+  background: none;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 6px;
+  transition: transform .2s;
+  display: flex;
+  position: relative;
+}
+
+.minimal-dock-app:hover {
+  transform: translateY(-8px)scale(1.1);
+}
+
+.minimal-dock-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.minimal-dock-icon-image {
+  object-fit: contain;
+  border-radius: 4px;
+  width: 22px;
+  height: 22px;
+}
+
+.minimal-dock-indicator {
+  background: var(--bitcoin-orange);
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.minimal-dock-right-apps {
+  gap: 6px;
+  padding-left: 15px;
+  display: flex;
+}
+
+.minimal-dock-app-mini {
+  cursor: pointer;
+  opacity: .6;
+  background: none;
+  border: none;
+  padding: 4px;
+  transition: opacity .2s;
+}
+
+.minimal-dock-app-mini:hover {
+  opacity: 1;
+}
+
+.minimal-dock-icon-mini {
+  width: 16px;
+  height: 16px;
+}
+
+.minimal-dock-status {
+  color: #888;
+  background: #ffffff08;
+  border-radius: 20px;
+  align-items: center;
+  gap: 15px;
+  margin-left: 20px;
+  padding: 4px 12px;
+  font-size: 11px;
+  display: flex;
+}
+
+.minimal-status-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.minimal-status-icon.connected {
+  color: #4ade80;
+}
+
+.dev-sidebar-toggle-standalone {
+  color: #fff;
+  cursor: pointer;
+  z-index: 100;
+  background: #1e1e1e;
+  border: 1px solid #ffffff1a;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  top: 20px;
+  right: -12px;
+  box-shadow: 0 2px 8px #00000080;
+}
+
+.app-content {
+  gap: 20px;
+  height: 100%;
+  display: flex;
+}
+
+.spreadsheet-wrapper {
+  background: var(--bg-card);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid #ffffff0d;
+  border-radius: 12px;
+  flex: 1;
+  overflow: hidden;
+  box-shadow: 0 8px 32px #0006;
+}
+
+.loading {
+  color: var(--bitcoin-orange);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  background: var(--bg-dark);
+  z-index: 100;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  position: absolute;
+  inset: 0;
+}
+
+.menu-bar {
+  align-items: center;
+  gap: 8px;
+  display: flex;
+}
+
+.bitcoin-suite-btn {
+  color: var(--bitcoin-orange);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0 10px;
+  font-size: 20px;
+}
+
+.menu-btn {
+  color: #ccc;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 13px;
+}
+
+.menu-btn:hover {
+  color: #fff;
+  background: #ffffff1a;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.taskbar-status-container {
+  align-items: center;
+  gap: 12px;
+  display: flex;
+}
+
+.status-indicator-connected {
+  color: #4ade80;
+}
+
+.status-indicator-disconnected {
+  color: #f87171;
+}
+
+@media (max-width: 768px) {
+  .dev-sidebar {
+    display: none;
+  }
+
+  .main-content {
+    padding: 10px;
+    margin-left: 0 !important;
+  }
+}
+
+/*# sourceMappingURL=app_globals_css_bad6b30c._.single.css.map*/

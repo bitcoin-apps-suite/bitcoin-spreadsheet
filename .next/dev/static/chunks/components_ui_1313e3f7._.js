@@ -1,0 +1,65 @@
+(globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push([typeof document === "object" ? document.currentScript : undefined,
+"[project]/components/ui/CleanTaskbar.tsx [app-client] (ecmascript, next/dynamic entry, async loader)", ((__turbopack_context__) => {
+
+__turbopack_context__.v((parentImport) => {
+    return Promise.all([
+  "static/chunks/_cf6eda72._.js",
+  "static/chunks/bb815_next_navigation_c675a34f.js",
+  "static/chunks/components_ui_CleanTaskbar_tsx_95091d68._.js"
+].map((chunk) => __turbopack_context__.l(chunk))).then(() => {
+        return parentImport("[project]/components/ui/CleanTaskbar.tsx [app-client] (ecmascript, next/dynamic entry)");
+    });
+});
+}),
+"[project]/components/ui/DevSidebar.tsx [app-client] (ecmascript, next/dynamic entry, async loader)", ((__turbopack_context__) => {
+
+__turbopack_context__.v((parentImport) => {
+    return Promise.all([
+  "static/chunks/_aa861bc8._.js",
+  "static/chunks/components_ui_DevSidebar_tsx_95091d68._.js"
+].map((chunk) => __turbopack_context__.l(chunk))).then(() => {
+        return parentImport("[project]/components/ui/DevSidebar.tsx [app-client] (ecmascript, next/dynamic entry)");
+    });
+});
+}),
+"[project]/components/ui/DockManager.tsx [app-client] (ecmascript, next/dynamic entry, async loader)", ((__turbopack_context__) => {
+
+__turbopack_context__.v((parentImport) => {
+    return Promise.all([
+  "static/chunks/_4bc52703._.js",
+  "static/chunks/1923a_react-icons_md_index_mjs_a3f562c1._.js",
+  "static/chunks/1923a_react-icons_ri_index_mjs_0327558e._.js",
+  "static/chunks/1923a_react-icons_bs_index_mjs_40248099._.js",
+  "static/chunks/1923a_react-icons_lib_47b732a5._.js",
+  "static/chunks/db9ba_react-feather_dist_icons_3d1c7cf4._.js",
+  "static/chunks/2fec6_phosphor-react_dist_ca39433a._.js",
+  "static/chunks/node_modules__pnpm_c6db6111._.js",
+  "static/chunks/components_ui_DockManager_tsx_95091d68._.js"
+].map((chunk) => __turbopack_context__.l(chunk))).then(() => {
+        return parentImport("[project]/components/ui/DockManager.tsx [app-client] (ecmascript, next/dynamic entry)");
+    });
+});
+}),
+"[project]/components/ui/Footer.tsx [app-client] (ecmascript, next/dynamic entry, async loader)", ((__turbopack_context__) => {
+
+__turbopack_context__.v((parentImport) => {
+    return Promise.all([
+  "static/chunks/components_ui_Footer_tsx_1b9cabda._.js",
+  "static/chunks/components_ui_Footer_tsx_95091d68._.js"
+].map((chunk) => __turbopack_context__.l(chunk))).then(() => {
+        return parentImport("[project]/components/ui/Footer.tsx [app-client] (ecmascript, next/dynamic entry)");
+    });
+});
+}),
+"[project]/components/ui/ProofOfConceptBanner.tsx [app-client] (ecmascript, next/dynamic entry, async loader)", ((__turbopack_context__) => {
+
+__turbopack_context__.v((parentImport) => {
+    return Promise.all([
+  "static/chunks/_73f08f37._.js",
+  "static/chunks/components_ui_ProofOfConceptBanner_tsx_95091d68._.js"
+].map((chunk) => __turbopack_context__.l(chunk))).then(() => {
+        return parentImport("[project]/components/ui/ProofOfConceptBanner.tsx [app-client] (ecmascript, next/dynamic entry)");
+    });
+});
+}),
+]);

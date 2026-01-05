@@ -1,0 +1,20 @@
+  {
+    "manifest_version": 3,
+    "name": "Bitcoin Spreadsheets",
+    "version": "1.0",
+    "theme": {
+      "colors": {
+        "frame": [25, 118, 210],
+        "frame_inactive": [13, 71, 161],
+        "frame_incognito": [100, 181, 246],
+        "frame_incognito_inactive": [13, 71, 161],
+        "toolbar": [10, 25, 41],
+        "tab_background_text": [100, 181, 246],
+        "tab_selected": [13, 71, 161],
+        "tab_text": [255, 255, 255],
+        "bookmark_text": [100, 181, 246],
+        "ntp_background": [0, 0, 0],
+        "ntp_text": [25, 118, 210]
+      }
+    }
+  }

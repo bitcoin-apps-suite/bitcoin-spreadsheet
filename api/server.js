@@ -12,8 +12,24 @@ const APP_SECRET = process.env.HANDCASH_APP_SECRET || process.env.REACT_APP_HAND
 const CLIENT_URL = process.env.CLIENT_URL || 'https://bitcoin-spreadsheet.vercel.app';
 
 // Middleware
+const allowedOrigins = [
+  'http://localhost:3000',      // Local development
+  'http://localhost:3001',      // Local API
+  'https://bitcoin-spreadsheet.vercel.app', // Production
+  process.env.CLIENT_URL        // Custom URL from env
+].filter(Boolean);
+
 app.use(cors({
-  origin: '*', // Allow all origins for development
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or Postman)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS not allowed'));
+    }
+  },
   credentials: true
 }));
 app.use(express.json());
@@ -21,9 +37,9 @@ app.use(express.json());
 // Initialize HandCash Connect
 let handCashConnect;
 if (APP_SECRET) {
-  handCashConnect = new HandCashConnect({ 
+  handCashConnect = new HandCashConnect({
     appId: APP_ID,
-    appSecret: APP_SECRET 
+    appSecret: APP_SECRET
   });
 }
 
@@ -42,7 +58,7 @@ app.get('/api/auth/handcash/url', (req, res) => {
 app.get('/api/auth/handcash/callback', async (req, res) => {
   try {
     const { authToken } = req.query;
-    
+
     if (!authToken) {
       return res.status(400).json({ error: 'No authToken provided' });
     }
@@ -55,10 +71,10 @@ app.get('/api/auth/handcash/callback', async (req, res) => {
 
     // Get account from authToken
     const account = await handCashConnect.getAccountFromAuthToken(authToken);
-    
+
     // Get user profile
     const profile = await account.profile.getCurrentProfile();
-    
+
     // Create a session token or JWT here
     // For now, we'll just pass the data back to the client
     const userData = {
@@ -68,11 +84,11 @@ app.get('/api/auth/handcash/callback', async (req, res) => {
       avatarUrl: profile.avatarUrl,
       authToken: authToken
     };
-    
+
     // Redirect back to client with user data
     const encodedData = Buffer.from(JSON.stringify(userData)).toString('base64');
     res.redirect(`${CLIENT_URL}?userData=${encodedData}`);
-    
+
   } catch (error) {
     console.error('Callback error:', error);
     res.redirect(`${CLIENT_URL}?error=authentication_failed`);
@@ -82,7 +98,7 @@ app.get('/api/auth/handcash/callback', async (req, res) => {
 app.get('/api/auth/handcash/profile', async (req, res) => {
   try {
     const authToken = req.headers.authorization?.replace('Bearer ', '');
-    
+
     if (!authToken) {
       return res.status(401).json({ error: 'No auth token provided' });
     }
@@ -99,14 +115,14 @@ app.get('/api/auth/handcash/profile', async (req, res) => {
 
     const account = await handCashConnect.getAccountFromAuthToken(authToken);
     const profile = await account.profile.getCurrentProfile();
-    
+
     res.json({
       handle: profile.handle,
       paymail: profile.paymail,
       displayName: profile.displayName,
       avatarUrl: profile.avatarUrl
     });
-    
+
   } catch (error) {
     console.error('Profile error:', error);
     res.status(500).json({ error: 'Failed to get profile' });
@@ -117,12 +133,12 @@ app.get('/api/auth/handcash/profile', async (req, res) => {
 app.post('/api/handcash-profile', async (req, res) => {
   try {
     const { authToken } = req.body;
-    
+
     console.log('=== Profile Request ===');
     console.log('Auth token received:', authToken ? authToken.substring(0, 20) + '...' : 'NONE');
     console.log('Has APP_SECRET:', !!APP_SECRET);
     console.log('APP_ID:', APP_ID);
-    
+
     if (!authToken) {
       return res.status(401).json({ error: 'No auth token provided' });
     }
@@ -144,11 +160,11 @@ app.post('/api/handcash-profile', async (req, res) => {
     const account = handCashConnect.getAccountFromAuthToken(authToken);
     console.log('Fetching profile...');
     const profile = await account.profile.getCurrentProfile();
-    
+
     console.log('Profile fetched successfully!');
     console.log('Public handle:', profile.publicProfile?.handle);
     console.log('Private handle:', profile.privateProfile?.handle);
-    
+
     res.json({
       success: true,
       profile: {
@@ -161,23 +177,27 @@ app.post('/api/handcash-profile', async (req, res) => {
         phoneNumber: profile.privateProfile?.phoneNumber
       }
     });
-    
+
   } catch (error) {
     console.error('Profile error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       error: 'Failed to get profile',
-      details: error.message 
+      details: error.message
     });
   }
 });
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ 
+  res.json({
     status: 'ok',
     appId: APP_ID,
     hasSecret: !!APP_SECRET
   });
+});
+
+app.listen(PORT, () => {
+  console.log(`API Server running on port ${PORT}`);
 });
 
 module.exports = app;

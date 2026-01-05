@@ -1,0 +1,472 @@
+/* [project]/styles/mobile.css [app-client] (css) */
+@media screen and (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  html {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
+  }
+
+  .App {
+    flex-direction: column;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+  }
+
+  .App-header {
+    z-index: 100;
+    border-bottom: 1px solid #ffffff1a;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding: 0;
+    display: flex;
+    position: relative;
+  }
+
+  .mobile-header-title {
+    background: #000;
+    border-bottom: 1px solid #ffffff0d;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 16px;
+    display: flex;
+  }
+
+  .App-header h1 {
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 300;
+    display: flex;
+  }
+
+  .App-header h1 .bitcoin-icon-beveled {
+    width: 24px !important;
+    height: 24px !important;
+    margin-right: 8px !important;
+  }
+
+  .app-subtitle {
+    display: none;
+  }
+
+  .mobile-header-connections {
+    background: #0a0e2780;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 44px;
+    padding: 8px 16px;
+    display: flex;
+  }
+
+  .connection-badge {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: none;
+    border-radius: 0;
+    flex: 1;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    display: flex;
+    position: static;
+    transform: none;
+  }
+
+  .connect-badge-btn {
+    background: #4285f4;
+    border-radius: 16px;
+    min-width: auto;
+    padding: 6px 16px;
+    font-size: 12px;
+  }
+
+  .connected-avatars {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .service-avatar {
+    width: 24px;
+    height: 24px;
+  }
+
+  .connection-count {
+    color: #ffffffb3;
+    font-size: 12px;
+  }
+
+  .desktop-user-info {
+    display: none !important;
+  }
+
+  .mobile-user-section {
+    align-items: center;
+    gap: 8px;
+    display: flex;
+  }
+
+  .handcash-user-badge {
+    background: #ffffff0d;
+    border-radius: 16px;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    display: flex;
+  }
+
+  .handcash-user-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .user-handle {
+    color: #87ceeb;
+    font-size: 12px;
+  }
+
+  .connection-dot {
+    background: #4caf50;
+    border-radius: 50%;
+    width: 6px;
+    height: 6px;
+  }
+
+  .mobile-header-actions {
+    align-items: center;
+    gap: 8px;
+    display: flex;
+  }
+
+  .mobile-connections-btn, .mobile-logout-btn {
+    color: #fffc;
+    cursor: pointer;
+    background: #ffffff1a;
+    border: none;
+    border-radius: 16px;
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  .mobile-connections-btn {
+    color: #4285f4;
+    background: #4285f433;
+  }
+
+  .mobile-logout-btn {
+    color: #fff9;
+    background: #ff00001a;
+  }
+
+  .spreadsheet-main-container {
+    flex-direction: column;
+    flex: 1;
+    height: calc(100vh - 60px);
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spreadsheet-sidebar {
+    display: none !important;
+  }
+
+  .spreadsheet-toolbar {
+    -webkit-overflow-scrolling: touch;
+    background: #0a0e27;
+    border-bottom: 1px solid #ffffff1a;
+    flex-shrink: 0;
+    gap: 8px;
+    padding: 8px;
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .spreadsheet-toolbar button {
+    white-space: nowrap;
+    min-width: fit-content;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .spreadsheet-container {
+    flex-direction: column;
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spreadsheet-grid {
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+    position: relative;
+    overflow: auto !important;
+  }
+
+  .spreadsheet-grid table {
+    table-layout: auto;
+    min-width: 100%;
+  }
+
+  .spreadsheet-grid th, .spreadsheet-grid td {
+    min-width: 60px;
+    max-width: 120px;
+    height: 36px;
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+
+  .spreadsheet-grid th:first-child, .spreadsheet-grid td:first-child {
+    z-index: 10;
+    background: #0a0e27;
+    min-width: 40px;
+    max-width: 40px;
+    position: sticky;
+    left: 0;
+  }
+
+  .spreadsheet-grid thead th {
+    z-index: 11;
+    background: #0a0e27;
+    position: sticky;
+    top: 0;
+  }
+
+  .spreadsheet-grid thead th:first-child {
+    z-index: 12;
+  }
+
+  .cell-input {
+    padding: 4px;
+    font-size: 14px;
+  }
+
+  .formula-bar {
+    background: #0a0e27;
+    border-top: 1px solid #ffffff1a;
+    flex-shrink: 0;
+    padding: 8px;
+  }
+
+  .formula-bar input {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .spreadsheet-taskbar {
+    -webkit-overflow-scrolling: touch;
+    z-index: 99;
+    background: #0a0e27;
+    border-top: 1px solid #ffffff1a;
+    border-bottom: none;
+    flex-direction: row;
+    height: auto;
+    padding: 0;
+    position: fixed;
+    inset: auto 0 0;
+    overflow: auto hidden;
+  }
+
+  .taskbar-menu {
+    flex-direction: row;
+    gap: 4px;
+    width: 100%;
+    padding: 8px 4px;
+    display: flex;
+  }
+
+  .menu-item {
+    white-space: nowrap;
+    background: #ffffff0d;
+    border-radius: 6px;
+    min-width: fit-content;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .menu-item:hover {
+    background: #f7931a1a;
+  }
+
+  .menu-dropdown {
+    border-radius: 8px 8px 0 0;
+    min-width: 200px;
+    max-height: 60vh;
+    position: fixed;
+    bottom: 56px;
+    left: auto;
+    right: auto;
+    overflow-y: auto;
+  }
+
+  .bitcoin-suite-menu, .taskbar-clock {
+    display: none;
+  }
+
+  .exchange-container {
+    padding: 16px;
+  }
+
+  .exchange-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .modal-overlay {
+    padding: 16px;
+  }
+
+  .modal-content {
+    border-radius: 12px;
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100vh - 32px);
+    margin: 0;
+  }
+
+  .claude-chat-container {
+    border-radius: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    position: fixed;
+    inset: 0;
+  }
+
+  .claude-chat-header {
+    padding: 12px 16px;
+  }
+
+  .claude-chat-input-container {
+    padding: 12px;
+  }
+
+  .three-d-container {
+    height: calc(100vh - 60px);
+  }
+
+  button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block !important;
+  }
+
+  .mobile-fab {
+    color: #fff;
+    z-index: 999;
+    cursor: pointer;
+    background: linear-gradient(135deg, #87ceeb, #4682b4);
+    border: none;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+    display: flex;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    box-shadow: 0 4px 12px #f7931a66;
+  }
+
+  .install-prompt {
+    width: calc(100% - 32px);
+    max-width: none;
+    bottom: 100px;
+  }
+
+  .mobile-nav {
+    z-index: 100;
+    background: #0a0e27;
+    border-top: 1px solid #ffffff1a;
+    justify-content: space-around;
+    padding: 8px 0;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .mobile-nav button {
+    color: #ffffffb3;
+    background: none;
+    border: none;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    gap: 4px;
+    padding: 8px;
+    font-size: 12px;
+    display: flex;
+  }
+
+  .mobile-nav button.active {
+    color: #87ceeb;
+  }
+
+  .mobile-nav button svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .App-header {
+    padding: 16px 24px;
+  }
+
+  .spreadsheet-sidebar {
+    width: 200px;
+  }
+
+  .spreadsheet-grid th, .spreadsheet-grid td {
+    min-width: 80px;
+    padding: 10px 8px;
+  }
+}
+
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .App-header {
+    padding: 8px 16px;
+  }
+
+  .App-header h1 {
+    font-size: 1rem;
+  }
+
+  .spreadsheet-grid th, .spreadsheet-grid td {
+    height: 32px;
+    padding: 6px 4px;
+  }
+
+  .mobile-nav {
+    padding: 4px 0;
+  }
+}
+
+/*# sourceMappingURL=styles_mobile_css_bad6b30c._.single.css.map*/

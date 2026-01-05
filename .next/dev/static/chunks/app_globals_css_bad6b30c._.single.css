@@ -383,6 +383,117 @@ body {
   background: #ffffff1a;
 }
 
+.menu-btn.active {
+  color: #fff;
+  background: #ffffff26;
+}
+
+.menu-dropdown {
+  z-index: 10000;
+  background: #141414f2;
+  border: 1px solid #ffffff1a;
+  border-radius: 6px;
+  flex-direction: column;
+  min-width: 200px;
+  display: flex;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  overflow: hidden;
+  box-shadow: 0 10px 25px #00000080;
+}
+
+.menu-item {
+  color: #ccc;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 13px;
+  transition: all .2s;
+  display: flex;
+}
+
+.menu-item:hover {
+  color: var(--bitcoin-orange);
+  background: #f7931a1a;
+}
+
+.menu-item-divider {
+  background: #ffffff14;
+  height: 1px;
+  margin: 4px 0;
+}
+
+.taskbar-status-links {
+  align-items: center;
+  gap: 12px;
+  display: flex;
+}
+
+.taskbar-status-link {
+  color: #888;
+  opacity: .8;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  transition: all .2s;
+  display: flex;
+}
+
+.taskbar-status-link:hover {
+  color: #fff;
+  opacity: 1;
+}
+
+.taskbar-separator {
+  background: #ffffff1a;
+  width: 1px;
+  height: 20px;
+}
+
+.bitcoin-suite-dropdown {
+  z-index: 10000;
+  background: #141414f2;
+  border: 1px solid #ffffff1a;
+  border-radius: 6px;
+  flex-direction: column;
+  min-width: 220px;
+  padding: 8px 0;
+  display: flex;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  box-shadow: 0 10px 25px #00000080;
+}
+
+.bitcoin-app-store-link {
+  color: #ccc;
+  cursor: pointer;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  font-size: 13px;
+  text-decoration: none;
+  transition: all .2s;
+  display: flex;
+}
+
+.bitcoin-app-store-link:hover {
+  color: var(--bitcoin-orange);
+  background: #f7931a1a;
+}
+
+.taskbar-mobile, .taskbar-mobile-btn, .taskbar-mobile-menu-container, .taskbar-mobile-menu-inner, .taskbar-mobile-menu-items, .taskbar-mobile-menu-item, .taskbar-mobile-menu-title {
+  display: none;
+}
+
 .flex {
   display: flex;
 }

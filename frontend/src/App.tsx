@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom';
 import './App.css';
 import './styles/app-dark.css';
 import './styles/mobile.css';
@@ -55,6 +55,30 @@ function App() {
     return savedMode !== 'false'; // Default to true unless explicitly set to false
   });
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Pages that have their own headers and shouldn't show the main app header
+  const pagesWithOwnHeaders = [
+    '/bitcoin-spreadsheets',
+    '/marketing',
+    '/educational-proposal',
+    '/bap',
+    '/developers',
+    '/docs',
+    '/jobs',
+    '/3d',
+    '/token',
+    '/contributions',
+    '/tasks',
+    '/contracts',
+    '/save',
+    '/mint',
+    '/market',
+    '/exchange',
+    '/react-on-chain-bugs'
+  ];
+
+  const shouldShowMainHeader = !pagesWithOwnHeaders.includes(location.pathname);
 
   // Toggle dark mode
   const toggleDarkMode = () => {
@@ -226,7 +250,7 @@ function App() {
       <Route path="/exchange" element={<ExchangePage />} />
       <Route path="/react-on-chain-bugs" element={<ReactOnChainBugsPage />} />
       <Route path="/auth/handcash/callback" element={<HandCashCallback />} />
-      <Route path="/*" element={
+      <Route path="/" element={
         isLoading ? (
           <div className="App">
             <div className="loading">Loading Bitcoin Jobs...</div>
@@ -260,6 +284,7 @@ function App() {
               toggleDarkMode={toggleDarkMode}
               isDarkMode={isDarkMode}
             />
+            {shouldShowMainHeader && (
             <header className="App-header">
               {/* Mobile header layout - only on mobile */}
               <div className="mobile-header-wrapper">
@@ -269,8 +294,8 @@ function App() {
                     style={{ cursor: 'pointer' }}
                   >
                     <img 
-                      src="/bitcoin-watercolor-icon.png" 
-                      alt="Bitcoin" 
+                      src="/bitcoin-spreadsheets-icon.png" 
+                      alt="" 
                       className="bitcoin-icon-beveled"
                       style={{ width: '40px', height: '40px', marginRight: '16px', verticalAlign: 'middle' }}
                     />
@@ -353,8 +378,8 @@ function App() {
                   style={{ cursor: 'pointer' }}
                 >
                   <img 
-                    src="/bitcoin-watercolor-icon.png" 
-                    alt="Bitcoin" 
+                    src="/bitcoin-spreadsheets-icon.png" 
+                    alt="" 
                     className="bitcoin-icon-beveled"
                     style={{ width: '40px', height: '40px', marginRight: '16px', verticalAlign: 'middle' }}
                   />
@@ -524,6 +549,7 @@ function App() {
                 )}
               </div>
             </header>
+            )}
             <main className="main-container">
               {bitcoinService ? (
                 showExchange ? (
@@ -635,11 +661,30 @@ function App() {
           </div>
         )
       } />
+      <Route path="*" element={
+        <div className="App">
+          <header className="App-header">
+            <h1>404 - Page Not Found</h1>
+            <p>The page you're looking for doesn't exist.</p>
+            <button onClick={() => navigate('/')} style={{
+              padding: '10px 20px',
+              margin: '20px',
+              backgroundColor: '#f7931a',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}>
+              Go Home
+            </button>
+          </header>
+        </div>
+      } />
     </Routes>
       <Footer />
       
       {/* Bitcoin OS Dock - Global on all pages */}
-      <DockManager currentApp="bitcoin-spreadsheet" />
+      <DockManager currentApp="bitcoin-spreadsheets" />
       </div>
     </>
   );

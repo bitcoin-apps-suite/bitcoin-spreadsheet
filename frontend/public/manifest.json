@@ -4,7 +4,7 @@
   "description": "A decentralized spreadsheet application on Bitcoin",
   "icons": [
     {
-      "src": "bitcoin-watercolor-icon.png",
+      "src": "bitcoin-spreadsheets-icon.png",
       "type": "image/png",
       "sizes": "512x512"
     },

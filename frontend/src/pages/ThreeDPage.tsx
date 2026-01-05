@@ -185,7 +185,7 @@ const ThreeDPage: React.FC = () => {
         <div className="connection-indicator" />
         <h1>
           <img 
-            src="/bitcoin-watercolor-icon.png" 
+            src="/bitcoin-spreadsheets-icon.png" 
             alt="Bitcoin" 
             className="bitcoin-icon-beveled"
             style={{ width: '40px', height: '40px', marginRight: '16px', verticalAlign: 'middle' }}

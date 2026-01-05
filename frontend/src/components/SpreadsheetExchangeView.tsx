@@ -295,7 +295,7 @@ const SpreadsheetExchangeView: React.FC<SpreadsheetExchangeViewProps> = ({
                 alignItems: 'center'
               }}>
                 <img 
-                  src="/bitcoin-watercolor-icon.png" 
+                  src="/bitcoin-spreadsheets-icon.png" 
                   alt="Bitcoin" 
                   className="bitcoin-icon-beveled"
                   style={{ width: '32px', height: '32px', marginRight: '12px' }}

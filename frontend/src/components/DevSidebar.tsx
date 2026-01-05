@@ -36,11 +36,11 @@ const DevSidebar: React.FC = () => {
     divider?: boolean;
     external?: boolean;
   }> = [
+    { path: '/token', icon: DollarSign, label: '$bSheets', badge: 'NEW' },
     { path: '/contracts', icon: FileText, label: 'Contracts', badge: '8' },
     { path: '/tasks', icon: Terminal, label: 'Tasks', badge: '25+' },
     { path: '/contributions', icon: Users, label: 'Contributors', badge: '1' },
     { path: '/docs', icon: BookOpen, label: 'Documentation' },
-    { path: '/token', icon: DollarSign, label: '$bSheets', badge: 'NEW' },
     { divider: true },
     { path: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet', icon: GitBranch, label: 'GitHub', external: true },
     { path: 'https://github.com/bitcoin-apps-suite/bitcoin-spreadsheet/issues', icon: Bug, label: 'Issues', external: true, badge: '12' },
@@ -59,7 +59,13 @@ const DevSidebar: React.FC = () => {
   };
 
   return (
-    <div className={`dev-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+    <div 
+      className={`dev-sidebar ${isCollapsed ? 'collapsed' : ''}`}
+      style={{
+        // Ensure no white background at top
+        background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+      }}
+    >
       <button 
         className="dev-sidebar-toggle-standalone"
         onClick={() => setIsCollapsed(!isCollapsed)}

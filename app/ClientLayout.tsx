@@ -27,14 +27,12 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     return (
         <div className={`App ${sidebarCollapsed ? 'sidebar-collapsed' : 'sidebar-expanded'}`}>
             <ProofOfConceptBanner />
-            <div className="taskbar-container">
-                <CleanTaskbar
-                    tickerCollapsed={true}
-                    isAuthenticated={isAuthenticated}
-                    currentUser={currentUser}
-                    onLogout={logout}
-                />
-            </div>
+            <CleanTaskbar
+                tickerCollapsed={true}
+                isAuthenticated={isAuthenticated}
+                currentUser={currentUser}
+                onLogout={logout}
+            />
             <div className="app-with-sidebar">
                 <DevSidebar onCollapsedChange={setSidebarCollapsed} />
                 <main className="main-content">

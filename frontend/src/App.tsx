@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom';
 import './App.css';
 import './styles/app-dark.css';
@@ -35,6 +35,9 @@ import Footer from './components/Footer';
 import DockManager from './components/DockManager';
 import { BitcoinService, SpreadsheetData } from './services/BitcoinService';
 import { HandCashService, HandCashUser } from './services/HandCashService';
+import { useCompactShell, isInWallet } from './mobile/shell';
+import { hasCWI, signInWithCWI, getStoredCWIUser } from './mobile/cwi';
+import MobileApp from './mobile/MobileApp';
 
 function App() {
   const [bitcoinService, setBitcoinService] = useState<BitcoinService | null>(null);
@@ -54,6 +57,7 @@ function App() {
     const savedMode = localStorage.getItem('darkMode');
     return savedMode !== 'false'; // Default to true unless explicitly set to false
   });
+  const hideShellChrome = useCompactShell(); // mobile width or inside bWallet
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -183,7 +187,12 @@ function App() {
 
   const checkAuthentication = () => {
     // Check if user is already logged in
-    if (handcashService.isAuthenticated()) {
+    const cwiUser = getStoredCWIUser();
+    if (cwiUser) {
+      setCurrentUser(cwiUser);
+      setIsAuthenticated(true);
+      initializeBitcoinService();
+    } else if (handcashService.isAuthenticated()) {
       const user = handcashService.getCurrentUser();
       setCurrentUser(user);
       setIsAuthenticated(true);
@@ -207,6 +216,31 @@ function App() {
     initializeBitcoinService();
   };
 
+  // Stable callback for the mobile app's silent bWallet sign-in.
+  const handleMobileLogin = useCallback((user: HandCashUser) => {
+    setCurrentUser(user);
+    setIsAuthenticated(true);
+  }, []);
+
+  // Mobile / bWallet: the phone app owns the whole screen on "/".
+  const mobileHome = hideShellChrome && location.pathname === '/';
+  useEffect(() => {
+    document.documentElement.classList.toggle('bw-mobile-app', mobileHome);
+  }, [mobileHome]);
+
+  // Prefer BRC-100 (window.CWI) inside bWallet; otherwise open the connections modal.
+  const handleConnect = async () => {
+    if (hasCWI()) {
+      try {
+        handleLogin(await signInWithCWI());
+        return;
+      } catch (err) {
+        console.warn('bWallet sign-in failed, falling back', err);
+      }
+    }
+    setShowConnectionsModal(true);
+  };
+
   const handleLogout = () => {
     // Clear EVERYTHING
     localStorage.clear();
@@ -228,8 +262,8 @@ function App() {
 
   return (
     <>
-      <ProofOfConceptBanner />
-      <DevSidebar />
+      {!hideShellChrome && <ProofOfConceptBanner />}
+      {!hideShellChrome && <DevSidebar />}
       <div className="app-with-sidebar">
       <Routes>
       <Route path="/bap" element={<BapsPage />} />
@@ -251,12 +285,19 @@ function App() {
       <Route path="/react-on-chain-bugs" element={<ReactOnChainBugsPage />} />
       <Route path="/auth/handcash/callback" element={<HandCashCallback />} />
       <Route path="/" element={
-        isLoading ? (
+        mobileHome ? (
+          <MobileApp
+            appName="bSheets"
+            user={currentUser}
+            onLogin={handleMobileLogin}
+            onRequestLogin={() => new HandCashService().login()}
+          />
+        ) : isLoading ? (
           <div className="App">
             <div className="loading">Loading Bitcoin Jobs...</div>
           </div>
         ) : (
-          <div className="App" style={{ paddingTop: isMobile ? '0' : '68px' }}> {/* 40px banner + 28px taskbar */}
+          <div className="App" style={{ paddingTop: isMobile ? '0' : hideShellChrome ? '28px' : '68px' }}> {/* 40px banner + 28px taskbar */}
             {/* Bitcoin Jobs Taskbar */}
             <SpreadsheetTaskbar
               isAuthenticated={isAuthenticated}
@@ -303,10 +344,10 @@ function App() {
                   </h1>
                 </div>
                 <div className="mobile-header-connections">
-                  <div className="connection-badge" onClick={() => setShowConnectionsModal(true)}>
+                  <div className="connection-badge" onClick={handleConnect}>
                     {connectedServices.length === 0 ? (
                       <button className="connect-badge-btn">
-                        Connect
+                        {isInWallet() && hasCWI() ? 'Sign in' : 'Connect'}
                       </button>
                     ) : (
                       <>
@@ -681,10 +722,10 @@ function App() {
         </div>
       } />
     </Routes>
-      <Footer />
+      {!hideShellChrome && <Footer />}
       
       {/* Bitcoin OS Dock - Global on all pages */}
-      <DockManager currentApp="bitcoin-spreadsheets" />
+      {!hideShellChrome && <DockManager currentApp="bitcoin-spreadsheets" />}
       </div>
     </>
   );

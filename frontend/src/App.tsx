@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom';
 import './App.css';
 import './styles/app-dark.css';
@@ -37,6 +37,7 @@ import { BitcoinService, SpreadsheetData } from './services/BitcoinService';
 import { HandCashService, HandCashUser } from './services/HandCashService';
 import { useCompactShell, isInWallet } from './mobile/shell';
 import { hasCWI, signInWithCWI, getStoredCWIUser } from './mobile/cwi';
+import MobileApp from './mobile/MobileApp';
 
 function App() {
   const [bitcoinService, setBitcoinService] = useState<BitcoinService | null>(null);
@@ -215,6 +216,18 @@ function App() {
     initializeBitcoinService();
   };
 
+  // Stable callback for the mobile app's silent bWallet sign-in.
+  const handleMobileLogin = useCallback((user: HandCashUser) => {
+    setCurrentUser(user);
+    setIsAuthenticated(true);
+  }, []);
+
+  // Mobile / bWallet: the phone app owns the whole screen on "/".
+  const mobileHome = hideShellChrome && location.pathname === '/';
+  useEffect(() => {
+    document.documentElement.classList.toggle('bw-mobile-app', mobileHome);
+  }, [mobileHome]);
+
   // Prefer BRC-100 (window.CWI) inside bWallet; otherwise open the connections modal.
   const handleConnect = async () => {
     if (hasCWI()) {
@@ -272,7 +285,14 @@ function App() {
       <Route path="/react-on-chain-bugs" element={<ReactOnChainBugsPage />} />
       <Route path="/auth/handcash/callback" element={<HandCashCallback />} />
       <Route path="/" element={
-        isLoading ? (
+        mobileHome ? (
+          <MobileApp
+            appName="bSheets"
+            user={currentUser}
+            onLogin={handleMobileLogin}
+            onRequestLogin={() => new HandCashService().login()}
+          />
+        ) : isLoading ? (
           <div className="App">
             <div className="loading">Loading Bitcoin Jobs...</div>
           </div>
@@ -702,7 +722,7 @@ function App() {
         </div>
       } />
     </Routes>
-      <Footer />
+      {!hideShellChrome && <Footer />}
       
       {/* Bitcoin OS Dock - Global on all pages */}
       {!hideShellChrome && <DockManager currentApp="bitcoin-spreadsheets" />}

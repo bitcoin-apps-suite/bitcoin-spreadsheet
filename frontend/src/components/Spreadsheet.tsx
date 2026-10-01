@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { BitcoinService, SpreadsheetData, CellData } from '../services/BitcoinService';
-import Cell from './Cell';
+import React, { useState, useEffect, useCallback } from 'react';
+import { BitcoinService, SpreadsheetData } from '../services/BitcoinService';
 import Toolbar from './Toolbar';
 import StorageOptionsModal from './StorageOptionsModal';
 import TokenizationModal from './TokenizationModal';
@@ -25,6 +24,8 @@ interface SpreadsheetProps {
   onNewSpreadsheet?: () => void;
 }
 
+const getCellKey = (row: number, col: number): string => `${row}-${col}`;
+
 const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: propSpreadsheet, onSpreadsheetUpdate, isAuthenticated = false, isSidebarOpen, onToggleSidebar, onLogin, onNewSpreadsheet }) => {
   const [spreadsheet, setSpreadsheet] = useState<SpreadsheetData | null>(propSpreadsheet || null);
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null);
@@ -39,7 +40,6 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
   const [useCellAddresses, setUseCellAddresses] = useState(false);
   const [is3DView, setIs3DView] = useState(false);
   const [showExchangeView, setShowExchangeView] = useState(false); // Show spreadsheet by default
-  const gridRef = useRef<HTMLDivElement>(null);
 
   // Handle per-cell address toggle
   const handleToggleCellAddresses = (enabled: boolean) => {
@@ -100,10 +100,6 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
     };
   }, []);
 
-  const getCellKey = (row: number, col: number): string => {
-    return `${row}-${col}`;
-  };
-
   const getColumnLabel = (col: number): string => {
     // Support for A-Z columns
     if (col < 26) {
@@ -114,16 +110,6 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
     const secondLetter = String.fromCharCode(65 + (col % 26));
     return firstLetter + secondLetter;
   };
-
-  const handleCellClick = useCallback((row: number, col: number) => {
-    setSelectedCell({ row, col });
-    setIsEditing(false);
-  }, []);
-
-  const handleCellDoubleClick = useCallback((row: number, col: number) => {
-    setSelectedCell({ row, col });
-    setIsEditing(true);
-  }, []);
 
   const handleCellValueChange = useCallback(async (row: number, col: number, value: string) => {
     if (!spreadsheet) return;
@@ -161,9 +147,9 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
     } catch (error) {
       console.error('Failed to update cell:', error);
     }
-  }, [spreadsheet]);
+  }, [spreadsheet, onSpreadsheetUpdate]);
 
-  const getCellValue = (row: number, col: number): string => {
+  const getCellValue = useCallback((row: number, col: number): string => {
     if (!spreadsheet) return '';
 
     const cellKey = getCellKey(row, col);
@@ -178,7 +164,7 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
     }
 
     return cell.value;
-  };
+  }, [spreadsheet]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -253,7 +239,7 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedCell, isEditing, copiedCell, handleCellValueChange]);
+  }, [selectedCell, isEditing, copiedCell, handleCellValueChange, getCellValue]);
 
   // Calculate cost for saving to blockchain
   const calculateSaveCost = (): { cells: number; satoshis: number; usd: string } => {
@@ -332,7 +318,7 @@ const Spreadsheet: React.FC<SpreadsheetProps> = ({ bitcoinService, spreadsheet: 
       });
 
       // Mark all cells as saved
-      for (const [key, cell] of Object.entries(spreadsheet.cells)) {
+      for (const cell of Object.values(spreadsheet.cells)) {
         if (cell.value.trim() !== '') {
           await bitcoinService.updateCell(
             spreadsheet.id,

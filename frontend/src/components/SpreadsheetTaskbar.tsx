@@ -317,20 +317,6 @@ const SpreadsheetTaskbar: React.FC<TaskbarProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const openBitcoinApp = (appName: string) => {
-    // Handle opening other Bitcoin apps
-    switch(appName) {
-      case 'writer':
-        window.open('https://bitcoin-writer.vercel.app', '_blank');
-        break;
-      case 'drive':
-        window.open('https://bitcoin-drive.vercel.app', '_blank');
-        break;
-      default:
-        console.log(`Opening ${appName}`);
-    }
-  };
-
   // Mobile taskbar
   if (isMobile) {
     return (

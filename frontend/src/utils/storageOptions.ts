@@ -81,7 +81,6 @@ export const SPREADSHEET_STORAGE_OPTIONS: StorageOption[] = [
 const SATOSHIS_PER_BITCOIN = 100_000_000;
 const SERVICE_MULTIPLIER = 2; // We charge 2x the base cost
 const CENTS_PER_CELL = 0.0000001; // 1/1,000,000th of a penny per cell = $0.0000001
-const BYTES_PER_CELL = 50; // Rough estimate for spreadsheet cell data
 
 // Get current Bitcoin price (mock - in production, fetch from API)
 export const getBitcoinPriceUSD = async (): Promise<number> => {

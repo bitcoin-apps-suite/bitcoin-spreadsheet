@@ -190,7 +190,7 @@ const AdvancedSpreadsheet: React.FC<AdvancedSpreadsheetProps> = ({
     
     // Process cell changes
     Object.entries(detail.models).forEach(([key, model]: [string, any]) => {
-      const [_, rowIndex] = key.split('.');
+      const [, rowIndex] = key.split('.');
       Object.entries(model).forEach(([colProp, value]) => {
         const columnIndex = colProp.charCodeAt(0) - 65; // Convert A-Z to 0-25
         changes.push({

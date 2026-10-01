@@ -1,22 +1,20 @@
 // Complete Icon Mappings for All Icon Libraries
 
 // Lucide Icons (existing)
-import { 
-  Wallet as LucideWallet, 
-  Mail as LucideMail, 
-  Music as LucideMusic, 
-  FileText as LucideFileText, 
-  HardDrive as LucideHardDrive, 
-  Globe as LucideGlobe, 
-  Terminal as LucideTerminal, 
-  Settings as LucideSettings, 
-  Calendar as LucideCalendar, 
-  Search as LucideSearch, 
-  TrendingUp as LucideTrendingUp, 
-  Briefcase as LucideBriefcase, 
-  Table as LucideTable, 
-  Share2 as LucideShare2,
-  DollarSign as LucideDollarSign,
+import {
+  Wallet as LucideWallet,
+  Mail as LucideMail,
+  Music as LucideMusic,
+  FileText as LucideFileText,
+  HardDrive as LucideHardDrive,
+  Globe as LucideGlobe,
+  Terminal as LucideTerminal,
+  Settings as LucideSettings,
+  Calendar as LucideCalendar,
+  Search as LucideSearch,
+  TrendingUp as LucideTrendingUp,
+  Briefcase as LucideBriefcase,
+  Table as LucideTable,
   Store as LucideStore,
   Code2 as LucideCode2,
   Video as LucideVideo,
@@ -36,7 +34,7 @@ import {
 } from 'lucide-react'
 
 // React Icons (Material Design) - existing
-import { 
+import {
   MdAccountBalanceWallet,
   MdEmail,
   MdLibraryMusic,
@@ -47,11 +45,8 @@ import {
   MdSettings,
   MdCalendarToday,
   MdSearch,
-  MdTrendingUp,
   MdWork,
   MdTableChart,
-  MdShare,
-  MdAttachMoney,
   MdStore,
   MdCode,
   MdShowChart,
@@ -82,11 +77,8 @@ import {
   IconSettings as TablerSettings,
   IconCalendar as TablerCalendar,
   IconSearch as TablerSearch,
-  IconTrendingUp as TablerTrendingUp,
   IconBriefcase as TablerBriefcase,
   IconTable as TablerTable,
-  IconShare as TablerShare,
-  IconCurrencyDollar as TablerCurrencyDollar,
   IconBuildingStore as TablerStore,
   IconCode as TablerCode,
   IconChartLine as TablerChartLine,
@@ -116,11 +108,8 @@ import {
   Cog6ToothIcon as HeroSettings,
   CalendarIcon as HeroCalendar,
   MagnifyingGlassIcon as HeroSearch,
-  ArrowTrendingUpIcon as HeroTrendingUp,
   BriefcaseIcon as HeroBriefcase,
   TableCellsIcon as HeroTable,
-  ShareIcon as HeroShare,
-  CurrencyDollarIcon as HeroCurrencyDollar,
   BuildingStorefrontIcon as HeroStore,
   CodeBracketIcon as HeroCode,
   ChartBarIcon as HeroChartBar,
@@ -140,7 +129,8 @@ import {
 
 // Feather Icons
 import {
-  CreditCard as FeatherWallet, // Using CreditCard instead of Wallet
+  CreditCard as FeatherWallet,
+  // Using CreditCard instead of Wallet
   Mail as FeatherMail,
   Music as FeatherMusic,
   FileText as FeatherFileText,
@@ -150,11 +140,8 @@ import {
   Settings as FeatherSettings,
   Calendar as FeatherCalendar,
   Search as FeatherSearch,
-  TrendingUp as FeatherTrendingUp,
   Briefcase as FeatherBriefcase,
   Grid as FeatherTable,
-  Share2 as FeatherShare,
-  DollarSign as FeatherDollarSign,
   ShoppingBag as FeatherStore,
   Code as FeatherCode,
   Activity as FeatherActivity,
@@ -168,7 +155,8 @@ import {
   Box as FeatherBox,
   Droplet as FeatherPalette,
   Award as FeatherAward,
-  CheckCircle as FeatherUserCheck, // Using CheckCircle instead of UserCheck
+  CheckCircle as FeatherUserCheck,
+  // Using CheckCircle instead of UserCheck
   Circle as FeatherCircle
 } from 'react-feather'
 
@@ -184,11 +172,8 @@ import {
   Gear as PhosphorSettings,
   Calendar as PhosphorCalendar,
   MagnifyingGlass as PhosphorSearch,
-  TrendUp as PhosphorTrendingUp,
   Briefcase as PhosphorBriefcase,
   Table as PhosphorTable,
-  Share as PhosphorShare,
-  CurrencyDollar as PhosphorCurrencyDollar,
   Storefront as PhosphorStore,
   Code as PhosphorCode,
   ChartLine as PhosphorChartLine,
@@ -221,11 +206,8 @@ import {
   RiLineChartLine,
   RiBriefcaseLine,
   RiTableLine,
-  RiShareLine,
-  RiMoneyDollarCircleLine,
   RiStoreLine,
   RiCodeLine,
-  RiBarChartLine,
   RiVideoLine,
   RiCameraLine,
   RiMapPinLine,
@@ -255,11 +237,8 @@ import {
   BsGraphUp,
   BsBriefcase,
   BsTable,
-  BsShare,
-  BsCurrencyDollar,
   BsShop,
   BsCode,
-  BsBarChart,
   BsCameraVideo,
   BsCamera,
   BsGeoAlt,

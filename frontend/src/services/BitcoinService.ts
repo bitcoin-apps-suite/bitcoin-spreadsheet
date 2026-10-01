@@ -223,7 +223,6 @@ export class BitcoinService {
       if (formula.startsWith('=SUM(')) {
         const match = formula.match(/=SUM\((\w+)\)/);
         if (match) {
-          const range = match[1];
           // Simple implementation - in reality, you'd parse the range and sum values
           return '0'; // Placeholder
         }

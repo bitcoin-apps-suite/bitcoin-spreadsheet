@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import Spreadsheet3D from '../components/Spreadsheet3D';
 import Spreadsheet3DPlotly from '../components/Spreadsheet3DPlotly';
@@ -35,20 +35,7 @@ const ThreeDPage: React.FC = () => {
     }
   }, [isDarkMode]);
 
-  useEffect(() => {
-    checkAuthentication();
-  }, []);
-
-  const checkAuthentication = () => {
-    if (handcashService.isAuthenticated()) {
-      const user = handcashService.getCurrentUser();
-      setCurrentUser(user);
-      setIsAuthenticated(true);
-    }
-    initializeBitcoinService();
-  };
-
-  const initializeBitcoinService = async () => {
+  const initializeBitcoinService = useCallback(async () => {
     const service = new BitcoinService();
     await service.connect();
     setBitcoinService(service);
@@ -106,7 +93,21 @@ const ThreeDPage: React.FC = () => {
     }
     
     setIsLoading(false);
-  };
+  }, []);
+
+  const checkAuthentication = useCallback(() => {
+    if (handcashService.isAuthenticated()) {
+      const user = handcashService.getCurrentUser();
+      setCurrentUser(user);
+      setIsAuthenticated(true);
+    }
+    initializeBitcoinService();
+  }, [handcashService, initializeBitcoinService]);
+
+  useEffect(() => {
+    checkAuthentication();
+  }, [checkAuthentication]);
+
 
   const handleLogin = (user: HandCashUser) => {
     setCurrentUser(user);

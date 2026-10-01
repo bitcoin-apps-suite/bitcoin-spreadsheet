@@ -1,76 +1,80 @@
-# Mobile + bWallet shell
+# bSheets in bWallet: the MobileApp pattern
 
-Goal: every Bitcoin Apps Suite bApp works on a phone and inside bWallet's
-in-app browser, with **no Bitcoin OS dock** and **no "proof of concept" banner**.
-Desktop is unchanged.
+bWallet opens bApps in an in-app WebView and injects a BRC-100 wallet as
+`window.CWI`. On phones and inside bWallet, bSheets does not shrink the desktop
+page. It renders a separate phone app.
 
-## Modes
+## When the mobile app is used
 
-| Mode | Trigger | `<html>` class |
-|------|---------|----------------|
-| in-wallet | UA contains `bWallet/` (bWallet sends `bWallet/1 YoursWalletMobile/1`), or `?inwallet=1` for testing | `bw-inwallet` + `bw-compact` |
-| compact | in-wallet **or** viewport <= 768px | `bw-compact` |
-| desktop | everything else | none, nothing changes |
+`src/mobile/shell.ts` decides:
 
-## Files (copy as-is into each repo)
+- **In wallet:** the UA contains `bWallet/`, or `window.CWI` exists, or the URL has `?inwallet=1`.
+- **Compact:** in wallet, or the viewport is 768px wide or less.
 
-- `mobile/shell.ts`: `isInWallet()`, `isCompact()`, `applyShellClasses()`, `useCompactShell()` hook
-- `mobile/cwi.ts`: BRC-100 sign-in through `window.CWI` (`getPublicKey({ identityKey: true })`).
-  It only stores the public identity key. No keys or secrets.
-- `mobile/mobile-bwallet.css`: hides `.poc-banner`, `.minimal-dock`,
-  `.minimal-dock-container`, `.bitcoin-dock`, `.dev-sidebar`; removes the 40px
-  banner padding; blocks horizontal page scroll (grids still scroll inside
-  themselves); sets 44px touch targets, 16px inputs (no iOS zoom), safe-area
-  insets, and a compact header. Banner and dock are also hidden by a plain
-  `@media (max-width: 768px)` rule, so they never show on first paint.
+`useCompactShell()` reads this synchronously on the first render, so the app
+never renders the desktop chrome first and then removes it.
 
-These class names are shared by every suite repo because the shell components
-(`ProofOfConceptBanner`/`PocBar`/`StandardPocBar`, `DockManager` ->
-`MinimalDock`/`Dock`, `DevSidebar`) were copied from one repo into each of the
-others. There is no shared package, so the same CSS works everywhere.
+## Files
 
-## Wiring
+| File | Role | Reuse |
+| --- | --- | --- |
+| `src/mobile/shell.ts` | Detection (`isInWallet`, `isCompact`, `useCompactShell`). | Copy unchanged. |
+| `src/mobile/cwi.ts` | BRC-100 sign-in: `hasCWI`, `signInWithCWI` (`getPublicKey({identityKey:true})`), `getStoredCWIUser`. Only the public key is stored. | Copy unchanged. |
+| `src/mobile/MobileApp.tsx` | Phone app frame. Top bar, home list, full-screen editor, edit bar pinned above the keyboard (visualViewport), Save / Share / New bottom bar, silent CWI sign-in with a 10s timeout. | Copy, then replace the editor area. |
+| `src/mobile/mobile-app.css` | Dark bWallet theme: black, gold `#F5B800`, app accent `#38bdf8`. 44px targets, safe-area insets, the grid scrolls inside its own container. | Copy; change `--bsm-blue` to the app's identity colour. |
+| `src/mobile/sheetStore.ts` | bSheets data: localStorage sheets, formula evaluation, CSV export. | Write one per app. |
+| `src/mobile/mobile-bwallet.css` | Small baseline for non-home routes in compact mode. | Copy unchanged. |
 
-**CRA / Vite** (`src/index.tsx`): import `./mobile/mobile-bwallet.css` and call
-`applyShellClasses()` after the last import. CRA's eslint `import/first` rule
-fails the build if code sits between imports.
+## Wiring (`App.tsx`)
 
-**Next.js App Router** (`app/layout.tsx`): import the CSS and render
-`<MobileShellInit />` (a client component that calls `applyShellClasses()`)
-as the first child of `<body>`.
+```tsx
+const hideShellChrome = useCompactShell();
+const mobileHome = hideShellChrome && location.pathname === '/';
+useEffect(() => {
+  document.documentElement.classList.toggle('bw-mobile-app', mobileHome);
+}, [mobileHome]);
 
-**Recommended JSX gating**: render the banner, dock and dev sidebar
-conditionally with `const hide = useCompactShell()`, so they never mount on
-mobile.
-
-**Sign-in**: when `hasCWI()` is true, the Connect action calls
-`signInWithCWI()` and passes the returned user (same shape as `HandCashUser`)
-to the existing login handler. Otherwise it falls back to HandCash. On load,
-check `getStoredCWIUser()` before the HandCash session.
-
-## Rolling out to another repo
-
-```bash
-gh repo clone bitcoin-apps-suite/bitcoin-<app> -- --depth 1
-/path/to/bitcoin-spreadsheet/scripts/apply-mobile-bwallet.sh ./bitcoin-<app>
-# then do the manual steps the script prints, build with the repo's package manager, screenshot, commit, push the branch
+{!hideShellChrome && <ProofOfConceptBanner />}
+{!hideShellChrome && <DevSidebar />}
+<Route path="/" element={mobileHome
+  ? <MobileApp appName="bSheets" user={currentUser}
+      onLogin={handleMobileLogin} onRequestLogin={() => new HandCashService().login()} />
+  : desktopHome} />
+{!hideShellChrome && <Footer />}
+{!hideShellChrome && <DockManager currentApp="..." />}
 ```
 
-The script creates `feat/mobile-bwallet`, detects the package manager and the
-framework, copies the files and wires the entry point. It never commits or
-pushes.
+- **Gate in JSX.** Wrap the chrome in conditionals as above. Don't hide it with CSS.
+- **Keep `onLogin` stable.** Use `useCallback`, because `MobileApp`'s sign-in effect depends on it.
+- **Restore bWallet users.** `checkAuthentication` must check `getStoredCWIUser()` first, so they stay signed in.
+- **Leave desktop alone.** The desktop login paths (HandCash, connections modal) stay unchanged.
+- **Next.js apps:** decide compact mode on the client and start from "not mounted". Render none of the chrome-related branches until the component has mounted. That way the server-rendered page never contains the dock or banner on a phone.
 
-## Verify
+## Build and deploy
 
-At 390x844 with UA `... bWallet/1 YoursWalletMobile/1`:
-`document.documentElement.scrollWidth === innerWidth`, no `.poc-banner` or
-dock, and every visible button is at least 44px. At 1440px the page should
-match `main` pixel for pixel.
+- **Root `vercel.json`:**
+  - `installCommand`: `pnpm install`
+  - `buildCommand`: `cd frontend && pnpm run build`
+  - `outputDirectory`: `frontend/build`
+- **Strict build:** Vercel sets `CI`, and CRA then treats ESLint warnings as errors. `cd frontend && CI=true pnpm run build` must pass with no warnings. Fix the warnings; don't use `CI=false` or eslint-disable comments.
 
-## bSheets pilot notes
+## Test
 
-- CRA (react-app-rewired) in `frontend/`, pnpm workspace.
-- The toolbar already collapses to a bottom File/Edit/Exchange/Theme/More bar
-  at <=768px (`SpreadsheetTaskbar`), and the grid uses `MobileSpreadsheet`.
-- Removed the duplicate "Connect" block under the header and moved the AI chat
-  button so it sits above both bottom bars.
+Use Playwright WebKit at 390x844 with a UA ending in `bWallet/1.0`. Add an init script that stubs `window.CWI`:
+
+```js
+window.CWI = {
+  getPublicKey: async () => ({ publicKey: '02…' }),
+  waitForAuthentication: async () => ({ authenticated: true }),
+};
+```
+
+Check that:
+
+- the page has no PoC banner, dock or dev sidebar;
+- `scrollWidth <= innerWidth`;
+- the top bar shows the shortened public key;
+- the home screen and editor screenshots look right;
+- at 1400px the desktop page still has the dock.
+
+To copy the kit into another repo, run `scripts/apply-mobile-bwallet.sh /path/to/repo AppName`.

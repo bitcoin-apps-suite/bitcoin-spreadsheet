@@ -4,7 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './mobile/mobile-bwallet.css';
 import { applyShellClasses } from './mobile/shell';
-import * as serviceWorkerRegistration from './registerServiceWorker';
+// Service worker disabled for blockchain deployment; re-enable with:
+// import * as serviceWorkerRegistration from './registerServiceWorker';
 
 applyShellClasses();
 

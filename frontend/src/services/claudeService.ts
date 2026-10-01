@@ -55,4 +55,5 @@ Please provide helpful insights and answer their questions about this data.`;
   }
 }
 
-export default new ClaudeService();
+const claudeService = new ClaudeService();
+export default claudeService;

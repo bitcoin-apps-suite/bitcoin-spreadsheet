@@ -249,7 +249,6 @@ export class BSVService {
   ): Promise<Transaction> {
     const cellAddress = this.getCellAddress(row, col);
     const cellPrivateKey = PrivateKey.fromWif(cellAddress.privateKey);
-    const cellPublicKey = cellPrivateKey.toPublicKey();
     
     const tx = new Transaction();
     

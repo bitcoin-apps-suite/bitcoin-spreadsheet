@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { 
-  Code, 
-  GitBranch, 
-  Bug, 
-  FileText, 
-  DollarSign, 
-  Users, 
+import {
+  Code,
+  GitBranch,
+  Bug,
+  FileText,
+  DollarSign,
+  Users,
   BookOpen,
   ChevronLeft,
   ChevronRight,
-  Zap,
   Package,
   Terminal,
   Activity

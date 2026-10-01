@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { HandCashService } from '../services/HandCashService';
+import React, { useState } from 'react';
 import SpreadsheetTaskbar from '../components/SpreadsheetTaskbar';
 import './JobExchangePage.css';
 
@@ -72,24 +71,6 @@ interface Contract {
   urgent?: boolean;
 }
 
-interface JobBid {
-  id: string;
-  jobId: string;
-  bidderName: string;
-  bidAmount: number;
-  currency: string;
-  estimatedCompletion: string;
-  proposal: string;
-  timestamp: Date;
-}
-
-interface OrderBookEntry {
-  price: number;
-  quantity: number;
-  total: number;
-  type: 'buy' | 'sell';
-}
-
 const JobExchangePage: React.FC<{
   isAuthenticated: boolean;
   currentUser: any;
@@ -97,10 +78,6 @@ const JobExchangePage: React.FC<{
 }> = ({ isAuthenticated, currentUser, onLogout }) => {
   const [activeTab, setActiveTab] = useState<'tasks' | 'jobs' | 'exchange'>('tasks');
   const [selectedToken, setSelectedToken] = useState<string | null>(null);
-  const [orderBook, setOrderBook] = useState<{ buy: OrderBookEntry[], sell: OrderBookEntry[] }>({
-    buy: [],
-    sell: []
-  });
 
   // Sample data for TechSteck and other teams
   const teams: Team[] = [

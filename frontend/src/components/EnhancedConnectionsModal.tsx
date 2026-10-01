@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { HandCashService, HandCashUser } from '../services/HandCashService';
 import { BitcoinService } from '../services/BitcoinService';
 import './EnhancedConnectionsModal.css';
@@ -41,8 +41,8 @@ const EnhancedConnectionsModal: React.FC<EnhancedConnectionsModalProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<'connections' | 'subscriptions' | 'topup'>('connections');
   const [isLoading, setIsLoading] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [connectedAccounts, setConnectedAccounts] = useState<ConnectedAccount[]>([]);
+  const [error] = useState<string | null>(null);
+  const [, setConnectedAccounts] = useState<ConnectedAccount[]>([]);
   const [handcashService] = useState(new HandCashService());
   const [bsvBalance, setBsvBalance] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
@@ -119,12 +119,8 @@ const EnhancedConnectionsModal: React.FC<EnhancedConnectionsModalProps> = ({
     }
   ];
 
-  useEffect(() => {
-    loadConnectedAccounts();
-    checkBsvBalance();
-  }, []);
 
-  const loadConnectedAccounts = () => {
+  const loadConnectedAccounts = useCallback(() => {
     const accounts: ConnectedAccount[] = [];
     
     // Check HandCash
@@ -157,12 +153,17 @@ const EnhancedConnectionsModal: React.FC<EnhancedConnectionsModalProps> = ({
     });
     
     setConnectedAccounts(accounts);
-  };
+  }, [handcashService]);
 
-  const checkBsvBalance = () => {
+  const checkBsvBalance = useCallback(() => {
     const mockBalance = parseFloat(localStorage.getItem('bsvBalance') || '0.001');
     setBsvBalance(mockBalance);
-  };
+  }, []);
+
+  useEffect(() => {
+    loadConnectedAccounts();
+    checkBsvBalance();
+  }, [loadConnectedAccounts, checkBsvBalance]);
 
 
   const handleQuickBooksConnect = async () => {

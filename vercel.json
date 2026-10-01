@@ -1,6 +1,6 @@
 {
   "installCommand": "pnpm install --no-frozen-lockfile",
-  "buildCommand": "cd frontend && CI=false pnpm run build",
+  "buildCommand": "cd frontend && pnpm run build",
   "outputDirectory": "frontend/build",
   "framework": null,
   "rewrites": [

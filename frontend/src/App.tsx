@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 import './styles/app-dark.css';
 import './styles/mobile.css';
 import Spreadsheet from './components/Spreadsheet';
 import MobileSpreadsheet from './components/MobileSpreadsheet';
 import SpreadsheetManager from './components/SpreadsheetManager';
-import NavbarLogin from './components/NavbarLogin';
 import EnhancedConnectionsModal from './components/EnhancedConnectionsModal';
 import HandCashCallback from './components/HandCashCallback';
 import BapsPage from './pages/BapsPage';
@@ -149,6 +148,37 @@ function App() {
     return () => window.removeEventListener('servicesUpdated', handleServicesUpdated);
   }, [isAuthenticated, currentUser]);
 
+  const initializeBitcoinService = useCallback(async () => {
+    const service = new BitcoinService();
+    await service.connect();
+    setBitcoinService(service);
+  }, []);
+
+  const handleLogin = useCallback((user: HandCashUser) => {
+    setCurrentUser(user);
+    setIsAuthenticated(true);
+    initializeBitcoinService();
+  }, [initializeBitcoinService]);
+
+  const checkAuthentication = useCallback(() => {
+    // Check if user is already logged in
+    const cwiUser = getStoredCWIUser();
+    if (cwiUser) {
+      setCurrentUser(cwiUser);
+      setIsAuthenticated(true);
+      initializeBitcoinService();
+    } else if (handcashService.isAuthenticated()) {
+      const user = handcashService.getCurrentUser();
+      setCurrentUser(user);
+      setIsAuthenticated(true);
+      initializeBitcoinService();
+    } else {
+      // Allow guest access - initialize Bitcoin service for anonymous users
+      initializeBitcoinService();
+    }
+    setIsLoading(false);
+  }, [handcashService, initializeBitcoinService]);
+
   useEffect(() => {
     // Check if we're coming back from HandCash with an authToken
     const urlParams = new URLSearchParams(window.location.search);
@@ -183,38 +213,7 @@ function App() {
     } else {
       checkAuthentication();
     }
-  }, []);
-
-  const checkAuthentication = () => {
-    // Check if user is already logged in
-    const cwiUser = getStoredCWIUser();
-    if (cwiUser) {
-      setCurrentUser(cwiUser);
-      setIsAuthenticated(true);
-      initializeBitcoinService();
-    } else if (handcashService.isAuthenticated()) {
-      const user = handcashService.getCurrentUser();
-      setCurrentUser(user);
-      setIsAuthenticated(true);
-      initializeBitcoinService();
-    } else {
-      // Allow guest access - initialize Bitcoin service for anonymous users
-      initializeBitcoinService();
-    }
-    setIsLoading(false);
-  };
-
-  const initializeBitcoinService = async () => {
-    const service = new BitcoinService();
-    await service.connect();
-    setBitcoinService(service);
-  };
-
-  const handleLogin = (user: HandCashUser) => {
-    setCurrentUser(user);
-    setIsAuthenticated(true);
-    initializeBitcoinService();
-  };
+  }, [checkAuthentication, handleLogin]);
 
   // Stable callback for the mobile app's silent bWallet sign-in.
   const handleMobileLogin = useCallback((user: HandCashUser) => {

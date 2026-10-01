@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { SpreadsheetUtils } from '../utils/SpreadsheetUtils';
 
 interface SpreadsheetToolbarProps {
@@ -24,7 +24,7 @@ const SpreadsheetToolbar: React.FC<SpreadsheetToolbarProps> = ({
   onToggle3DView,
   onNewSpreadsheet
 }) => {
-  const [selectedCell, setSelectedCell] = useState('A1');
+  const [selectedCell] = useState('A1');
   const [formulaValue, setFormulaValue] = useState('');
   const [currentFormat, setCurrentFormat] = useState('General');
   const [isEditingTitle, setIsEditingTitle] = useState(false);

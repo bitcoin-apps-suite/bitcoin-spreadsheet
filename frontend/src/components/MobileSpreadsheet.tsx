@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { SpreadsheetData, CellData } from '../services/BitcoinService';
+import { SpreadsheetData } from '../services/BitcoinService';
 import './MobileSpreadsheet.css';
 
 interface MobileSpreadsheetProps {
